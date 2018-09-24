@@ -1,11 +1,10 @@
 package com.sduduzog.slimlauncher
 
-import android.app.ActivityManager
-import android.content.Context
 import android.content.SharedPreferences
 import android.content.res.Resources
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import androidx.navigation.Navigation
 import androidx.navigation.Navigation.findNavController
 
 
@@ -27,15 +26,6 @@ private lateinit var settings: SharedPreferences
         recreate()
     }
 
-//    override fun onPause() {
-//        super.onPause()
-//
-//        val activityManager = applicationContext
-//                .getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
-//
-//        activityManager.moveTaskToFront(taskId, 0)
-//    }
-
     override fun getTheme(): Resources.Theme {
         val theme = super.getTheme()
         settings = getSharedPreferences("settings", MODE_PRIVATE)
@@ -49,5 +39,8 @@ private lateinit var settings: SharedPreferences
         return theme
     }
 
-    override fun onBackPressed() {}
+    override fun onBackPressed() {
+        val nav = Navigation.findNavController(this, R.id.nav_host_fragment)
+        nav.navigateUp()
+    }
 }
