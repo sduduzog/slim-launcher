@@ -8,3 +8,6 @@
 * todo list
 * tic-tac-toe game
 
+
+# slim-launcher
+Android minimalistic launcher
