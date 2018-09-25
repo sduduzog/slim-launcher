@@ -19,7 +19,7 @@ interface AppDao {
     @Update
     fun update(app: App)
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert
     fun addHomeApp(app: HomeApp)
 
     @Query("DELETE FROM apps")

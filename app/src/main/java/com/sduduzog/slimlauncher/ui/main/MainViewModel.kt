@@ -27,20 +27,15 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         _repository.delete(app)
     }
 
-    fun insert(app: App) {
-        _repository.insert(app)
-    }
-
-    fun update(app: App) {
-        _repository.update(app)
-    }
-
     fun updateApps() {
         _repository.updateApps()
     }
 
     fun addToHomeScreen(app: App) {
-        val home = HomeApp(app.appName, app.packageName, app.activityName)
-        _repository.insertHomeApp(home)
+        val home = HomeApp()
+        home.activityName = app.activityName
+        home.appName = app.appName
+        home.packageName = app.packageName
+        _repository.insert(home)
     }
 }

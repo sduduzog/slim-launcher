@@ -13,7 +13,6 @@ import android.view.ViewGroup
 import androidx.navigation.Navigation
 import com.sduduzog.slimlauncher.R
 import com.sduduzog.slimlauncher.data.App
-import com.sduduzog.slimlauncher.data.HomeApp
 import com.sduduzog.slimlauncher.ui.main.MainViewModel
 import java.util.*
 
@@ -39,7 +38,10 @@ class AppsFragment : Fragment() {
         for (i in launchables.indices) {
             val item = launchables[i]
             val activity = item.activityInfo
-            val app = App(activity.loadLabel(pm).toString(), activity.name, activity.applicationInfo.packageName)
+            val app = App()
+            app.appName = launchables[i].loadLabel(pm).toString()
+            app.packageName = activity.applicationInfo.packageName
+            app.activityName = activity.name
             apps.add(app)
         }
         mAdapter = AppsListAdapter(listOf(), InteractionHandler())

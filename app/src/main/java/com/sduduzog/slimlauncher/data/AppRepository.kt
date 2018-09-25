@@ -15,6 +15,8 @@ class AppRepository(application: Application) {
     private var _apps: LiveData<List<App>> = appDao.apps
     private var _homeApps: LiveData<List<HomeApp>> = appDao.homeApps
 
+    private val TAG: String = "REPO"
+
     private var pm: PackageManager = application.packageManager
 
     val homeApps: LiveData<List<HomeApp>>
@@ -23,7 +25,7 @@ class AppRepository(application: Application) {
     val apps: LiveData<List<App>>
     get() = _apps
 
-    fun insert(app: App) {
+    fun insert(app: HomeApp) {
         InsertAsyncTask(appDao).execute(app)
     }
 
@@ -31,27 +33,11 @@ class AppRepository(application: Application) {
         DeleteAsyncTask(appDao).execute(app)
     }
 
-    fun update(app: App) {
-        UpdateAsyncTask(appDao).execute(app)
-    }
-
     fun updateApps() {
         UpdateAppsAsyncTask(appDao).execute(pm)
     }
 
-    fun insertHomeApp(home: HomeApp) {
-    InsertHomeAsyncTask(appDao).execute(home)
-    }
-
-    private class InsertAsyncTask internal constructor(private val mAsyncTaskDao: AppDao) : AsyncTask<App, Void, Void>() {
-
-        override fun doInBackground(vararg params: App): Void? {
-            mAsyncTaskDao.insert(params[0])
-            return null
-        }
-    }
-
-    private class InsertHomeAsyncTask internal constructor(private val mAsyncTaskDao: AppDao) : AsyncTask<HomeApp, Void, Void>() {
+    private class InsertAsyncTask internal constructor(private val mAsyncTaskDao: AppDao) : AsyncTask<HomeApp, Void, Void>() {
 
         override fun doInBackground(vararg params: HomeApp): Void? {
             mAsyncTaskDao.addHomeApp(params[0])
@@ -63,14 +49,6 @@ class AppRepository(application: Application) {
 
         override fun doInBackground(vararg params: HomeApp): Void? {
             mAsyncTaskDao.delete(params[0])
-            return null
-        }
-    }
-
-    private class UpdateAsyncTask internal constructor(private val mAsyncTaskDao: AppDao) : AsyncTask<App, Void, Void>() {
-
-        override fun doInBackground(vararg params: App): Void? {
-            mAsyncTaskDao.update(params[0])
             return null
         }
     }
@@ -90,7 +68,10 @@ class AppRepository(application: Application) {
             for (i in launchables.indices) {
                 val item = launchables[i]
                 val activity = item.activityInfo
-                val app = App(activity.loadLabel(pm).toString(), activity.name, activity.applicationInfo.packageName)
+                val app = App()
+                app.appName = launchables[i].loadLabel(pm).toString()
+                app.packageName = activity.applicationInfo.packageName
+                app.activityName = activity.name
                 mAsyncTaskDao.insert(app)
             }
             return null

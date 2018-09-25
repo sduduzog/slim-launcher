@@ -10,10 +10,10 @@ android {
         applicationId "com.sduduzog.slimlauncher"
         minSdkVersion 15
         targetSdkVersion 28
-        versionCode 2
+        versionCode 3
         versionName "0.1.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        versionNameSuffix 'preview'
+        versionNameSuffix '-beta1'
     }
     buildTypes {
         release {

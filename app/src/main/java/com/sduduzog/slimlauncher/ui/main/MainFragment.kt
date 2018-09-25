@@ -6,6 +6,7 @@ import android.content.*
 import android.os.Build
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,6 +23,8 @@ class MainFragment : Fragment() {
     private lateinit var viewModel: MainViewModel
     private lateinit var receiver: BroadcastReceiver
     private lateinit var adapter: MainAppsAdapter
+
+    private val TAG: String = "MainFragment"
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
@@ -83,6 +86,7 @@ class MainFragment : Fragment() {
             try {
                 startActivity(intent)
             } catch (e: ActivityNotFoundException) {
+                Log.e(TAG, e.message)
                 Toast.makeText(activity, "${item.appName} seems to be uninstalled, removing from list", Toast.LENGTH_LONG).show()
                 viewModel.deleteApp(item)
             }
