@@ -44,7 +44,11 @@ class MainFragment : Fragment() {
         settingsButton.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_openSettingsFragment))
         clockTextView.setOnClickListener {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                startActivity(Intent(android.provider.AlarmClock.ACTION_SHOW_ALARMS))
+                try {
+                    startActivity(Intent(android.provider.AlarmClock.ACTION_SHOW_ALARMS))
+                }catch (e: Exception){
+                    Log.e(TAG, e.message)
+                }
             }
         }
         updateUi()
