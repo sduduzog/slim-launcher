@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import com.sduduzog.slimlauncher.R
-import com.sduduzog.slimlauncher.data.App
+import com.sduduzog.slimlauncher.data.HomeApp
 
-class SettingsListAdapter(private var apps: List<App>, private val listener: SettingsFragment.OnListFragmentInteractionListener) : RecyclerView.Adapter<SettingsListAdapter.AppViewHolder>() {
+class SettingsListAdapter(private var apps: List<HomeApp>, private val listener: SettingsFragment.OnListFragmentInteractionListener) : RecyclerView.Adapter<SettingsListAdapter.AppViewHolder>() {
 
     private lateinit var inflater: LayoutInflater
 
@@ -20,7 +20,7 @@ class SettingsListAdapter(private var apps: List<App>, private val listener: Set
     }
 
     override fun onBindViewHolder(holder: AppViewHolder, position: Int) {
-        holder.labelText.text = apps[position].label
+        holder.labelText.text = apps[position].appName
         holder.removeButton.setOnClickListener {
                 listener.onRemove(apps[position])
         }
@@ -30,7 +30,7 @@ class SettingsListAdapter(private var apps: List<App>, private val listener: Set
         return apps.size
     }
 
-    internal fun setApps(apps: List<App>) {
+    internal fun setApps(apps: List<HomeApp>) {
         this.apps = apps
         notifyDataSetChanged()
     }

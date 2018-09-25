@@ -1,32 +1,31 @@
 package com.sduduzog.slimlauncher.data
 
 import android.arch.lifecycle.LiveData
-import android.arch.persistence.room.Dao
-import android.arch.persistence.room.Insert
-import android.arch.persistence.room.Query
-import android.arch.persistence.room.Update
+import android.arch.persistence.room.*
 
 @Dao
 interface AppDao {
 
-    @get:Query("SELECT * from apps")
-    val allApps: LiveData<List<App>>
 
-    @get:Query("SELECT * from apps WHERE home=1")
-    val homeApps: LiveData<List<App>>
+    @get:Query("SELECT * FROM apps WHERE package_name NOT IN (SELECT apps.package_name from apps JOIN home_apps ON home_apps.package_name=apps.package_name)")
+    val apps: LiveData<List<App>>
 
-    @get:Query("SELECT * from apps WHERE home=0")
-    val availableApps: LiveData<List<App>>
+    @get:Query("SELECT * FROM home_apps")
+    val homeApps: LiveData<List<HomeApp>>
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insert(app: App)
 
     @Update
     fun update(app: App)
 
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    fun addHomeApp(app: HomeApp)
+
     @Query("DELETE FROM apps")
     fun deleteAll()
 
-    @Query("DELETE FROM apps WHERE package_name=:packageName")
-    fun delete(packageName: String)
+    @Delete
+    fun delete(app: HomeApp)
+
 }

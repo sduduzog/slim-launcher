@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import androidx.navigation.Navigation
 import com.sduduzog.slimlauncher.R
 import com.sduduzog.slimlauncher.data.App
+import com.sduduzog.slimlauncher.data.HomeApp
 import com.sduduzog.slimlauncher.ui.main.MainViewModel
 import java.util.*
 
@@ -50,7 +51,7 @@ class AppsFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
-        viewModel.availableApps.observe(this, Observer {
+        viewModel.apps.observe(this, Observer {
             if (it != null) {
                 mAdapter.setList(it)
             }
@@ -59,10 +60,9 @@ class AppsFragment : Fragment() {
 
     inner class InteractionHandler : OnListFragmentInteractionListener {
         override fun onListFragmentInteraction(app: App) {
-            app.home = true
-            viewModel.update(app)
+            viewModel.addToHomeScreen(app)
             val nav = Navigation.findNavController(layout)
-            nav.navigateUp()
+            nav.popBackStack()
         }
     }
 

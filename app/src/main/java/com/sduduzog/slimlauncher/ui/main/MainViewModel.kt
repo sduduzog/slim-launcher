@@ -5,27 +5,27 @@ import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.LiveData
 import com.sduduzog.slimlauncher.data.App
 import com.sduduzog.slimlauncher.data.AppRepository
+import com.sduduzog.slimlauncher.data.HomeApp
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
     private var _repository: AppRepository = AppRepository(application)
+    private var _homeApps: LiveData<List<HomeApp>>
     private var _apps: LiveData<List<App>>
-    private var _homeApps: LiveData<List<App>>
-    private var _availableApps: LiveData<List<App>>
 
     init {
-        _apps = _repository.allApps
         _homeApps = _repository.homeApps
-        _availableApps = _repository.availableApps
+        _apps = _repository.apps
     }
+
+    val homeApps: LiveData<List<HomeApp>>
+        get() = _homeApps
 
     val apps: LiveData<List<App>>
         get() = _apps
 
-    val homeApps: LiveData<List<App>>
-        get() = _homeApps
-
-    val availableApps: LiveData<List<App>>
-        get() = _availableApps
+    fun deleteApp(app: HomeApp) {
+        _repository.delete(app)
+    }
 
     fun insert(app: App) {
         _repository.insert(app)
@@ -35,11 +35,12 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         _repository.update(app)
     }
 
-    fun deleteApp(packageName: String) {
-        _repository.delete(packageName)
+    fun updateApps() {
+        _repository.updateApps()
     }
 
-    fun bulkInsert(apps: MutableList<App>) {
-        _repository.bulkInsert(apps)
+    fun addToHomeScreen(app: App) {
+        val home = HomeApp(app.appName, app.packageName, app.activityName)
+        _repository.insertHomeApp(home)
     }
 }

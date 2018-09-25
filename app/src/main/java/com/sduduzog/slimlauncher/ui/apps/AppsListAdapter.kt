@@ -36,7 +36,7 @@ class AppsListAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = mValues.elementAt(position)
-        holder.mLabelView.text = item.label
+        holder.mLabelView.text = item.appName
         with(holder.mView) {
             tag = item
             setOnClickListener(mOnClickListener)

@@ -1,6 +1,5 @@
 package com.sduduzog.slimlauncher.ui.main
 
-import android.annotation.TargetApi
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.*
@@ -13,11 +12,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.Navigation
 import com.sduduzog.slimlauncher.R
-import com.sduduzog.slimlauncher.data.App
+import com.sduduzog.slimlauncher.data.HomeApp
 import kotlinx.android.synthetic.main.main_fragment.*
 import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
+import java.util.*
 
 class MainFragment : Fragment() {
 
@@ -27,9 +25,7 @@ class MainFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
-        val view = inflater.inflate(R.layout.main_fragment, container, false)
-
-        return view
+        return inflater.inflate(R.layout.main_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -38,7 +34,7 @@ class MainFragment : Fragment() {
         adapter = MainAppsAdapter(mutableSetOf(), InteractionHandler())
         mainAppsList.adapter = adapter
         viewModel.homeApps.observe(this, Observer {
-            if (it !=null){
+            if (it != null) {
                 adapter.setApps(it)
             }
         })
@@ -77,18 +73,23 @@ class MainFragment : Fragment() {
     }
 
     inner class InteractionHandler : OnListFragmentInteractionListener {
-        override fun onLaunch(item: App) {
+        override fun onLaunch(item: HomeApp) {
             val name = ComponentName(item.packageName, item.activityName)
             val intent = Intent()
             intent.action = Intent.ACTION_MAIN
             intent.addCategory(Intent.CATEGORY_LAUNCHER)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED
             intent.component = name
-            startActivity(intent)
+            try {
+                startActivity(intent)
+            } catch (e: ActivityNotFoundException) {
+                Toast.makeText(activity, "${item.appName} seems to be uninstalled, removing from list", Toast.LENGTH_LONG).show()
+                viewModel.deleteApp(item)
+            }
         }
     }
 
     interface OnListFragmentInteractionListener {
-        fun onLaunch(item: App)
+        fun onLaunch(item: HomeApp)
     }
 }

@@ -14,7 +14,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
 import com.sduduzog.slimlauncher.R
-import com.sduduzog.slimlauncher.data.App
+import com.sduduzog.slimlauncher.data.HomeApp
 import kotlinx.android.synthetic.main.fragment_settings.*
 
 
@@ -40,7 +40,7 @@ class SettingsFragment : Fragment() {
                 }
             }
         })
-        var apps = viewModel.apps.value
+        var apps = viewModel.homeApps.value
         if (apps == null)
             apps = listOf()
         adapter = SettingsListAdapter(apps, InteractionHandler())
@@ -68,13 +68,12 @@ class SettingsFragment : Fragment() {
     }
 
     inner class InteractionHandler : OnListFragmentInteractionListener {
-        override fun onRemove(app: App) {
-            app.home = false
-            viewModel.update(app)
+        override fun onRemove(app: HomeApp) {
+            viewModel.deleteApp(app)
         }
     }
 
     interface OnListFragmentInteractionListener {
-        fun onRemove(app: App)
+        fun onRemove(app: HomeApp)
     }
 }
