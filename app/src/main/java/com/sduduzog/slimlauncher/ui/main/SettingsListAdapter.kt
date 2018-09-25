@@ -22,8 +22,7 @@ class SettingsListAdapter(private var apps: List<App>, private val listener: Set
     override fun onBindViewHolder(holder: AppViewHolder, position: Int) {
         holder.labelText.text = apps[position].label
         holder.removeButton.setOnClickListener {
-            val packageName = apps[position].packageName
-                listener.onRemove(packageName)
+                listener.onRemove(apps[position])
         }
     }
 

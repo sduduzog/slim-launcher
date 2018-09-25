@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.fragment_app.view.*
 
 
 class AppsListAdapter(
-        private var mValues: MutableSet<App>,
+        private var mValues: List<App>,
         private val mListener: OnListFragmentInteractionListener?)
     : RecyclerView.Adapter<AppsListAdapter.ViewHolder>() {
 
@@ -44,7 +44,7 @@ class AppsListAdapter(
     }
 
     override fun getItemCount(): Int = mValues.size
-    fun setList(apps: MutableSet<App>) {
+    fun setList(apps: List<App>) {
         mValues = apps
         notifyDataSetChanged()
     }

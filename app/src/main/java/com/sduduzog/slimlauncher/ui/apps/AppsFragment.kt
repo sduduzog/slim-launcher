@@ -7,7 +7,6 @@ import android.content.pm.ResolveInfo
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -42,7 +41,7 @@ class AppsFragment : Fragment() {
             val app = App(activity.loadLabel(pm).toString(), activity.name, activity.applicationInfo.packageName)
             apps.add(app)
         }
-        mAdapter = AppsListAdapter(mutableSetOf(), InteractionHandler())
+        mAdapter = AppsListAdapter(listOf(), InteractionHandler())
         layout = view.findViewById(R.id.appList)
         layout.adapter = mAdapter
         return view
@@ -51,20 +50,17 @@ class AppsFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
-        viewModel.apps.observe(this, Observer {
-            val set = mutableSetOf<App>()
-            set.clear()
-            for (i in apps.indices) {
-                set.add(apps[i])
+        viewModel.availableApps.observe(this, Observer {
+            if (it != null) {
+                mAdapter.setList(it)
             }
-            set.removeAll(it as Iterable<App>)
-            mAdapter.setList(set)
         })
     }
 
     inner class InteractionHandler : OnListFragmentInteractionListener {
         override fun onListFragmentInteraction(app: App) {
-            viewModel.insert(app)
+            app.home = true
+            viewModel.update(app)
             val nav = Navigation.findNavController(layout)
             nav.navigateUp()
         }

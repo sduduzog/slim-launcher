@@ -8,4 +8,4 @@ import android.arch.persistence.room.PrimaryKey
 data class App(@field:ColumnInfo(name = "label")
           var label: String, @field:ColumnInfo(name = "activity_name")
           var activityName: String, @field:PrimaryKey @field:ColumnInfo(name = "package_name")
-          var packageName: String)
+          var packageName: String, @field:ColumnInfo(name = "home") var home: Boolean = false)

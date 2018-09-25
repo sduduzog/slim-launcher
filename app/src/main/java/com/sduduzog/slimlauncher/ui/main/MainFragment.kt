@@ -1,8 +1,10 @@
 package com.sduduzog.slimlauncher.ui.main
 
+import android.annotation.TargetApi
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.*
+import android.os.Build
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -35,12 +37,17 @@ class MainFragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
         adapter = MainAppsAdapter(mutableSetOf(), InteractionHandler())
         mainAppsList.adapter = adapter
-        viewModel.apps.observe(this, Observer {
+        viewModel.homeApps.observe(this, Observer {
             if (it !=null){
                 adapter.setApps(it)
             }
         })
         settingsButton.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_openSettingsFragment))
+        clockTextView.setOnClickListener {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                startActivity(Intent(android.provider.AlarmClock.ACTION_SHOW_ALARMS))
+            }
+        }
         updateUi()
     }
 

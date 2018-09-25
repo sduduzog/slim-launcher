@@ -5,6 +5,7 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context.MODE_PRIVATE
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -13,6 +14,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
 import com.sduduzog.slimlauncher.R
+import com.sduduzog.slimlauncher.data.App
 import kotlinx.android.synthetic.main.fragment_settings.*
 
 
@@ -29,7 +31,7 @@ class SettingsFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
-        viewModel.apps.observe(this, Observer {
+        viewModel.homeApps.observe(this, Observer {
             if (it != null) {
                 adapter.setApps(it)
                 when (it.size) {
@@ -45,8 +47,16 @@ class SettingsFragment : Fragment() {
         settingsAppList.adapter = adapter
         settingsAppList.layoutManager = LinearLayoutManager(activity)
         deviceSettingsButton.setOnClickListener {
-            startActivityForResult(Intent(android.provider.Settings.ACTION_SETTINGS), 0)
+            startActivity(Intent(android.provider.Settings.ACTION_SETTINGS))
         }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            launcherSettingsButton.setOnClickListener {
+                startActivity(Intent(android.provider.Settings.ACTION_HOME_SETTINGS))
+            }
+        } else {
+            launcherSettingsButton.visibility = View.GONE
+        }
+
         val settings = activity?.getSharedPreferences("settings", MODE_PRIVATE)
         val active = settings?.getBoolean("theme", false)
         themeSwitch.isChecked = active!!
@@ -58,12 +68,13 @@ class SettingsFragment : Fragment() {
     }
 
     inner class InteractionHandler : OnListFragmentInteractionListener {
-        override fun onRemove(packageName: String) {
-            viewModel.deleteApp(packageName)
+        override fun onRemove(app: App) {
+            app.home = false
+            viewModel.update(app)
         }
     }
 
     interface OnListFragmentInteractionListener {
-        fun onRemove(packageName: String)
+        fun onRemove(app: App)
     }
 }
