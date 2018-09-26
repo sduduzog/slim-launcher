@@ -1,11 +1,8 @@
-package com.sduduzog.slimlauncher.ui.main
+package com.sduduzog.slimlauncher.ui.apps
 
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
-import android.content.Context.MODE_PRIVATE
-import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -13,9 +10,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
+import com.sduduzog.slimlauncher.MainViewModel
 import com.sduduzog.slimlauncher.R
 import com.sduduzog.slimlauncher.data.HomeApp
-import kotlinx.android.synthetic.main.fragment_settings.*
+import kotlinx.android.synthetic.main.settings_fragment.*
 
 
 class SettingsFragment : Fragment() {
@@ -25,7 +23,7 @@ class SettingsFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_settings, container, false)
+        return inflater.inflate(R.layout.settings_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -46,24 +44,7 @@ class SettingsFragment : Fragment() {
         adapter = SettingsListAdapter(apps, InteractionHandler())
         settingsAppList.adapter = adapter
         settingsAppList.layoutManager = LinearLayoutManager(activity)
-        deviceSettingsButton.setOnClickListener {
-            startActivity(Intent(android.provider.Settings.ACTION_SETTINGS))
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            launcherSettingsButton.setOnClickListener {
-                startActivity(Intent(android.provider.Settings.ACTION_HOME_SETTINGS))
-            }
-        } else {
-            launcherSettingsButton.visibility = View.GONE
-        }
 
-        val settings = activity?.getSharedPreferences("settings", MODE_PRIVATE)
-        val active = settings?.getBoolean("theme", false)
-        themeSwitch.isChecked = active!!
-        themeSwitch.setOnCheckedChangeListener { _, b ->
-
-            settings.edit()?.putBoolean("theme", b)?.apply()
-        }
         addButton.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_openAppsFragment))
     }
 

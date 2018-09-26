@@ -1,4 +1,4 @@
-package com.sduduzog.slimlauncher.ui.main
+package com.sduduzog.slimlauncher.ui.apps
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -22,7 +22,7 @@ class SettingsListAdapter(private var apps: List<HomeApp>, private val listener:
     override fun onBindViewHolder(holder: AppViewHolder, position: Int) {
         holder.labelText.text = apps[position].appName
         holder.removeButton.setOnClickListener {
-                listener.onRemove(apps[position])
+            listener.onRemove(apps[position])
         }
     }
 

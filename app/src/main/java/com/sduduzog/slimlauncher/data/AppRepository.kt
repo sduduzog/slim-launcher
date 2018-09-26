@@ -23,7 +23,7 @@ class AppRepository(application: Application) {
         get() = _homeApps
 
     val apps: LiveData<List<App>>
-    get() = _apps
+        get() = _apps
 
     fun insert(app: HomeApp) {
         InsertAsyncTask(appDao).execute(app)

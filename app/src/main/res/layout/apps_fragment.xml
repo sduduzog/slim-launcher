@@ -8,4 +8,4 @@
     android:layout_marginStart="16dp"
     android:layout_marginEnd="16dp"
     app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-    tools:listitem="@layout/fragment_app" />
+    tools:listitem="@layout/apps_list_item" />

@@ -11,7 +11,7 @@ import com.sduduzog.slimlauncher.data.App
 
 import com.sduduzog.slimlauncher.ui.apps.AppsFragment.OnListFragmentInteractionListener
 
-import kotlinx.android.synthetic.main.fragment_app.view.*
+import kotlinx.android.synthetic.main.apps_list_item.view.*
 
 
 class AppsListAdapter(
@@ -30,7 +30,7 @@ class AppsListAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.fragment_app, parent, false)
+                .inflate(R.layout.apps_list_item, parent, false)
         return ViewHolder(view)
     }
 

@@ -8,6 +8,7 @@ import android.content.Context;
 @Database(entities = {App.class, HomeApp.class}, version = 1, exportSchema = false)
 public abstract class AppRoomDatabase extends RoomDatabase {
     private static volatile AppRoomDatabase INSTANCE;
+
     static AppRoomDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {
             synchronized (AppRoomDatabase.class) {
@@ -20,5 +21,6 @@ public abstract class AppRoomDatabase extends RoomDatabase {
         }
         return INSTANCE;
     }
+
     public abstract AppDao appDao();
 }

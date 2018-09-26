@@ -7,10 +7,10 @@ import android.arch.persistence.room.*
 interface AppDao {
 
 
-    @get:Query("SELECT * FROM apps WHERE package_name NOT IN (SELECT apps.package_name from apps JOIN home_apps ON home_apps.package_name=apps.package_name)")
+    @get:Query("SELECT * FROM apps WHERE package_name NOT IN (SELECT apps.package_name from apps JOIN home_apps ON home_apps.package_name=apps.package_name) ORDER BY app_name ASC")
     val apps: LiveData<List<App>>
 
-    @get:Query("SELECT * FROM home_apps")
+    @get:Query("SELECT * FROM home_apps ORDER BY app_name ASC")
     val homeApps: LiveData<List<HomeApp>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)

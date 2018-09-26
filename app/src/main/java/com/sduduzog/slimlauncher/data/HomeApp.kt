@@ -5,7 +5,7 @@ import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
 
 @Entity(tableName = "home_apps")
-class HomeApp{
+class HomeApp {
     @field:ColumnInfo(name = "app_name")
     lateinit var appName: String
     @PrimaryKey

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottomSheet"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:attr/colorBackground"
+    app:behavior_peekHeight="50dp"
+    app:behavior_skipCollapsed="true"
+    app:layout_behavior="android.support.design.widget.BottomSheetBehavior"
+    tools:context=".MainActivity"
+    tools:layout_editor_absoluteY="25dp">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Slim options"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/changeThemeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="24dp"
+        android:text="Change theme"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/settingsText"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="32dp"
+        android:text="Home screen apps"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/changeThemeText"
+        app:layout_constraintTop_toBottomOf="@+id/changeThemeText" />
+
+    <TextView
+        android:id="@+id/deviceSettingsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Open device settings"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/settingsText"
+        app:layout_constraintTop_toBottomOf="@+id/settingsText" />
+
+    <TextView
+        android:id="@+id/aboutText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="About Slim"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/deviceSettingsText"
+        app:layout_constraintTop_toBottomOf="@+id/deviceSettingsText" />
+
+    <TextView
+        android:id="@+id/rateAppText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Rate the app"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/aboutText"
+        app:layout_constraintTop_toBottomOf="@+id/aboutText" />
+
+    <TextView
+        android:id="@+id/changeLauncherText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginBottom="24dp"
+        android:text="Change launcher"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</android.support.constraint.ConstraintLayout>

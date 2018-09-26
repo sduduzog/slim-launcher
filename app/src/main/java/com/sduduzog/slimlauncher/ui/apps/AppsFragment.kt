@@ -11,9 +11,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
+import com.sduduzog.slimlauncher.MainViewModel
 import com.sduduzog.slimlauncher.R
 import com.sduduzog.slimlauncher.data.App
-import com.sduduzog.slimlauncher.ui.main.MainViewModel
 import java.util.*
 
 
@@ -26,7 +26,7 @@ class AppsFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_apps_list, container, false)
+        val view = inflater.inflate(R.layout.apps_fragment, container, false)
         val pm = activity!!.packageManager
         val main = Intent(Intent.ACTION_MAIN, null)
 

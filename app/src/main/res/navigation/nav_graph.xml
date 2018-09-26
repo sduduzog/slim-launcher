@@ -9,16 +9,19 @@
         android:id="@+id/mainFragment"
         android:name="com.sduduzog.slimlauncher.ui.main.MainFragment"
         android:label="main_fragment"
-        tools:layout="@layout/main_fragment" >
+        tools:layout="@layout/main_fragment">
         <action
             android:id="@+id/action_openSettingsFragment"
             app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_openAboutFragment"
+            app:destination="@id/aboutFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.sduduzog.slimlauncher.ui.main.SettingsFragment"
+        android:name="com.sduduzog.slimlauncher.ui.apps.SettingsFragment"
         android:label="fragment_settings"
-        tools:layout="@layout/fragment_settings" >
+        tools:layout="@layout/settings_fragment">
         <action
             android:id="@+id/action_openAppsFragment"
             app:destination="@+id/appsFragment" />
@@ -27,6 +30,10 @@
         android:id="@+id/appsFragment"
         android:name="com.sduduzog.slimlauncher.ui.apps.AppsFragment"
         android:label="fragment_apps_list"
-        tools:layout="@layout/fragment_apps_list" >
-    </fragment>
+        tools:layout="@layout/apps_fragment" />
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.sduduzog.slimlauncher.ui.main.AboutFragment"
+        android:label="fragment_about"
+        tools:layout="@layout/fragment_about" />
 </navigation>

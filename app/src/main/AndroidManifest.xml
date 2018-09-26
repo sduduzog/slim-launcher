@@ -3,23 +3,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.sduduzog.slimlauncher">
 
-    <uses-permission android:name="android.permission.SET_ALARM"/>
+    <uses-permission android:name="android.permission.SET_ALARM" />
 
     <application
         android:allowBackup="false"
+        android:configChanges="orientation|keyboardHidden|screenSize"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:configChanges="orientation|keyboardHidden|screenSize"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppLightTheme"
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning"
 
-        tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".MainActivity"
+        tools:replace="android:allowBackup">
+        <activity
+            android:name=".MainActivity"
             android:launchMode="singleTask"
             android:stateNotNeeded="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.HOME" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.LAUNCHER" />
