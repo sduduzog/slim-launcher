@@ -7,11 +7,11 @@ import android.content.*
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.support.constraint.ConstraintLayout
 import android.support.design.widget.BottomSheetBehavior
 import android.support.design.widget.BottomSheetBehavior.STATE_COLLAPSED
 import android.support.design.widget.BottomSheetBehavior.STATE_HALF_EXPANDED
 import android.support.v4.app.Fragment
+import android.support.v7.widget.CardView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -20,6 +20,7 @@ import android.widget.Toast
 import androidx.navigation.Navigation
 import com.daasuu.ei.Ease
 import com.daasuu.ei.EasingInterpolator
+import com.sduduzog.slimlauncher.MainActivity
 import com.sduduzog.slimlauncher.MainViewModel
 import com.sduduzog.slimlauncher.R
 import com.sduduzog.slimlauncher.data.HomeApp
@@ -34,7 +35,7 @@ class MainFragment : Fragment() {
     private lateinit var viewModel: MainViewModel
     private lateinit var receiver: BroadcastReceiver
     private lateinit var adapter: MainAppsAdapter
-    private lateinit var sheetBehavior: BottomSheetBehavior<ConstraintLayout>
+    private lateinit var sheetBehavior: BottomSheetBehavior<CardView>
     private lateinit var themeChooser: ThemeChooserDialog
 
     @Suppress("PropertyName")
@@ -78,6 +79,17 @@ class MainFragment : Fragment() {
         activity?.unregisterReceiver(receiver)
     }
 
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        with(context as MainActivity){
+            this.onBackPressedListener = object : MainActivity.OnBackPressedListener {
+                override fun onBackPressed() {
+                    sheetBehavior.state = STATE_COLLAPSED
+                }
+            }
+        }
+    }
+
     inner class ClockReceiver : BroadcastReceiver() {
         override fun onReceive(ctx: Context?, intent: Intent?) {
             updateUi()
@@ -116,7 +128,7 @@ class MainFragment : Fragment() {
     }
 
     private fun doBounceAnimation(targetView: View) {
-        val animator = ObjectAnimator.ofFloat(targetView, "translationY", 0f, -20f, 0f)
+        val animator = ObjectAnimator.ofFloat(targetView, "translationY", 0f, -40f, 0f)
         animator.interpolator = EasingInterpolator(Ease.QUINT_OUT)
         animator.startDelay = 1000
         animator.duration = 1000

@@ -16,13 +16,15 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
     private val label = "main_fragment"
     private lateinit var currentLabel: String
     private lateinit var viewModel: MainViewModel
+    private lateinit var navigator: NavController
+    var onBackPressedListener: OnBackPressedListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
         settings = getSharedPreferences(getString(R.string.prefs_settings), MODE_PRIVATE)
         settings.registerOnSharedPreferenceChangeListener(this)
-        val navigator = findNavController(this, R.id.nav_host_fragment)
+        navigator = findNavController(this, R.id.nav_host_fragment)
         navigator.addOnNavigatedListener(this)
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
     }
@@ -47,6 +49,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
     override fun onBackPressed() {
         if (currentLabel != label)
             super.onBackPressed()
+        else onBackPressedListener?.onBackPressed()
     }
 
     override fun onNavigated(controller: NavController, destination: NavDestination) {
@@ -71,5 +74,8 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
             }
             return R.style.AppTheme
         }
+    }
+    interface OnBackPressedListener{
+        fun onBackPressed()
     }
 }

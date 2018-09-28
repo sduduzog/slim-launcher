@@ -1,92 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/bottomSheet"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?android:attr/colorBackground"
     app:behavior_peekHeight="50dp"
     app:behavior_skipCollapsed="true"
+    app:cardBackgroundColor="?android:attr/colorBackground"
+    app:cardCornerRadius="0dp"
+    app:cardElevation="8dp"
     app:layout_behavior="android.support.design.widget.BottomSheetBehavior"
-    tools:context=".MainActivity"
-    tools:layout_editor_absoluteY="25dp"
-    tools:ignore="Overdraw">
+    tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/main_slim_options"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:ignore="Overdraw"
+        tools:layout_editor_absoluteY="25dp">
 
-    <TextView
-        android:id="@+id/changeThemeText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="@string/main_options_change_theme"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="@+id/deviceSettingsText"
-        app:layout_constraintTop_toBottomOf="@+id/deviceSettingsText" />
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/main_slim_options"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/settingsText"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginTop="32dp"
-        android:text="@string/main_options_home_screen_apps"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="@+id/changeThemeText"
-        app:layout_constraintTop_toBottomOf="@+id/changeThemeText" />
+        <TextView
+            android:id="@+id/changeThemeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/main_options_change_theme"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="@+id/deviceSettingsText"
+            app:layout_constraintTop_toBottomOf="@+id/deviceSettingsText" />
 
-    <TextView
-        android:id="@+id/deviceSettingsText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="32dp"
-        android:text="@string/main_options_settings"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        <TextView
+            android:id="@+id/settingsText"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginTop="32dp"
+            android:text="@string/main_options_home_screen_apps"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="@+id/changeThemeText"
+            app:layout_constraintTop_toBottomOf="@+id/changeThemeText" />
 
-    <TextView
-        android:id="@+id/aboutText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="@string/main_options_about_slim"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="@+id/settingsText"
-        app:layout_constraintTop_toBottomOf="@+id/settingsText" />
+        <TextView
+            android:id="@+id/deviceSettingsText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="32dp"
+            android:text="@string/main_options_settings"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-    <TextView
-        android:id="@+id/rateAppText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
-        android:layout_marginBottom="24dp"
-        android:text="@string/main_options_rate_the_app"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <TextView
+            android:id="@+id/aboutText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/main_options_about_slim"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="@+id/settingsText"
+            app:layout_constraintTop_toBottomOf="@+id/settingsText" />
 
-    <TextView
-        android:id="@+id/changeLauncherText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginBottom="24dp"
-        android:text="@string/main_options_change_launcher"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-</android.support.constraint.ConstraintLayout>
+        <TextView
+            android:id="@+id/rateAppText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="32dp"
+            android:layout_marginRight="32dp"
+            android:layout_marginBottom="24dp"
+            android:text="@string/main_options_feedback"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/changeLauncherText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginBottom="24dp"
+            android:text="@string/main_options_change_launcher"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+    </android.support.constraint.ConstraintLayout>
+</android.support.v7.widget.CardView>
