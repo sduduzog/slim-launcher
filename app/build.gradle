@@ -10,8 +10,8 @@ android {
         applicationId "com.sduduzog.slimlauncher"
         minSdkVersion 15
         targetSdkVersion 28
-        versionCode 6
-        versionName "1.1.0"
+        versionCode 7
+        versionName "1.1.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         versionNameSuffix '-beta'
         vectorDrawables.useSupportLibrary = true
@@ -39,10 +39,14 @@ dependencies {
     implementation 'android.arch.navigation:navigation-fragment:1.0.0-alpha06'
     implementation 'android.arch.persistence.room:runtime:1.1.1'
     annotationProcessor "android.arch.persistence.room:compiler:1.1.1"
-    androidTestImplementation 'android.arch.persistence.room:testing:1.1.1'
     implementation 'android.arch.lifecycle:extensions:1.1.1'
     annotationProcessor "android.arch.lifecycle:compiler:1.1.1"
     implementation 'com.android.support:cardview-v7:28.0.0'
     implementation 'com.android.support:design:28.0.0'
     implementation 'com.daasuu:EasingInterpolator:1.0.0'
+
+    // Tests
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'org.mockito:mockito-core:2.7.6'
+    androidTestImplementation 'android.arch.persistence.room:testing:1.1.1'
 }

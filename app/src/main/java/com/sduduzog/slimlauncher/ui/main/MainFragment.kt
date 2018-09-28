@@ -58,7 +58,6 @@ class MainFragment : Fragment() {
                 adapter.setApps(it)
             }
         })
-        updateUi()
         setEventListeners()
     }
 
@@ -70,6 +69,10 @@ class MainFragment : Fragment() {
         sheetBehavior.state = STATE_COLLAPSED
     }
 
+    override fun onResume() {
+        super.onResume()
+        updateUi()
+    }
     override fun onStop() {
         super.onStop()
         activity?.unregisterReceiver(receiver)
