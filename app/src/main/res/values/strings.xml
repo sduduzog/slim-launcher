@@ -11,6 +11,41 @@
         <item>Pink</item>
     </string-array>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="prefs_settings">settings</string>
+    <string name="prefs_settings_key_theme">key_theme</string>
+    <string name="main_slim_options">Slim options</string>
+    <string name="main_options_change_theme">Change theme</string>
+    <string name="main_options_home_screen_apps">Home screen apps</string>
+    <string name="main_options_settings">Settings</string>
+    <string name="main_options_about_slim">About Slim</string>
+    <string name="main_options_rate_the_app">Rate the app</string>
+    <string name="main_options_change_launcher">Change launcher</string>
+    <string name="settings_item_button_remove">remove</string>
+    <string name="settings_title">Home screen apps</string>
+    <string name="settings_button_add">Add</string>
+    <string name="settings_option_why">Why can\'t I add more?</string>
+    <string name="about_title">Slim launcher</string>
+    <string name="about_text">
+        Created by : Beautus S Gumede\n
+        Source : https://github.com/sduduzog/slim-launcher\n\n
+        3rd party credits/licences\n\n
+        Copyright 2015 MasayukiSuda\n\n
+        MIT License\n\n
+        Permission is hereby granted, free of charge, to any person obtaining a copy of this
+        software and associated documentation files (the "Software"), to deal in the Software
+        without restriction, including without limitation the rights to use, copy, modify, merge,
+        publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons
+        to whom the Software is furnished to do so, subject to the following conditions:\n\n
+        The above copyright notice and this permission notice shall be included in all copies or
+        substantial portions of the Software.\n\n
+
+        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+        INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+        PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
+        FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+        OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+        DEALINGS IN THE SOFTWARE.
+    </string>
+    <string name="content_description_expand_up">Expand up icon</string>
+
 </resources>
