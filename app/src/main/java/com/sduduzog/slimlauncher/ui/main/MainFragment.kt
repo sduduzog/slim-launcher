@@ -9,7 +9,8 @@ import android.os.Build
 import android.os.Bundle
 import android.support.constraint.ConstraintLayout
 import android.support.design.widget.BottomSheetBehavior
-import android.support.design.widget.BottomSheetBehavior.*
+import android.support.design.widget.BottomSheetBehavior.STATE_COLLAPSED
+import android.support.design.widget.BottomSheetBehavior.STATE_HALF_EXPANDED
 import android.support.v4.app.Fragment
 import android.util.Log
 import android.view.LayoutInflater
@@ -36,7 +37,8 @@ class MainFragment : Fragment() {
     private lateinit var sheetBehavior: BottomSheetBehavior<ConstraintLayout>
     private lateinit var themeChooser: ThemeChooserDialog
 
-    private val TAG: String = "MainFragment"
+    @Suppress("PropertyName")
+    val TAG: String = "MainFragment"
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
@@ -45,62 +47,19 @@ class MainFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
+        sheetBehavior = BottomSheetBehavior.from(bottomSheet)
+        bottomSheet.alpha = 0.0f
+        viewModel = ViewModelProviders.of(activity!!).get(MainViewModel::class.java)
         adapter = MainAppsAdapter(mutableSetOf(), InteractionHandler())
-        themeChooser = ThemeChooserDialog(context!!)
+        themeChooser = ThemeChooserDialog.getThemeChooser()
         mainAppsList.adapter = adapter
         viewModel.homeApps.observe(this, Observer {
             if (it != null) {
                 adapter.setApps(it)
             }
         })
-        clockTextView.setOnClickListener {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                try {
-                    val intent = Intent(android.provider.AlarmClock.ACTION_SHOW_ALARMS)
-                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                    startActivity(intent)
-                } catch (e: Exception) {
-                    Log.e(TAG, e.message)
-                }
-            }
-        }
-        bottomSheet.alpha = 0.0f
-        sheetBehavior = BottomSheetBehavior.from(bottomSheet)
-
-        sheetBehavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
-            override fun onSlide(p0: View, p1: Float) {
-
-            }
-
-            override fun onStateChanged(bottomSheet: View, newState: Int) {
-                ivExpand.visibility = View.INVISIBLE
-                when (newState) {
-                    STATE_COLLAPSED -> {
-                        bottomSheet.animate().alpha(0.0f).duration = 100
-                        ivExpand.visibility = View.VISIBLE
-                    }
-                    STATE_EXPANDED -> {
-                        bottomSheet.animate().alpha(1.0f).duration = 50
-                    }
-                    STATE_DRAGGING -> {
-                        bottomSheet.alpha = 1.0f
-                    }
-                }
-            }
-        })
-        bottomSheet.setOnClickListener { }
-        changeThemeText.setOnClickListener { changeTheme() }
-        settingsText.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_openSettingsFragment))
-        deviceSettingsText.setOnClickListener { openSettings() }
-        rateAppText.setOnClickListener { rateApp() }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            changeLauncherText.setOnClickListener {
-                startActivity(Intent(android.provider.Settings.ACTION_HOME_SETTINGS))
-            }
-        } else changeLauncherText.visibility = View.INVISIBLE
-        aboutText.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_openAboutFragment))
         updateUi()
+        setEventListeners()
     }
 
     override fun onStart() {
@@ -185,5 +144,45 @@ class MainFragment : Fragment() {
 
     private fun changeTheme() {
         themeChooser.show(fragmentManager, TAG)
+    }
+
+    private fun setEventListeners(){
+        clockTextView.setOnClickListener {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                try {
+                    val intent = Intent(android.provider.AlarmClock.ACTION_SHOW_ALARMS)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                    startActivity(intent)
+                } catch (e: Exception) {
+                    Log.e(TAG, e.message)
+                }
+            }
+        }
+        bottomSheet.setOnClickListener {
+            if (sheetBehavior.state == STATE_COLLAPSED) sheetBehavior.state = STATE_HALF_EXPANDED
+        }
+        sheetBehavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+            override fun onSlide(p0: View, p1: Float) {
+                val alpha = 3 * p1
+                bottomSheet.alpha = alpha
+            }
+
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                ivExpand.visibility = View.INVISIBLE
+                if (newState == STATE_COLLAPSED) {
+                    ivExpand.visibility = View.VISIBLE
+                }
+            }
+        })
+        changeThemeText.setOnClickListener { changeTheme() }
+        settingsText.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_openSettingsFragment))
+        deviceSettingsText.setOnClickListener { openSettings() }
+        rateAppText.setOnClickListener { rateApp() }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            changeLauncherText.setOnClickListener {
+                startActivity(Intent(android.provider.Settings.ACTION_HOME_SETTINGS))
+            }
+        } else changeLauncherText.visibility = View.INVISIBLE
+        aboutText.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_openAboutFragment))
     }
 }

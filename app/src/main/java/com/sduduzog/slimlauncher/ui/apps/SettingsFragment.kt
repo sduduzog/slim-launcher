@@ -46,6 +46,7 @@ class SettingsFragment : Fragment() {
         settingsAppList.layoutManager = LinearLayoutManager(activity)
 
         addButton.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_openAppsFragment))
+
     }
 
     inner class InteractionHandler : OnListFragmentInteractionListener {

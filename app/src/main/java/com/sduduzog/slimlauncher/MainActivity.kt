@@ -15,14 +15,12 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
     private lateinit var settings: SharedPreferences
     private val label = "main_fragment"
     private lateinit var currentLabel: String
-    var fragmentBackPressed: IOnBackPressed? = null
     private lateinit var viewModel: MainViewModel
-    private val TAG: String = "MainActivity"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
-        settings = getSharedPreferences("settings", MODE_PRIVATE)
+        settings = getSharedPreferences(getString(R.string.prefs_settings), MODE_PRIVATE)
         settings.registerOnSharedPreferenceChangeListener(this)
         val navigator = findNavController(this, R.id.nav_host_fragment)
         navigator.addOnNavigatedListener(this)
@@ -40,35 +38,13 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
 
     override fun getTheme(): Resources.Theme {
         val theme = super.getTheme()
-        settings = getSharedPreferences("settings", MODE_PRIVATE)
-
-        val active = settings.getInt("theme", 0)
-        when (active) {
-            0 -> {
-                theme.applyStyle(R.style.AppTheme, true)
-            }
-            1 -> {
-                theme.applyStyle(R.style.AppDarkTheme, true)
-            }
-            2 -> {
-                theme.applyStyle(R.style.AppGreyTheme, true)
-            }
-            3 -> {
-                theme.applyStyle(R.style.AppTealTheme, true)
-            }
-            4 -> {
-                theme.applyStyle(R.style.AppPinkTheme, true)
-            }
-        }
+        settings = getSharedPreferences(getString(R.string.prefs_settings), MODE_PRIVATE)
+        val active = settings.getInt(getString(R.string.prefs_settings_key_theme), 0)
+        theme.applyStyle(resolveTheme(active), true)
         return theme
     }
 
     override fun onBackPressed() {
-        if (fragmentBackPressed != null) {
-            if (fragmentBackPressed?.onBackPressed() as Boolean) {
-                return
-            }
-        }
         if (currentLabel != label)
             super.onBackPressed()
     }
@@ -77,8 +53,23 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
         currentLabel = destination.label.toString()
     }
 
-    interface IOnBackPressed {
-        fun onBackPressed(): Boolean
+    companion object {
+        fun resolveTheme(i: Int): Int {
+            when (i) {
+                1 -> {
+                    return R.style.AppDarkTheme
+                }
+                2 -> {
+                    return R.style.AppGreyTheme
+                }
+                3 -> {
+                    return R.style.AppTealTheme
+                }
+                4 -> {
+                    return R.style.AppPinkTheme
+                }
+            }
+            return R.style.AppTheme
+        }
     }
-
 }

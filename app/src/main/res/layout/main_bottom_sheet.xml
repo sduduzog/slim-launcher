@@ -10,7 +10,8 @@
     app:behavior_skipCollapsed="true"
     app:layout_behavior="android.support.design.widget.BottomSheetBehavior"
     tools:context=".MainActivity"
-    tools:layout_editor_absoluteY="25dp">
+    tools:layout_editor_absoluteY="25dp"
+    tools:ignore="Overdraw">
 
     <TextView
         android:id="@+id/textView"
@@ -19,7 +20,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
-        android:text="Slim options"
+        android:text="@string/main_slim_options"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -27,20 +28,18 @@
         android:id="@+id/changeThemeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="24dp"
-        android:text="Change theme"
+        android:layout_marginTop="32dp"
+        android:text="@string/main_options_change_theme"
         android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintStart_toStartOf="@+id/deviceSettingsText"
+        app:layout_constraintTop_toBottomOf="@+id/deviceSettingsText" />
 
     <TextView
         android:id="@+id/settingsText"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginTop="32dp"
-        android:text="Home screen apps"
+        android:text="@string/main_options_home_screen_apps"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="@+id/changeThemeText"
         app:layout_constraintTop_toBottomOf="@+id/changeThemeText" />
@@ -49,31 +48,35 @@
         android:id="@+id/deviceSettingsText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
         android:layout_marginTop="32dp"
-        android:text="Open device settings"
+        android:text="@string/main_options_settings"
         android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="@+id/settingsText"
-        app:layout_constraintTop_toBottomOf="@+id/settingsText" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <TextView
         android:id="@+id/aboutText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="About Slim"
+        android:text="@string/main_options_about_slim"
         android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="@+id/deviceSettingsText"
-        app:layout_constraintTop_toBottomOf="@+id/deviceSettingsText" />
+        app:layout_constraintStart_toStartOf="@+id/settingsText"
+        app:layout_constraintTop_toBottomOf="@+id/settingsText" />
 
     <TextView
         android:id="@+id/rateAppText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="Rate the app"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="@+id/aboutText"
-        app:layout_constraintTop_toBottomOf="@+id/aboutText" />
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginBottom="24dp"
+        android:text="@string/main_options_rate_the_app"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/changeLauncherText"
@@ -82,7 +85,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
         android:layout_marginBottom="24dp"
-        android:text="Change launcher"
+        android:text="@string/main_options_change_launcher"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

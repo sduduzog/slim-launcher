@@ -9,7 +9,7 @@ import android.content.Context;
 public abstract class AppRoomDatabase extends RoomDatabase {
     private static volatile AppRoomDatabase INSTANCE;
 
-    static AppRoomDatabase getDatabase(final Context context) {
+    public static AppRoomDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {
             synchronized (AppRoomDatabase.class) {
                 if (INSTANCE == null) {

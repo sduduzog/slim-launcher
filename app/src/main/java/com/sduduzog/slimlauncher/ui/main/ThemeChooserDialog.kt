@@ -1,34 +1,31 @@
 package com.sduduzog.slimlauncher.ui.main
 
-import android.annotation.SuppressLint
 import android.app.Dialog
-import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import android.support.v7.app.AlertDialog
-import android.util.Log
 import com.sduduzog.slimlauncher.R
 
-@SuppressLint("ValidFragment")
-class ThemeChooserDialog(private val ctx: Context) : DialogFragment() {
+class ThemeChooserDialog : DialogFragment() {
 
-    private val settings: SharedPreferences = ctx.getSharedPreferences("settings", MODE_PRIVATE)
-    private var choice: Int = 0
+    private lateinit var settings: SharedPreferences
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val builder = AlertDialog.Builder(ctx)
-        builder.setTitle("Choose theme")
-
-
-        val active = settings.getInt("theme", 0)
-        builder.setSingleChoiceItems(R.array.themes_array, active) { _, i -> choice = i }.setPositiveButton("Done") { _, i -> Log.d("DIALOG", "val$i") }
+        val builder = AlertDialog.Builder(context!!)
+        settings = context!!.getSharedPreferences(getString(R.string.prefs_settings), MODE_PRIVATE)
+        val active = settings.getInt(getString(R.string.prefs_settings_key_theme), 0)
+        builder.setSingleChoiceItems(R.array.themes_array, active) { dialogInterface, i ->
+            dialogInterface.dismiss()
+            settings.edit().putInt(getString(R.string.prefs_settings_key_theme), i).apply()
+        }
         return builder.create()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        settings.edit().putInt("theme", choice).apply()
+    companion object {
+        fun getThemeChooser(): ThemeChooserDialog {
+            return ThemeChooserDialog()
+        }
     }
 }

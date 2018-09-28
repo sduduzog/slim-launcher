@@ -8,6 +8,6 @@
         android:id="@+id/label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
+        android:layout_margin="8dp"
         android:textSize="24sp" />
 </LinearLayout>
