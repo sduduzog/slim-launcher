@@ -190,7 +190,10 @@ class MainFragment : Fragment() {
                 }
             }
         })
-        changeThemeText.setOnClickListener { changeTheme() }
+        changeThemeText.setOnClickListener {
+            sheetBehavior.state = STATE_COLLAPSED
+            changeTheme()
+        }
         settingsText.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_openSettingsFragment))
         deviceSettingsText.setOnClickListener { openSettings() }
         rateAppText.setOnClickListener { rateApp() }
