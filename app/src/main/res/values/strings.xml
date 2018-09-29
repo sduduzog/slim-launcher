@@ -57,5 +57,7 @@
     </string>
     <string name="content_description_expand_up">Expand up icon</string>
     <string name="theme_chooser_dialog_title">Change theme</string>
+    <string name="main_call_icon">call icon</string>
+    <string name="main_photo_camera_icon">photo camera icon</string>
 
 </resources>

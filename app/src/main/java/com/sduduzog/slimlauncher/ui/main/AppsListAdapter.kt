@@ -1,4 +1,4 @@
-package com.sduduzog.slimlauncher.ui.apps
+package com.sduduzog.slimlauncher.ui.main
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -9,7 +9,7 @@ import com.sduduzog.slimlauncher.R
 import com.sduduzog.slimlauncher.data.App
 
 
-import com.sduduzog.slimlauncher.ui.apps.AppsFragment.OnListFragmentInteractionListener
+import com.sduduzog.slimlauncher.ui.main.AppsFragment.OnListFragmentInteractionListener
 
 import kotlinx.android.synthetic.main.apps_list_item.view.*
 

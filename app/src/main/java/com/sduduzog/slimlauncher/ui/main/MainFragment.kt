@@ -7,6 +7,7 @@ import android.content.*
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
 import android.support.design.widget.BottomSheetBehavior
 import android.support.design.widget.BottomSheetBehavior.STATE_COLLAPSED
 import android.support.design.widget.BottomSheetBehavior.STATE_HALF_EXPANDED
@@ -174,7 +175,7 @@ class MainFragment : Fragment() {
             }
         }
         bottomSheet.setOnClickListener {
-            if (sheetBehavior.state == STATE_COLLAPSED) sheetBehavior.state = STATE_HALF_EXPANDED
+
         }
         sheetBehavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
             override fun onSlide(p0: View, p1: Float) {
@@ -199,5 +200,24 @@ class MainFragment : Fragment() {
             }
         } else changeLauncherText.visibility = View.INVISIBLE
         aboutText.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_openAboutFragment))
+        ivCall.setOnClickListener {
+            try {
+                val intent = Intent(Intent.ACTION_DIAL)
+                startActivity(intent)
+            } catch (e: Exception) {
+                Log.e(TAG, e.message)
+            }
+        }
+        ivCamera.setOnClickListener {
+            try {
+                val intent = Intent(MediaStore.INTENT_ACTION_STILL_IMAGE_CAMERA)
+                startActivity(intent)
+            } catch (e: Exception) {
+                Log.e(TAG, e.message)
+            }
+        }
+        ivExpand.setOnClickListener {
+            if (sheetBehavior.state == STATE_COLLAPSED) sheetBehavior.state = STATE_HALF_EXPANDED
+        }
     }
 }

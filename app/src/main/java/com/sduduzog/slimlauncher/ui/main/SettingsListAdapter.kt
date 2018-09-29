@@ -1,4 +1,4 @@
-package com.sduduzog.slimlauncher.ui.apps
+package com.sduduzog.slimlauncher.ui.main
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
