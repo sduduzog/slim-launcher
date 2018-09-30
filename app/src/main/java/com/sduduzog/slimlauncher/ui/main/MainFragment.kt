@@ -219,6 +219,7 @@ class MainFragment : Fragment() {
                 Log.e(TAG, e.message)
             }
         }
+
         ivExpand.setOnClickListener {
             if (sheetBehavior.state == STATE_COLLAPSED) sheetBehavior.state = STATE_HALF_EXPANDED
         }
