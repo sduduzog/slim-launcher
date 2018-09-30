@@ -71,10 +71,6 @@ class MainFragment : Fragment() {
         sheetBehavior.state = STATE_COLLAPSED
     }
 
-    override fun onResume() {
-        super.onResume()
-        updateUi()
-    }
     override fun onStop() {
         super.onStop()
         activity?.unregisterReceiver(receiver)
@@ -94,6 +90,7 @@ class MainFragment : Fragment() {
     inner class ClockReceiver : BroadcastReceiver() {
         override fun onReceive(ctx: Context?, intent: Intent?) {
             updateUi()
+            doBounceAnimation(ivExpand)
         }
     }
 
@@ -103,7 +100,6 @@ class MainFragment : Fragment() {
         val date = Date()
         clockTextView.text = fWatchTime.format(date)
         dateTextView.text = fWatchDate.format(date)
-        doBounceAnimation(ivExpand)
     }
 
     inner class InteractionHandler : OnListFragmentInteractionListener {
