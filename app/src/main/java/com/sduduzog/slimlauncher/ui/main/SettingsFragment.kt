@@ -3,6 +3,7 @@ package com.sduduzog.slimlauncher.ui.main
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Context.MODE_PRIVATE
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -20,6 +21,8 @@ class SettingsFragment : Fragment() {
 
     private lateinit var viewModel: MainViewModel
     private lateinit var adapter: SettingsListAdapter
+
+    private val TAG: String = "SettingsFragment"
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -44,9 +47,16 @@ class SettingsFragment : Fragment() {
         adapter = SettingsListAdapter(apps, InteractionHandler())
         settingsAppList.adapter = adapter
         settingsAppList.layoutManager = LinearLayoutManager(activity)
-
         addButton.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_openAppsFragment))
-
+        changeThemeText.setOnClickListener {
+            val themeChooserDialog = ThemeChooserDialog()
+            themeChooserDialog.showNow(fragmentManager, TAG)
+        }
+        val settings = context!!.getSharedPreferences(getString(R.string.prefs_settings), MODE_PRIVATE)
+        clockTypeChecker.isChecked = settings.getBoolean(getString(R.string.prefs_settings_key_clocktype), false)
+        clockTypeChecker.setOnCheckedChangeListener { _, b ->
+            settings.edit().putBoolean(getString(R.string.prefs_settings_key_clocktype), b).apply()
+        }
     }
 
     inner class InteractionHandler : OnListFragmentInteractionListener {

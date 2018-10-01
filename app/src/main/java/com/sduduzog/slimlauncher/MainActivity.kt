@@ -35,7 +35,9 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, s: String?) {
-        recreate()
+        if (s.equals(getString(R.string.prefs_settings_key_theme), true)) {
+            recreate()
+        }
     }
 
     override fun getTheme(): Resources.Theme {

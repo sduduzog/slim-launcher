@@ -4,6 +4,7 @@ import android.animation.ObjectAnimator
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.*
+import android.content.Context.MODE_PRIVATE
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -12,11 +13,11 @@ import android.support.design.widget.BottomSheetBehavior
 import android.support.design.widget.BottomSheetBehavior.STATE_COLLAPSED
 import android.support.design.widget.BottomSheetBehavior.STATE_HALF_EXPANDED
 import android.support.v4.app.Fragment
-import android.support.v7.widget.CardView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.navigation.Navigation
 import com.daasuu.ei.Ease
@@ -36,8 +37,7 @@ class MainFragment : Fragment() {
     private lateinit var viewModel: MainViewModel
     private lateinit var receiver: BroadcastReceiver
     private lateinit var adapter: MainAppsAdapter
-    private lateinit var sheetBehavior: BottomSheetBehavior<CardView>
-    private lateinit var themeChooser: ThemeChooserDialog
+    private lateinit var sheetBehavior: BottomSheetBehavior<FrameLayout>
 
     @Suppress("PropertyName")
     val TAG: String = "MainFragment"
@@ -50,10 +50,9 @@ class MainFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         sheetBehavior = BottomSheetBehavior.from(bottomSheet)
-        bottomSheet.alpha = 0.0f
+        optionsView.alpha = 0.0f
         viewModel = ViewModelProviders.of(activity!!).get(MainViewModel::class.java)
         adapter = MainAppsAdapter(mutableSetOf(), InteractionHandler())
-        themeChooser = ThemeChooserDialog.getThemeChooser()
         mainAppsList.adapter = adapter
         viewModel.homeApps.observe(this, Observer {
             if (it != null) {
@@ -83,7 +82,7 @@ class MainFragment : Fragment() {
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
-        with(context as MainActivity){
+        with(context as MainActivity) {
             this.onBackPressedListener = object : MainActivity.OnBackPressedListener {
                 override fun onBackPressed() {
                     sheetBehavior.state = STATE_COLLAPSED
@@ -100,10 +99,21 @@ class MainFragment : Fragment() {
     }
 
     fun updateUi() {
-        val fWatchTime = SimpleDateFormat("HH:mm", Locale.ENGLISH)
-        val fWatchDate = SimpleDateFormat("EEE, MMM dd", Locale.ENGLISH)
+        val twenty4Hour = context?.getSharedPreferences(getString(R.string.prefs_settings), MODE_PRIVATE)
+                ?.getBoolean(getString(R.string.prefs_settings_key_clocktype), false)
         val date = Date()
-        clockTextView.text = fWatchTime.format(date)
+        if (twenty4Hour as Boolean) {
+            val fWatchTime = SimpleDateFormat("HH:mm", Locale.ENGLISH)
+            clockTextView.text = fWatchTime.format(date)
+            clockAmPm.visibility = View.GONE
+        } else {
+            val fWatchTime = SimpleDateFormat("hh:mm", Locale.ENGLISH)
+            val fWatchTimeAP = SimpleDateFormat("aa", Locale.ENGLISH)
+            clockTextView.text = fWatchTime.format(date)
+            clockAmPm.text = fWatchTimeAP.format(date)
+            clockAmPm.visibility = View.VISIBLE
+        }
+        val fWatchDate = SimpleDateFormat("EEE, MMM dd", Locale.ENGLISH)
         dateTextView.text = fWatchDate.format(date)
     }
 
@@ -130,7 +140,7 @@ class MainFragment : Fragment() {
     }
 
     private fun doBounceAnimation(targetView: View) {
-        val animator = ObjectAnimator.ofFloat(targetView, "translationY", 0f, -40f, 0f)
+        val animator = ObjectAnimator.ofFloat(targetView, "translationY", 0f, -20f, 0f)
         animator.interpolator = EasingInterpolator(Ease.QUINT_OUT)
         animator.startDelay = 1000
         animator.duration = 1000
@@ -159,11 +169,7 @@ class MainFragment : Fragment() {
         startActivity(Intent(android.provider.Settings.ACTION_SETTINGS))
     }
 
-    private fun changeTheme() {
-        themeChooser.show(fragmentManager, TAG)
-    }
-
-    private fun setEventListeners(){
+    private fun setEventListeners() {
         clockTextView.setOnClickListener {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                 try {
@@ -180,8 +186,12 @@ class MainFragment : Fragment() {
         }
         sheetBehavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
             override fun onSlide(p0: View, p1: Float) {
-                val alpha = 3 * p1
-                bottomSheet.alpha = alpha
+                val multi = 3 * p1
+                optionsView.alpha = multi
+                optionsView.cardElevation = p1 * 8
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    optionsView.elevation = p1 * 8
+                }
             }
 
             override fun onStateChanged(bottomSheet: View, newState: Int) {
@@ -191,10 +201,6 @@ class MainFragment : Fragment() {
                 }
             }
         })
-        changeThemeText.setOnClickListener {
-            sheetBehavior.state = STATE_COLLAPSED
-            changeTheme()
-        }
         settingsText.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_openSettingsFragment))
         deviceSettingsText.setOnClickListener { openSettings() }
         rateAppText.setOnClickListener { rateApp() }
