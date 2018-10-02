@@ -195,9 +195,9 @@ class MainFragment : Fragment() {
             }
 
             override fun onStateChanged(bottomSheet: View, newState: Int) {
-                ivExpand.visibility = View.INVISIBLE
+                iconTray.visibility = View.GONE
                 if (newState == STATE_COLLAPSED) {
-                    ivExpand.visibility = View.VISIBLE
+                    iconTray.visibility = View.VISIBLE
                 }
             }
         })
@@ -208,7 +208,7 @@ class MainFragment : Fragment() {
             changeLauncherText.setOnClickListener {
                 startActivity(Intent(android.provider.Settings.ACTION_HOME_SETTINGS))
             }
-        } else changeLauncherText.visibility = View.INVISIBLE
+        } else changeLauncherText.visibility = View.GONE
         aboutText.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_openAboutFragment))
         ivCall.setOnClickListener {
             try {
