@@ -46,6 +46,7 @@ dependencies {
     annotationProcessor "android.arch.persistence.room:compiler:1.1.1"
     implementation 'android.arch.lifecycle:extensions:1.1.1'
     annotationProcessor "android.arch.lifecycle:compiler:1.1.1"
+    implementation 'androidx.core:core-ktx:1.0.0'
 
     // 3rd Party libs
     implementation 'com.daasuu:EasingInterpolator:1.0.0'
