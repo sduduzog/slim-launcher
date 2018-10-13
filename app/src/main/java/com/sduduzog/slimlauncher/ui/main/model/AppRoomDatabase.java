@@ -9,6 +9,7 @@ import android.content.Context;
 public abstract class AppRoomDatabase extends RoomDatabase {
     private static volatile AppRoomDatabase INSTANCE;
 
+    @SuppressWarnings("UnusedReturnValue")
     public static AppRoomDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {
             synchronized (AppRoomDatabase.class) {
@@ -22,5 +23,6 @@ public abstract class AppRoomDatabase extends RoomDatabase {
         return INSTANCE;
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public abstract AppDao appDao();
 }

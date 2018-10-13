@@ -7,7 +7,7 @@
     tools:context="com.sduduzog.slimlauncher.ui.main.setup.SetupFragment">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cvIton"
+        android:id="@+id/cvIcon"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginStart="32dp"
@@ -68,7 +68,7 @@
         android:textSize="32sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cvIton" />
+        app:layout_constraintTop_toBottomOf="@+id/cvIcon" />
 
     <TextView
         android:id="@+id/textViewLets"

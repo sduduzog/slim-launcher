@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
-import androidx.recyclerview.widget.RecyclerView
 import com.sduduzog.slimlauncher.R
 import com.sduduzog.slimlauncher.ui.main.model.App
 import com.sduduzog.slimlauncher.ui.main.model.MainViewModel
@@ -23,7 +22,6 @@ class AppsFragment : Fragment() {
     private var apps: MutableList<App> = mutableListOf()
     private lateinit var viewModel: MainViewModel
     private lateinit var mAdapter: AppsListAdapter
-    private lateinit var layout: RecyclerView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -59,7 +57,7 @@ class AppsFragment : Fragment() {
     inner class InteractionHandler : OnListFragmentInteractionListener {
         override fun onListFragmentInteraction(app: App) {
             viewModel.addToHomeScreen(app)
-            val nav = Navigation.findNavController(layout)
+            val nav = Navigation.findNavController(appList)
             nav.popBackStack()
         }
     }

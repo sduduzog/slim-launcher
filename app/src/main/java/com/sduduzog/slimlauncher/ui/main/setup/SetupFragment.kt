@@ -95,7 +95,7 @@ class SetupFragment : Fragment(), DialogInteractionListener {
         textViewLets.alpha = 0f
         setupButton.alpha = 0f
         tvWelcome.alpha = 0f
-        cvIton.alpha = 0f
+        cvIcon.alpha = 0f
     }
 
     private fun revealUI(level: Int) {
@@ -103,7 +103,7 @@ class SetupFragment : Fragment(), DialogInteractionListener {
         when (level) {
             0 -> {
                 tvWelcome.animate().alpha(1f).duration = 1000
-                cvIton.animate().alpha(1f).duration = 1500
+                cvIcon.animate().alpha(1f).duration = 1500
                 textViewLets.animate().alpha(1f).duration = 1000
                 opt1Text.animate().setStartDelay(1000).alpha(1f).duration = 500
                 opt1Number.animate().setStartDelay(1000).alpha(1f).duration = 500

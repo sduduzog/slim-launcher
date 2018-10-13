@@ -3,9 +3,6 @@ package com.sduduzog.slimlauncher.ui.main.model
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import com.sduduzog.slimlauncher.ui.main.model.App
-import com.sduduzog.slimlauncher.ui.main.model.AppRepository
-import com.sduduzog.slimlauncher.ui.main.model.HomeApp
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
     private var _repository: AppRepository = AppRepository(application)

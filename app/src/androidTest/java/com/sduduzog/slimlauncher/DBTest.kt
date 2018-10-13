@@ -36,7 +36,7 @@ class DBTest {
     @Test
     @Throws(InterruptedException::class)
     fun testInsertLiveDataApps() {
-        val app = TestUtil.createApp("TestApp", "com.test.testapp", "TestMainActivity")
+        val app = TestUtil.createApp("TestApp", "com.test.test.app", "TestMainActivity")
         mAppDao!!.insert(app)
         val appsInstalled = LiveDataTestUtil.getValue(mAppDao!!.apps)
         assertThat(appsInstalled.size, equalTo(1))

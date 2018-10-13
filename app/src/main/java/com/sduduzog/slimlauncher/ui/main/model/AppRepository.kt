@@ -15,8 +15,6 @@ class AppRepository(application: Application) {
     private var _apps: LiveData<List<App>> = appDao.apps
     private var _homeApps: LiveData<List<HomeApp>> = appDao.homeApps
 
-    private val TAG: String = "REPO"
-
     private var pm: PackageManager = application.packageManager
 
     val homeApps: LiveData<List<HomeApp>>

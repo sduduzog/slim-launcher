@@ -23,8 +23,6 @@ class SettingsFragment : Fragment() {
     private lateinit var viewModel: MainViewModel
     private lateinit var adapter: SettingsListAdapter
 
-    private val TAG: String = "SettingsFragment"
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.settings_fragment, container, false)
@@ -51,7 +49,7 @@ class SettingsFragment : Fragment() {
         addButton.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_openAppsFragment))
         changeThemeText.setOnClickListener {
             val themeChooserDialog = ThemeChooserDialog.getThemeChooser()
-            themeChooserDialog.showNow(fragmentManager, TAG)
+            themeChooserDialog.showNow(fragmentManager, "THEME_CHOOSER")
         }
         val settings = context!!.getSharedPreferences(getString(R.string.prefs_settings), MODE_PRIVATE)
         clockTypeChecker.isChecked = settings.getBoolean(getString(R.string.prefs_settings_key_clock_type), false)
