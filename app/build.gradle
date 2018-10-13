@@ -35,7 +35,6 @@ dependencies {
 
     // Kotlin Libraries
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.0.0'
 
     // Support Libraries
     implementation 'androidx.appcompat:appcompat:1.0.0'
