@@ -1,11 +1,8 @@
-package com.sduduzog.slimlauncher
+package com.sduduzog.slimlauncher.ui.main.model
 
 import android.app.Application
-import android.arch.lifecycle.AndroidViewModel
-import android.arch.lifecycle.LiveData
-import com.sduduzog.slimlauncher.data.App
-import com.sduduzog.slimlauncher.data.AppRepository
-import com.sduduzog.slimlauncher.data.HomeApp
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
     private var _repository: AppRepository = AppRepository(application)
@@ -32,10 +29,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun addToHomeScreen(app: App) {
-        val home = HomeApp()
-        home.activityName = app.activityName
-        home.appName = app.appName
-        home.packageName = app.packageName
+        val home = HomeApp(app.appName, app.packageName, app.activityName)
         _repository.insert(home)
     }
 }

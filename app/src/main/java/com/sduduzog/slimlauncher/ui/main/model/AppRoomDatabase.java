@@ -1,14 +1,15 @@
-package com.sduduzog.slimlauncher.data;
+package com.sduduzog.slimlauncher.ui.main.model;
 
-import android.arch.persistence.room.Database;
-import android.arch.persistence.room.Room;
-import android.arch.persistence.room.RoomDatabase;
+import androidx.room.Database;
+import androidx.room.Room;
+import androidx.room.RoomDatabase;
 import android.content.Context;
 
 @Database(entities = {App.class, HomeApp.class}, version = 1, exportSchema = false)
 public abstract class AppRoomDatabase extends RoomDatabase {
     private static volatile AppRoomDatabase INSTANCE;
 
+    @SuppressWarnings("UnusedReturnValue")
     public static AppRoomDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {
             synchronized (AppRoomDatabase.class) {
@@ -22,5 +23,6 @@ public abstract class AppRoomDatabase extends RoomDatabase {
         return INSTANCE;
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public abstract AppDao appDao();
 }

@@ -1,12 +1,12 @@
 package com.sduduzog.slimlauncher.ui.main
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.sduduzog.slimlauncher.R
-import com.sduduzog.slimlauncher.data.HomeApp
+import com.sduduzog.slimlauncher.ui.main.model.HomeApp
 
 class MainAppsAdapter(private var mValues: MutableSet<HomeApp>,
                       private val mListener: MainFragment.OnListFragmentInteractionListener?)
