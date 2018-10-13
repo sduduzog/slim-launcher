@@ -1,16 +1,16 @@
 package com.sduduzog.slimlauncher.ui.main.model
 
 import android.app.Application
-import androidx.lifecycle.LiveData
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
 import android.os.AsyncTask
+import androidx.lifecycle.LiveData
 import java.util.*
 
 class AppRepository(application: Application) {
 
-    private val db: AppRoomDatabase = AppRoomDatabase.getDatabase(application)
+    private val db: AppRoomDatabase = AppRoomDatabase.getDatabase(application)!!
     private var appDao: AppDao = db.appDao()
     private var _apps: LiveData<List<App>> = appDao.apps
     private var _homeApps: LiveData<List<HomeApp>> = appDao.homeApps
