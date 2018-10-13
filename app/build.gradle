@@ -30,7 +30,10 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+
+    // Kotlin Libraries
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.core:core-ktx:1.0.0'
 
     // Support Libraries
     implementation 'androidx.appcompat:appcompat:1.0.0-rc02'
@@ -43,12 +46,8 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0-rc01'
     implementation 'android.arch.navigation:navigation-fragment:1.0.0-alpha06'
     implementation 'androidx.room:room-runtime:2.0.0-alpha1'
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0-rc02'
-    implementation 'androidx.legacy:legacy-support-v13:1.0.0-alpha1'
     annotationProcessor "androidx.room:room-compiler:2.0.0-alpha1"
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0-rc01'
     annotationProcessor "androidx.lifecycle:lifecycle-compiler:2.0.0-alpha1"
-    implementation 'androidx.core:core-ktx:1.0.0'
 
     // 3rd Party libs
     implementation 'com.daasuu:EasingInterpolator:1.0.0'
