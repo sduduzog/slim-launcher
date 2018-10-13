@@ -11,6 +11,11 @@
         <item>Candy</item>
     </string-array>
 
+    <string-array name="clock_types">
+        <item>12 Hour</item>
+        <item>24 Hour</item>
+    </string-array>
+
     <string name="prefs_settings">settings</string>
     <string name="prefs_settings_key_theme">key_theme</string>
     <string name="main_slim_options">Slim options</string>
@@ -59,6 +64,20 @@
     <string name="theme_chooser_dialog_title">Change theme</string>
     <string name="main_call_icon">call icon</string>
     <string name="main_photo_camera_icon">photo camera icon</string>
-    <string name="prefs_settings_key_clocktype">clock_type</string>
+    <string name="prefs_settings_key_clock_type">clock_type</string>
+
+    <string name="prefs_settings_key_fresh_install_setup">key_fresh_install_setup</string>
+    <string name="setup_button_start">start</string>
+    <string name="setup_text_welcome">Welcome!</string>
+    <string name="setup_text_lets_get_you_set_up">Lets get you set up!</string>
+    <string name="setup_text_choose_apps">Choose apps that will appear on your home screen</string>
+    <string name="setup_text_choose_your_preferred_clock">Choose your preferred clock type</string>
+    <string name="setup_text_set_the_theme">Set the theme of your choice</string>
+    <string name="icon_check">Icon check</string>
+    <string name="setup_button_next">next</string>
+    <string name="setup_button_finish">Finish</string>
+    <string name="setup_text_1">1.</string>
+    <string name="setup_text_2">2.</string>
+    <string name="setup_text_3">3.</string>
 
 </resources>

@@ -1,12 +1,12 @@
 package com.sduduzog.slimlauncher.ui.main
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.sduduzog.slimlauncher.R
-import com.sduduzog.slimlauncher.data.App
+import com.sduduzog.slimlauncher.ui.main.model.App
 
 
 import com.sduduzog.slimlauncher.ui.main.AppsFragment.OnListFragmentInteractionListener

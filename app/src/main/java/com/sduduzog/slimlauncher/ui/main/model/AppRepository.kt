@@ -1,7 +1,7 @@
-package com.sduduzog.slimlauncher.data
+package com.sduduzog.slimlauncher.ui.main.model
 
 import android.app.Application
-import android.arch.lifecycle.LiveData
+import androidx.lifecycle.LiveData
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
@@ -68,10 +68,7 @@ class AppRepository(application: Application) {
             for (i in launchables.indices) {
                 val item = launchables[i]
                 val activity = item.activityInfo
-                val app = App()
-                app.appName = launchables[i].loadLabel(pm).toString()
-                app.packageName = activity.applicationInfo.packageName
-                app.activityName = activity.name
+                val app = App(launchables[i].loadLabel(pm).toString(), activity.applicationInfo.packageName, activity.name)
                 mAsyncTaskDao.insert(app)
             }
             return null

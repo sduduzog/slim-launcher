@@ -1,6 +1,6 @@
 package com.sduduzog.slimlauncher
 
-import com.sduduzog.slimlauncher.data.App
+import com.sduduzog.slimlauncher.ui.main.model.App
 
 internal object TestUtil {
 
