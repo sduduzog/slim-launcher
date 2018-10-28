@@ -25,19 +25,19 @@ class DBTest {
     fun createDb() {
         val context = InstrumentationRegistry.getTargetContext()
         mDb = Room.inMemoryDatabaseBuilder(context, AppRoomDatabase::class.java).build()
-        mAppDao = mDb!!.appDao()
+        mAppDao = mDb?.appDao()
     }
 
     @After
     fun closeDb() {
-        mDb!!.close()
+        mDb?.close()
     }
 
     @Test
     @Throws(InterruptedException::class)
     fun testInsertLiveDataApps() {
         val app = TestUtil.createApp("TestApp", "com.test.test.app", "TestMainActivity")
-        mAppDao!!.insert(app)
+        mAppDao?.insert(app)
         val appsInstalled = LiveDataTestUtil.getValue(mAppDao!!.apps)
         assertThat(appsInstalled.size, equalTo(1))
     }
