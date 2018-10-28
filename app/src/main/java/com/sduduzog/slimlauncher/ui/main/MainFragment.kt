@@ -172,13 +172,9 @@ class MainFragment : Fragment() {
     private fun setEventListeners() {
         clockTextView.setOnClickListener {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                try {
-                    val intent = Intent(android.provider.AlarmClock.ACTION_SHOW_ALARMS)
-                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                    startActivity(intent)
-                } catch (e: Exception) {
-                    Log.e(TAG, e.message)
-                }
+                val intent = Intent(android.provider.AlarmClock.ACTION_SHOW_ALARMS)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(intent)
             }
         }
         bottomSheet.setOnClickListener {
