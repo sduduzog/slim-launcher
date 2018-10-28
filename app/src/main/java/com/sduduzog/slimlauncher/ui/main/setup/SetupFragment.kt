@@ -39,7 +39,7 @@ class SetupFragment : Fragment(), DialogInteractionListener {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(activity!!).get(MainViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
         setLoading()
         viewModel.homeApps.observe(this, ValueObserver())
         setupButton.setOnClickListener {
