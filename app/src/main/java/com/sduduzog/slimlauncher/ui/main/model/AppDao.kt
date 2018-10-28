@@ -1,7 +1,7 @@
-package com.sduduzog.slimlauncher.data
+package com.sduduzog.slimlauncher.ui.main.model
 
-import android.arch.lifecycle.LiveData
-import android.arch.persistence.room.*
+import androidx.lifecycle.LiveData
+import androidx.room.*
 
 @Dao
 interface AppDao {
@@ -15,9 +15,6 @@ interface AppDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insert(app: App)
-
-    @Update
-    fun update(app: App)
 
     @Insert
     fun addHomeApp(app: HomeApp)

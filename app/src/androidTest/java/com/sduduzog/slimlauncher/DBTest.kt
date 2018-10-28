@@ -1,13 +1,11 @@
 package com.sduduzog.slimlauncher
 
-import android.arch.persistence.room.Room
-import android.content.Context
-import android.support.test.InstrumentationRegistry
-import android.support.test.runner.AndroidJUnit4
+import androidx.room.Room
+import androidx.test.InstrumentationRegistry
+import androidx.test.runner.AndroidJUnit4
 
-import com.sduduzog.slimlauncher.data.App
-import com.sduduzog.slimlauncher.data.AppDao
-import com.sduduzog.slimlauncher.data.AppRoomDatabase
+import com.sduduzog.slimlauncher.ui.main.model.AppDao
+import com.sduduzog.slimlauncher.ui.main.model.AppRoomDatabase
 
 import org.junit.After
 import org.junit.Before
@@ -38,7 +36,7 @@ class DBTest {
     @Test
     @Throws(InterruptedException::class)
     fun testInsertLiveDataApps() {
-        val app = TestUtil.createApp("TestApp", "com.test.testapp", "TestMainActivity")
+        val app = TestUtil.createApp("TestApp", "com.test.test.app", "TestMainActivity")
         mAppDao!!.insert(app)
         val appsInstalled = LiveDataTestUtil.getValue(mAppDao!!.apps)
         assertThat(appsInstalled.size, equalTo(1))

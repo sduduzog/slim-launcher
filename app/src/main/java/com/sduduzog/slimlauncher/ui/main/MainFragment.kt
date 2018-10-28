@@ -1,31 +1,31 @@
 package com.sduduzog.slimlauncher.ui.main
 
 import android.animation.ObjectAnimator
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
 import android.content.*
 import android.content.Context.MODE_PRIVATE
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
-import android.support.design.widget.BottomSheetBehavior
-import android.support.design.widget.BottomSheetBehavior.STATE_COLLAPSED
-import android.support.design.widget.BottomSheetBehavior.STATE_HALF_EXPANDED
-import android.support.v4.app.Fragment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import com.daasuu.ei.Ease
 import com.daasuu.ei.EasingInterpolator
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPSED
+import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_HALF_EXPANDED
 import com.sduduzog.slimlauncher.MainActivity
-import com.sduduzog.slimlauncher.MainViewModel
 import com.sduduzog.slimlauncher.R
-import com.sduduzog.slimlauncher.data.HomeApp
+import com.sduduzog.slimlauncher.ui.main.model.HomeApp
+import com.sduduzog.slimlauncher.ui.main.model.MainViewModel
 import kotlinx.android.synthetic.main.main_bottom_sheet.*
 import kotlinx.android.synthetic.main.main_content.*
 import java.text.SimpleDateFormat
@@ -100,7 +100,7 @@ class MainFragment : Fragment() {
 
     fun updateUi() {
         val twenty4Hour = context?.getSharedPreferences(getString(R.string.prefs_settings), MODE_PRIVATE)
-                ?.getBoolean(getString(R.string.prefs_settings_key_clocktype), false)
+                ?.getBoolean(getString(R.string.prefs_settings_key_clock_type), false)
         val date = Date()
         if (twenty4Hour as Boolean) {
             val fWatchTime = SimpleDateFormat("HH:mm", Locale.ENGLISH)

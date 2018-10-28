@@ -1,21 +1,19 @@
-package com.sduduzog.slimlauncher.data
+package com.sduduzog.slimlauncher.ui.main.model
 
 import android.app.Application
-import android.arch.lifecycle.LiveData
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
 import android.os.AsyncTask
+import androidx.lifecycle.LiveData
 import java.util.*
 
 class AppRepository(application: Application) {
 
-    private val db: AppRoomDatabase = AppRoomDatabase.getDatabase(application)
+    private val db: AppRoomDatabase = AppRoomDatabase.getDatabase(application)!!
     private var appDao: AppDao = db.appDao()
     private var _apps: LiveData<List<App>> = appDao.apps
     private var _homeApps: LiveData<List<HomeApp>> = appDao.homeApps
-
-    private val TAG: String = "REPO"
 
     private var pm: PackageManager = application.packageManager
 
@@ -68,10 +66,7 @@ class AppRepository(application: Application) {
             for (i in launchables.indices) {
                 val item = launchables[i]
                 val activity = item.activityInfo
-                val app = App()
-                app.appName = launchables[i].loadLabel(pm).toString()
-                app.packageName = activity.applicationInfo.packageName
-                app.activityName = activity.name
+                val app = App(launchables[i].loadLabel(pm).toString(), activity.applicationInfo.packageName, activity.name)
                 mAsyncTaskDao.insert(app)
             }
             return null

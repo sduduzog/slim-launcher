@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/mainFragment">
+    app:startDestination="@id/setupFragment">
 
     <fragment
         android:id="@+id/mainFragment"
@@ -36,4 +36,13 @@
         android:name="com.sduduzog.slimlauncher.ui.main.AboutFragment"
         android:label="fragment_about"
         tools:layout="@layout/fragment_about" />
+    <fragment
+        android:id="@+id/setupFragment"
+        android:name="com.sduduzog.slimlauncher.ui.main.setup.SetupFragment"
+        android:label="setup_fragment"
+        tools:layout="@layout/setup_fragment" >
+        <action
+            android:id="@+id/action_setupFragment_to_mainFragment2"
+            app:destination="@id/mainFragment" />
+    </fragment>
 </navigation>
