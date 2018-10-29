@@ -51,7 +51,7 @@ class MainFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         sheetBehavior = BottomSheetBehavior.from(bottomSheet)
         optionsView.alpha = 0.0f
-        viewModel = ViewModelProviders.of(activity!!).get(MainViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
         adapter = MainAppsAdapter(mutableSetOf(), InteractionHandler())
         mainAppsList.adapter = adapter
         viewModel.homeApps.observe(this, Observer {
@@ -149,7 +149,7 @@ class MainFragment : Fragment() {
     }
 
     private fun rateApp() {
-        val uri = Uri.parse("market://details?id=" + context!!.packageName)
+        val uri = Uri.parse("market://details?id=" + context?.packageName)
         val goToMarket = Intent(Intent.ACTION_VIEW, uri)
         goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY or
                 Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
@@ -161,7 +161,7 @@ class MainFragment : Fragment() {
             Log.d(TAG, goToMarket.data?.query)
         } catch (e: ActivityNotFoundException) {
             startActivity(Intent(Intent.ACTION_VIEW,
-                    Uri.parse("http://play.google.com/store/apps/details?id=" + context!!.packageName)))
+                    Uri.parse("http://play.google.com/store/apps/details?id=" + context?.packageName)))
         }
     }
 
@@ -172,13 +172,9 @@ class MainFragment : Fragment() {
     private fun setEventListeners() {
         clockTextView.setOnClickListener {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                try {
-                    val intent = Intent(android.provider.AlarmClock.ACTION_SHOW_ALARMS)
-                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                    startActivity(intent)
-                } catch (e: Exception) {
-                    Log.e(TAG, e.message)
-                }
+                val intent = Intent(android.provider.AlarmClock.ACTION_SHOW_ALARMS)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(intent)
             }
         }
         bottomSheet.setOnClickListener {
