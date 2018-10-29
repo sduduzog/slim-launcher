@@ -1,7 +1,7 @@
 package com.sduduzog.slimlauncher
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.Observer
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit
 object LiveDataTestUtil {
 
     @Throws(InterruptedException::class)
-    fun <T> getValue(liveData: LiveData<T>): T {
+    inline fun <reified T> getValue(liveData: LiveData<T>): T {
         val data = arrayOfNulls<Any>(1)
         val latch = CountDownLatch(1)
         val observer = object : Observer<T> {

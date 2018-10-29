@@ -1,31 +1,31 @@
 package com.sduduzog.slimlauncher.ui.main
 
 import android.animation.ObjectAnimator
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
 import android.content.*
 import android.content.Context.MODE_PRIVATE
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
-import android.support.design.widget.BottomSheetBehavior
-import android.support.design.widget.BottomSheetBehavior.STATE_COLLAPSED
-import android.support.design.widget.BottomSheetBehavior.STATE_HALF_EXPANDED
-import android.support.v4.app.Fragment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import com.daasuu.ei.Ease
 import com.daasuu.ei.EasingInterpolator
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPSED
+import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_HALF_EXPANDED
 import com.sduduzog.slimlauncher.MainActivity
-import com.sduduzog.slimlauncher.MainViewModel
 import com.sduduzog.slimlauncher.R
-import com.sduduzog.slimlauncher.data.HomeApp
+import com.sduduzog.slimlauncher.ui.main.model.HomeApp
+import com.sduduzog.slimlauncher.ui.main.model.MainViewModel
 import kotlinx.android.synthetic.main.main_bottom_sheet.*
 import kotlinx.android.synthetic.main.main_content.*
 import java.text.SimpleDateFormat
@@ -51,7 +51,7 @@ class MainFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         sheetBehavior = BottomSheetBehavior.from(bottomSheet)
         optionsView.alpha = 0.0f
-        viewModel = ViewModelProviders.of(activity!!).get(MainViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
         adapter = MainAppsAdapter(mutableSetOf(), InteractionHandler())
         mainAppsList.adapter = adapter
         viewModel.homeApps.observe(this, Observer {
@@ -100,7 +100,7 @@ class MainFragment : Fragment() {
 
     fun updateUi() {
         val twenty4Hour = context?.getSharedPreferences(getString(R.string.prefs_settings), MODE_PRIVATE)
-                ?.getBoolean(getString(R.string.prefs_settings_key_clocktype), false)
+                ?.getBoolean(getString(R.string.prefs_settings_key_clock_type), false)
         val date = Date()
         if (twenty4Hour as Boolean) {
             val fWatchTime = SimpleDateFormat("HH:mm", Locale.ENGLISH)
@@ -149,7 +149,7 @@ class MainFragment : Fragment() {
     }
 
     private fun rateApp() {
-        val uri = Uri.parse("market://details?id=" + context!!.packageName)
+        val uri = Uri.parse("market://details?id=" + context?.packageName)
         val goToMarket = Intent(Intent.ACTION_VIEW, uri)
         goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY or
                 Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
@@ -161,7 +161,7 @@ class MainFragment : Fragment() {
             Log.d(TAG, goToMarket.data?.query)
         } catch (e: ActivityNotFoundException) {
             startActivity(Intent(Intent.ACTION_VIEW,
-                    Uri.parse("http://play.google.com/store/apps/details?id=" + context!!.packageName)))
+                    Uri.parse("http://play.google.com/store/apps/details?id=" + context?.packageName)))
         }
     }
 
@@ -172,13 +172,9 @@ class MainFragment : Fragment() {
     private fun setEventListeners() {
         clockTextView.setOnClickListener {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                try {
-                    val intent = Intent(android.provider.AlarmClock.ACTION_SHOW_ALARMS)
-                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                    startActivity(intent)
-                } catch (e: Exception) {
-                    Log.e(TAG, e.message)
-                }
+                val intent = Intent(android.provider.AlarmClock.ACTION_SHOW_ALARMS)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(intent)
             }
         }
         bottomSheet.setOnClickListener {

@@ -4,8 +4,9 @@ import android.app.Dialog
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.support.v4.app.DialogFragment
-import android.support.v7.app.AlertDialog
+import androidx.appcompat.app.AlertDialog
+import androidx.core.content.edit
+import androidx.fragment.app.DialogFragment
 import com.sduduzog.slimlauncher.R
 
 class ThemeChooserDialog : DialogFragment() {
@@ -19,7 +20,9 @@ class ThemeChooserDialog : DialogFragment() {
         builder.setTitle(R.string.theme_chooser_dialog_title)
         builder.setSingleChoiceItems(R.array.themes_array, active) { dialogInterface, i ->
             dialogInterface.dismiss()
-            settings.edit().putInt(getString(R.string.prefs_settings_key_theme), i).apply()
+            settings.edit {
+                putInt(getString(R.string.prefs_settings_key_theme), i)
+            }
         }
         return builder.create()
     }
