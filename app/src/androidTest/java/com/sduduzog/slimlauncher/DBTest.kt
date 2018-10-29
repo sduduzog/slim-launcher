@@ -1,5 +1,6 @@
 package com.sduduzog.slimlauncher
 
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import androidx.test.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4
@@ -14,12 +15,16 @@ import org.junit.runner.RunWith
 
 import org.hamcrest.CoreMatchers.equalTo
 import org.junit.Assert.assertThat
+import org.junit.Rule
 
 @RunWith(AndroidJUnit4::class)
 class DBTest {
 
     private var mAppDao: AppDao? = null
     private var mDb: AppRoomDatabase? = null
+
+    @get:Rule
+    var instantTaskExecutorRule = InstantTaskExecutorRule()
 
     @Before
     fun createDb() {
