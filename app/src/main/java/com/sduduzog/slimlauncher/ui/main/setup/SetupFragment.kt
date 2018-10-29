@@ -164,11 +164,13 @@ class SetupFragment : Fragment(), DialogInteractionListener {
             }
             builder.setPositiveButton("Done") { _, _ ->
                 if (checkedItems.none { it }) {
-                    Toast.makeText(context, "Choose at least one app", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, getString(R.string.no_app_selected_toast_msg), Toast.LENGTH_SHORT).show()
                 } else {
                     setApps()
                 }
             }
+            builder.setTitle(getString(R.string.choose_apps_title))
+
             return builder.create()
         }
 
