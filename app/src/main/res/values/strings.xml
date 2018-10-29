@@ -79,5 +79,7 @@
     <string name="settings_text_tap_to_check_between_24_hour_or_12_hour">Tap to check between 24 hour or 12 hour</string>
     <string name="settings_text_tap_to_change_app_theme">Tap to change app theme</string>
     <string name="settings_text_home_screen_apps">Home screen apps</string>
+    <string name="no_app_selected_toast_msg">Choose at least one app</string>
+    <string name="choose_apps_title">Choose Apps</string>
 
 </resources>
