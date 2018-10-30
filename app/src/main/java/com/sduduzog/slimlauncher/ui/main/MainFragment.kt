@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.GridLayoutManager
 import com.daasuu.ei.Ease
 import com.daasuu.ei.EasingInterpolator
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -52,8 +53,9 @@ class MainFragment : Fragment() {
         sheetBehavior = BottomSheetBehavior.from(bottomSheet)
         optionsView.alpha = 0.0f
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
-        adapter = MainAppsAdapter(mutableSetOf(), InteractionHandler())
+        adapter = MainAppsAdapter(mutableSetOf(), context, InteractionHandler())
         mainAppsList.adapter = adapter
+        mainAppsList.layoutManager = GridLayoutManager(context, 2)
         viewModel.homeApps.observe(this, Observer {
             if (it != null) {
                 adapter.setApps(it)
