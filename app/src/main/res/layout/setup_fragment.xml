@@ -120,11 +120,25 @@
         android:layout_marginLeft="8dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
+        android:text="@string/setup_text_choose_your_preferred_layout"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintEnd_toStartOf="@id/ivTick2"
+        app:layout_constraintStart_toEndOf="@id/opt2Number"
+        app:layout_constraintTop_toTopOf="@id/opt2Number" />
+
+    <TextView
+        android:id="@+id/opt3Text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
         android:text="@string/setup_text_choose_your_preferred_clock"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:layout_constraintEnd_toStartOf="@+id/ivTick2"
-        app:layout_constraintStart_toEndOf="@+id/opt2Number"
-        app:layout_constraintTop_toTopOf="@+id/opt2Number" />
+        app:layout_constraintEnd_toStartOf="@id/ivTick3"
+        app:layout_constraintStart_toEndOf="@id/opt3Number"
+        app:layout_constraintTop_toTopOf="@id/opt3Number" />
 
     <ImageView
         android:id="@+id/ivTick2"
@@ -136,6 +150,18 @@
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/opt2Text"
+        app:srcCompat="@drawable/ic_check" />
+
+    <ImageView
+        android:id="@+id/ivTick3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:contentDescription="@string/icon_check"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/opt3Text"
         app:srcCompat="@drawable/ic_check" />
 
     <TextView
@@ -161,6 +187,18 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/opt1Text" />
+
+    <TextView
+        android:id="@+id/opt3Number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/setup_text_3"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/opt2Text" />
 
     <ProgressBar
         android:id="@+id/progressBar"

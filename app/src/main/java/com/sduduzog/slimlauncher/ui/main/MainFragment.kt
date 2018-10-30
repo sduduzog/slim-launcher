@@ -18,6 +18,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.daasuu.ei.Ease
 import com.daasuu.ei.EasingInterpolator
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -43,6 +44,9 @@ class MainFragment : Fragment() {
     @Suppress("PropertyName")
     val TAG: String = "MainFragment"
 
+    private val LIST_LAYOUT_TYPE = 1
+    private val GRID_LAYOUT_TYPE = 2
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
         return inflater.inflate(R.layout.main_fragment, container, false)
@@ -53,9 +57,19 @@ class MainFragment : Fragment() {
         sheetBehavior = BottomSheetBehavior.from(bottomSheet)
         optionsView.alpha = 0.0f
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
-        adapter = MainAppsAdapter(mutableSetOf(), context, InteractionHandler())
+
+        val layoutPref = context?.getSharedPreferences(getString(R.string.prefs_settings), MODE_PRIVATE)
+                ?.getString(getString(R.string.prefs_settings_key_layout_type), "List")
+        var layoutType = LIST_LAYOUT_TYPE
+        if (layoutPref == "List") {
+            mainAppsList.layoutManager = LinearLayoutManager(context)
+        } else {
+            layoutType = GRID_LAYOUT_TYPE
+            mainAppsList.layoutManager = GridLayoutManager(context, 2)
+        }
+
+        adapter = MainAppsAdapter(mutableSetOf(), context, layoutType, InteractionHandler())
         mainAppsList.adapter = adapter
-        mainAppsList.layoutManager = GridLayoutManager(context, 2)
         viewModel.homeApps.observe(this, Observer {
             if (it != null) {
                 adapter.setApps(it)

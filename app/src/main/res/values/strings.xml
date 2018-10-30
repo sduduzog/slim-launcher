@@ -16,6 +16,11 @@
         <item>24 Hour</item>
     </string-array>
 
+    <string-array name="layout_types">
+        <item>List</item>
+        <item>Grid</item>
+    </string-array>
+
     <string name="prefs_settings">settings</string>
     <string name="prefs_settings_key_theme">key_theme</string>
     <string name="main_slim_options">Slim options</string>
@@ -70,16 +75,19 @@
     <string name="setup_text_lets_get_you_set_up">Lets get you set up!</string>
     <string name="setup_text_choose_apps">Choose apps that will appear on your home screen</string>
     <string name="setup_text_choose_your_preferred_clock">Choose your preferred clock type</string>
+    <string name="setup_text_choose_your_preferred_layout">Choose your preferred layout</string>
     <string name="icon_check">Icon check</string>
     <string name="setup_button_next">next</string>
     <string name="setup_button_finish">Finish</string>
     <string name="setup_text_1">1.</string>
     <string name="setup_text_2">2.</string>
+    <string name="setup_text_3">3.</string>
     <string name="settings_text_use_24_hour_clock">Use 24 hour clock</string>
     <string name="settings_text_tap_to_check_between_24_hour_or_12_hour">Tap to check between 24 hour or 12 hour</string>
     <string name="settings_text_tap_to_change_app_theme">Tap to change app theme</string>
     <string name="settings_text_home_screen_apps">Home screen apps</string>
     <string name="no_app_selected_toast_msg">Choose at least one app</string>
     <string name="choose_apps_title">Choose Apps</string>
+    <string name="prefs_settings_key_layout_type">List</string>
 
 </resources>

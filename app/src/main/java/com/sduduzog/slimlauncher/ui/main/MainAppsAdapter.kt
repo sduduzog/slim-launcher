@@ -12,13 +12,19 @@ import com.sduduzog.slimlauncher.ui.main.model.HomeApp
 
 class MainAppsAdapter(private var mValues: MutableSet<HomeApp>,
                       private var mContext: Context?,
+                      private val mLayoutType: Int,
                       private val mListener: MainFragment.OnListFragmentInteractionListener?)
     : RecyclerView.Adapter<MainAppsAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainAppsAdapter.ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.main_list_item, parent, false)
-        return ViewHolder(view)
+
+        return if (mLayoutType == 1) {
+            ViewHolder(LayoutInflater.from(parent.context)
+                    .inflate(R.layout.main_list_item, parent, false))
+        } else {
+            ViewHolder(LayoutInflater.from(parent.context)
+                    .inflate(R.layout.grid_list_item, parent, false))
+        }
     }
 
     override fun onBindViewHolder(holder: MainAppsAdapter.ViewHolder, position: Int) {

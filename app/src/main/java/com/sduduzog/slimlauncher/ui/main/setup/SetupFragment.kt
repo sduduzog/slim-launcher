@@ -45,7 +45,8 @@ class SetupFragment : Fragment(), DialogInteractionListener {
         setupButton.setOnClickListener {
             when (state) {
                 1 -> chooseApps()
-                2 -> chooseClock()
+                2 -> chooseLayout()
+                3 -> chooseClock()
                 else -> {
                     val settings = activity!!.getSharedPreferences(getString(R.string.prefs_settings), MODE_PRIVATE)
                     settings.edit {
@@ -92,6 +93,8 @@ class SetupFragment : Fragment(), DialogInteractionListener {
         opt1Text.alpha = 0f
         opt2Number.alpha = 0f
         opt2Text.alpha = 0f
+        opt3Number.alpha = 0f
+        opt3Text.alpha = 0f
         textViewLets.alpha = 0f
         setupButton.alpha = 0f
         tvWelcome.alpha = 0f
@@ -109,7 +112,9 @@ class SetupFragment : Fragment(), DialogInteractionListener {
                 opt1Number.animate().setStartDelay(1000).alpha(1f).duration = 500
                 opt2Text.animate().setStartDelay(1500).alpha(1f).duration = 500
                 opt2Number.animate().setStartDelay(1500).alpha(1f).duration = 500
-                setupButton.animate().setStartDelay(2000).alpha(1f).duration = 500
+                opt3Number.animate().setStartDelay(2000).alpha(1f).duration = 500
+                opt3Text.animate().setStartDelay(2000).alpha(1f).duration = 500
+                setupButton.animate().setStartDelay(2500).alpha(1f).duration = 500
             }
             1 -> {
                 setupButton.text = getString(R.string.setup_button_next)
@@ -117,6 +122,10 @@ class SetupFragment : Fragment(), DialogInteractionListener {
             }
             2 -> {
                 ivTick2.visibility = View.VISIBLE
+                setupButton.text = getString(R.string.setup_button_next)
+            }
+            3 -> {
+                ivTick3.visibility = View.VISIBLE
                 setupButton.text = getString(R.string.setup_button_finish)
             }
         }
@@ -129,6 +138,10 @@ class SetupFragment : Fragment(), DialogInteractionListener {
 
     private fun chooseClock() {
         ChooseClockType.newInstance(this).show(fragmentManager, "CLOCK_CHOOSER")
+    }
+
+    private fun chooseLayout() {
+        ChooseLayoutType.newInstance(this).show(fragmentManager, "LAYOUT_CHOOSER")
     }
 
     class ChooseApps : DialogFragment() {
@@ -217,6 +230,38 @@ class SetupFragment : Fragment(), DialogInteractionListener {
         }
     }
 
+    class ChooseLayoutType : DialogFragment() {
+
+        private lateinit var listener: DialogInteractionListener
+
+        companion object {
+            fun newInstance(listener: DialogInteractionListener): ChooseLayoutType {
+                val chooser = ChooseLayoutType()
+                chooser.listener = listener
+                return chooser
+            }
+        }
+
+        override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+            val builder = AlertDialog.Builder(context!!)
+            builder.setTitle("Choose Layout")
+            builder.setSingleChoiceItems(R.array.layout_types, 0) { _, i ->
+                val settings = context!!.getSharedPreferences(getString(R.string.prefs_settings), MODE_PRIVATE)
+                if (i == 0)
+                    settings.edit {
+                        putString(getString(R.string.prefs_settings_key_layout_type), "List")
+                    }
+                else
+                    settings.edit {
+                        putString(getString(R.string.prefs_settings_key_layout_type), "Grid")
+                    }
+                listener.onLayoutChosen()
+                dismiss()
+            }
+            return builder.create()
+        }
+    }
+
     inner class ValueObserver : Observer<List<HomeApp>> {
         override fun onChanged(it: List<HomeApp>?) {
             if (it != null && it.isEmpty()) {
@@ -237,6 +282,10 @@ class SetupFragment : Fragment(), DialogInteractionListener {
     }
 
     override fun onClockChosen() {
+        revealUI(state)
+    }
+
+    override fun onLayoutChosen() {
         revealUI(state)
     }
 }
