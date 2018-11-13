@@ -5,7 +5,7 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.main.SettingsFragment">
+    tools:context=".ui.main.settings.SettingsFragment">
 
     <TextView
         android:id="@+id/textView3"
@@ -13,23 +13,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:text="@string/settings_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/addButton"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:text="@string/settings_button_add"
-        app:layout_constraintBottom_toBottomOf="@+id/textView8"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView8"
-        app:layout_constraintVertical_bias="0.31" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/settingsAppList"
@@ -37,14 +24,14 @@
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8"
-        tools:listitem="@layout/settings_apps_list_item" />
+        tools:listitem="@layout/settings_list_item" />
 
     <TextView
         android:id="@+id/textView2"
@@ -52,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginLeft="24dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:text="@string/settings_text_use_24_hour_clock"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textSize="24sp"
@@ -134,11 +121,22 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginLeft="24dp"
-        android:layout_marginTop="16dp"
         android:text="@string/settings_text_home_screen_apps"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider2" />
+
+    <Button
+        android:id="@+id/buttonChangeTheme"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:text="@string/settings_button_change_theme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

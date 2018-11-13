@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.sduduzog.slimlauncher.ui.main.SettingsFragment"
+        android:name="com.sduduzog.slimlauncher.ui.main.settings.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/settings_fragment">
         <action
@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/appsFragment"
-        android:name="com.sduduzog.slimlauncher.ui.main.AppsFragment"
+        android:name="com.sduduzog.slimlauncher.ui.main.settings.AppsFragment"
         android:label="fragment_apps_list"
         tools:layout="@layout/apps_fragment" />
     <fragment

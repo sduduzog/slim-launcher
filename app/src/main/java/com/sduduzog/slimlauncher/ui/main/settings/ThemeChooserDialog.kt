@@ -1,4 +1,4 @@
-package com.sduduzog.slimlauncher.ui.main
+package com.sduduzog.slimlauncher.ui.main.settings
 
 import android.app.Dialog
 import android.content.Context.MODE_PRIVATE

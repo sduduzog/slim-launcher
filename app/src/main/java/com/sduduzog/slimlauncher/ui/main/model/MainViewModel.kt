@@ -28,8 +28,15 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         _repository.updateApps()
     }
 
-    fun addToHomeScreen(app: App) {
-        val home = HomeApp(app.appName, app.packageName, app.activityName)
-        _repository.insert(home)
+    fun addToHomeScreen(app: HomeApp) {
+        _repository.insert(app)
+    }
+
+    fun addToHomeScreen(apps: List<App>) {
+        for (i in apps.indices){
+            val app = apps[i]
+            val home = HomeApp(app.appName, app.packageName, app.activityName, i)
+            _repository.insert(home)
+        }
     }
 }

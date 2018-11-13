@@ -230,9 +230,7 @@ class SetupFragment : Fragment(), DialogInteractionListener {
     }
 
     override fun onAppsChosen(apps: List<App>) {
-        for (i in apps) {
-            viewModel.addToHomeScreen(i)
-        }
+        viewModel.addToHomeScreen(apps)
         revealUI(state)
     }
 

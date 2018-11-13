@@ -12,5 +12,7 @@ data class HomeApp(
         @field:ColumnInfo(name = "package_name")
         var packageName: String,
         @field:ColumnInfo(name = "activity_name")
-        var activityName: String
+        var activityName: String,
+        @field:ColumnInfo(name = "sorting_index")
+        var sortingIndex: Int
 )

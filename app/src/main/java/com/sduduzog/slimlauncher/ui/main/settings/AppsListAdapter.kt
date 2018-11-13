@@ -1,31 +1,39 @@
-package com.sduduzog.slimlauncher.ui.main
+package com.sduduzog.slimlauncher.ui.main.settings
 
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.sduduzog.slimlauncher.R
 import com.sduduzog.slimlauncher.ui.main.model.App
+import com.sduduzog.slimlauncher.ui.main.model.HomeApp
+import com.sduduzog.slimlauncher.ui.main.model.MainViewModel
 
 
-import com.sduduzog.slimlauncher.ui.main.AppsFragment.OnListFragmentInteractionListener
+import com.sduduzog.slimlauncher.ui.main.settings.AppsFragment.OnAppsChooserListener
 
 import kotlinx.android.synthetic.main.apps_list_item.view.*
 
 
-class AppsListAdapter(
-        private var mValues: List<App>,
-        private val mListener: OnListFragmentInteractionListener?)
+class AppsListAdapter(fragment: Fragment,
+        private val mListener: OnAppsChooserListener?,
+                      private val appIndex: Int)
     : RecyclerView.Adapter<AppsListAdapter.ViewHolder>() {
 
-    private val mOnClickListener: View.OnClickListener
+    private var mValues: List<App> = listOf()
+    private var viewModel: MainViewModel =  ViewModelProviders.of(fragment).get(MainViewModel::class.java)
 
     init {
-        mOnClickListener = View.OnClickListener { v ->
-            val item = v.tag as App
-            mListener?.onListFragmentInteraction(item)
-        }
+        viewModel.apps.observe(fragment, Observer {
+            if (it != null) {
+                mValues = it
+                notifyDataSetChanged()
+            }
+        })
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -39,15 +47,17 @@ class AppsListAdapter(
         holder.mLabelView.text = item.appName
         with(holder.mView) {
             tag = item
-            setOnClickListener(mOnClickListener)
+            setOnClickListener {
+                val app = it.tag as App
+                val homeApp = HomeApp(app.appName, app.packageName, app.activityName, appIndex)
+                viewModel.addToHomeScreen(homeApp)
+                mListener?.onAppChosen()
+            }
         }
     }
 
     override fun getItemCount(): Int = mValues.size
-    fun setList(apps: List<App>) {
-        mValues = apps
-        notifyDataSetChanged()
-    }
+
 
     inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
         val mLabelView: TextView = mView.label
