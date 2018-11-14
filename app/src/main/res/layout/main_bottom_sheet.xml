@@ -44,7 +44,8 @@
                 android:id="@+id/deviceSettingsText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
+                android:layout_margin="8dp"
+                android:padding="8dp"
                 android:text="@string/main_options_settings"
                 android:textSize="24sp" />
 
@@ -52,7 +53,8 @@
                 android:id="@+id/settingsText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
+                android:layout_margin="8dp"
+                android:padding="8dp"
                 android:text="@string/main_options_home_screen_apps"
                 android:textSize="24sp" />
 
@@ -60,7 +62,8 @@
                 android:id="@+id/changeLauncherText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
+                android:layout_margin="8dp"
+                android:padding="8dp"
                 android:text="@string/main_options_change_launcher"
                 android:textSize="24sp" />
 
@@ -68,7 +71,8 @@
                 android:id="@+id/rateAppText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
+                android:layout_margin="8dp"
+                android:padding="8dp"
                 android:text="@string/main_options_feedback"
                 android:textSize="24sp" />
 
@@ -76,7 +80,8 @@
                 android:id="@+id/aboutText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
+                android:layout_margin="8dp"
+                android:padding="8dp"
                 android:text="@string/main_options_about_slim"
                 android:textSize="24sp" />
 
