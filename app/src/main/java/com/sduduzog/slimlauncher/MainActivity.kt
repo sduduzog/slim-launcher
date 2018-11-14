@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
 
     override fun onStart() {
         super.onStart()
-        viewModel.updateApps()
+        viewModel.refreshApps()
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, s: String?) {

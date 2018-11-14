@@ -15,18 +15,16 @@ import com.sduduzog.slimlauncher.R
 import com.sduduzog.slimlauncher.ui.main.model.HomeApp
 import com.sduduzog.slimlauncher.ui.main.model.MainViewModel
 
-class SettingsListAdapter(private val fragment: Fragment) : RecyclerView.Adapter<SettingsListAdapter.AppViewHolder>() {
+class SettingsListAdapter(private val fragment: Fragment) : RecyclerView.Adapter<SettingsListAdapter.AppViewHolder>(), OnItemActionListener {
 
+    private var deletedFrom = 0
     private lateinit var inflater: LayoutInflater
-    private var apps: List<HomeApp> = listOf()
+    private var displayedApps: ArrayList<HomeApp> = arrayListOf()
     private var viewModel: MainViewModel = ViewModelProviders.of(fragment).get(MainViewModel::class.java)
 
     init {
         viewModel.homeApps.observe(fragment, Observer {
-            if (it != null) {
-                apps = it
-                notifyDataSetChanged()
-            }
+            updateApps(it.orEmpty())
         })
     }
 
@@ -37,20 +35,14 @@ class SettingsListAdapter(private val fragment: Fragment) : RecyclerView.Adapter
     }
 
     override fun onBindViewHolder(holder: AppViewHolder, position: Int) {
-
-        val app = apps.singleOrNull {
-            it.sortingIndex == position
-        }
-
-        if (app != null) {
+        if (position < displayedApps.size) {
+            val app = displayedApps[position]
             with(app) {
                 holder.itemText.text = this.appName
             }
-            holder.itemSubtext.visibility = View.VISIBLE
             holder.itemButton.visibility = View.GONE
         } else {
-            holder.itemText.text = fragment.getString(R.string.settings_list_item_text, getNthString(position))
-            holder.itemSubtext.visibility = View.INVISIBLE
+            holder.itemText.text = fragment.getString(R.string.settings_list_item_text)
             holder.itemButton.visibility = View.VISIBLE
             val bundle = Bundle()
             bundle.putInt("index", position)
@@ -59,22 +51,57 @@ class SettingsListAdapter(private val fragment: Fragment) : RecyclerView.Adapter
         }
     }
 
-    override fun getItemCount() = if (apps.size != 5) apps.size + 1 else apps.size
+    override fun getItemCount() = if (displayedApps.size != 5) displayedApps.size + 1 else displayedApps.size
 
-    private fun getNthString(index: Int): String {
-        val i = index + 1
-        return when (i) {
-            1 -> "${i}st"
-            2 -> "${i}nd"
-            3 -> "${i}rd"
-            else -> "${i}th"
+//    fun deleteAppFromList(position: Int) {
+//        deletedFrom = position
+//        if (position < displayedApps.size) {
+//            viewModel.deleteApp(displayedApps[position])
+//        } else
+//            notifyDataSetChanged()
+//    }
+
+    private fun updateApps(newList: List<HomeApp>) {
+        val size = displayedApps.size
+        displayedApps.clear()
+        displayedApps.addAll(newList)
+        if (size > newList.size) {
+            notifyItemRemoved(deletedFrom)
         }
+        else if (size < newList.size) notifyItemRangeChanged(size, displayedApps.size - size)
+
+    }
+
+    override fun onViewMoved(oldPosition: Int, newPosition: Int): Boolean {
+        if ((oldPosition < displayedApps.size) and (newPosition < displayedApps.size)){
+            val app1 = displayedApps[oldPosition]
+            val app2 = displayedApps[newPosition]
+            app1.sortingIndex = newPosition
+            app2.sortingIndex = oldPosition
+
+            displayedApps[oldPosition] = app2
+            displayedApps[newPosition] = app1
+            notifyItemMoved(oldPosition, newPosition)
+            return true
+        }
+        return false
+    }
+
+    override fun onViewSwiped(position: Int) {
+        deletedFrom = position
+        if (position < displayedApps.size) {
+            viewModel.deleteApp(displayedApps[position])
+        } else
+            notifyDataSetChanged()
+    }
+
+    override fun onViewIdle() {
+        viewModel.updateApps(displayedApps)
     }
 
     inner class AppViewHolder(view: View)// Bind item views here
         : RecyclerView.ViewHolder(view) {
         val itemText: TextView = view.findViewById(R.id.item_text)
-        val itemSubtext: TextView = view.findViewById(R.id.item_subtext)
         val itemButton: Button = view.findViewById(R.id.item_button)
     }
 }

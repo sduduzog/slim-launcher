@@ -32,12 +32,12 @@
     <string name="settings_text_tap_to_check_between_24_hour_or_12_hour">Tap to check between 24 hour or 12 hour</string>
     <string name="settings_text_tap_to_change_app_theme">Choose from a variety of themes</string>
     <string name="settings_text_home_screen_apps">Home screen apps</string>
-    <string name="settings_item_button_remove">remove</string>
+    <!--<string name="settings_item_button_remove">remove</string>-->
     <string name="settings_title">Preferences</string>
 
     <string name="settings_list_item_button_set_app">Set app</string>
-    <string name="settings_list_item_text">%s app goes here</string>
-    <string name="settings_list_item_subtext">Swipe to remove or drag up/down to reorder</string>
+    <string name="settings_list_item_text">Slot empty</string>
+    <string name="settings_list_item_subtext">Swipe left/right to remove an app or long press to drag up/down to reorder</string>
     <string name="settings_button_change_theme">Change</string>
     <string name="about_title">Slim launcher</string>
     <string name="about_text">
@@ -89,11 +89,10 @@
 
     <string name="no_app_selected_toast_msg">Choose at least one app</string>
     <string name="choose_apps_title">Choose Apps</string>
-    <string name="title_activity_dummy">DummyActivity</string>
-    <string name="action_settings">Settings</string>
-    <string name="section_format">Hello World from section: %1$d</string>
+    <!--<string name="action_settings">Settings</string>-->
+    <!--<string name="section_format">Hello World from section: %1$d</string>-->
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!--<string name="hello_blank_fragment">Hello blank fragment</string>-->
 
 </resources>

@@ -1,21 +1,22 @@
 package com.sduduzog.slimlauncher.ui.main
 
 import android.animation.ObjectAnimator
-import android.content.*
-import android.content.Context.MODE_PRIVATE
+import android.content.ActivityNotFoundException
+import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.provider.Settings
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
 import androidx.navigation.Navigation
 import com.daasuu.ei.Ease
 import com.daasuu.ei.EasingInterpolator
@@ -24,23 +25,18 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPS
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_HALF_EXPANDED
 import com.sduduzog.slimlauncher.MainActivity
 import com.sduduzog.slimlauncher.R
-import com.sduduzog.slimlauncher.ui.main.model.HomeApp
-import com.sduduzog.slimlauncher.ui.main.model.MainViewModel
 import kotlinx.android.synthetic.main.main_bottom_sheet.*
 import kotlinx.android.synthetic.main.main_content.*
-import java.text.SimpleDateFormat
-import java.util.*
 
 
 class MainFragment : Fragment() {
 
-    private lateinit var viewModel: MainViewModel
-    private lateinit var receiver: BroadcastReceiver
-    private lateinit var adapter: MainAppsAdapter
     private lateinit var sheetBehavior: BottomSheetBehavior<FrameLayout>
+    private var mSectionsPagerAdapter: SectionsPagerAdapter? = null
 
     @Suppress("PropertyName")
     val TAG: String = "MainFragment"
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
@@ -49,35 +45,20 @@ class MainFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        Log.d(TAG, "onActivityCreated")
+        mSectionsPagerAdapter = SectionsPagerAdapter(childFragmentManager)
+        container.adapter = mSectionsPagerAdapter
         sheetBehavior = BottomSheetBehavior.from(bottomSheet)
         optionsView.alpha = 0.0f
-        viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
-        adapter = MainAppsAdapter(mutableSetOf(), InteractionHandler())
-        mainAppsList.adapter = adapter
-        viewModel.homeApps.observe(this, Observer {
-            if (it != null) {
-                adapter.setApps(it)
-            }
-        })
         setEventListeners()
     }
 
     override fun onStart() {
         super.onStart()
-        receiver = ClockReceiver()
-        activity?.registerReceiver(receiver, IntentFilter(Intent.ACTION_TIME_TICK))
+        Log.d(TAG, "onStart")
         doBounceAnimation(ivExpand)
         sheetBehavior.state = STATE_COLLAPSED
-    }
-
-    override fun onResume() {
-        super.onResume()
-        updateUi()
-    }
-
-    override fun onStop() {
-        super.onStop()
-        activity?.unregisterReceiver(receiver)
+        mSectionsPagerAdapter?.notifyDataSetChanged()
     }
 
     override fun onAttach(context: Context?) {
@@ -89,54 +70,6 @@ class MainFragment : Fragment() {
                 }
             }
         }
-    }
-
-    inner class ClockReceiver : BroadcastReceiver() {
-        override fun onReceive(ctx: Context?, intent: Intent?) {
-            updateUi()
-            doBounceAnimation(ivExpand)
-        }
-    }
-
-    fun updateUi() {
-        val twenty4Hour = context?.getSharedPreferences(getString(R.string.prefs_settings), MODE_PRIVATE)
-                ?.getBoolean(getString(R.string.prefs_settings_key_clock_type), false)
-        val date = Date()
-        if (twenty4Hour as Boolean) {
-            val fWatchTime = SimpleDateFormat("HH:mm", Locale.ENGLISH)
-            clockTextView.text = fWatchTime.format(date)
-            clockAmPm.visibility = View.GONE
-        } else {
-            val fWatchTime = SimpleDateFormat("hh:mm", Locale.ENGLISH)
-            val fWatchTimeAP = SimpleDateFormat("aa", Locale.ENGLISH)
-            clockTextView.text = fWatchTime.format(date)
-            clockAmPm.text = fWatchTimeAP.format(date)
-            clockAmPm.visibility = View.VISIBLE
-        }
-        val fWatchDate = SimpleDateFormat("EEE, MMM dd", Locale.ENGLISH)
-        dateTextView.text = fWatchDate.format(date)
-    }
-
-    inner class InteractionHandler : OnListFragmentInteractionListener {
-        override fun onLaunch(item: HomeApp) {
-            val name = ComponentName(item.packageName, item.activityName)
-            val intent = Intent()
-            intent.action = Intent.ACTION_MAIN
-            intent.addCategory(Intent.CATEGORY_LAUNCHER)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED
-            intent.component = name
-            try {
-                startActivity(intent)
-            } catch (e: ActivityNotFoundException) {
-                Log.e(TAG, e.message)
-                Toast.makeText(activity, "${item.appName} seems to be uninstalled, removing from list", Toast.LENGTH_LONG).show()
-                viewModel.deleteApp(item)
-            }
-        }
-    }
-
-    interface OnListFragmentInteractionListener {
-        fun onLaunch(item: HomeApp)
     }
 
     private fun doBounceAnimation(targetView: View) {
@@ -170,13 +103,6 @@ class MainFragment : Fragment() {
     }
 
     private fun setEventListeners() {
-        clockTextView.setOnClickListener {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                val intent = Intent(android.provider.AlarmClock.ACTION_SHOW_ALARMS)
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                startActivity(intent)
-            }
-        }
         bottomSheet.setOnClickListener {
 
         }
@@ -202,7 +128,7 @@ class MainFragment : Fragment() {
         rateAppText.setOnClickListener { rateApp() }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             changeLauncherText.setOnClickListener {
-                startActivity(Intent(android.provider.Settings.ACTION_HOME_SETTINGS))
+                startActivity(Intent(Settings.ACTION_HOME_SETTINGS))
             }
         } else changeLauncherText.visibility = View.GONE
         aboutText.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_openAboutFragment))
@@ -225,6 +151,25 @@ class MainFragment : Fragment() {
 
         ivExpand.setOnClickListener {
             if (sheetBehavior.state == STATE_COLLAPSED) sheetBehavior.state = STATE_HALF_EXPANDED
+        }
+    }
+
+    inner class SectionsPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
+
+        override fun getItem(position: Int): Fragment {
+            return HomeFragment.newInstance()
+        }
+
+        override fun getCount(): Int {
+            // Show 3 total pages.
+            return 1
+        }
+
+        override fun getPageTitle(position: Int): CharSequence? {
+            when (position) {
+                0 -> return "Home"
+            }
+            return null
         }
     }
 }

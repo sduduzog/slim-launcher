@@ -31,8 +31,14 @@ class AppRepository(application: Application) {
         DeleteAsyncTask(appDao).execute(app)
     }
 
-    fun updateApps() {
-        UpdateAppsAsyncTask(appDao).execute(pm)
+    fun updateApps(list: List<HomeApp>) {
+        for (app in list) {
+            UpdateAppsAsyncTask(appDao).execute(app)
+        }
+    }
+
+    fun refreshApps() {
+        RefreshAppsAsyncTask(appDao).execute(pm)
     }
 
     private class InsertAsyncTask internal constructor(private val mAsyncTaskDao: AppDao) : AsyncTask<HomeApp, Void, Void>() {
@@ -51,7 +57,15 @@ class AppRepository(application: Application) {
         }
     }
 
-    private class UpdateAppsAsyncTask internal constructor(private val mAsyncTaskDao: AppDao) : AsyncTask<PackageManager, Void, Void>() {
+    private class UpdateAppsAsyncTask internal constructor(private val mAsyncTaskDao: AppDao) : AsyncTask<HomeApp, Void, Void>() {
+
+        override fun doInBackground(vararg params: HomeApp): Void? {
+            mAsyncTaskDao.updateHomeApp(params[0])
+            return null
+        }
+    }
+
+    private class RefreshAppsAsyncTask internal constructor(private val mAsyncTaskDao: AppDao) : AsyncTask<PackageManager, Void, Void>() {
 
         override fun doInBackground(vararg params: PackageManager): Void? {
             val pm = params[0]
@@ -70,6 +84,23 @@ class AppRepository(application: Application) {
                 mAsyncTaskDao.insert(app)
             }
             return null
+        }
+    }
+
+
+    companion object {
+
+        @Volatile
+        @JvmStatic
+        private var INSTANCE: AppRepository? = null
+
+        fun getInstance(application: Application): AppRepository {
+            synchronized(AppRepository::class.java) {
+                if (INSTANCE == null) {
+                    INSTANCE = AppRepository(application)
+                }
+                return INSTANCE!!
+            }
         }
     }
 }

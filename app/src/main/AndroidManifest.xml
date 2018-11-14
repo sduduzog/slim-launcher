@@ -28,9 +28,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ui.main.DummyActivity"
-            android:label="@string/title_activity_dummy" />
     </application>
 
 </manifest>

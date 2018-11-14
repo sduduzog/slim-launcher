@@ -5,7 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
-    private var _repository: AppRepository = AppRepository(application)
+    private var _repository: AppRepository = AppRepository.getInstance(application)
     private var _homeApps: LiveData<List<HomeApp>>
     private var _apps: LiveData<List<App>>
 
@@ -24,8 +24,12 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         _repository.delete(app)
     }
 
-    fun updateApps() {
-        _repository.updateApps()
+    fun updateApps(list: List<HomeApp>) {
+        _repository.updateApps(list)
+    }
+
+    fun refreshApps() {
+        _repository.refreshApps()
     }
 
     fun addToHomeScreen(app: HomeApp) {
