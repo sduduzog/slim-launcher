@@ -10,10 +10,10 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.sduduzog.slimlauncher"
-        minSdkVersion 15
+        minSdkVersion 21
         targetSdkVersion 28
-        versionCode 16
-        versionName "2.0.0"
+        versionCode 19
+        versionName "2.0.3"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
@@ -24,7 +24,6 @@ android {
         }
         debug {
             minifyEnabled false
-            applicationIdSuffix ".debug"
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -55,6 +54,7 @@ dependencies {
 
     // 3rd Party libs
     implementation 'com.daasuu:EasingInterpolator:1.0.0'
+    // implementation 'com.getbase:floatingactionbutton:1.10.1'
 
     // Test libs
     testImplementation 'junit:junit:4.12'

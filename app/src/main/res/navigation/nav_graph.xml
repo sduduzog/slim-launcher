@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_openAboutFragment"
             app:destination="@id/aboutFragment" />
+        <action
+            android:id="@+id/action_openNotesListFragment"
+            app:destination="@+id/notesListFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -45,4 +48,9 @@
             android:id="@+id/action_setupFragment_to_mainFragment2"
             app:destination="@id/mainFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/notesListFragment"
+        android:name="com.sduduzog.slimlauncher.ui.main.notes.NotesListFragment"
+        android:label="notes_list_fragment"
+        tools:layout="@layout/notes_list_fragment" />
 </navigation>

@@ -8,7 +8,7 @@
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
     app:behavior_hideable="false"
     app:behavior_peekHeight="60dp"
-    tools:context=".MainActivity">
+    tools:context="com.sduduzog.slimlauncher.ui.main.MainFragment">
 
 
     <androidx.cardview.widget.CardView
@@ -41,13 +41,14 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/deviceSettingsText"
+                android:id="@+id/notesText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:padding="8dp"
-                android:text="@string/main_options_settings"
-                android:textSize="24sp" />
+                android:text="@string/main_options_text_notes"
+                android:textSize="24sp"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/settingsText"
@@ -56,6 +57,15 @@
                 android:layout_margin="8dp"
                 android:padding="8dp"
                 android:text="@string/main_options_home_screen_apps"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/deviceSettingsText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:padding="8dp"
+                android:text="@string/main_options_settings"
                 android:textSize="24sp" />
 
             <TextView
@@ -99,7 +109,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
             android:contentDescription="@string/main_call_icon"
             android:padding="16dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -126,7 +135,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
             android:contentDescription="@string/main_photo_camera_icon"
             android:padding="16dp"
             app:layout_constraintEnd_toEndOf="parent"

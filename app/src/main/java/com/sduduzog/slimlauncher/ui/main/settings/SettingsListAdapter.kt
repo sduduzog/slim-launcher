@@ -43,6 +43,7 @@ class SettingsListAdapter(private val fragment: Fragment) : RecyclerView.Adapter
             holder.itemButton.visibility = View.GONE
         } else {
             holder.itemText.text = fragment.getString(R.string.settings_list_item_text)
+            holder.itemText.alpha = .3f
             holder.itemButton.visibility = View.VISIBLE
             val bundle = Bundle()
             bundle.putInt("index", position)
@@ -53,13 +54,6 @@ class SettingsListAdapter(private val fragment: Fragment) : RecyclerView.Adapter
 
     override fun getItemCount() = if (displayedApps.size != 5) displayedApps.size + 1 else displayedApps.size
 
-//    fun deleteAppFromList(position: Int) {
-//        deletedFrom = position
-//        if (position < displayedApps.size) {
-//            viewModel.deleteApp(displayedApps[position])
-//        } else
-//            notifyDataSetChanged()
-//    }
 
     private fun updateApps(newList: List<HomeApp>) {
         val size = displayedApps.size

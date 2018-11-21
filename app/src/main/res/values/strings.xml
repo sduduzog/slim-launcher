@@ -9,6 +9,7 @@
         <item>Jupiter</item>
         <item>Teal</item>
         <item>Candy</item>
+        <item>Pastel</item>
     </string-array>
 
     <string-array name="clock_types">
@@ -18,21 +19,27 @@
 
     <string name="prefs_settings">settings</string>
     <string name="prefs_settings_key_theme">key_theme</string>
+
+    <!--main package strings-->
     <string name="main_slim_options">Slim options</string>
     <string name="main_options_change_theme">Change theme</string>
     <string name="main_options_home_screen_apps">Preferences</string>
-    <string name="main_options_settings">Settings</string>
+    <string name="main_options_settings">Device Settings</string>
     <string name="main_options_about_slim">About Slim</string>
     <string name="main_options_feedback">Give us Feedback</string>
     <string name="main_options_change_launcher">Change launcher</string>
+    <string name="main_options_text_notes">Notes</string>
 
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="note_fragment_hint_title">Title</string>
+    <string name="note_fragment_hint_body">Start here</string>
 
     <!--settings package strings-->
     <string name="settings_text_use_24_hour_clock">Use 24 hour clock</string>
     <string name="settings_text_tap_to_check_between_24_hour_or_12_hour">Tap to check between 24 hour or 12 hour</string>
     <string name="settings_text_tap_to_change_app_theme">Choose from a variety of themes</string>
     <string name="settings_text_home_screen_apps">Home screen apps</string>
-    <!--<string name="settings_item_button_remove">remove</string>-->
     <string name="settings_title">Preferences</string>
 
     <string name="settings_list_item_button_set_app">Set app</string>
@@ -89,10 +96,5 @@
 
     <string name="no_app_selected_toast_msg">Choose at least one app</string>
     <string name="choose_apps_title">Choose Apps</string>
-    <!--<string name="action_settings">Settings</string>-->
-    <!--<string name="section_format">Hello World from section: %1$d</string>-->
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <!--<string name="hello_blank_fragment">Hello blank fragment</string>-->
 
 </resources>

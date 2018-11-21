@@ -72,6 +72,9 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
                     return R.style.AppTealTheme
                 }
                 4 -> {
+                    return R.style.AppCandyTheme
+                }
+                5 -> {
                     return R.style.AppPinkTheme
                 }
             }
