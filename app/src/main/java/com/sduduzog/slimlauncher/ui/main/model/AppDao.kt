@@ -16,10 +16,10 @@ interface AppDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insert(app: App)
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addHomeApp(app: HomeApp)
 
-    @Update
+    @Update(onConflict = OnConflictStrategy.REPLACE)
     fun updateHomeApp(app: HomeApp)
 
     @Query("DELETE FROM apps")
