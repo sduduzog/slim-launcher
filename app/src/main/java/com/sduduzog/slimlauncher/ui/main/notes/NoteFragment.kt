@@ -12,7 +12,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.sduduzog.slimlauncher.R
 import com.sduduzog.slimlauncher.data.Note
+import com.sduduzog.slimlauncher.ui.main.DoubleClickListener
 import kotlinx.android.synthetic.main.note_fragment.*
+import java.security.MessageDigest
+import java.util.*
 
 
 class NoteFragment : Fragment() {
@@ -22,6 +25,7 @@ class NoteFragment : Fragment() {
 
     private lateinit var note: Note
     private lateinit var viewModel: NotesViewModel
+    private lateinit var initialDigest: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +36,7 @@ class NoteFragment : Fragment() {
                 Note("", -1L)
             }
         }
-        Log.d(TAG, "$note")
+        initialDigest = hash(note.title + note.body)
         viewModel = ViewModelProviders.of(this).get(NotesViewModel::class.java)
     }
 
@@ -45,27 +49,68 @@ class NoteFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         if (note.edited == -1L) {
-            if (bodyEditText.requestFocus()) {
-                val imm = activity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                imm.showSoftInput(bodyEditText, InputMethodManager.SHOW_IMPLICIT)
-            }
+            editBody()
+        } else {
+            bodyEditText.visibility = View.INVISIBLE
+            textBody.visibility = View.VISIBLE
+            textBody.text = note.body
+            titleEditText.setText(note.title.orEmpty())
+            bodyEditText.setText(note.body)
+            titleEditText.isEnabled = false
         }
+        titleEditText.setOnClickListener {
+            Log.d(TAG, "title edit")
+        }
+        titleEditText.setOnEditorActionListener { _, _, _ ->
+            editBody()
+            true
+        }
+        note_fragment.setOnClickListener(object : DoubleClickListener() {
+            override fun onDoubleClick(v: View) {
+                titleEditText.isEnabled = true
+                editBody()
+            }
+
+            override fun onSingleClick(v: View) {
+
+            }
+        })
     }
 
-    override fun onStop() {
-        super.onStop()
+    override fun onPause() {
+        super.onPause()
         saveNote()
+    }
+
+    private fun editBody() {
+        textBody.visibility = View.INVISIBLE
+        bodyEditText.visibility = View.VISIBLE
+        txtDoubleTap.visibility = View.INVISIBLE
+        if (bodyEditText.requestFocus()) {
+            val imm = activity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.showSoftInput(bodyEditText, InputMethodManager.SHOW_IMPLICIT)
+            bodyEditText.setSelection(note.body.length)
+        }
     }
 
     private fun saveNote() {
         val body = bodyEditText.text.toString()
         val title = titleEditText.text.toString()
-        if (title.isNotEmpty()){
-            note.title = title
-        }
-        if (body.isNotEmpty()) {
-            note.body = body
-            viewModel.saveNote(note)
-        }
+        val newNote = Note(body, Date().time)
+        newNote.title = if (title.isEmpty()) null else title
+        newNote.body = body
+        newNote.id = note.id
+        val currentDigest = hash(newNote.title + newNote.body)
+        if (body.isEmpty()) return
+        if (initialDigest == currentDigest) return
+        if (note.id == null) viewModel.saveNote(newNote) else viewModel.updateNote(newNote)
+
+    }
+
+    private fun hash(input: String): String {
+        val bytes = input.toByteArray(charset("UTF-8"))
+        val md = MessageDigest.getInstance("MD5")
+        md.update(bytes)
+        return String(md.digest())
     }
 }

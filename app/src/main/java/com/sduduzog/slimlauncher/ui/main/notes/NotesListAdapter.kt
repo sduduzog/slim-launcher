@@ -1,5 +1,6 @@
 package com.sduduzog.slimlauncher.ui.main.notes
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -38,7 +39,7 @@ class NotesListAdapter(private val fragment: NotesListFragment) : RecyclerView.A
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val note = notes[position]
         with(note.title) {
-            if (this != null) {
+            if (this != null && this.isNotEmpty()) {
                 holder.title.text = this
                 holder.title.visibility = View.VISIBLE
             } else {
@@ -46,8 +47,8 @@ class NotesListAdapter(private val fragment: NotesListFragment) : RecyclerView.A
             }
         }
         holder.body.text = note.body
-        val fWatchDate = SimpleDateFormat("MMM dd, hh:mm", Locale.ENGLISH)
-        holder.edited.text = fWatchDate.format(note.edited)
+        val fWatchDate = SimpleDateFormat("HH:mm, MMMM dd, yyyy", Locale.US)
+        holder.edited.text = fragment.getString(R.string.notes_date_placeholder, fWatchDate.format(note.edited))
         val bundle = Bundle()
         bundle.putSerializable("note", note)
         holder.itemView.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_openNoteFragment, bundle))
@@ -66,6 +67,7 @@ class NotesListAdapter(private val fragment: NotesListFragment) : RecyclerView.A
             val note = notes[position]
             viewModel.deleteNote(note)
             Snackbar.make(fragment.view!!, "Note deleted successfully", Snackbar.LENGTH_LONG)
+                    .setActionTextColor(Color.WHITE)
                     .setAction("UNDO") {
                         viewModel.saveNote(note)
                     }
@@ -84,8 +86,7 @@ class NotesListAdapter(private val fragment: NotesListFragment) : RecyclerView.A
         notes.addAll(newList)
         if (size > newList.size) {
             notifyItemRemoved(deletedFrom)
-        } else if (size < newList.size) notifyDataSetChanged()
-
+        } else notifyDataSetChanged()
     }
 
     inner class ViewHolder(mView: View) : RecyclerView.ViewHolder(mView) {

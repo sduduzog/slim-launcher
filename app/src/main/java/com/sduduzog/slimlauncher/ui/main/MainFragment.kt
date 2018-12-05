@@ -81,6 +81,8 @@ class MainFragment : Fragment() {
             }
         }
 
+        buttonNotes.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_mainFragment_to_notesListFragment))
+
         buttonDialer.setOnClickListener {
             try {
                 val intent = Intent(Intent.ACTION_DIAL)

@@ -57,7 +57,6 @@ dependencies {
 
     // 3rd Party libs
     implementation 'com.daasuu:EasingInterpolator:1.0.0'
-    // implementation 'com.getbase:floatingactionbutton:1.10.1'
 
     // Test libs
     testImplementation 'junit:junit:4.12'

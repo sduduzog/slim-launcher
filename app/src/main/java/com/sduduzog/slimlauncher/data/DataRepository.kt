@@ -50,6 +50,10 @@ class DataRepository(application: Application) {
         SaveNoteAsyncTask(noteDao).execute(note)
     }
 
+    fun updateNote(note: Note){
+        UpdateNoteAsyncTask(noteDao).execute(note)
+    }
+
     fun deleteNote(note: Note){
         DeleteNoteAsyncTask(noteDao).execute(note)
     }
@@ -104,6 +108,15 @@ class DataRepository(application: Application) {
         override fun doInBackground(vararg params: Note): Void? {
             val note = params[0]
             mAsyncTaskDao.saveNote(note)
+            return null
+        }
+    }
+
+    private class UpdateNoteAsyncTask internal constructor(private val mAsyncTaskDao: NoteDao) : AsyncTask<Note, Void, Void>() {
+
+        override fun doInBackground(vararg params: Note): Void? {
+            val note = params[0]
+            mAsyncTaskDao.updateNote(note)
             return null
         }
     }

@@ -22,6 +22,10 @@ class NotesViewModel(application: Application) : AndroidViewModel(application) {
         _repository.saveNote(note)
     }
 
+    fun updateNote(note: Note){
+        _repository.updateNote(note)
+    }
+
     fun deleteNote(note: Note){
         _repository.deleteNote(note)
     }
