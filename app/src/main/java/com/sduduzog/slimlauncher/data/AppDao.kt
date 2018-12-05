@@ -1,4 +1,4 @@
-package com.sduduzog.slimlauncher.ui.main.model
+package com.sduduzog.slimlauncher.data
 
 import androidx.lifecycle.LiveData
 import androidx.room.*

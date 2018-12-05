@@ -9,9 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.sduduzog.slimlauncher.R
-import com.sduduzog.slimlauncher.ui.main.model.App
-import com.sduduzog.slimlauncher.ui.main.model.HomeApp
-import com.sduduzog.slimlauncher.ui.main.model.MainViewModel
+import com.sduduzog.slimlauncher.data.App
+import com.sduduzog.slimlauncher.data.HomeApp
+import com.sduduzog.slimlauncher.ui.main.MainViewModel
 
 
 import com.sduduzog.slimlauncher.ui.main.settings.AppsFragment.OnAppsChooserListener

@@ -11,14 +11,8 @@
         android:label="main_fragment"
         tools:layout="@layout/main_fragment">
         <action
-            android:id="@+id/action_openSettingsFragment"
-            app:destination="@id/settingsFragment" />
-        <action
-            android:id="@+id/action_openAboutFragment"
-            app:destination="@id/aboutFragment" />
-        <action
-            android:id="@+id/action_openNotesListFragment"
-            app:destination="@+id/notesListFragment" />
+            android:id="@+id/action_openOptionsFragment"
+            app:destination="@id/optionsFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -52,5 +46,29 @@
         android:id="@+id/notesListFragment"
         android:name="com.sduduzog.slimlauncher.ui.main.notes.NotesListFragment"
         android:label="notes_list_fragment"
-        tools:layout="@layout/notes_list_fragment" />
+        tools:layout="@layout/notes_list_fragment" >
+        <action
+            android:id="@+id/action_openNoteFragment"
+            app:destination="@id/noteFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/optionsFragment"
+        android:name="com.sduduzog.slimlauncher.ui.main.OptionsFragment"
+        android:label="options_fragment"
+        tools:layout="@layout/options_fragment" >
+        <action
+            android:id="@+id/action_openNotesListFragment"
+            app:destination="@id/notesListFragment" />
+        <action
+            android:id="@+id/action_openSettingsFragment"
+            app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_openAboutFragment"
+            app:destination="@id/aboutFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/noteFragment"
+        android:name="com.sduduzog.slimlauncher.ui.main.notes.NoteFragment"
+        android:label="note_fragment"
+        tools:layout="@layout/note_fragment" />
 </navigation>

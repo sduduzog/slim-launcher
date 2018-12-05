@@ -18,9 +18,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import com.sduduzog.slimlauncher.R
-import com.sduduzog.slimlauncher.ui.main.model.App
-import com.sduduzog.slimlauncher.ui.main.model.HomeApp
-import com.sduduzog.slimlauncher.ui.main.model.MainViewModel
+import com.sduduzog.slimlauncher.data.App
+import com.sduduzog.slimlauncher.data.HomeApp
+import com.sduduzog.slimlauncher.ui.main.MainViewModel
 import kotlinx.android.synthetic.main.setup_fragment.*
 import java.util.*
 

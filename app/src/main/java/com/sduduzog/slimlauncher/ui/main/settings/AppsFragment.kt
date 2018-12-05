@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import com.sduduzog.slimlauncher.R
-import com.sduduzog.slimlauncher.ui.main.model.MainViewModel
+import com.sduduzog.slimlauncher.ui.main.MainViewModel
 import kotlinx.android.synthetic.main.apps_fragment.*
 
 

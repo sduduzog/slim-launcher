@@ -25,6 +25,7 @@ android {
         debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            applicationIdSuffix ".debug"
         }
     }
 }
@@ -49,6 +50,8 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
     implementation 'android.arch.navigation:navigation-fragment:1.0.0-alpha07'
     implementation 'androidx.room:room-runtime:2.1.0-alpha02'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0-alpha1'
+    implementation 'androidx.legacy:legacy-support-v13:1.0.0-alpha1'
     kapt "androidx.room:room-compiler:2.1.0-alpha02"
     kapt "androidx.lifecycle:lifecycle-compiler:2.0.0"
 

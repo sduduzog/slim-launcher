@@ -12,8 +12,9 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.sduduzog.slimlauncher.R
-import com.sduduzog.slimlauncher.ui.main.model.HomeApp
-import com.sduduzog.slimlauncher.ui.main.model.MainViewModel
+import com.sduduzog.slimlauncher.data.HomeApp
+import com.sduduzog.slimlauncher.ui.main.MainViewModel
+import com.sduduzog.slimlauncher.ui.main.OnItemActionListener
 
 class SettingsListAdapter(private val fragment: Fragment) : RecyclerView.Adapter<SettingsListAdapter.AppViewHolder>(), OnItemActionListener {
 

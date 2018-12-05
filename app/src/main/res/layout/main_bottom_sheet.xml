@@ -48,7 +48,7 @@
                 android:padding="8dp"
                 android:text="@string/main_options_text_notes"
                 android:textSize="24sp"
-                android:visibility="gone" />
+                android:visibility="visible" />
 
             <TextView
                 android:id="@+id/settingsText"

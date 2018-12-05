@@ -1,4 +1,4 @@
-package com.sduduzog.slimlauncher.ui.main.model
+package com.sduduzog.slimlauncher.data
 
 import android.app.Application
 import android.content.Intent
@@ -8,12 +8,14 @@ import android.os.AsyncTask
 import androidx.lifecycle.LiveData
 import java.util.*
 
-class AppRepository(application: Application) {
+class DataRepository(application: Application) {
 
-    private val db: AppRoomDatabase = AppRoomDatabase.getDatabase(application)!!
-    private var appDao: AppDao = db.appDao()
+    private val db: DataRoomDatabase = DataRoomDatabase.getDatabase(application)!!
+    private val appDao: AppDao = db.appDao()
+    private val noteDao: NoteDao = db.noteDao()
     private var _apps: LiveData<List<App>> = appDao.apps
     private var _homeApps: LiveData<List<HomeApp>> = appDao.homeApps
+    private var _notes: LiveData<List<Note>> = noteDao.notes
 
     private var pm: PackageManager = application.packageManager
 
@@ -23,12 +25,15 @@ class AppRepository(application: Application) {
     val apps: LiveData<List<App>>
         get() = _apps
 
-    fun insert(app: HomeApp) {
-        InsertAsyncTask(appDao).execute(app)
+    val notes: LiveData<List<Note>>
+    get() = _notes
+
+    fun insertHomeApp(app: HomeApp) {
+        InsertHomeAppAsyncTask(appDao).execute(app)
     }
 
-    fun delete(app: HomeApp) {
-        DeleteAsyncTask(appDao).execute(app)
+    fun deleteHomeApp(app: HomeApp) {
+        DeleteHomeAppAsyncTask(appDao).execute(app)
     }
 
     fun updateApps(list: List<HomeApp>) {
@@ -41,7 +46,15 @@ class AppRepository(application: Application) {
         RefreshAppsAsyncTask(appDao).execute(pm)
     }
 
-    private class InsertAsyncTask internal constructor(private val mAsyncTaskDao: AppDao) : AsyncTask<HomeApp, Void, Void>() {
+    fun saveNote(note: Note){
+        SaveNoteAsyncTask(noteDao).execute(note)
+    }
+
+    fun deleteNote(note: Note){
+        DeleteNoteAsyncTask(noteDao).execute(note)
+    }
+
+    private class InsertHomeAppAsyncTask internal constructor(private val mAsyncTaskDao: AppDao) : AsyncTask<HomeApp, Void, Void>() {
 
         override fun doInBackground(vararg params: HomeApp): Void? {
             mAsyncTaskDao.addHomeApp(params[0])
@@ -49,7 +62,7 @@ class AppRepository(application: Application) {
         }
     }
 
-    private class DeleteAsyncTask internal constructor(private val mAsyncTaskDao: AppDao) : AsyncTask<HomeApp, Void, Void>() {
+    private class DeleteHomeAppAsyncTask internal constructor(private val mAsyncTaskDao: AppDao) : AsyncTask<HomeApp, Void, Void>() {
 
         override fun doInBackground(vararg params: HomeApp): Void? {
             mAsyncTaskDao.delete(params[0])
@@ -76,7 +89,6 @@ class AppRepository(application: Application) {
             val launchables = pm.queryIntentActivities(main, 0)
             Collections.sort(launchables,
                     ResolveInfo.DisplayNameComparator(pm))
-            mAsyncTaskDao.deleteAll()
             for (i in launchables.indices) {
                 val item = launchables[i]
                 val activity = item.activityInfo
@@ -87,17 +99,35 @@ class AppRepository(application: Application) {
         }
     }
 
+    private class SaveNoteAsyncTask internal constructor(private val mAsyncTaskDao: NoteDao) : AsyncTask<Note, Void, Void>() {
+
+        override fun doInBackground(vararg params: Note): Void? {
+            val note = params[0]
+            mAsyncTaskDao.saveNote(note)
+            return null
+        }
+    }
+
+    private class DeleteNoteAsyncTask internal constructor(private val mAsyncTaskDao: NoteDao) : AsyncTask<Note, Void, Void>() {
+
+        override fun doInBackground(vararg params: Note): Void? {
+            val note = params[0]
+            mAsyncTaskDao.deleteNote(note)
+            return null
+        }
+    }
+
 
     companion object {
 
         @Volatile
         @JvmStatic
-        private var INSTANCE: AppRepository? = null
+        private var INSTANCE: DataRepository? = null
 
-        fun getInstance(application: Application): AppRepository {
-            synchronized(AppRepository::class.java) {
+        fun getInstance(application: Application): DataRepository {
+            synchronized(DataRepository::class.java) {
                 if (INSTANCE == null) {
-                    INSTANCE = AppRepository(application)
+                    INSTANCE = DataRepository(application)
                 }
                 return INSTANCE!!
             }

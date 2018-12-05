@@ -5,8 +5,8 @@ import androidx.room.Room
 import androidx.test.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4
 
-import com.sduduzog.slimlauncher.ui.main.model.AppDao
-import com.sduduzog.slimlauncher.ui.main.model.AppRoomDatabase
+import com.sduduzog.slimlauncher.data.AppDao
+import com.sduduzog.slimlauncher.data.DataRoomDatabase
 
 import org.junit.After
 import org.junit.Before
@@ -21,7 +21,7 @@ import org.junit.Rule
 class DBTest {
 
     private var mAppDao: AppDao? = null
-    private var mDb: AppRoomDatabase? = null
+    private var mDb: DataRoomDatabase? = null
 
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()
@@ -29,7 +29,7 @@ class DBTest {
     @Before
     fun createDb() {
         val context = InstrumentationRegistry.getTargetContext()
-        mDb = Room.inMemoryDatabaseBuilder(context, AppRoomDatabase::class.java).build()
+        mDb = Room.inMemoryDatabaseBuilder(context, DataRoomDatabase::class.java).build()
         mAppDao = mDb?.appDao()
     }
 

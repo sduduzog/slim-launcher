@@ -1,7 +1,6 @@
 package com.sduduzog.slimlauncher.ui.main.settings
 
 
-import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.graphics.Canvas
 import android.os.Bundle
@@ -11,9 +10,9 @@ import android.view.ViewGroup
 import androidx.core.content.edit
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.sduduzog.slimlauncher.R
+import com.sduduzog.slimlauncher.ui.main.OnItemActionListener
 import kotlinx.android.synthetic.main.settings_fragment.*
 
 
@@ -30,7 +29,6 @@ class SettingsFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         adapter = SettingsListAdapter(this)
         settingsAppList.adapter = adapter
-        settingsAppList.layoutManager = LinearLayoutManager((activity as Context))
         val listener: OnItemActionListener = adapter
 
         val simpleItemTouchCallback = object : ItemTouchHelper.Callback() {

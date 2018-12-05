@@ -1,11 +1,14 @@
-package com.sduduzog.slimlauncher.ui.main.model
+package com.sduduzog.slimlauncher.ui.main
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import com.sduduzog.slimlauncher.data.App
+import com.sduduzog.slimlauncher.data.DataRepository
+import com.sduduzog.slimlauncher.data.HomeApp
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
-    private var _repository: AppRepository = AppRepository.getInstance(application)
+    private var _repository: DataRepository = DataRepository.getInstance(application)
     private var _homeApps: LiveData<List<HomeApp>>
     private var _apps: LiveData<List<App>>
 
@@ -21,7 +24,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         get() = _apps
 
     fun deleteApp(app: HomeApp) {
-        _repository.delete(app)
+        _repository.deleteHomeApp(app)
     }
 
     fun updateApps(list: List<HomeApp>) {
@@ -33,14 +36,14 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun addToHomeScreen(app: HomeApp) {
-        _repository.insert(app)
+        _repository.insertHomeApp(app)
     }
 
     fun addToHomeScreen(apps: List<App>) {
         for (i in apps.indices){
             val app = apps[i]
             val home = HomeApp(app.appName, app.packageName, app.activityName, i)
-            _repository.insert(home)
+            _repository.insertHomeApp(home)
         }
     }
 }

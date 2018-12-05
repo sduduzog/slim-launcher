@@ -1,4 +1,4 @@
-package com.sduduzog.slimlauncher.ui.main.model
+package com.sduduzog.slimlauncher.data
 
 import android.content.Context
 import androidx.room.Database
@@ -7,22 +7,26 @@ import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 
-@Database(entities = [App::class, HomeApp::class], version = 2, exportSchema = false)
-abstract class AppRoomDatabase : RoomDatabase() {
+
+
+@Database(entities = [App::class, HomeApp::class, Note::class], version = 3, exportSchema = false)
+abstract class DataRoomDatabase : RoomDatabase() {
 
     abstract fun appDao(): AppDao
+
+    abstract fun noteDao(): NoteDao
 
     companion object {
         @Volatile
         @JvmStatic
-        private var INSTANCE: AppRoomDatabase? = null
+        private var INSTANCE: DataRoomDatabase? = null
 
-        fun getDatabase(context: Context): AppRoomDatabase? {
-            synchronized(AppRoomDatabase::class.java) {
+        fun getDatabase(context: Context): DataRoomDatabase? {
+            synchronized(DataRoomDatabase::class.java) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.applicationContext,
-                            AppRoomDatabase::class.java, "app_database")
-                            .addMigrations(MIGRATION_1_2)
+                            DataRoomDatabase::class.java, "app_database")
+                            .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
                             .build()
                 }
                 return INSTANCE
@@ -41,6 +45,12 @@ abstract class AppRoomDatabase : RoomDatabase() {
                     cursor.moveToNext()
                     index++
                 }
+            }
+        }
+
+        private val MIGRATION_2_3 = object: Migration(2, 3){
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL("CREATE TABLE IF NOT EXISTS `notes` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `title` TEXT, `body` TEXT NOT NULL, `edited` INTEGER NOT NULL)")
             }
         }
     }
