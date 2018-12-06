@@ -85,7 +85,8 @@ class DataRepository(application: Application) {
 
     private class RefreshAppsAsyncTask internal constructor(private val mAsyncTaskDao: AppDao) : AsyncTask<PackageManager, Void, Void>() {
 
-        private val TAG = "DataRepository"
+        @Suppress("PropertyName")
+        private val _tag = "DataRepository"
 
         override fun doInBackground(vararg params: PackageManager): Void? {
             val pm = params[0]
@@ -98,7 +99,7 @@ class DataRepository(application: Application) {
                     ResolveInfo.DisplayNameComparator(pm))
             for (i in launchables.indices) {
                 val item = launchables[i]
-                Log.d(TAG, "$item")
+                Log.d(_tag, "$item")
                 val activity = item.activityInfo
                 val app = App(launchables[i].loadLabel(pm).toString(), activity.applicationInfo.packageName, activity.name)
                 mAsyncTaskDao.insert(app)

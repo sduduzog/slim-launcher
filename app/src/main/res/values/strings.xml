@@ -24,8 +24,6 @@
     <string name="prefs_settings_key_fresh_install_setup">key_fresh_install_setup</string>
 
     <!--main package strings-->
-    <string name="main_button_dialer">Dialer</string>
-    <string name="main_button_camera">Camera</string>
 
     <string name="main_slim_options">Slim options</string>
     <string name="main_options_change_theme">Change theme</string>
@@ -99,15 +97,11 @@
 
     <string name="no_app_selected_toast_msg">Choose at least one app</string>
     <string name="choose_apps_title">Choose Apps</string>
-    <string name="title_activity_main2">Main2Activity</string>
-    <string name="action_settings">Settings</string>
-    <string name="section_format">Hello World from section: %1$d</string>
     <string name="double_tap_anywhere_to_edit">Double tap anywhere to edit</string>
 
 
     <string name="notes_date_placeholder">Edited at %s</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="dialer_chevron">deleter</string>
 
 </resources>
