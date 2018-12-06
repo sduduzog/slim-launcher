@@ -20,8 +20,7 @@ import androidx.navigation.Navigation
 import com.daasuu.ei.Ease
 import com.daasuu.ei.EasingInterpolator
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPSED
-import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED
+import com.google.android.material.bottomsheet.BottomSheetBehavior.*
 import com.sduduzog.slimlauncher.MainActivity
 import com.sduduzog.slimlauncher.R
 import kotlinx.android.synthetic.main.main_bottom_sheet.*
@@ -121,7 +120,7 @@ class MainFragment : Fragment() {
             true
         }
         ivExpand.setOnClickListener {
-            if (sheetBehavior.state == STATE_COLLAPSED) sheetBehavior.state = STATE_EXPANDED
+            if (sheetBehavior.state == STATE_COLLAPSED) sheetBehavior.state = STATE_HALF_EXPANDED
         }
 
         ivCamera.setOnClickListener {
@@ -132,9 +131,11 @@ class MainFragment : Fragment() {
                 Log.e(TAG, e.message)
             }
         }
+    }
 
+    private fun setupBottomSheet(){
         bottomSheet.setOnClickListener {
-
+            // Do nothing
         }
         sheetBehavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
             override fun onSlide(p0: View, p1: Float) {
@@ -151,9 +152,6 @@ class MainFragment : Fragment() {
                 }
             }
         })
-    }
-
-    private fun setupBottomSheet(){
         settingsText.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_mainFragment_to_settingsFragment))
 
         rateAppText.setOnClickListener {
