@@ -1,24 +1,31 @@
 package com.sduduzog.slimlauncher.ui.main
 
 import android.animation.ObjectAnimator
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
+import android.content.*
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import android.provider.AlarmClock
 import android.provider.MediaStore
+import android.provider.Settings
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.daasuu.ei.Ease
 import com.daasuu.ei.EasingInterpolator
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPSED
+import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED
 import com.sduduzog.slimlauncher.MainActivity
 import com.sduduzog.slimlauncher.R
-import kotlinx.android.synthetic.main.main_fragment.*
+import kotlinx.android.synthetic.main.main_bottom_sheet.*
+import kotlinx.android.synthetic.main.main_content.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -29,6 +36,7 @@ class MainFragment : Fragment() {
     val TAG: String = "MainFragment"
 
     private lateinit var receiver: BroadcastReceiver
+    private lateinit var sheetBehavior: BottomSheetBehavior<FrameLayout>
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
@@ -38,14 +46,17 @@ class MainFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         mainAppsList.adapter = HomeAppsAdapter(this)
+        sheetBehavior = BottomSheetBehavior.from(bottomSheet)
+        optionsView.alpha = 0.0f
         setEventListeners()
+        setupBottomSheet()
     }
 
     override fun onStart() {
         super.onStart()
         receiver = ClockReceiver()
         activity?.registerReceiver(receiver, IntentFilter(Intent.ACTION_TIME_TICK))
-
+        sheetBehavior.state = STATE_COLLAPSED
         doBounceAnimation(ivExpand)
     }
 
@@ -60,6 +71,7 @@ class MainFragment : Fragment() {
         with(context as MainActivity) {
             this.onBackPressedListener = object : MainActivity.OnBackPressedListener {
                 override fun onBackPressed() {
+                    sheetBehavior.state = STATE_COLLAPSED
                 }
             }
         }
@@ -82,19 +94,37 @@ class MainFragment : Fragment() {
         }
 
         buttonNotes.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_mainFragment_to_notesListFragment))
-
-        buttonDialer.setOnClickListener {
-            try {
-                val intent = Intent(Intent.ACTION_DIAL)
-                startActivity(intent)
-            } catch (e: Exception) {
-                Log.e(TAG, e.message)
+        val settings = context!!.getSharedPreferences(getString(R.string.prefs_settings), Context.MODE_PRIVATE)
+        val isChecked = settings.getBoolean(getString(R.string.prefs_settings_key_app_dialer), false)
+        ivCall.setOnClickListener {
+            if (isChecked) {
+                getCallingPermission()
+            } else {
+                try {
+                    val intent = Intent(Intent.ACTION_DIAL)
+                    startActivity(intent)
+                } catch (e: Exception) {
+                    Log.e(TAG, e.message)
+                }
             }
         }
+        ivCall.setOnLongClickListener {
+            if (isChecked) {
+                try {
+                    val intent = Intent(Intent.ACTION_MAIN)
+                    intent.addCategory(Intent.CATEGORY_APP_CONTACTS)
+                    startActivity(intent)
+                } catch (e: ActivityNotFoundException) {
+                    Log.e(TAG, "$e")
+                }
+            }
+            true
+        }
+        ivExpand.setOnClickListener {
+            if (sheetBehavior.state == STATE_COLLAPSED) sheetBehavior.state = STATE_EXPANDED
+        }
 
-        ivExpand.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_openOptionsFragment))
-
-        buttonCamera.setOnClickListener {
+        ivCamera.setOnClickListener {
             try {
                 val intent = Intent(MediaStore.INTENT_ACTION_STILL_IMAGE_CAMERA)
                 startActivity(intent)
@@ -102,9 +132,56 @@ class MainFragment : Fragment() {
                 Log.e(TAG, e.message)
             }
         }
+
+        bottomSheet.setOnClickListener {
+
+        }
+        sheetBehavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+            override fun onSlide(p0: View, p1: Float) {
+                val multi = 3 * p1
+                optionsView.alpha = multi
+                optionsView.cardElevation = p1 * 8
+                optionsView.elevation = p1 * 8
+            }
+
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                iconTray.visibility = View.GONE
+                if (newState == STATE_COLLAPSED) {
+                    iconTray.visibility = View.VISIBLE
+                }
+            }
+        })
     }
 
+    private fun setupBottomSheet(){
+        settingsText.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_mainFragment_to_settingsFragment))
 
+        rateAppText.setOnClickListener {
+            val uri = Uri.parse("market://details?id=" + context?.packageName)
+            val goToMarket = Intent(Intent.ACTION_VIEW, uri)
+            goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY or
+                    Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
+            goToMarket.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT)
+            try {
+                startActivity(goToMarket)
+                Log.d(TAG, goToMarket.data?.query)
+            } catch (e: ActivityNotFoundException) {
+                startActivity(Intent(Intent.ACTION_VIEW,
+                        Uri.parse("http://play.google.com/store/apps/details?id=" + context?.packageName)))
+            }
+        }
+        changeLauncherText.setOnClickListener {
+            startActivity(Intent(Settings.ACTION_HOME_SETTINGS))
+        }
+        aboutText.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_mainFragment_to_aboutFragment))
+
+        deviceSettingsText.setOnClickListener {
+            startActivity(Intent(Settings.ACTION_SETTINGS))
+        }
+        changeLauncherText.setOnClickListener {
+            startActivity(Intent(Settings.ACTION_HOME_SETTINGS))
+        }
+    }
 
     private fun doBounceAnimation(targetView: View) {
         val animator = ObjectAnimator.ofFloat(targetView, "translationY", 0f, -20f, 0f)
@@ -134,9 +211,21 @@ class MainFragment : Fragment() {
         dateTextView.text = fWatchDate.format(date)
     }
 
+    private fun getCallingPermission() {
+        if (ContextCompat.checkSelfPermission(activity!!, android.Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(activity!!, arrayOf(android.Manifest.permission.CALL_PHONE), REQUEST_PHONE_CALL)
+        } else {
+            Navigation.findNavController(main_content).navigate(R.id.action_mainFragment_to_dialerFragment)
+        }
+    }
+
     inner class ClockReceiver : BroadcastReceiver() {
         override fun onReceive(ctx: Context?, intent: Intent?) {
             updateUi()
         }
+    }
+
+    companion object {
+        const val REQUEST_PHONE_CALL = 1
     }
 }

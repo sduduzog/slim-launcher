@@ -4,6 +4,7 @@
     package="com.sduduzog.slimlauncher">
 
     <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
 
     <application
         android:allowBackup="false"

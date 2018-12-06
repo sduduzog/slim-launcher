@@ -74,13 +74,23 @@ class SettingsFragment : Fragment() {
             val themeChooserDialog = ThemeChooserDialog.getThemeChooser()
             themeChooserDialog.showNow(fragmentManager, "THEME_CHOOSER")
         }
+        initComponents()
+    }
+
+    private fun initComponents(){
         val settings = context!!.getSharedPreferences(getString(R.string.prefs_settings), MODE_PRIVATE)
-        clockTypeChecker.isChecked = settings.getBoolean(getString(R.string.prefs_settings_key_clock_type), false)
-        clockTypeChecker.setOnCheckedChangeListener { _, b ->
+        clockSwitch.isChecked = settings.getBoolean(getString(R.string.prefs_settings_key_clock_type), false)
+        clockSwitch.setOnCheckedChangeListener { _, b ->
             settings.edit {
                 putBoolean(getString(R.string.prefs_settings_key_clock_type), b)
             }
         }
-    }
 
+        dialerSwitch.isChecked = settings.getBoolean(getString(R.string.prefs_settings_key_app_dialer), false)
+        dialerSwitch.setOnCheckedChangeListener { _, b ->
+            settings.edit {
+                putBoolean(getString(R.string.prefs_settings_key_app_dialer), b)
+            }
+        }
+    }
 }

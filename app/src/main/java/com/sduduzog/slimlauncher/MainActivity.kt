@@ -1,10 +1,11 @@
 package com.sduduzog.slimlauncher
 
-import androidx.lifecycle.ViewModelProviders
 import android.content.SharedPreferences
+import android.content.pm.PackageManager
 import android.content.res.Resources
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.Navigation.findNavController
@@ -59,6 +60,22 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
         currentLabel = destination.label.toString()
     }
 
+    override fun onRequestPermissionsResult(requestCode: Int,
+                                            permissions: Array<String>, grantResults: IntArray) {
+        when (requestCode) {
+            REQUEST_PHONE_CALL -> {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    navigator.navigate(R.id.action_mainFragment_to_dialerFragment)
+                } else {
+                // Do nothing
+                }
+                return
+            }
+        }// other 'case' lines to check for other
+        // permissions this app might request
+    }
+
     companion object {
         fun resolveTheme(i: Int): Int {
             when (i) {
@@ -80,8 +97,11 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
             }
             return R.style.AppTheme
         }
+
+        const val REQUEST_PHONE_CALL = 1
     }
-    interface OnBackPressedListener{
+
+    interface OnBackPressedListener {
         fun onBackPressed()
     }
 }

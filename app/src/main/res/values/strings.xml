@@ -19,6 +19,9 @@
 
     <string name="prefs_settings">settings</string>
     <string name="prefs_settings_key_theme">key_theme</string>
+    <string name="prefs_settings_key_clock_type">clock_type</string>
+    <string name="prefs_settings_key_app_dialer">app_dialer</string>
+    <string name="prefs_settings_key_fresh_install_setup">key_fresh_install_setup</string>
 
     <!--main package strings-->
     <string name="main_button_dialer">Dialer</string>
@@ -33,8 +36,6 @@
     <string name="main_options_change_launcher">Change launcher</string>
     <string name="main_options_text_notes">Notes</string>
 
-
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="note_fragment_hint_title">Title</string>
     <string name="note_fragment_hint_body">Start here</string>
 
@@ -83,9 +84,6 @@
     <string name="theme_chooser_dialog_title">Change theme</string>
     <string name="main_call_icon">call icon</string>
     <string name="main_photo_camera_icon">photo camera icon</string>
-    <string name="prefs_settings_key_clock_type">clock_type</string>
-
-    <string name="prefs_settings_key_fresh_install_setup">key_fresh_install_setup</string>
     <string name="setup_button_start">start</string>
     <string name="setup_text_welcome">Welcome!</string>
     <string name="setup_text_lets_get_you_set_up">Lets get you set up!</string>
@@ -108,5 +106,8 @@
 
 
     <string name="notes_date_placeholder">Edited at %s</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
