@@ -23,7 +23,8 @@ import com.sduduzog.slimlauncher.ui.main.OnItemActionListener
 
 class SettingsListAdapter(private val fragment: Fragment) : RecyclerView.Adapter<SettingsListAdapter.AppViewHolder>(), OnItemActionListener {
 
-    private var deletedFrom = 0
+    private var deletedFromIndex = 0
+    private var renamedOnIndex = -1
     private lateinit var inflater: LayoutInflater
     private var displayedApps: ArrayList<HomeApp> = arrayListOf()
     private var viewModel: MainViewModel = ViewModelProviders.of(fragment).get(MainViewModel::class.java)
@@ -60,6 +61,7 @@ class SettingsListAdapter(private val fragment: Fragment) : RecyclerView.Adapter
             }
             holder.itemView.setOnLongClickListener {
                 RenameAppDialog.rename(app, viewModel).show(fragment.childFragmentManager, "SettingsListAdapter")
+                renamedOnIndex = position
                 true
             }
         } else {
@@ -82,10 +84,12 @@ class SettingsListAdapter(private val fragment: Fragment) : RecyclerView.Adapter
         displayedApps.clear()
         displayedApps.addAll(newList)
         if (size > newList.size) {
-            notifyItemRemoved(deletedFrom)
+            notifyItemRemoved(deletedFromIndex)
         } else if (size < newList.size) notifyItemRangeChanged(size, displayedApps.size - size)
-        else notifyDataSetChanged()
-
+        else if (renamedOnIndex != -1) {
+            notifyItemChanged(renamedOnIndex)
+            renamedOnIndex = -1
+        }
     }
 
     override fun onViewMoved(oldPosition: Int, newPosition: Int): Boolean {
@@ -104,7 +108,7 @@ class SettingsListAdapter(private val fragment: Fragment) : RecyclerView.Adapter
     }
 
     override fun onViewSwiped(position: Int) {
-        deletedFrom = position
+        deletedFromIndex = position
         if (position < displayedApps.size) {
             viewModel.deleteApp(displayedApps[position])
         } else
