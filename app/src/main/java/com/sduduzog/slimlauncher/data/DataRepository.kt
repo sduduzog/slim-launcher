@@ -47,6 +47,10 @@ class DataRepository(application: Application) {
         RefreshAppsAsyncTask(appDao).execute(pm)
     }
 
+    fun renameApp(app: HomeApp) {
+        UpdateAppsAsyncTask(appDao).execute(app)
+    }
+
     fun saveNote(note: Note){
         SaveNoteAsyncTask(noteDao).execute(note)
     }

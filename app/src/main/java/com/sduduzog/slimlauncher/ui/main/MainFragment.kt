@@ -20,7 +20,8 @@ import androidx.navigation.Navigation
 import com.daasuu.ei.Ease
 import com.daasuu.ei.EasingInterpolator
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetBehavior.*
+import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPSED
+import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_HALF_EXPANDED
 import com.sduduzog.slimlauncher.MainActivity
 import com.sduduzog.slimlauncher.R
 import kotlinx.android.synthetic.main.main_bottom_sheet.*
@@ -29,7 +30,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class MainFragment : Fragment() {
+class MainFragment : Fragment(), MainActivity.OnBackPressedListener {
 
     @Suppress("PropertyName")
     val TAG: String = "MainFragment"
@@ -68,17 +69,28 @@ class MainFragment : Fragment() {
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         with(context as MainActivity) {
-            this.onBackPressedListener = object : MainActivity.OnBackPressedListener {
-                override fun onBackPressed() {
-                    sheetBehavior.state = STATE_COLLAPSED
-                }
-            }
+            this.onBackPressedListener = this@MainFragment
+        }
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        with(context as MainActivity) {
+            this.onBackPressedListener = null
         }
     }
 
     override fun onStop() {
         super.onStop()
         activity?.unregisterReceiver(receiver)
+    }
+
+    override fun onBackPress() {
+        sheetBehavior.state = STATE_COLLAPSED
+    }
+
+    override fun onBackPressed() {
+        // Do nothing
     }
 
     private fun setEventListeners() {
@@ -110,8 +122,7 @@ class MainFragment : Fragment() {
         ivCall.setOnLongClickListener {
             if (isChecked) {
                 try {
-                    val intent = Intent(Intent.ACTION_MAIN)
-                    intent.addCategory(Intent.CATEGORY_APP_CONTACTS)
+                    val intent = Intent(Intent.ACTION_DIAL, null)
                     startActivity(intent)
                 } catch (e: ActivityNotFoundException) {
                     Log.e(TAG, "$e")
@@ -133,7 +144,7 @@ class MainFragment : Fragment() {
         }
     }
 
-    private fun setupBottomSheet(){
+    private fun setupBottomSheet() {
         bottomSheet.setOnClickListener {
             // Do nothing
         }

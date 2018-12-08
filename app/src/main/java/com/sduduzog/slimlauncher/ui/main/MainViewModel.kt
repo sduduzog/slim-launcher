@@ -38,6 +38,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun addToHomeScreen(app: HomeApp) {
         _repository.insertHomeApp(app)
     }
+    fun renameApp(app: HomeApp){
+        _repository.renameApp(app)
+    }
 
     fun addToHomeScreen(apps: List<App>) {
         for (i in apps.indices){

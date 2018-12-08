@@ -103,5 +103,6 @@
     <string name="notes_date_placeholder">Edited at %s</string>
 
     <string name="dialer_chevron">deleter</string>
+    <string name="settings_itrem_icon_gradder">Dragger</string>
 
 </resources>

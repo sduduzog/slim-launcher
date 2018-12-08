@@ -10,6 +10,8 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.sduduzog.slimlauncher.MainActivity
 import com.sduduzog.slimlauncher.R
 import com.sduduzog.slimlauncher.data.Note
 import com.sduduzog.slimlauncher.ui.main.DoubleClickListener
@@ -18,7 +20,7 @@ import java.security.MessageDigest
 import java.util.*
 
 
-class NoteFragment : Fragment() {
+class NoteFragment : Fragment(), MainActivity.OnBackPressedListener {
 
     @Suppress("PropertyName")
     val TAG: String = "NoteFragment"
@@ -80,6 +82,21 @@ class NoteFragment : Fragment() {
     override fun onPause() {
         super.onPause()
         saveNote()
+    }
+
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        with(context as MainActivity) {
+            this.onBackPressedListener = this@NoteFragment
+        }
+    }
+
+    override fun onBackPress() {
+        // Do nothing
+    }
+
+    override fun onBackPressed() {
+        Log.d(TAG, "onBackPressed")
     }
 
     private fun editBody() {

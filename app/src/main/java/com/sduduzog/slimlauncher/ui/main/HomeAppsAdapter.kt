@@ -22,7 +22,6 @@ class HomeAppsAdapter(private var fragment: MainFragment)
     private var viewModel = ViewModelProviders.of(fragment).get(MainViewModel::class.java)
 
     init {
-        Log.d("HomeAppsAdapter", "onCreateView")
         viewModel.homeApps.observe(fragment, Observer {
             if (it != null) {
                 apps = it

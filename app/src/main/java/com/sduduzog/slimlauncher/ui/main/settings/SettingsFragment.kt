@@ -18,8 +18,6 @@ import kotlinx.android.synthetic.main.settings_fragment.*
 
 class SettingsFragment : Fragment() {
 
-    private lateinit var adapter: SettingsListAdapter
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.settings_fragment, container, false)
@@ -27,7 +25,7 @@ class SettingsFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        adapter = SettingsListAdapter(this)
+        val adapter = SettingsListAdapter(this)
         settingsAppList.adapter = adapter
         val listener: OnItemActionListener = adapter
 
@@ -64,11 +62,15 @@ class SettingsFragment : Fragment() {
                 //adapter.deleteAppFromList(viewHolder.adapterPosition)
                 listener.onViewSwiped(viewHolder.adapterPosition)
             }
+
+            override fun isLongPressDragEnabled() = false
         }
 
         val itemTouchHelper = ItemTouchHelper(simpleItemTouchCallback)
 
         itemTouchHelper.attachToRecyclerView(settingsAppList)
+
+        adapter.setItemTouchHelper(itemTouchHelper)
 
         buttonChangeTheme.setOnClickListener {
             val themeChooserDialog = ThemeChooserDialog.getThemeChooser()

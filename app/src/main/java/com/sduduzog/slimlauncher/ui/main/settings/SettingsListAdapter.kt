@@ -1,15 +1,20 @@
 package com.sduduzog.slimlauncher.ui.main.settings
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.sduduzog.slimlauncher.R
 import com.sduduzog.slimlauncher.data.HomeApp
@@ -23,8 +28,11 @@ class SettingsListAdapter(private val fragment: Fragment) : RecyclerView.Adapter
     private var displayedApps: ArrayList<HomeApp> = arrayListOf()
     private var viewModel: MainViewModel = ViewModelProviders.of(fragment).get(MainViewModel::class.java)
 
+    private lateinit var touchHelper: ItemTouchHelper
+
     init {
         viewModel.homeApps.observe(fragment, Observer {
+            Log.d("Adapter", "$it")
             updateApps(it.orEmpty())
         })
     }
@@ -35,6 +43,7 @@ class SettingsListAdapter(private val fragment: Fragment) : RecyclerView.Adapter
         return AppViewHolder(view)
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onBindViewHolder(holder: AppViewHolder, position: Int) {
         if (position < displayedApps.size) {
             val app = displayedApps[position]
@@ -42,10 +51,22 @@ class SettingsListAdapter(private val fragment: Fragment) : RecyclerView.Adapter
                 holder.itemText.text = this.appName
             }
             holder.itemButton.visibility = View.GONE
+            holder.itemDragger.visibility = View.VISIBLE
+            holder.itemDragger.setOnTouchListener { view, motionEvent ->
+                if (motionEvent.actionMasked == MotionEvent.ACTION_DOWN) {
+                    touchHelper.startDrag(holder)
+                }
+                false
+            }
+            holder.itemView.setOnLongClickListener {
+                RenameAppDialog.rename(app, viewModel).show(fragment.childFragmentManager, "SettingsListAdapter")
+                true
+            }
         } else {
             holder.itemText.text = fragment.getString(R.string.settings_list_item_text)
             holder.itemText.alpha = .3f
             holder.itemButton.visibility = View.VISIBLE
+            holder.itemDragger.visibility = View.GONE
             val bundle = Bundle()
             bundle.putInt("index", position)
             holder.itemButton.setOnClickListener(
@@ -62,13 +83,13 @@ class SettingsListAdapter(private val fragment: Fragment) : RecyclerView.Adapter
         displayedApps.addAll(newList)
         if (size > newList.size) {
             notifyItemRemoved(deletedFrom)
-        }
-        else if (size < newList.size) notifyItemRangeChanged(size, displayedApps.size - size)
+        } else if (size < newList.size) notifyItemRangeChanged(size, displayedApps.size - size)
+        else notifyDataSetChanged()
 
     }
 
     override fun onViewMoved(oldPosition: Int, newPosition: Int): Boolean {
-        if ((oldPosition < displayedApps.size) and (newPosition < displayedApps.size)){
+        if ((oldPosition < displayedApps.size) and (newPosition < displayedApps.size)) {
             val app1 = displayedApps[oldPosition]
             val app2 = displayedApps[newPosition]
             app1.sortingIndex = newPosition
@@ -94,9 +115,14 @@ class SettingsListAdapter(private val fragment: Fragment) : RecyclerView.Adapter
         viewModel.updateApps(displayedApps)
     }
 
+    fun setItemTouchHelper(touchHelper: ItemTouchHelper) {
+        this.touchHelper = touchHelper
+    }
+
     inner class AppViewHolder(view: View)// Bind item views here
         : RecyclerView.ViewHolder(view) {
         val itemText: TextView = view.findViewById(R.id.item_text)
         val itemButton: Button = view.findViewById(R.id.item_button)
+        val itemDragger: ImageView = view.findViewById(R.id.item_dragger)
     }
 }
