@@ -41,6 +41,15 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:padding="8dp"
+                android:text="@string/main_options_text_notes"
+                android:textSize="24sp" />
+
+            <TextView
                 android:id="@+id/settingsText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

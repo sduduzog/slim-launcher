@@ -92,7 +92,7 @@ class MainFragment : Fragment() {
             }
         }
 
-        buttonNotes.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_mainFragment_to_notesListFragment))
+
         val settings = context!!.getSharedPreferences(getString(R.string.prefs_settings), Context.MODE_PRIVATE)
         val isChecked = settings.getBoolean(getString(R.string.prefs_settings_key_app_dialer), false)
         ivCall.setOnClickListener {
@@ -152,6 +152,7 @@ class MainFragment : Fragment() {
                 }
             }
         })
+        textView12.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_mainFragment_to_notesListFragment))
         settingsText.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_mainFragment_to_settingsFragment))
 
         rateAppText.setOnClickListener {

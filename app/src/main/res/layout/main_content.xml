@@ -38,6 +38,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.6"
         tools:listitem="@layout/main_list_item" />
 
     <TextView
@@ -48,16 +49,5 @@
         android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/clockTextView"
         app:layout_constraintTop_toTopOf="@+id/clockTextView" />
-
-    <TextView
-        android:id="@+id/buttonNotes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:alpha="0.7"
-        android:padding="8dp"
-        android:text="@string/main_options_text_notes"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="@+id/mainAppsList"
-        app:layout_constraintTop_toBottomOf="@+id/mainAppsList" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
