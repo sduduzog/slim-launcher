@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.sduduzog.slimlauncher.MainActivity
 import com.sduduzog.slimlauncher.R
 import com.sduduzog.slimlauncher.data.Note
@@ -53,7 +52,7 @@ class NoteFragment : Fragment(), MainActivity.OnBackPressedListener {
         if (note.edited == -1L) {
             editBody()
         } else {
-            bodyEditText.visibility = View.INVISIBLE
+            bodyEditText.visibility = View.GONE
             textBody.visibility = View.VISIBLE
             textBody.text = note.body
             titleEditText.setText(note.title.orEmpty())
@@ -67,14 +66,14 @@ class NoteFragment : Fragment(), MainActivity.OnBackPressedListener {
             editBody()
             true
         }
-        note_fragment.setOnClickListener(object : DoubleClickListener() {
+        textBody.setOnClickListener(object : DoubleClickListener() {
             override fun onDoubleClick(v: View) {
                 titleEditText.isEnabled = true
                 editBody()
             }
 
             override fun onSingleClick(v: View) {
-
+                Log.d(TAG, "single click")
             }
         })
     }
@@ -100,9 +99,8 @@ class NoteFragment : Fragment(), MainActivity.OnBackPressedListener {
     }
 
     private fun editBody() {
-        textBody.visibility = View.INVISIBLE
+        textBody.visibility = View.GONE
         bodyEditText.visibility = View.VISIBLE
-        txtDoubleTap.visibility = View.INVISIBLE
         if (bodyEditText.requestFocus()) {
             val imm = activity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.showSoftInput(bodyEditText, InputMethodManager.SHOW_IMPLICIT)
@@ -115,7 +113,7 @@ class NoteFragment : Fragment(), MainActivity.OnBackPressedListener {
         val title = titleEditText.text.toString()
         val newNote = Note(body, Date().time)
         newNote.title = if (title.isEmpty()) null else title
-        newNote.body = body
+        newNote.body = body.trim()
         newNote.id = note.id
         val currentDigest = hash(newNote.title + newNote.body)
         if (body.isEmpty()) return
