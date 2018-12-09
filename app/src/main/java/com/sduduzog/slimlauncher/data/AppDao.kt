@@ -25,7 +25,10 @@ interface AppDao {
     @Query("DELETE FROM apps")
     fun deleteAll()
 
+    @Query("DELETE FROM home_apps")
+    fun clearHomeApps()
+
     @Delete
-    fun delete(app: HomeApp)
+    fun deleteHomeApp(app: HomeApp)
 
 }

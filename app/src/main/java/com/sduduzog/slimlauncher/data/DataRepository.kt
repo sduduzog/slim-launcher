@@ -37,6 +37,10 @@ class DataRepository(application: Application) {
         DeleteHomeAppAsyncTask(appDao).execute(app)
     }
 
+    fun clearHomeApps(){
+        ClearHomeAppsAsyncTask(appDao).execute()
+    }
+
     fun updateApps(list: List<HomeApp>) {
         for (app in list) {
             UpdateAppsAsyncTask(appDao).execute(app)
@@ -74,7 +78,15 @@ class DataRepository(application: Application) {
     private class DeleteHomeAppAsyncTask internal constructor(private val mAsyncTaskDao: AppDao) : AsyncTask<HomeApp, Void, Void>() {
 
         override fun doInBackground(vararg params: HomeApp): Void? {
-            mAsyncTaskDao.delete(params[0])
+            mAsyncTaskDao.deleteHomeApp(params[0])
+            return null
+        }
+    }
+
+    private class ClearHomeAppsAsyncTask internal constructor(private val mAsyncTaskDao: AppDao) : AsyncTask<Void, Void, Void>() {
+
+        override fun doInBackground(vararg params: Void): Void? {
+            mAsyncTaskDao.clearHomeApps()
             return null
         }
     }
@@ -101,6 +113,7 @@ class DataRepository(application: Application) {
             val launchables = pm.queryIntentActivities(main, 0)
             Collections.sort(launchables,
                     ResolveInfo.DisplayNameComparator(pm))
+            mAsyncTaskDao.deleteAll() // Need to find a less expensive way of doing this
             for (i in launchables.indices) {
                 val item = launchables[i]
                 Log.d(_tag, "$item")

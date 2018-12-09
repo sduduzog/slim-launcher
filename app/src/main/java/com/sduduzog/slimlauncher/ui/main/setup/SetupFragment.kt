@@ -1,36 +1,21 @@
 package com.sduduzog.slimlauncher.ui.main.setup
 
 
-import android.app.AlertDialog
-import android.app.Dialog
-import android.content.Context.MODE_PRIVATE
-import android.content.Intent
-import android.content.pm.ResolveInfo
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.content.edit
-import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.Navigation
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
 import com.sduduzog.slimlauncher.R
-import com.sduduzog.slimlauncher.data.App
-import com.sduduzog.slimlauncher.data.HomeApp
-import com.sduduzog.slimlauncher.ui.main.MainViewModel
 import kotlinx.android.synthetic.main.setup_fragment.*
-import java.util.*
 
 
-class SetupFragment : Fragment(), DialogInteractionListener {
+class SetupFragment : Fragment() {
 
-    private lateinit var viewModel: MainViewModel
-    private var state = 0
-    private val apps = mutableListOf<App>()
-
+    private lateinit var onPagerListener: OnPagerListener
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -39,202 +24,79 @@ class SetupFragment : Fragment(), DialogInteractionListener {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
-        setLoading()
-        viewModel.homeApps.observe(this, ValueObserver())
-        setupButton.setOnClickListener {
-            when (state) {
-                1 -> chooseApps()
-                2 -> chooseClock()
-                else -> {
-                    val settings = activity!!.getSharedPreferences(getString(R.string.prefs_settings), MODE_PRIVATE)
-                    settings.edit {
-                        putBoolean(getString(R.string.prefs_settings_key_fresh_install_setup), false)
-                    }
-                    finishSetup()
+
+        setup_view_pager.adapter = SectionsPagerAdapter(childFragmentManager)
+
+        setup_view_pager.setOnTouchListener { _, _ -> true }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        onPagerListener = object : OnPagerListener {
+            override fun onPage(position: Int) {
+                setup_view_pager.currentItem = position
+            }
+        }
+    }
+
+//    private fun checkFreshInstall() {
+//        val settings = activity!!.getSharedPreferences(getString(R.string.prefs_settings), MODE_PRIVATE)
+//        if (settings.getBoolean(getString(R.string.prefs_settings_key_fresh_install_setup), true)) {
+//            val pm = activity!!.packageManager
+//            val main = Intent(Intent.ACTION_MAIN, null)
+//
+//            main.addCategory(Intent.CATEGORY_LAUNCHER)
+//
+//            val launchables = pm.queryIntentActivities(main, 0)
+//            Collections.sort(launchables,
+//                    ResolveInfo.DisplayNameComparator(pm))
+//            for (i in launchables.indices) {
+//                val item = launchables[i]
+//                val activity = item.activityInfo
+//                val app = App(launchables[i].loadLabel(pm).toString(), activity.applicationInfo.packageName, activity.name)
+//                apps.add(app)
+//            }
+//            revealUI(state)
+//        } else {
+//            finishSetup()
+//        }
+//    }
+
+    inner class SectionsPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
+
+        override fun getItem(position: Int): Fragment {
+            return when (position) {
+                1 -> HomeSetupFragment.newInstance().apply {
+                    this.listener = onPagerListener
+                }
+                2 -> ClockSetupFragment.newInstance().apply {
+                    this.listener = onPagerListener
+                }
+                3 -> DialerSetupFragment.newInstance().apply {
+                    this.listener = onPagerListener
+                }
+                4 -> ThemeSetupFragment.newInstance().apply {
+                    this.listener = onPagerListener
+                }
+                else -> SplashFragment.newInstance().apply {
+                    this.listener = onPagerListener
                 }
             }
         }
 
-    }
-
-    private fun checkFreshInstall() {
-        val settings = activity!!.getSharedPreferences(getString(R.string.prefs_settings), MODE_PRIVATE)
-        if (settings.getBoolean(getString(R.string.prefs_settings_key_fresh_install_setup), true)) {
-            val pm = activity!!.packageManager
-            val main = Intent(Intent.ACTION_MAIN, null)
-
-            main.addCategory(Intent.CATEGORY_LAUNCHER)
-
-            val launchables = pm.queryIntentActivities(main, 0)
-            Collections.sort(launchables,
-                    ResolveInfo.DisplayNameComparator(pm))
-            for (i in launchables.indices) {
-                val item = launchables[i]
-                val activity = item.activityInfo
-                val app = App(launchables[i].loadLabel(pm).toString(), activity.applicationInfo.packageName, activity.name)
-                apps.add(app)
-            }
-            revealUI(state)
-        } else {
-            finishSetup()
-        }
-    }
-
-    private fun finishSetup() {
-        val nav = Navigation.findNavController(setupContainer)
-        nav.navigate(R.id.action_setupFragment_to_mainFragment2)
-    }
-
-    private fun setLoading() {
-        progressBar.visibility = View.VISIBLE
-        opt1Number.alpha = 0f
-        opt1Text.alpha = 0f
-        opt2Number.alpha = 0f
-        opt2Text.alpha = 0f
-        textViewLets.alpha = 0f
-        setupButton.alpha = 0f
-        tvWelcome.alpha = 0f
-        cvIcon.alpha = 0f
-    }
-
-    private fun revealUI(level: Int) {
-        progressBar.visibility = View.INVISIBLE
-        when (level) {
-            0 -> {
-                tvWelcome.animate().alpha(1f).duration = 1000
-                cvIcon.animate().alpha(1f).duration = 1500
-                textViewLets.animate().alpha(1f).duration = 1000
-                opt1Text.animate().setStartDelay(1000).alpha(1f).duration = 500
-                opt1Number.animate().setStartDelay(1000).alpha(1f).duration = 500
-                opt2Text.animate().setStartDelay(1500).alpha(1f).duration = 500
-                opt2Number.animate().setStartDelay(1500).alpha(1f).duration = 500
-                setupButton.animate().setStartDelay(2000).alpha(1f).duration = 500
-            }
-            1 -> {
-                setupButton.text = getString(R.string.setup_button_next)
-                ivTick1.visibility = View.VISIBLE
-            }
-            2 -> {
-                ivTick2.visibility = View.VISIBLE
-                setupButton.text = getString(R.string.setup_button_finish)
-            }
-        }
-        state++
-    }
-
-    private fun chooseApps() {
-        ChooseApps.newInstance(this, apps).show(fragmentManager, "APP_CHOOSER")
-    }
-
-    private fun chooseClock() {
-        ChooseClockType.newInstance(this).show(fragmentManager, "CLOCK_CHOOSER")
-    }
-
-    class ChooseApps : DialogFragment() {
-
-        private lateinit var listener: DialogInteractionListener
-        private lateinit var apps: List<App>
-        private lateinit var checkedItems: BooleanArray
-
-        companion object {
-            fun newInstance(listener: DialogInteractionListener, apps: List<App>): ChooseApps {
-                val chooser = ChooseApps()
-                chooser.apps = apps
-                chooser.listener = listener
-                return chooser
-            }
+        override fun getCount(): Int {
+            return 5
         }
 
-        override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-            val appNames = arrayOfNulls<String>(apps.size)
-            checkedItems = BooleanArray(apps.size)
-            for (i in apps.indices) {
-                appNames[i] = apps[i].appName
+        override fun getPageTitle(position: Int): CharSequence? {
+            when (position) {
+                0 -> return "Splash screen"
+                1 -> return "Home setup"
+                2 -> return "Clock setup"
+                3 -> return "Theme setup"
+                4 -> return "Dialer setup"
             }
-
-            val builder = AlertDialog.Builder(context!!)
-            builder.setMultiChoiceItems(appNames, checkedItems) { _, i, b ->
-                checkedItems[i] = b
-                if (checkedItems.filter { it }.size == 5) {
-                    setApps()
-                    dismiss()
-                }
-
-            }
-            builder.setPositiveButton("Done") { _, _ ->
-                if (checkedItems.none { it }) {
-                    Toast.makeText(context, getString(R.string.no_app_selected_toast_msg), Toast.LENGTH_SHORT).show()
-                } else {
-                    setApps()
-                }
-            }
-            builder.setTitle(getString(R.string.choose_apps_title))
-
-            return builder.create()
+            return null
         }
-
-        private fun setApps() {
-            val list = mutableListOf<App>()
-            for (i in checkedItems.indices) {
-                if (checkedItems[i]) {
-                    list.add(apps[i])
-                }
-            }
-            listener.onAppsChosen(list)
-        }
-    }
-
-    class ChooseClockType : DialogFragment() {
-
-        private lateinit var listener: DialogInteractionListener
-
-        companion object {
-            fun newInstance(listener: DialogInteractionListener): ChooseClockType {
-                val chooser = ChooseClockType()
-                chooser.listener = listener
-                return chooser
-            }
-        }
-
-        override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-            val builder = AlertDialog.Builder(context!!)
-            builder.setTitle("Choose clock type")
-            builder.setSingleChoiceItems(R.array.clock_types, 0) { _, i ->
-                val settings = context!!.getSharedPreferences(getString(R.string.prefs_settings), MODE_PRIVATE)
-                if (i == 0)
-                    settings.edit {
-                        putBoolean(getString(R.string.prefs_settings_key_clock_type), false)
-                    }
-                else
-                    settings.edit {
-                        putBoolean(getString(R.string.prefs_settings_key_clock_type), true)
-                    }
-                listener.onClockChosen()
-                dismiss()
-            }
-            return builder.create()
-        }
-    }
-
-    inner class ValueObserver : Observer<List<HomeApp>> {
-        override fun onChanged(it: List<HomeApp>?) {
-            if (it != null && it.isEmpty()) {
-                checkFreshInstall()
-                viewModel.apps.removeObservers(this@SetupFragment)
-            } else {
-                if (state == 0)
-                    finishSetup()
-            }
-        }
-    }
-
-    override fun onAppsChosen(apps: List<App>) {
-        viewModel.addToHomeScreen(apps)
-        revealUI(state)
-    }
-
-    override fun onClockChosen() {
-        revealUI(state)
     }
 }

@@ -2,22 +2,22 @@
 <resources>
     <color name="colorAccent">#37474F</color>
 
-    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorWhite">#ffffff</color>
     <color name="colorWhiteDark">#BDBDBD</color>
 
     <color name="primaryColor">#212121</color>
     <color name="primaryDarkColor">#000000</color>
 
-    <color name="colorBlueGrey">#37474F</color>
+    <color name="colorBlueGrey">#37474f</color>
     <color name="colorBlueGreyDark">#263238</color>
 
-    <color name="colorPink">#FCE4EC</color>
+    <color name="colorPink">#fce4ec</color>
     <color name="colorPinkDark">#F8BBD0</color>
 
-    <color name="colorTeal">#E0F2F1</color>
+    <color name="colorTeal">#e0f2f1</color>
     <color name="colorTealDark">#B2DFDB</color>
 
-    <color name="inverseTextColor">#E0E0E0</color>
+    <color name="inverseTextColor">#e0e0e0</color>
     <color name="inverseAccentColor">#607d8b</color>
 
     <color name="colorCandy">#f06292</color>

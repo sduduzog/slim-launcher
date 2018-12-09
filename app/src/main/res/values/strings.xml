@@ -50,6 +50,7 @@
     <string name="settings_button_change_theme">Change</string>
     <string name="about_title">Slim launcher</string>
     <string name="about_text">
+        "Slim v2.0.3 \u00a9 2018\n"
         Created by : Beautus S Gumede\n
         Source : <a href="https://github.com/sduduzog/slim-launcher">https://github.com/sduduzog/slim-launcher</a>\n\n
         Slim is an open source application launcher created to be a minimal and simple launcher to
@@ -84,7 +85,9 @@
     <string name="main_photo_camera_icon">photo camera icon</string>
     <string name="setup_button_start">start</string>
     <string name="setup_text_welcome">Welcome!</string>
-    <string name="setup_text_lets_get_you_set_up">Lets get you set up!</string>
+    <string name="setup_text_lets_get_you_set_up">
+    "Lets get you set up!\n Just a few tweaks and your new home screen will be ready for you."
+    </string>
     <string name="setup_text_choose_apps">
         Choose apps that will appear on your home screen. You can change them later in \'Preferences\'
     </string>
@@ -104,5 +107,27 @@
 
     <string name="dialer_chevron">deleter</string>
     <string name="settings_itrem_icon_gradder">Dragger</string>
+
+    <string name="setup_choose_theme">Choose Theme</string>
+    <string name="setup_text_default">Default</string>
+    <string name="setup_text_dark">Dark</string>
+    <string name="setup_text_jupiter">Jupiter</string>
+    <string name="setup_text_teal">Teal</string>
+    <string name="setup_text_candy">Candy</string>
+    <string name="setup_text_pastel">Pastel</string>
+    <string name="setup_we_re_almost_done">We\'re almost done!</string>
+    <string name="setup_expand_note">1. To open Slim options, click the arrow or swipe upwards from it.</string>
+    <string name="setup_note_camera">3. Press the camera icon to launch the default camera app</string>
+    <string name="setup_note_dialer">2. Press the dialer icon to open the default dialer</string>
+    <string name="screenshot_nav">Nav screenshot</string>
+    <string name="setup_dialer_note2">2. Press the dialer icon to open the built-in dialer. Press and hold, open the default</string>
+    <string name="setup_your_home_screen">Your home screen</string>
+    <string name="setup_screen_description">
+        "This is what your home screen will look like.\n\n"
+        "You should pick five of the apps you use the most.\n\n"
+        "You can later change them in Preferences."
+    </string>
+    <string name="setup_choose_apps">Choose apps</string>
+    <string name="setup_home_screenshot">Screenshot</string>
 
 </resources>

@@ -42,6 +42,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         _repository.renameApp(app)
     }
 
+    fun clearHomeApps(){
+        _repository.clearHomeApps()
+    }
+
     fun addToHomeScreen(apps: List<App>) {
         for (i in apps.indices){
             val app = apps[i]
