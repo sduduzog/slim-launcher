@@ -2,7 +2,6 @@ package com.sduduzog.slimlauncher.ui.main.setup
 
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,29 +37,6 @@ class SetupFragment : Fragment() {
             }
         }
     }
-
-//    private fun checkFreshInstall() {
-//        val settings = activity!!.getSharedPreferences(getString(R.string.prefs_settings), MODE_PRIVATE)
-//        if (settings.getBoolean(getString(R.string.prefs_settings_key_fresh_install_setup), true)) {
-//            val pm = activity!!.packageManager
-//            val main = Intent(Intent.ACTION_MAIN, null)
-//
-//            main.addCategory(Intent.CATEGORY_LAUNCHER)
-//
-//            val launchables = pm.queryIntentActivities(main, 0)
-//            Collections.sort(launchables,
-//                    ResolveInfo.DisplayNameComparator(pm))
-//            for (i in launchables.indices) {
-//                val item = launchables[i]
-//                val activity = item.activityInfo
-//                val app = App(launchables[i].loadLabel(pm).toString(), activity.applicationInfo.packageName, activity.name)
-//                apps.add(app)
-//            }
-//            revealUI(state)
-//        } else {
-//            finishSetup()
-//        }
-//    }
 
     inner class SectionsPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 

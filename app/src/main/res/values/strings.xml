@@ -12,11 +12,6 @@
         <item>Pastel</item>
     </string-array>
 
-    <string-array name="clock_types">
-        <item>12 Hour</item>
-        <item>24 Hour</item>
-    </string-array>
-
     <string name="prefs_settings">settings</string>
     <string name="prefs_settings_key_theme">key_theme</string>
     <string name="prefs_settings_key_clock_type">clock_type</string>
@@ -88,25 +83,18 @@
     <string name="setup_text_lets_get_you_set_up">
     "Lets get you set up!\n Just a few tweaks and your new home screen will be ready for you."
     </string>
-    <string name="setup_text_choose_apps">
-        Choose apps that will appear on your home screen. You can change them later in \'Preferences\'
-    </string>
-    <string name="setup_text_choose_your_preferred_clock">Choose your preferred clock type</string>
-    <string name="icon_check">Icon check</string>
+
     <string name="setup_button_next">next</string>
     <string name="setup_button_finish">Finish</string>
-    <string name="setup_text_1">1.</string>
-    <string name="setup_text_2">2.</string>
 
     <string name="no_app_selected_toast_msg">Choose at least one app</string>
     <string name="choose_apps_title">Choose Apps</string>
-    <string name="double_tap_anywhere_to_edit">Double tap anywhere to edit</string>
 
 
     <string name="notes_date_placeholder">Edited at %s</string>
 
     <string name="dialer_chevron">deleter</string>
-    <string name="settings_itrem_icon_gradder">Dragger</string>
+    <string name="settings_item_icon_drag_handler">Dragger</string>
 
     <string name="setup_choose_theme">Choose Theme</string>
     <string name="setup_text_default">Default</string>
@@ -129,5 +117,9 @@
     </string>
     <string name="setup_choose_apps">Choose apps</string>
     <string name="setup_home_screenshot">Screenshot</string>
+    <string name="setup_clock_type_text_description">This is also changeable in preferences. Whether you prefer a 12hr clock type or a 24hr clock type</string>
+    <string name="setup_clock_type">Clock Type</string>
+    <string name="settings_use_slim_s_built_in_dialer">Use Slim\'s built-in dialer</string>
+    <string name="settings_faster_shortcut_to_your_calls">Faster shortcut to your calls</string>
 
 </resources>

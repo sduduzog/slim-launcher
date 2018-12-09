@@ -58,6 +58,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_drag_handle"
-        android:contentDescription="@string/settings_itrem_icon_gradder" />
+        android:contentDescription="@string/settings_item_icon_drag_handler" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

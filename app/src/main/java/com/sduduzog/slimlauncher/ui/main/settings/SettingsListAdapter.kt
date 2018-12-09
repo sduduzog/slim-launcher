@@ -83,12 +83,13 @@ class SettingsListAdapter(private val fragment: Fragment) : RecyclerView.Adapter
         val size = displayedApps.size
         displayedApps.clear()
         displayedApps.addAll(newList)
-        if (size > newList.size) {
-            notifyItemRemoved(deletedFromIndex)
-        } else if (size < newList.size) notifyItemRangeChanged(size, displayedApps.size - size)
-        else if (renamedOnIndex != -1) {
-            notifyItemChanged(renamedOnIndex)
-            renamedOnIndex = -1
+        when {
+            size > newList.size -> notifyItemRemoved(deletedFromIndex)
+            size < newList.size -> notifyItemRangeChanged(size, displayedApps.size - size)
+            renamedOnIndex != -1 -> {
+                notifyItemChanged(renamedOnIndex)
+                renamedOnIndex = -1
+            }
         }
     }
 

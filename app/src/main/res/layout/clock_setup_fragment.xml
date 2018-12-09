@@ -7,13 +7,12 @@
     android:layout_height="match_parent"
     tools:context=".ui.main.setup.ClockSetupFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:id="@+id/textView14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="Clock Type"
+        android:text="@string/setup_clock_type"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,6 +25,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
+        android:contentDescription="@string/setup_home_screenshot"
         android:src="@drawable/clock_zoomed"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/textView14"
@@ -39,7 +39,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:gravity="center"
-        android:text="This is also changeable in preferences. Whether you prefer a 12hr clock type or a 24hr clock type"
+        android:text="@string/setup_clock_type_text_description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/clock_setup_image" />

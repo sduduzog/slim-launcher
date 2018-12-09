@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import androidx.core.content.edit
 import androidx.navigation.Navigation
 import com.sduduzog.slimlauncher.R
-import kotlinx.android.synthetic.main.setup_fragment.*
 import kotlinx.android.synthetic.main.theme_setup_fragment.*
 
 

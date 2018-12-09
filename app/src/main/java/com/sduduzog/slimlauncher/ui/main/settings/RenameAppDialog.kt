@@ -2,7 +2,6 @@ package com.sduduzog.slimlauncher.ui.main.settings
 
 import android.app.Dialog
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
