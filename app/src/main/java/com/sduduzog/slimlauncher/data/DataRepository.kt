@@ -5,7 +5,6 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
 import android.os.AsyncTask
-import android.util.Log
 import androidx.lifecycle.LiveData
 import java.util.*
 
@@ -27,7 +26,7 @@ class DataRepository(application: Application) {
         get() = _apps
 
     val notes: LiveData<List<Note>>
-    get() = _notes
+        get() = _notes
 
     fun insertHomeApp(app: HomeApp) {
         InsertHomeAppAsyncTask(appDao).execute(app)
@@ -37,7 +36,7 @@ class DataRepository(application: Application) {
         DeleteHomeAppAsyncTask(appDao).execute(app)
     }
 
-    fun clearHomeApps(){
+    fun clearHomeApps() {
         ClearHomeAppsAsyncTask(appDao).execute()
     }
 
@@ -55,15 +54,15 @@ class DataRepository(application: Application) {
         UpdateAppsAsyncTask(appDao).execute(app)
     }
 
-    fun saveNote(note: Note){
+    fun saveNote(note: Note) {
         SaveNoteAsyncTask(noteDao).execute(note)
     }
 
-    fun updateNote(note: Note){
+    fun updateNote(note: Note) {
         UpdateNoteAsyncTask(noteDao).execute(note)
     }
 
-    fun deleteNote(note: Note){
+    fun deleteNote(note: Note) {
         DeleteNoteAsyncTask(noteDao).execute(note)
     }
 
@@ -101,9 +100,6 @@ class DataRepository(application: Application) {
 
     private class RefreshAppsAsyncTask internal constructor(private val mAsyncTaskDao: AppDao) : AsyncTask<PackageManager, Void, Void>() {
 
-        @Suppress("PropertyName")
-        private val _tag = "DataRepository"
-
         override fun doInBackground(vararg params: PackageManager): Void? {
             val pm = params[0]
             val main = Intent(Intent.ACTION_MAIN, null)
@@ -116,7 +112,6 @@ class DataRepository(application: Application) {
             mAsyncTaskDao.deleteAll() // Need to find a less expensive way of doing this
             for (i in launchables.indices) {
                 val item = launchables[i]
-                Log.d(_tag, "$item")
                 val activity = item.activityInfo
                 val app = App(launchables[i].loadLabel(pm).toString(), activity.applicationInfo.packageName, activity.name)
                 mAsyncTaskDao.insert(app)

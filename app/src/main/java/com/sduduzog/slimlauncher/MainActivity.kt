@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     navigator.navigate(R.id.action_mainFragment_to_dialerFragment)
                 } else {
-                // Do nothing
+                    // Do nothing
                 }
                 return
             }

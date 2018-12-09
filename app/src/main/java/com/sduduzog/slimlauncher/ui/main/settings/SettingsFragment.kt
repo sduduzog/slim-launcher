@@ -79,7 +79,7 @@ class SettingsFragment : Fragment() {
         initComponents()
     }
 
-    private fun initComponents(){
+    private fun initComponents() {
         val settings = context!!.getSharedPreferences(getString(R.string.prefs_settings), MODE_PRIVATE)
         clockSwitch.isChecked = settings.getBoolean(getString(R.string.prefs_settings_key_clock_type), false)
         clockSwitch.setOnCheckedChangeListener { _, b ->

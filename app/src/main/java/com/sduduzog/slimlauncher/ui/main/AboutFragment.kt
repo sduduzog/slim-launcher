@@ -2,11 +2,11 @@ package com.sduduzog.slimlauncher.ui.main
 
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.sduduzog.slimlauncher.R
 import kotlinx.android.synthetic.main.about_fragment.*
 

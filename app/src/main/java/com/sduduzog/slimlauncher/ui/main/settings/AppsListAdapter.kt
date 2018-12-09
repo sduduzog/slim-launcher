@@ -1,6 +1,6 @@
 package com.sduduzog.slimlauncher.ui.main.settings
 
-import androidx.recyclerview.widget.RecyclerView
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,24 +8,22 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.RecyclerView
 import com.sduduzog.slimlauncher.R
 import com.sduduzog.slimlauncher.data.App
 import com.sduduzog.slimlauncher.data.HomeApp
 import com.sduduzog.slimlauncher.ui.main.MainViewModel
-
-
 import com.sduduzog.slimlauncher.ui.main.settings.AppsFragment.OnAppsChooserListener
-
 import kotlinx.android.synthetic.main.apps_list_item.view.*
 
 
 class AppsListAdapter(fragment: Fragment,
-        private val mListener: OnAppsChooserListener?,
+                      private val mListener: OnAppsChooserListener?,
                       private val appIndex: Int)
     : RecyclerView.Adapter<AppsListAdapter.ViewHolder>() {
 
     private var mValues: List<App> = listOf()
-    private var viewModel: MainViewModel =  ViewModelProviders.of(fragment).get(MainViewModel::class.java)
+    private var viewModel: MainViewModel = ViewModelProviders.of(fragment).get(MainViewModel::class.java)
 
     init {
         viewModel.apps.observe(fragment, Observer {

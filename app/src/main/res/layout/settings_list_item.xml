@@ -53,11 +53,11 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:alpha="0.5"
+        android:contentDescription="@string/settings_item_icon_drag_handler"
         android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_drag_handle"
-        android:contentDescription="@string/settings_item_icon_drag_handler" />
+        app:srcCompat="@drawable/ic_drag_handle" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

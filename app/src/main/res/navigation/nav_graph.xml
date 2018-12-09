@@ -46,7 +46,7 @@
         android:id="@+id/setupFragment"
         android:name="com.sduduzog.slimlauncher.ui.main.setup.SetupFragment"
         android:label="setup_fragment"
-        tools:layout="@layout/setup_fragment" >
+        tools:layout="@layout/setup_fragment">
         <action
             android:id="@+id/action_setupFragment_to_mainFragment2"
             app:destination="@id/mainFragment" />
@@ -55,7 +55,7 @@
         android:id="@+id/notesListFragment"
         android:name="com.sduduzog.slimlauncher.ui.main.notes.NotesListFragment"
         android:label="notes_list_fragment"
-        tools:layout="@layout/notes_list_fragment" >
+        tools:layout="@layout/notes_list_fragment">
         <action
             android:id="@+id/action_openNoteFragment"
             app:destination="@id/noteFragment" />

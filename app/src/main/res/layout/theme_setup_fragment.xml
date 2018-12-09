@@ -26,20 +26,21 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
         android:clickable="true"
+        android:focusable="true"
         android:src="@drawable/ic_text_fields"
         app:backgroundTint="@color/colorWhite"
         app:fabSize="normal"
         app:layout_constraintEnd_toStartOf="@+id/setup_fab_dark"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView18"
-        android:focusable="true" />
+        app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/setup_fab_dark"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
+        android:focusable="true"
         android:src="@drawable/ic_text_fields"
         android:tint="@color/inverseTextColor"
         app:backgroundTint="@color/primaryDarkColor"
@@ -47,8 +48,7 @@
         app:layout_constraintEnd_toStartOf="@+id/setup_fab_jupiter"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/setup_fab_default"
-        app:layout_constraintTop_toTopOf="@+id/setup_fab_default"
-        android:focusable="true" />
+        app:layout_constraintTop_toTopOf="@+id/setup_fab_default" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/setup_fab_jupiter"
@@ -56,6 +56,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:clickable="true"
+        android:focusable="true"
         android:src="@drawable/ic_text_fields"
         android:tint="@color/inverseTextColor"
         app:backgroundTint="@color/colorBlueGrey"
@@ -63,8 +64,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/setup_fab_dark"
-        app:layout_constraintTop_toTopOf="@+id/setup_fab_dark"
-        android:focusable="true" />
+        app:layout_constraintTop_toTopOf="@+id/setup_fab_dark" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/setup_fab_teal"
@@ -72,20 +72,21 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:clickable="true"
+        android:focusable="true"
         android:src="@drawable/ic_text_fields"
         app:backgroundTint="@color/colorTeal"
         app:fabSize="normal"
         app:layout_constraintEnd_toStartOf="@+id/setup_fab_candy"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView20"
-        android:focusable="true" />
+        app:layout_constraintTop_toBottomOf="@+id/textView20" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/setup_fab_candy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
+        android:focusable="true"
         android:src="@drawable/ic_text_fields"
         android:tint="@color/inverseTextColor"
         app:backgroundTint="@color/colorCandy"
@@ -93,22 +94,21 @@
         app:layout_constraintEnd_toStartOf="@+id/setup_fab_pastel"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/setup_fab_teal"
-        app:layout_constraintTop_toTopOf="@+id/setup_fab_teal"
-        android:focusable="true" />
+        app:layout_constraintTop_toTopOf="@+id/setup_fab_teal" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/setup_fab_pastel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
+        android:focusable="true"
         android:src="@drawable/ic_text_fields"
         app:backgroundTint="@color/colorPink"
         app:fabSize="normal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/setup_fab_candy"
-        app:layout_constraintTop_toTopOf="@+id/setup_fab_candy"
-        android:focusable="true" />
+        app:layout_constraintTop_toTopOf="@+id/setup_fab_candy" />
 
     <TextView
         android:id="@+id/textView20"

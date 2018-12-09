@@ -18,15 +18,15 @@ class NotesViewModel(application: Application) : AndroidViewModel(application) {
     val notes: LiveData<List<Note>>
         get() = _notes
 
-    fun saveNote(note: Note){
+    fun saveNote(note: Note) {
         _repository.saveNote(note)
     }
 
-    fun updateNote(note: Note){
+    fun updateNote(note: Note) {
         _repository.updateNote(note)
     }
 
-    fun deleteNote(note: Note){
+    fun deleteNote(note: Note) {
         _repository.deleteNote(note)
     }
 }

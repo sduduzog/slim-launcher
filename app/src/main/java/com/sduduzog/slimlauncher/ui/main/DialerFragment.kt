@@ -4,7 +4,6 @@ package com.sduduzog.slimlauncher.ui.main
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,9 +13,6 @@ import kotlinx.android.synthetic.main.dialer_fragment.*
 
 
 class DialerFragment : Fragment(), View.OnClickListener {
-
-    @Suppress("PropertyName")
-    val TAG: String = "DialerFragment"
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -49,7 +45,7 @@ class DialerFragment : Fragment(), View.OnClickListener {
                 i.data = Uri.parse("tel:${Uri.encode(number)}")
                 startActivity(i)
             } catch (e: Exception) {
-                Log.e(TAG, "$e")
+                // Do nothing
             }
         }
     }

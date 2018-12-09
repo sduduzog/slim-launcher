@@ -8,7 +8,6 @@ import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 
 
-
 @Database(entities = [App::class, HomeApp::class, Note::class], version = 3, exportSchema = false)
 abstract class DataRoomDatabase : RoomDatabase() {
 
@@ -33,13 +32,13 @@ abstract class DataRoomDatabase : RoomDatabase() {
             }
         }
 
-        private val MIGRATION_1_2 = object: Migration(1, 2){
+        private val MIGRATION_1_2 = object : Migration(1, 2) {
             override fun migrate(database: SupportSQLiteDatabase) {
                 database.execSQL("ALTER TABLE home_apps ADD COLUMN sorting_index INTEGER NOT NULL DEFAULT 0")
                 val cursor = database.query("SELECT package_name FROM home_apps")
                 cursor.moveToFirst()
                 var index = 0
-                while (!cursor.isAfterLast){
+                while (!cursor.isAfterLast) {
                     val column = cursor.getString(cursor.getColumnIndex("package_name"))
                     database.execSQL("UPDATE home_apps SET sorting_index=$index WHERE package_name='$column'")
                     cursor.moveToNext()
@@ -48,7 +47,7 @@ abstract class DataRoomDatabase : RoomDatabase() {
             }
         }
 
-        private val MIGRATION_2_3 = object: Migration(2, 3){
+        private val MIGRATION_2_3 = object : Migration(2, 3) {
             override fun migrate(database: SupportSQLiteDatabase) {
                 database.execSQL("CREATE TABLE IF NOT EXISTS `notes` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `title` TEXT, `body` TEXT NOT NULL, `edited` INTEGER NOT NULL)")
             }

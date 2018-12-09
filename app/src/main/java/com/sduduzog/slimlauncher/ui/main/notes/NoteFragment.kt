@@ -3,7 +3,6 @@ package com.sduduzog.slimlauncher.ui.main.notes
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,9 +19,6 @@ import java.util.*
 
 
 class NoteFragment : Fragment(), MainActivity.OnBackPressedListener {
-
-    @Suppress("PropertyName")
-    val TAG: String = "NoteFragment"
 
     private lateinit var note: Note
     private lateinit var viewModel: NotesViewModel
@@ -59,9 +55,6 @@ class NoteFragment : Fragment(), MainActivity.OnBackPressedListener {
             bodyEditText.setText(note.body)
             titleEditText.isEnabled = false
         }
-        titleEditText.setOnClickListener {
-            Log.d(TAG, "title edit")
-        }
         titleEditText.setOnEditorActionListener { _, _, _ ->
             editBody()
             true
@@ -73,14 +66,9 @@ class NoteFragment : Fragment(), MainActivity.OnBackPressedListener {
             }
 
             override fun onSingleClick(v: View) {
-                Log.d(TAG, "single click")
+                // Do nothing
             }
         })
-    }
-
-    override fun onPause() {
-        super.onPause()
-        saveNote()
     }
 
     override fun onAttach(context: Context?) {
@@ -95,7 +83,7 @@ class NoteFragment : Fragment(), MainActivity.OnBackPressedListener {
     }
 
     override fun onBackPressed() {
-        Log.d(TAG, "onBackPressed")
+        saveNote()
     }
 
     private fun editBody() {

@@ -1,8 +1,6 @@
 package com.sduduzog.slimlauncher.ui.main.notes
 
 
-import android.animation.ObjectAnimator
-import android.animation.PropertyValuesHolder
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,8 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.daasuu.ei.Ease
-import com.daasuu.ei.EasingInterpolator
 import com.sduduzog.slimlauncher.R
 import com.sduduzog.slimlauncher.ui.main.OnItemActionListener
 import kotlinx.android.synthetic.main.notes_list_fragment.*
@@ -65,11 +61,9 @@ class NotesListFragment : Fragment() {
     }
 
     private fun showFabAnimation(targetView: View) {
-        val scaleX = PropertyValuesHolder.ofFloat("scaleX", 0f, 1f)
-        val scaleY = PropertyValuesHolder.ofFloat("scaleY", 0f, 1f)
-        val animator = ObjectAnimator.ofPropertyValuesHolder(targetView, scaleX, scaleY)
-        animator.interpolator = EasingInterpolator(Ease.SINE_IN_OUT)
-        animator.duration = 100
-        animator.start()
+        targetView.scaleX = 0f
+        targetView.scaleY = 0f
+        targetView.animate().scaleY(1f).scaleX(1f).duration = 1000
+        // Animate fab
     }
 }

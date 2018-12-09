@@ -265,13 +265,13 @@
         android:layout_marginEnd="8dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:clickable="true"
+        android:contentDescription="@string/dialer_chevron"
         android:focusable="true"
         android:padding="8dp"
         android:src="@drawable/ic_chevron_left"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/editText2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/editText2"
-        android:contentDescription="@string/dialer_chevron" />
+        app:layout_constraintTop_toTopOf="@+id/editText2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

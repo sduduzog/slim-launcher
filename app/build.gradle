@@ -12,14 +12,15 @@ android {
         applicationId "com.sduduzog.slimlauncher"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 19
-        versionName "2.0.3"
+        versionCode 20
+        versionName "2.1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         release {
             minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
@@ -49,13 +50,8 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
     implementation 'android.arch.navigation:navigation-fragment:1.0.0-alpha07'
     implementation 'androidx.room:room-runtime:2.1.0-alpha02'
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0-alpha1'
-    implementation 'androidx.legacy:legacy-support-v13:1.0.0-alpha1'
     kapt "androidx.room:room-compiler:2.1.0-alpha02"
     kapt "androidx.lifecycle:lifecycle-compiler:2.0.0"
-
-    // 3rd Party libs
-    implementation 'com.daasuu:EasingInterpolator:1.0.0'
 
     // Test libs
     testImplementation 'junit:junit:4.12'

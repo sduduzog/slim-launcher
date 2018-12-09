@@ -2,7 +2,6 @@ package com.sduduzog.slimlauncher.ui.main.settings
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -33,7 +32,6 @@ class SettingsListAdapter(private val fragment: Fragment) : RecyclerView.Adapter
 
     init {
         viewModel.homeApps.observe(fragment, Observer {
-            Log.d("Adapter", "$it")
             updateApps(it.orEmpty())
         })
     }
@@ -53,7 +51,7 @@ class SettingsListAdapter(private val fragment: Fragment) : RecyclerView.Adapter
             }
             holder.itemButton.visibility = View.GONE
             holder.itemDragger.visibility = View.VISIBLE
-            holder.itemDragger.setOnTouchListener { view, motionEvent ->
+            holder.itemDragger.setOnTouchListener { _, motionEvent ->
                 if (motionEvent.actionMasked == MotionEvent.ACTION_DOWN) {
                     touchHelper.startDrag(holder)
                 }

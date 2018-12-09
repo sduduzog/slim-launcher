@@ -12,7 +12,7 @@ data class Note(
         var body: String,
         @field:ColumnInfo(name = "edited")
         var edited: Long
-): Serializable {
+) : Serializable {
     @field:ColumnInfo(name = "id")
     @PrimaryKey(autoGenerate = true)
     var id: Int? = null

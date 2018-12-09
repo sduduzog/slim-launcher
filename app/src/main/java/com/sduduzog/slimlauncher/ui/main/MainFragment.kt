@@ -1,6 +1,5 @@
 package com.sduduzog.slimlauncher.ui.main
 
-import android.animation.ObjectAnimator
 import android.content.*
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -8,7 +7,6 @@ import android.os.Bundle
 import android.provider.AlarmClock
 import android.provider.MediaStore
 import android.provider.Settings
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,8 +15,6 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
-import com.daasuu.ei.Ease
-import com.daasuu.ei.EasingInterpolator
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPSED
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_HALF_EXPANDED
@@ -31,9 +27,6 @@ import java.util.*
 
 
 class MainFragment : Fragment(), MainActivity.OnBackPressedListener {
-
-    @Suppress("PropertyName")
-    val TAG: String = "MainFragment"
 
     private lateinit var receiver: BroadcastReceiver
     private lateinit var sheetBehavior: BottomSheetBehavior<FrameLayout>
@@ -115,7 +108,7 @@ class MainFragment : Fragment(), MainActivity.OnBackPressedListener {
                     val intent = Intent(Intent.ACTION_DIAL)
                     startActivity(intent)
                 } catch (e: Exception) {
-                    Log.e(TAG, e.message)
+                    // Do nothing
                 }
             }
         }
@@ -125,7 +118,7 @@ class MainFragment : Fragment(), MainActivity.OnBackPressedListener {
                     val intent = Intent(Intent.ACTION_DIAL, null)
                     startActivity(intent)
                 } catch (e: ActivityNotFoundException) {
-                    Log.e(TAG, "$e")
+                    // Do nothing
                 }
             }
             true
@@ -139,7 +132,7 @@ class MainFragment : Fragment(), MainActivity.OnBackPressedListener {
                 val intent = Intent(MediaStore.INTENT_ACTION_STILL_IMAGE_CAMERA)
                 startActivity(intent)
             } catch (e: Exception) {
-                Log.e(TAG, e.message)
+                // Do nothing
             }
         }
     }
@@ -174,7 +167,6 @@ class MainFragment : Fragment(), MainActivity.OnBackPressedListener {
             goToMarket.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT)
             try {
                 startActivity(goToMarket)
-                Log.d(TAG, goToMarket.data?.query)
             } catch (e: ActivityNotFoundException) {
                 startActivity(Intent(Intent.ACTION_VIEW,
                         Uri.parse("http://play.google.com/store/apps/details?id=" + context?.packageName)))
@@ -194,12 +186,9 @@ class MainFragment : Fragment(), MainActivity.OnBackPressedListener {
     }
 
     private fun doBounceAnimation(targetView: View) {
-        val animator = ObjectAnimator.ofFloat(targetView, "translationY", 0f, -20f, 0f)
-        animator.interpolator = EasingInterpolator(Ease.QUINT_OUT)
-        animator.startDelay = 1000
-        animator.duration = 1000
-        animator.repeatCount = 1
-        animator.start()
+        targetView.animate().translationYBy(-20f).withEndAction {
+            targetView.animate().translationYBy(20f).duration = 300
+        }.duration = 100
     }
 
     fun updateUi() {
