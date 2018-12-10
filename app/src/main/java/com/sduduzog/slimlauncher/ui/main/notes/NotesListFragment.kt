@@ -63,7 +63,7 @@ class NotesListFragment : Fragment() {
     private fun showFabAnimation(targetView: View) {
         targetView.scaleX = 0f
         targetView.scaleY = 0f
-        targetView.animate().scaleY(1f).scaleX(1f).duration = 1000
+        targetView.animate().scaleY(1f).scaleX(1f).duration = 100
         // Animate fab
     }
 }

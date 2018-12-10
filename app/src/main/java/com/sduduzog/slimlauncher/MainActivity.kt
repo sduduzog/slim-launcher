@@ -51,10 +51,10 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
     }
 
     override fun onBackPressed() {
+        onBackPressedListener?.onBackPressed()
         if (currentLabel != label)
             super.onBackPressed()
         else onBackPressedListener?.onBackPress()
-        onBackPressedListener?.onBackPressed()
     }
 
     override fun onNavigated(controller: NavController, destination: NavDestination) {

@@ -186,8 +186,12 @@ class MainFragment : Fragment(), MainActivity.OnBackPressedListener {
     }
 
     private fun doBounceAnimation(targetView: View) {
-        targetView.animate().translationYBy(-20f).withEndAction {
-            targetView.animate().translationYBy(20f).duration = 300
+        targetView.animate()
+                .setStartDelay(500)
+                .translationYBy(-20f).withEndAction {
+            targetView.animate()
+                    .setStartDelay(0)
+                    .translationYBy(20f).duration = 100
         }.duration = 100
     }
 
