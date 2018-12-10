@@ -3,7 +3,6 @@ package com.sduduzog.slimlauncher.ui.main.notes
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -84,7 +83,6 @@ class NoteFragment : Fragment(), MainActivity.OnBackPressedListener {
     }
 
     override fun onBackPressed() {
-        Log.d("NoteFragment", "on back pressed")
         saveNote()
     }
 
