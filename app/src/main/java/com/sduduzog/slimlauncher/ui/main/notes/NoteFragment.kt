@@ -10,6 +10,7 @@ import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.sduduzog.slimlauncher.MainActivity
+import com.sduduzog.slimlauncher.Observer
 import com.sduduzog.slimlauncher.R
 import com.sduduzog.slimlauncher.data.Note
 import com.sduduzog.slimlauncher.ui.main.DoubleClickListener
@@ -18,7 +19,7 @@ import java.security.MessageDigest
 import java.util.*
 
 
-class NoteFragment : Fragment(), MainActivity.OnBackPressedListener {
+class NoteFragment : Fragment(), Observer {
 
     private lateinit var note: Note
     private lateinit var viewModel: NotesViewModel
@@ -74,15 +75,18 @@ class NoteFragment : Fragment(), MainActivity.OnBackPressedListener {
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         with(context as MainActivity) {
-            this.onBackPressedListener = this@NoteFragment
+            this.dispatcher.attachObserver(this@NoteFragment)
         }
     }
 
-    override fun onBackPress() {
-        // Do nothing
+    override fun onDetach() {
+        super.onDetach()
+        with(context as MainActivity) {
+            this.dispatcher.detachObserver(this@NoteFragment)
+        }
     }
 
-    override fun onBackPressed() {
+    override fun update(on: String) {
         saveNote()
     }
 

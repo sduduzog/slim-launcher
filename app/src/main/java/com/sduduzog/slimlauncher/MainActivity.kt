@@ -21,6 +21,26 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
     private lateinit var navigator: NavController
     var onBackPressedListener: OnBackPressedListener? = null
 
+
+    var dispatcher: Subject = object : Subject() {
+
+        var observers: MutableSet<Observer> = mutableSetOf()
+        override fun attachObserver(o: Observer) {
+            observers.add(o)
+        }
+
+        override fun detachObserver(o: Observer) {
+            observers.remove(o)
+        }
+
+        override fun notifyObservers() {
+            for (o in observers) {
+                o.update("onBackPressed")
+            }
+        }
+
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
@@ -51,7 +71,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
     }
 
     override fun onBackPressed() {
-        onBackPressedListener?.onBackPressed()
+        dispatcher.notifyObservers()
         if (currentLabel != label)
             super.onBackPressed()
         else onBackPressedListener?.onBackPress()
