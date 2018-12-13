@@ -108,7 +108,7 @@
     <string name="setup_note_camera">3. Press the camera icon to launch the default camera app</string>
     <string name="setup_note_dialer">2. Press the dialer icon to open the default dialer</string>
     <string name="screenshot_nav">Nav screenshot</string>
-    <string name="setup_dialer_note2">2. Press the dialer icon to open the built-in dialer. Press and hold, open the default</string>
+    <string name="setup_dialer_note2">2. Press the dialer icon to open the built-in dialer(experimental). Press and hold, open the default</string>
     <string name="setup_your_home_screen">Your home screen</string>
     <string name="setup_screen_description">
         "This is what your home screen will look like.\n\n"
