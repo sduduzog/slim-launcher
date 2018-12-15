@@ -2,7 +2,7 @@
 
 Android minimalistic launcher
 
-[Get it here](https://play.google.com/apps//details?id=com.sduduzog.slimlauncher)
+[Get it here](https://play.google.com/store/apps/details?id=com.sduduzog.slimlauncher)
 
 or get the latest unreleased [beta version](https://play.google.com/apps/testing/com.sduduzog.slimlauncher)
 
