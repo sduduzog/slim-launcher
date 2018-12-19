@@ -29,7 +29,7 @@ class DBTest {
 
     @Before
     fun createDb() {
-        val context = InstrumentationRegistry.getInstrumentation().context
+        val context = InstrumentationRegistry.getInstrumentation().targetContext
         mDb = Room.inMemoryDatabaseBuilder(context, DataRoomDatabase::class.java).build()
         mAppDao = mDb!!.appDao()
     }
