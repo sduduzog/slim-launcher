@@ -1,9 +1,11 @@
 package com.sduduzog.slimlauncher
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.lifecycle.Observer
 import androidx.room.Room
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import androidx.test.platform.app.InstrumentationRegistry
+import com.sduduzog.slimlauncher.data.App
 import com.sduduzog.slimlauncher.data.AppDao
 import com.sduduzog.slimlauncher.data.DataRoomDatabase
 import org.hamcrest.CoreMatchers.equalTo
@@ -13,6 +15,8 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import java.util.concurrent.CountDownLatch
+import java.util.concurrent.TimeUnit
 
 @RunWith(AndroidJUnit4ClassRunner::class)
 class DBTest {
@@ -27,7 +31,7 @@ class DBTest {
     fun createDb() {
         val context = InstrumentationRegistry.getInstrumentation().context
         mDb = Room.inMemoryDatabaseBuilder(context, DataRoomDatabase::class.java).build()
-        mAppDao = mDb?.appDao()
+        mAppDao = mDb!!.appDao()
     }
 
     @After
@@ -38,9 +42,23 @@ class DBTest {
     @Test
     @Throws(InterruptedException::class)
     fun testInsertLiveDataApps() {
-        val app = TestUtil.createApp("TestApp", "com.test.test.app", "TestMainActivity")
-        mAppDao?.insert(app)
-        val appsInstalled = LiveDataTestUtil.getValue(mAppDao!!.apps)
+        val app = App("TestApp", "com.test.test.app", "TestMainActivity")
+        mAppDao!!.insert(app)
+
+        var appsInstalled: List<App> = listOf()
+
+        val latch = CountDownLatch(1)
+
+        val appsLiveData = mAppDao!!.apps
+
+        val observer = Observer<List<App>> {
+            appsInstalled = it
+            latch.countDown()
+        }
+
+        appsLiveData.observeForever(observer)
+        latch.await(2, TimeUnit.SECONDS)
+        appsLiveData.removeObserver(observer)
         assertThat(appsInstalled.size, equalTo(1))
     }
 }
