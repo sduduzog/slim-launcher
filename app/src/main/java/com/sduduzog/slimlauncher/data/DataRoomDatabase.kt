@@ -28,8 +28,8 @@ abstract class DataRoomDatabase : RoomDatabase() {
                             .addCallback(object : Callback(){
                                 override fun onCreate(db: SupportSQLiteDatabase) {
                                     super.onCreate(db)
-                                    val _db = DataRoomDatabase.getDatabase(context)!!
-                                    val dao = _db.noteDao()
+                                    val database = DataRoomDatabase.getDatabase(context)!!
+                                    val dao = database.noteDao()
                                     PopulateDatabaseTask(dao).execute()
                                 }
                             })

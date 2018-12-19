@@ -2,8 +2,8 @@ package com.sduduzog.slimlauncher
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
-import androidx.test.InstrumentationRegistry
-import androidx.test.runner.AndroidJUnit4
+import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
+import androidx.test.platform.app.InstrumentationRegistry
 import com.sduduzog.slimlauncher.data.AppDao
 import com.sduduzog.slimlauncher.data.DataRoomDatabase
 import org.hamcrest.CoreMatchers.equalTo
@@ -14,7 +14,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
-@RunWith(AndroidJUnit4::class)
+@RunWith(AndroidJUnit4ClassRunner::class)
 class DBTest {
 
     private var mAppDao: AppDao? = null
@@ -25,7 +25,7 @@ class DBTest {
 
     @Before
     fun createDb() {
-        val context = InstrumentationRegistry.getTargetContext()
+        val context = InstrumentationRegistry.getInstrumentation().context
         mDb = Room.inMemoryDatabaseBuilder(context, DataRoomDatabase::class.java).build()
         mAppDao = mDb?.appDao()
     }
