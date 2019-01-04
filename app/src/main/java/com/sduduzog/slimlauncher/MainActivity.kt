@@ -14,6 +14,15 @@ import com.sduduzog.slimlauncher.ui.main.MainViewModel
 
 class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceChangeListener, NavController.OnDestinationChangedListener {
 
+    // TODO: Hide and show status bar (possibly bottom nav too) in preferences
+    // TODO: Click on date, opens calendar app
+    // TODO: Support more devices, screen densities
+
+    // TODO: Setup Wizard redesign to include,
+    // TODO: Have different text sizes, and typefaces
+    // TODO: Move some apps to bottom sheet.
+    // TODO: Clickable apps while in preferences, intuitiveness
+    // TODO: Lock screen on double tap
 
     private lateinit var settings: SharedPreferences
     private val label = "main_fragment"
