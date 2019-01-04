@@ -1,28 +1,49 @@
-# Slim Launcher
+# Slim launcher
 
-Android minimalistic launcher
+> _All you need is less._
 
-[Get it here](https://play.google.com/apps//details?id=com.sduduzog.slimlauncher)
+<style>
+#app-logo{
+  height: 250px;
+  width: 100%;
+  clear: both;
+  object-fit: contain;
+}
 
-or get the latest unreleased [beta version](https://play.google.com/apps/testing/com.sduduzog.slimlauncher)
+#g-badge{
+  height: 50px;
+  float: left
+}
+</style>
+<img id="app-logo" src="docs/assets/ic_launcher-web.png">
 
-The project got inspired by LessPhone [LessPhone](https://play.google.com/store/apps/details?id=me.aswinmohan.nophone) by Aswin Mohan
+<a href="https://play.google.com/apps//details?id=com.sduduzog.slimlauncher">
+<img id="g-badge" src="docs/assets/google-play-badge.png">
+</a>
 
-I liked it so much but I couldn't do with just 3 apps as daily apps so tah-daaa Slim launcher, everyone!
+### Now available for [download](https://play.google.com/apps//details?id=com.sduduzog.slimlauncher) on Google Play
 
-## TODO
+...Or get the latest unreleased [beta version](https://play.google.com/apps/testing/com.sduduzog.slimlauncher).
 
-### Features that I think will make this really cool for the app
+## Background
 
-- quick voice recorder
-- notes app
-- todo list
+This project was inspired by LessPhone [LessPhone](https://play.google.com/store/apps/details?id=me.aswinmohan.nophone) by Aswin Mohan. A launcher I adopted when I descided to take on minimalism as a lifestyle choice. I purged from personal belongings to my digital space. For my phone, I also needed a less distraction solution also, hence **_LessPhone_**. I loved it, _but it worked a little too much_. Do check it out!
 
-### For the project
+**But!** I couldn't do with just 3 apps as daily apps so tah-daaa Slim launcher, everyone! with a couple of bells and whistles.
 
-- Migrate to stable version of android studio for better contribution accessibility
-- Write all tests for the app
+## Milstones
 
-### Contribute
+- [x] Release on Google Play _(release the kraken!)_
+- [x] Variety of themes
+- [x] Clean up README _...continuous_.
+- [] Journal (text and audio)
+- [] Gesture controls for home screen modes
+- [] Tasks (like journal but better)
+- [] Figure out whether to fully adopt Material Design or continue mixing with flat principles. Open an issue...if there is one.
+- [] Tests and README badges **!important;**
+- [] Landing page for the app.
+- [] A tutorial series in how to build an android launcher
 
-- PRs are more than welcome.
+## Contribute
+
+- YES! PRs are more than welcome.
