@@ -95,4 +95,7 @@
     <string name="settings_use_slim_s_built_in_dialer">Use Slim\'s built-in dialer</string>
     <string name="settings_faster_shortcut_to_your_calls">Faster shortcut to your calls</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

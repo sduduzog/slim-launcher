@@ -9,10 +9,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.sduduzog.slimlauncher.R
+import com.sduduzog.slimlauncher.ui.main.StatusBarThemeFragment
 import kotlinx.android.synthetic.main.setup_fragment.*
 
 
-class SetupFragment : Fragment() {
+class SetupFragment : StatusBarThemeFragment() {
 
     private lateinit var onPagerListener: OnPagerListener
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -37,6 +38,8 @@ class SetupFragment : Fragment() {
             }
         }
     }
+
+    override fun getFragmentView(): View = setup_view_pager
 
     inner class SectionsPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 

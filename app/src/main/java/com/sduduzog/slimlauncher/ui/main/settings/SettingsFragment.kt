@@ -1,29 +1,22 @@
 package com.sduduzog.slimlauncher.ui.main.settings
 
 
-import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.graphics.Canvas
-import android.graphics.Color
-import android.os.Build
 import android.os.Bundle
-import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.sduduzog.slimlauncher.R
 import com.sduduzog.slimlauncher.ui.main.OnItemActionListener
-import kotlinx.android.synthetic.main.main_fragment.*
+import com.sduduzog.slimlauncher.ui.main.StatusBarThemeFragment
 import kotlinx.android.synthetic.main.settings_fragment.*
 
 
-class SettingsFragment : Fragment() {
+class SettingsFragment : StatusBarThemeFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -86,32 +79,7 @@ class SettingsFragment : Fragment() {
         initComponents()
     }
 
-    private fun setLightStatusBar(window: Window, view: View) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            val flags = window.decorView.systemUiVisibility or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-            view.systemUiVisibility = flags
-            window.statusBarColor = Color.WHITE
-        }
-    }
-
-    private fun clearLightStatusBar(window: Window, context: Context) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            val value = TypedValue()
-            context.theme.resolveAttribute(R.attr.colorPrimary, value, true)
-            window.statusBarColor = value.data
-        }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        val settings = context!!.getSharedPreferences(getString(R.string.prefs_settings), AppCompatActivity.MODE_PRIVATE)
-        val active = settings.getInt(getString(R.string.prefs_settings_key_theme), 0)
-        if (active == 0) {
-            setLightStatusBar(activity!!.window, settings_fragment)
-        } else {
-            clearLightStatusBar(activity!!.window, context!!)
-        }
-    }
+    override fun getFragmentView(): View = settings_fragment
 
     private fun initComponents() {
         val settings = context!!.getSharedPreferences(getString(R.string.prefs_settings), MODE_PRIVATE)
