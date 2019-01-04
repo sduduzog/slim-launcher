@@ -12,7 +12,8 @@ import androidx.navigation.Navigation.findNavController
 import com.sduduzog.slimlauncher.ui.main.MainViewModel
 
 
-class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceChangeListener, NavController.OnNavigatedListener {
+class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceChangeListener, NavController.OnDestinationChangedListener {
+
 
     private lateinit var settings: SharedPreferences
     private val label = "main_fragment"
@@ -47,7 +48,8 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
         settings = getSharedPreferences(getString(R.string.prefs_settings), MODE_PRIVATE)
         settings.registerOnSharedPreferenceChangeListener(this)
         navigator = findNavController(this, R.id.nav_host_fragment)
-        navigator.addOnNavigatedListener(this)
+//        navigator.addOnNavigatedListener(this) : removed. a breaking change
+        navigator.addOnDestinationChangedListener(this)
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
     }
 
@@ -77,7 +79,10 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
         else onBackPressedListener?.onBackPress()
     }
 
-    override fun onNavigated(controller: NavController, destination: NavDestination) {
+    /**
+     * Make the activity aware of the current destination in our NavController.
+     */
+    override fun onDestinationChanged(controller: NavController, destination: NavDestination, arguments: Bundle?) {
         currentLabel = destination.label.toString()
     }
 
