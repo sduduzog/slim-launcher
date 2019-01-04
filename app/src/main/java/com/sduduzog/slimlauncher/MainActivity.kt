@@ -1,9 +1,16 @@
 package com.sduduzog.slimlauncher
 
+import android.content.Context
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.content.res.Resources
+import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
+import android.util.TypedValue
+import android.view.View
+import android.view.Window
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
@@ -67,6 +74,17 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
         viewModel.refreshApps()
     }
 
+    override fun onResume() {
+        super.onResume()
+//        val isHidden = settings.getBoolean(getString(R.string.prefs_settings_key_hide_status_bar), true)
+//        if (isHidden) {
+//        window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN)
+//        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+//        }
+        val flags = window.decorView.systemUiVisibility or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+        window.decorView.systemUiVisibility = flags
+    }
+
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, s: String?) {
         if (s.equals(getString(R.string.prefs_settings_key_theme), true)) {
             recreate()
@@ -112,6 +130,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
     }
 
     companion object {
+
         fun resolveTheme(i: Int): Int {
             when (i) {
                 1 -> {

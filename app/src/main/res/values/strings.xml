@@ -15,6 +15,7 @@
     <string name="prefs_settings">settings</string>
     <string name="prefs_settings_key_theme">key_theme</string>
     <string name="prefs_settings_key_clock_type">clock_type</string>
+    <string name="prefs_settings_key_hide_status_bar">hide_status_bar</string>
     <string name="prefs_settings_key_app_dialer">app_dialer</string>
     <string name="prefs_settings_key_fresh_install_setup">key_fresh_install_setup</string>
 

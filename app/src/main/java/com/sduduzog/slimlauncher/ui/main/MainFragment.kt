@@ -2,15 +2,20 @@ package com.sduduzog.slimlauncher.ui.main
 
 import android.content.*
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.AlarmClock
 import android.provider.MediaStore
 import android.provider.Settings
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import android.widget.FrameLayout
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -22,6 +27,7 @@ import com.sduduzog.slimlauncher.MainActivity
 import com.sduduzog.slimlauncher.R
 import kotlinx.android.synthetic.main.main_bottom_sheet.*
 import kotlinx.android.synthetic.main.main_content.*
+import kotlinx.android.synthetic.main.main_fragment.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -53,9 +59,31 @@ class MainFragment : Fragment(), MainActivity.OnBackPressedListener {
         doBounceAnimation(ivExpand)
     }
 
+    private fun setLightStatusBar(window: Window, view: View) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val flags = window.decorView.systemUiVisibility or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+            view.systemUiVisibility = flags
+            window.statusBarColor = Color.WHITE
+        }
+    }
+
+    private fun clearLightStatusBar(window: Window, context: Context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val value = TypedValue()
+            context.theme.resolveAttribute(R.attr.colorPrimary, value, true)
+            window.statusBarColor = value.data
+        }
+    }
 
     override fun onResume() {
         super.onResume()
+        val settings = context!!.getSharedPreferences(getString(R.string.prefs_settings), AppCompatActivity.MODE_PRIVATE)
+        val active = settings.getInt(getString(R.string.prefs_settings_key_theme), 0)
+        if (active == 0) {
+            setLightStatusBar(activity!!.window, main)
+        } else {
+            clearLightStatusBar(activity!!.window, context!!)
+        }
         updateUi()
     }
 
@@ -189,10 +217,10 @@ class MainFragment : Fragment(), MainActivity.OnBackPressedListener {
         targetView.animate()
                 .setStartDelay(500)
                 .translationYBy(-20f).withEndAction {
-            targetView.animate()
-                    .setStartDelay(0)
-                    .translationYBy(20f).duration = 100
-        }.duration = 100
+                    targetView.animate()
+                            .setStartDelay(0)
+                            .translationYBy(20f).duration = 100
+                }.duration = 100
     }
 
     fun updateUi() {
