@@ -21,6 +21,9 @@
 
     <!--main package strings-->
 
+    <string name="setup_welcome">Welcome!</string>
+    <string name="setup_welcome2">This is what your home screen will look like. But better! Let\'s get you setup.</string>
+
     <string name="main_slim_options">Slim options</string>
     <string name="main_options_change_theme">Change theme</string>
     <string name="main_options_home_screen_apps">Preferences</string>
@@ -52,7 +55,7 @@
     <string name="main_call_icon">call icon</string>
     <string name="main_photo_camera_icon">photo camera icon</string>
     <string name="setup_button_start">start</string>
-    <string name="setup_text_welcome">Welcome!</string>
+
     <string name="setup_text_lets_get_you_set_up">
     "Lets get you set up!\n Just a few tweaks and your new home screen will be ready for you."
     </string>
@@ -95,7 +98,8 @@
     <string name="settings_use_slim_s_built_in_dialer">Use Slim\'s built-in dialer</string>
     <string name="settings_faster_shortcut_to_your_calls">Faster shortcut to your calls</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Content Description For Image Resources-->
+    <string name="content_description_my_phone">My phone</string>
 
 </resources>

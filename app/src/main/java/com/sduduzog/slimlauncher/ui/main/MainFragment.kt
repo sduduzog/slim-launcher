@@ -3,6 +3,7 @@ package com.sduduzog.slimlauncher.ui.main
 import android.content.*
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.AlarmClock
 import android.provider.MediaStore
@@ -92,7 +93,11 @@ class MainFragment : StatusBarThemeFragment(), MainActivity.OnBackPressedListene
     private fun setEventListeners() {
         clockTextView.setOnClickListener {
             try {
-                val intent = Intent(AlarmClock.ACTION_SHOW_ALARMS)
+                val intent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                    Intent(AlarmClock.ACTION_SHOW_ALARMS)
+                } else {
+                    TODO("VERSION.SDK_INT < KITKAT")
+                }
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
                 startActivity(intent)
             } finally {
@@ -149,7 +154,9 @@ class MainFragment : StatusBarThemeFragment(), MainActivity.OnBackPressedListene
                 val multi = 3 * p1
                 optionsView.alpha = multi
                 optionsView.cardElevation = p1 * 8
-                optionsView.elevation = p1 * 8
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    optionsView.elevation = p1 * 8
+                }
             }
 
             override fun onStateChanged(bottomSheet: View, newState: Int) {
@@ -167,7 +174,9 @@ class MainFragment : StatusBarThemeFragment(), MainActivity.OnBackPressedListene
             val goToMarket = Intent(Intent.ACTION_VIEW, uri)
             goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY or
                     Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
-            goToMarket.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                goToMarket.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT)
+            }
             try {
                 startActivity(goToMarket)
             } catch (e: ActivityNotFoundException) {
@@ -176,7 +185,9 @@ class MainFragment : StatusBarThemeFragment(), MainActivity.OnBackPressedListene
             }
         }
         changeLauncherText.setOnClickListener {
-            startActivity(Intent(Settings.ACTION_HOME_SETTINGS))
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                startActivity(Intent(Settings.ACTION_HOME_SETTINGS))
+            }
         }
         aboutText.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_mainFragment_to_aboutFragment))
 
@@ -184,18 +195,23 @@ class MainFragment : StatusBarThemeFragment(), MainActivity.OnBackPressedListene
             startActivity(Intent(Settings.ACTION_SETTINGS))
         }
         changeLauncherText.setOnClickListener {
-            startActivity(Intent(Settings.ACTION_HOME_SETTINGS))
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                startActivity(Intent(Settings.ACTION_HOME_SETTINGS))
+            }
         }
     }
 
     private fun doBounceAnimation(targetView: View) {
-        targetView.animate()
-                .setStartDelay(500)
-                .translationYBy(-20f).withEndAction {
-                    targetView.animate()
-                            .setStartDelay(0)
-                            .translationYBy(20f).duration = 100
-                }.duration = 100
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            targetView.animate()
+                    .setStartDelay(500)
+                    .translationYBy(-20f).withEndAction {
+                        targetView.animate()
+                                .setStartDelay(0)
+                                .translationYBy(20f).duration = 100
+                    }.duration = 100
+        }
+        // TODO Animations for API level 16
     }
 
     fun updateUi() {

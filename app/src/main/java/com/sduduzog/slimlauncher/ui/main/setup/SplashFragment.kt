@@ -27,32 +27,6 @@ class SplashFragment : PagerHelperFragment() {
         if (!settings.getBoolean(getString(R.string.prefs_settings_key_fresh_install_setup), true)) {
             Navigation.findNavController(splash_fragment).navigate(R.id.action_setupFragment_to_mainFragment2)
         }
-        animateViews()
-    }
-
-    private fun animateViews() {
-        setup_splash_button_start.alpha = 0f
-        setup_splash_button_start.translationX = -100f
-        welcome_text.alpha = 0f
-        welcome_text.translationY = 100f
-        welcome_title.alpha = 0f
-        welcome_title.translationY = 50f
-        cvIcon.alpha = 0f
-        cvIcon.scaleX = 0.5f
-        cvIcon.scaleY = 0.5f
-        cvIcon.animate().alpha(1f)
-                .scaleX(1f)
-                .scaleY(1f)
-                .duration = 2000
-        welcome_title.animate().alpha(1f)
-                .translationYBy(-50f)
-                .setStartDelay(1500).duration = 1000
-        welcome_text.animate().alpha(1f)
-                .translationYBy(-100f)
-                .setStartDelay(2000).duration = 1000
-        setup_splash_button_start.animate().alpha(1f)
-                .translationXBy(100f)
-                .setStartDelay(2500).duration = 1000
     }
 
     companion object {

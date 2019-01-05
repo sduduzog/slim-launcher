@@ -1,16 +1,10 @@
 package com.sduduzog.slimlauncher
 
-import android.content.Context
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.content.res.Resources
-import android.graphics.Color
-import android.os.Build
 import android.os.Bundle
-import android.util.TypedValue
 import android.view.View
-import android.view.Window
-import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController

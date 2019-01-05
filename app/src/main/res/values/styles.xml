@@ -8,7 +8,6 @@
         <item name="colorPrimary">@color/colorWhite</item>
         <item name="colorPrimaryDark">@color/colorWhiteDark</item>
         <item name="android:colorBackground">@color/colorWhite</item>
-        <item name="android:statusBarColor">?android:attr/colorPrimaryDark</item>
     </style>
 
     <style name="AppDarkTheme" parent="@style/Theme.AppCompat.NoActionBar">
@@ -18,7 +17,6 @@
         <item name="android:colorBackground">@color/primaryDarkColor</item>
         <!--<item name="android:statusBarColor">?android:attr/colorPrimaryDark</item>-->
         <item name="android:colorForeground">@color/inverseTextColor</item>
-        <item name="android:statusBarColor">?android:attr/colorPrimary</item>
     </style>
 
     <style name="AppGreyTheme" parent="@style/AppDarkTheme">
@@ -34,7 +32,6 @@
         <item name="colorPrimary">@color/colorCandy</item>
         <item name="colorPrimaryDark">@color/colorCandyDark</item>
         <item name="android:colorBackground">@color/colorCandy</item>
-        <item name="android:statusBarColor">?android:attr/colorPrimary</item>
         <!--<item name="android:statusBarColor">@color/colorCandyDark</item>-->
     </style>
 
