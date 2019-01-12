@@ -13,6 +13,10 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
 import com.sduduzog.slimlauncher.R
 import com.sduduzog.slimlauncher.data.HomeApp
+import androidx.core.content.ContextCompat.startActivity
+import android.app.ActivityOptions
+import androidx.core.app.ActivityOptionsCompat
+
 
 class HomeAppsAdapter(private var fragment: MainFragment)
     : RecyclerView.Adapter<HomeAppsAdapter.ViewHolder>() {
@@ -46,7 +50,12 @@ class HomeAppsAdapter(private var fragment: MainFragment)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED
             intent.component = name
             try {
-                fragment.startActivity(intent)
+                val left = 0
+                val top = 0
+                val width = it.measuredWidth
+                val height = it.measuredHeight
+                val opts = ActivityOptionsCompat.makeClipRevealAnimation(it, left, top, width, height)
+                fragment.startActivity(intent, opts.toBundle())
             } catch (e: ActivityNotFoundException) {
                 Toast.makeText(fragment.context, "${item.appName} seems to be uninstalled, removing from list", Toast.LENGTH_LONG).show()
                 viewModel.deleteApp(item)

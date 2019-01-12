@@ -8,15 +8,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.edit
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.sduduzog.slimlauncher.R
 import com.sduduzog.slimlauncher.ui.main.OnItemActionListener
+import com.sduduzog.slimlauncher.ui.main.StatusBarThemeFragment
 import kotlinx.android.synthetic.main.settings_fragment.*
 
 
-class SettingsFragment : Fragment() {
+class SettingsFragment : StatusBarThemeFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -79,6 +79,8 @@ class SettingsFragment : Fragment() {
         initComponents()
     }
 
+    override fun getFragmentView(): View = settings_fragment
+
     private fun initComponents() {
         val settings = context!!.getSharedPreferences(getString(R.string.prefs_settings), MODE_PRIVATE)
         clockSwitch.isChecked = settings.getBoolean(getString(R.string.prefs_settings_key_clock_type), false)
@@ -92,6 +94,13 @@ class SettingsFragment : Fragment() {
         dialerSwitch.setOnCheckedChangeListener { _, b ->
             settings.edit {
                 putBoolean(getString(R.string.prefs_settings_key_app_dialer), b)
+            }
+        }
+
+        statusBarSwitch.isChecked = settings.getBoolean(getString(R.string.prefs_settings_key_hide_status_bar), false)
+        statusBarSwitch.setOnCheckedChangeListener { _, b ->
+            settings.edit {
+                putBoolean(getString(R.string.prefs_settings_key_hide_status_bar), b)
             }
         }
     }
