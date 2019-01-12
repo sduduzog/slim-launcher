@@ -1,5 +1,6 @@
 package com.sduduzog.slimlauncher.ui.main
 
+import android.annotation.SuppressLint
 import android.content.*
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -8,11 +9,11 @@ import android.os.Bundle
 import android.provider.AlarmClock
 import android.provider.MediaStore
 import android.provider.Settings
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.util.Log
+import android.view.*
 import android.widget.FrameLayout
 import androidx.core.app.ActivityCompat
+import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.ContextCompat
 import androidx.navigation.Navigation
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -31,6 +32,7 @@ class MainFragment : StatusBarThemeFragment(), MainActivity.OnBackPressedListene
 
     private lateinit var receiver: BroadcastReceiver
     private lateinit var sheetBehavior: BottomSheetBehavior<FrameLayout>
+    private val homeClickListener = HomeDoubleClickListener()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
@@ -91,20 +93,45 @@ class MainFragment : StatusBarThemeFragment(), MainActivity.OnBackPressedListene
     }
 
     private fun setEventListeners() {
+
+        main.setOnTouchListener(homeClickListener)
+
+        mainAppsList.setOnTouchListener(homeClickListener)
+
         clockTextView.setOnClickListener {
             try {
                 val intent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                     Intent(AlarmClock.ACTION_SHOW_ALARMS)
                 } else {
-                    TODO("VERSION.SDK_INT < KITKAT")
+                    alternativeClockIntent()
                 }
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                startActivity(intent)
+                val left = 0
+                val top = 0
+                val width = it.measuredWidth
+                val height = it.measuredHeight
+                val opts = ActivityOptionsCompat.makeClipRevealAnimation(it, left, top, width, height)
+                startActivity(intent, opts.toBundle())
             } finally {
                 // Do nothing
             }
         }
 
+        dateTextView.setOnClickListener {
+            try {
+                val intent = Intent(Intent.ACTION_MAIN)
+                intent.addCategory(Intent.CATEGORY_APP_CALENDAR)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                val left = 0
+                val top = 0
+                val width = it.measuredWidth
+                val height = it.measuredHeight
+                val opts = ActivityOptionsCompat.makeClipRevealAnimation(it, left, top, width, height)
+                startActivity(intent, opts.toBundle())
+            } finally {
+                // Do nothing
+            }
+        }
 
         val settings = context!!.getSharedPreferences(getString(R.string.prefs_settings), Context.MODE_PRIVATE)
         val isChecked = settings.getBoolean(getString(R.string.prefs_settings_key_app_dialer), false)
@@ -114,7 +141,12 @@ class MainFragment : StatusBarThemeFragment(), MainActivity.OnBackPressedListene
             } else {
                 try {
                     val intent = Intent(Intent.ACTION_DIAL)
-                    startActivity(intent)
+                    val left = 0
+                    val top = 0
+                    val width = it.measuredWidth
+                    val height = it.measuredHeight
+                    val opts = ActivityOptionsCompat.makeClipRevealAnimation(it, left, top, width, height)
+                    startActivity(intent, opts.toBundle())
                 } catch (e: Exception) {
                     // Do nothing
                 }
@@ -124,7 +156,12 @@ class MainFragment : StatusBarThemeFragment(), MainActivity.OnBackPressedListene
             if (isChecked) {
                 try {
                     val intent = Intent(Intent.ACTION_DIAL, null)
-                    startActivity(intent)
+                    val left = 0
+                    val top = 0
+                    val width = it.measuredWidth
+                    val height = it.measuredHeight
+                    val opts = ActivityOptionsCompat.makeClipRevealAnimation(it, left, top, width, height)
+                    startActivity(intent, opts.toBundle())
                 } catch (e: ActivityNotFoundException) {
                     // Do nothing
                 }
@@ -138,7 +175,12 @@ class MainFragment : StatusBarThemeFragment(), MainActivity.OnBackPressedListene
         ivCamera.setOnClickListener {
             try {
                 val intent = Intent(MediaStore.INTENT_ACTION_STILL_IMAGE_CAMERA)
-                startActivity(intent)
+                val left = 0
+                val top = 0
+                val width = it.measuredWidth
+                val height = it.measuredHeight
+                val opts = ActivityOptionsCompat.makeClipRevealAnimation(it, left, top, width, height)
+                startActivity(intent, opts.toBundle())
             } catch (e: Exception) {
                 // Do nothing
             }
@@ -171,14 +213,14 @@ class MainFragment : StatusBarThemeFragment(), MainActivity.OnBackPressedListene
 
         rateAppText.setOnClickListener {
             val uri = Uri.parse("market://details?id=" + context?.packageName)
-            val goToMarket = Intent(Intent.ACTION_VIEW, uri)
-            goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY or
+            val intent = Intent(Intent.ACTION_VIEW, uri)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY or
                     Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                goToMarket.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT)
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT)
             }
             try {
-                startActivity(goToMarket)
+                startActivity(intent)
             } catch (e: ActivityNotFoundException) {
                 startActivity(Intent(Intent.ACTION_VIEW,
                         Uri.parse("http://play.google.com/store/apps/details?id=" + context?.packageName)))
@@ -201,17 +243,38 @@ class MainFragment : StatusBarThemeFragment(), MainActivity.OnBackPressedListene
         }
     }
 
-    private fun doBounceAnimation(targetView: View) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            targetView.animate()
-                    .setStartDelay(500)
-                    .translationYBy(-20f).withEndAction {
-                        targetView.animate()
-                                .setStartDelay(0)
-                                .translationYBy(20f).duration = 100
-                    }.duration = 100
+    private fun alternativeClockIntent(): Intent {
+        val alarmClockIntent = Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LAUNCHER)
+
+// Verify clock implementation
+        val clockImpls = arrayOf(arrayOf("HTC Alarm Clock", "com.htc.android.worldclock", "com.htc.android.worldclock.WorldClockTabControl"), arrayOf("Standar Alarm Clock", "com.android.deskclock", "com.android.deskclock.AlarmClock"), arrayOf("Froyo Nexus Alarm Clock", "com.google.android.deskclock", "com.android.deskclock.DeskClock"), arrayOf("Moto Blur Alarm Clock", "com.motorola.blur.alarmclock", "com.motorola.blur.alarmclock.AlarmClock"), arrayOf("Samsung Galaxy Clock", "com.sec.android.app.clockpackage", "com.sec.android.app.clockpackage.ClockPackage"), arrayOf("Sony Ericsson Xperia Z", "com.sonyericsson.organizer", "com.sonyericsson.organizer.Organizer_WorldClock"), arrayOf("ASUS Tablets", "com.asus.deskclock", "com.asus.deskclock.DeskClock"))
+
+        var foundClockImpl = false
+
+        for (i in clockImpls.indices) {
+            val packageName = clockImpls[i][1]
+            val className = clockImpls[i][2]
+            val cn = ComponentName(packageName, className)
+            alarmClockIntent.component = cn
+            foundClockImpl = true
         }
-        // TODO Animations for API level 16
+
+        if (!foundClockImpl) {
+            throw Exception()
+        }
+        return alarmClockIntent
+
+    }
+
+    private fun doBounceAnimation(targetView: View) {
+        targetView.animate()
+                .setStartDelay(500)
+                .translationYBy(-20f).withEndAction {
+                    targetView.animate()
+                            .setStartDelay(0)
+                            .translationYBy(20f).duration = 100
+                }.duration = 100
+
     }
 
     fun updateUi() {
@@ -244,6 +307,22 @@ class MainFragment : StatusBarThemeFragment(), MainActivity.OnBackPressedListene
     inner class ClockReceiver : BroadcastReceiver() {
         override fun onReceive(ctx: Context?, intent: Intent?) {
             updateUi()
+        }
+    }
+
+    inner class HomeDoubleClickListener : View.OnTouchListener {
+
+        private val gestureDetector = GestureDetector(context, object : GestureDetector.SimpleOnGestureListener() {
+            override fun onDoubleTap(e: MotionEvent?): Boolean {
+                Log.d("MAIN", "double click")
+                return super.onDoubleTap(e)
+            }
+        })
+
+        @SuppressLint("ClickableViewAccessibility")
+        override fun onTouch(p0: View?, p1: MotionEvent?): Boolean {
+            gestureDetector.onTouchEvent(p1)
+            return true
         }
     }
 

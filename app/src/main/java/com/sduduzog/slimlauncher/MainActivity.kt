@@ -15,13 +15,9 @@ import com.sduduzog.slimlauncher.ui.main.MainViewModel
 
 class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceChangeListener, NavController.OnDestinationChangedListener {
 
-    // TODO: Hide and show status bar (possibly bottom nav too) in preferences
-    // TODO: Click on date, opens calendar app
-
-    // TODO: Setup Wizard redesign to include,
-    // TODO: Move some apps to bottom sheet.
     // TODO: Clickable apps while in preferences, intuitiveness
     // TODO: Lock screen on double tap
+    // TODO: Move some apps to bottom sheet.
 
     private lateinit var settings: SharedPreferences
     private val label = "main_fragment"
@@ -67,6 +63,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
 
     override fun onResume() {
         super.onResume()
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         toggleStatusBar()
     }
 

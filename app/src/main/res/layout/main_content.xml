@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:text="@string/main_placeholder_clock"
         android:layout_marginTop="@dimen/_64sdp"
-        android:textSize="@dimen/_38sdp"
+        android:textSize="@dimen/_40ssp"
         app:layout_constraintBottom_toTopOf="@+id/dateTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -50,6 +50,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
@@ -64,7 +65,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="@dimen/_135sdp" />
+        app:layout_constraintGuide_begin="@dimen/_140sdp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
