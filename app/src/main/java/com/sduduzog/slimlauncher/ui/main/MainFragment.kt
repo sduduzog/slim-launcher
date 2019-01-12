@@ -9,7 +9,6 @@ import android.os.Bundle
 import android.provider.AlarmClock
 import android.provider.MediaStore
 import android.provider.Settings
-import android.util.Log
 import android.view.*
 import android.widget.FrameLayout
 import androidx.core.app.ActivityCompat
@@ -94,8 +93,7 @@ class MainFragment : StatusBarThemeFragment(), MainActivity.OnBackPressedListene
 
     private fun setEventListeners() {
 
-        main.setOnTouchListener(homeClickListener)
-
+        main.setOnClickListener(homeClickListener)
         mainAppsList.setOnTouchListener(homeClickListener)
 
         clockTextView.setOnClickListener {
@@ -310,20 +308,29 @@ class MainFragment : StatusBarThemeFragment(), MainActivity.OnBackPressedListene
         }
     }
 
-    inner class HomeDoubleClickListener : View.OnTouchListener {
+    inner class HomeDoubleClickListener : View.OnTouchListener, DoubleClickListener() {
 
         private val gestureDetector = GestureDetector(context, object : GestureDetector.SimpleOnGestureListener() {
             override fun onDoubleTap(e: MotionEvent?): Boolean {
-                Log.d("MAIN", "double click")
+                performLock()
                 return super.onDoubleTap(e)
             }
         })
 
         @SuppressLint("ClickableViewAccessibility")
         override fun onTouch(p0: View?, p1: MotionEvent?): Boolean {
-            gestureDetector.onTouchEvent(p1)
-            return true
+            return gestureDetector.onTouchEvent(p1)
         }
+
+        override fun onDoubleClick(v: View) {
+            performLock()
+        }
+
+        override fun onSingleClick(v: View) {
+
+        }
+
+        private fun performLock() {}
     }
 
     companion object {
