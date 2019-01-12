@@ -3,6 +3,7 @@ package com.sduduzog.slimlauncher
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.content.res.Resources
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -75,7 +76,11 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
 //        window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN)
 //        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
 //        }
-        val flags = window.decorView.systemUiVisibility or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+        val flags = window.decorView.systemUiVisibility or if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+             View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+        } else {
+            0
+        }
         window.decorView.systemUiVisibility = flags
     }
 

@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="splash_ic_box_size">30dp</dimen>
-    <dimen name="splash_ic_box_marginTop">32dp</dimen>
+    <!--<dimen name="splash_ic_box_size">30dp</dimen>-->
+    <!--<dimen name="splash_ic_box_marginTop">32dp</dimen>-->
 
-    <dimen name="splash_welcome_margin">32dp</dimen>
+    <!--<dimen name="splash_welcome_margin">32dp</dimen>-->
 
-    <dimen name="splash_welcome_font_size">24sp</dimen>
-    <dimen name="splash_welcome_text_font_size">16sp</dimen>
-    <dimen name="splash_welcome_text_width">164dp</dimen>
-    <dimen name="splash_welcome_text_marginTop">90dp</dimen>
-    <dimen name="splash_welcome_text_marginLeft">110dp</dimen>
+    <!--<dimen name="splash_welcome_font_size">24sp</dimen>-->
+    <!--<dimen name="splash_welcome_text_font_size">16sp</dimen>-->
+    <!--<dimen name="splash_welcome_text_width">164dp</dimen>-->
+    <!--<dimen name="splash_welcome_text_marginTop">90dp</dimen>-->
+    <!--<dimen name="splash_welcome_text_marginLeft">110dp</dimen>-->
 
-    <dimen name="splash_phone_width">160dp</dimen>
-    <dimen name="splash_phone_height">113dp</dimen>
-    <dimen name="splash_phone_marginLeft">8dp</dimen>
+    <!--<dimen name="splash_phone_width">160dp</dimen>-->
+    <!--<dimen name="splash_phone_height">113dp</dimen>-->
+    <!--<dimen name="splash_phone_marginLeft">8dp</dimen>-->
+
+    <!--<dimen name="main_clock_marginTop">16dp</dimen>-->
+    <!--<dimen name="main_top_guide_begin">150dp</dimen>-->
+    <dimen name="main_bottom_guide_end">56dp</dimen>
 </resources>

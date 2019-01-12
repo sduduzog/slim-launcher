@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.main.setup.ThemeSetupFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:id="@+id/textView18"
         android:layout_width="wrap_content"
@@ -27,13 +26,14 @@
         android:layout_marginTop="32dp"
         android:clickable="true"
         android:focusable="true"
-        android:src="@drawable/ic_text_fields"
+        app:srcCompat="@drawable/ic_text_fields"
         app:backgroundTint="@color/colorWhite"
         app:fabSize="normal"
         app:layout_constraintEnd_toStartOf="@+id/setup_fab_dark"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView18" />
+        app:layout_constraintTop_toBottomOf="@+id/textView18"
+        android:layout_marginLeft="8dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/setup_fab_dark"
@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:clickable="true"
         android:focusable="true"
-        android:src="@drawable/ic_text_fields"
+        app:srcCompat="@drawable/ic_text_fields"
         android:tint="@color/inverseTextColor"
         app:backgroundTint="@color/primaryDarkColor"
         app:fabSize="normal"
@@ -57,14 +57,15 @@
         android:layout_marginEnd="8dp"
         android:clickable="true"
         android:focusable="true"
-        android:src="@drawable/ic_text_fields"
+        app:srcCompat="@drawable/ic_text_fields"
         android:tint="@color/inverseTextColor"
         app:backgroundTint="@color/colorBlueGrey"
         app:fabSize="normal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/setup_fab_dark"
-        app:layout_constraintTop_toTopOf="@+id/setup_fab_dark" />
+        app:layout_constraintTop_toTopOf="@+id/setup_fab_dark"
+        android:layout_marginRight="8dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/setup_fab_teal"
@@ -73,7 +74,7 @@
         android:layout_marginTop="32dp"
         android:clickable="true"
         android:focusable="true"
-        android:src="@drawable/ic_text_fields"
+        app:srcCompat="@drawable/ic_text_fields"
         app:backgroundTint="@color/colorTeal"
         app:fabSize="normal"
         app:layout_constraintEnd_toStartOf="@+id/setup_fab_candy"
@@ -87,7 +88,7 @@
         android:layout_height="wrap_content"
         android:clickable="true"
         android:focusable="true"
-        android:src="@drawable/ic_text_fields"
+        app:srcCompat="@drawable/ic_text_fields"
         android:tint="@color/inverseTextColor"
         app:backgroundTint="@color/colorCandy"
         app:fabSize="normal"
@@ -102,7 +103,7 @@
         android:layout_height="wrap_content"
         android:clickable="true"
         android:focusable="true"
-        android:src="@drawable/ic_text_fields"
+        app:srcCompat="@drawable/ic_text_fields"
         app:backgroundTint="@color/colorPink"
         app:fabSize="normal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -175,6 +176,7 @@
         android:layout_marginBottom="16dp"
         android:text="@string/setup_button_finish"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginRight="16dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

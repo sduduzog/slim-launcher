@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <dimen name="splash_ic_box_size">90dp</dimen>
-
-    <dimen name="splash_welcome_margin">48dp</dimen>
-    <dimen name="splash_phone_marginLeft">36dp</dimen>
-</resources>

@@ -45,16 +45,7 @@ class SetupFragment : StatusBarThemeFragment() {
 
         override fun getItem(position: Int): Fragment {
             return when (position) {
-                1 -> HomeSetupFragment.newInstance().apply {
-                    this.listener = onPagerListener
-                }
-                2 -> ClockSetupFragment.newInstance().apply {
-                    this.listener = onPagerListener
-                }
-                3 -> DialerSetupFragment.newInstance().apply {
-                    this.listener = onPagerListener
-                }
-                4 -> ThemeSetupFragment.newInstance().apply {
+                1 -> ThemeSetupFragment.newInstance().apply {
                     this.listener = onPagerListener
                 }
                 else -> SplashFragment.newInstance().apply {
