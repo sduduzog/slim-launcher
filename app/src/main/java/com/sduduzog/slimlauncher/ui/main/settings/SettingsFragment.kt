@@ -96,5 +96,12 @@ class SettingsFragment : StatusBarThemeFragment() {
                 putBoolean(getString(R.string.prefs_settings_key_app_dialer), b)
             }
         }
+
+        statusBarSwitch.isChecked = settings.getBoolean(getString(R.string.prefs_settings_key_hide_status_bar), false)
+        statusBarSwitch.setOnCheckedChangeListener { _, b ->
+            settings.edit {
+                putBoolean(getString(R.string.prefs_settings_key_hide_status_bar), b)
+            }
+        }
     }
 }

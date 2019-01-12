@@ -3,7 +3,6 @@ package com.sduduzog.slimlauncher
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.content.res.Resources
-import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -18,10 +17,8 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
 
     // TODO: Hide and show status bar (possibly bottom nav too) in preferences
     // TODO: Click on date, opens calendar app
-    // TODO: Support more devices, screen densities
 
     // TODO: Setup Wizard redesign to include,
-    // TODO: Have different text sizes, and typefaces
     // TODO: Move some apps to bottom sheet.
     // TODO: Clickable apps while in preferences, intuitiveness
     // TODO: Lock screen on double tap
@@ -59,7 +56,6 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
         settings = getSharedPreferences(getString(R.string.prefs_settings), MODE_PRIVATE)
         settings.registerOnSharedPreferenceChangeListener(this)
         navigator = findNavController(this, R.id.nav_host_fragment)
-//        navigator.addOnNavigatedListener(this) : removed. a breaking change
         navigator.addOnDestinationChangedListener(this)
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
     }
@@ -71,22 +67,21 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
 
     override fun onResume() {
         super.onResume()
-//        val isHidden = settings.getBoolean(getString(R.string.prefs_settings_key_hide_status_bar), true)
-//        if (isHidden) {
-//        window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN)
-//        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-//        }
-        val flags = window.decorView.systemUiVisibility or if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-             View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-        } else {
-            0
-        }
-        window.decorView.systemUiVisibility = flags
+        toggleStatusBar()
     }
+
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        if (hasFocus) toggleStatusBar()
+    }
+
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, s: String?) {
         if (s.equals(getString(R.string.prefs_settings_key_theme), true)) {
             recreate()
+        }
+        if (s.equals(getString(R.string.prefs_settings_key_hide_status_bar), true)) {
+            toggleStatusBar()
         }
     }
 
@@ -126,6 +121,26 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
             }
         }// other 'case' lines to check for other
         // permissions this app might request
+    }
+
+    private fun showSystemUI() {
+        window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
+    }
+
+    private fun hideSystemUI() {
+        window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                or View.SYSTEM_UI_FLAG_FULLSCREEN)
+    }
+
+    private fun toggleStatusBar() {
+        val isHidden = settings.getBoolean(getString(R.string.prefs_settings_key_hide_status_bar), false)
+        if (isHidden) {
+            hideSystemUI()
+        } else {
+            showSystemUI()
+        }
     }
 
     companion object {

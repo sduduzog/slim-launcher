@@ -42,6 +42,10 @@
     <string name="settings_text_tap_to_change_app_theme">Choose from a variety of themes</string>
     <string name="settings_text_home_screen_apps">Home screen apps</string>
     <string name="settings_title">Preferences</string>
+    <string name="settings_use_slim_s_built_in_dialer">Use Slim\'s built-in dialer</string>
+    <string name="settings_faster_shortcut_to_your_calls">Faster shortcut to your calls</string>
+    <string name="settings_status_bar_when_switched">When switched on, you can still drag down from the top to reveal it</string>
+    <string name="settings_hide_status_bar">Hide status bar</string>
 
     <string name="settings_list_item_button_set_app">Set app</string>
     <string name="settings_list_item_text">Slot empty</string>
@@ -95,11 +99,10 @@
     <string name="setup_home_screenshot">Screenshot</string>
     <string name="setup_clock_type_text_description">This is also changeable in preferences. Whether you prefer a 12hr clock type or a 24hr clock type</string>
     <string name="setup_clock_type">Clock Type</string>
-    <string name="settings_use_slim_s_built_in_dialer">Use Slim\'s built-in dialer</string>
-    <string name="settings_faster_shortcut_to_your_calls">Faster shortcut to your calls</string>
 
 
     <!-- Content Description For Image Resources-->
     <string name="content_description_my_phone">My phone</string>
+
 
 </resources>
