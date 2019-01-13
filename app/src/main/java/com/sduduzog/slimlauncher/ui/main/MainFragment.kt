@@ -2,7 +2,6 @@ package com.sduduzog.slimlauncher.ui.main
 
 import android.annotation.SuppressLint
 import android.content.*
-import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -11,9 +10,7 @@ import android.provider.MediaStore
 import android.provider.Settings
 import android.view.*
 import android.widget.FrameLayout
-import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityOptionsCompat
-import androidx.core.content.ContextCompat
 import androidx.navigation.Navigation
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPSED
@@ -130,20 +127,16 @@ class MainFragment : StatusBarThemeFragment(), MainActivity.OnBackPressedListene
         val settings = context!!.getSharedPreferences(getString(R.string.prefs_settings), Context.MODE_PRIVATE)
         val isChecked = settings.getBoolean(getString(R.string.prefs_settings_key_app_dialer), false)
         ivCall.setOnClickListener {
-            if (isChecked) {
-                getCallingPermission()
-            } else {
-                try {
-                    val intent = Intent(Intent.ACTION_DIAL)
-                    val left = 0
-                    val top = 0
-                    val width = it.measuredWidth
-                    val height = it.measuredHeight
-                    val opts = ActivityOptionsCompat.makeClipRevealAnimation(it, left, top, width, height)
-                    startActivity(intent, opts.toBundle())
-                } catch (e: Exception) {
-                    // Do nothing
-                }
+            try {
+                val intent = Intent(Intent.ACTION_DIAL)
+                val left = 0
+                val top = 0
+                val width = it.measuredWidth
+                val height = it.measuredHeight
+                val opts = ActivityOptionsCompat.makeClipRevealAnimation(it, left, top, width, height)
+                startActivity(intent, opts.toBundle())
+            } catch (e: Exception) {
+                // Do nothing
             }
         }
         ivCall.setOnLongClickListener {
@@ -299,13 +292,6 @@ class MainFragment : StatusBarThemeFragment(), MainActivity.OnBackPressedListene
         dateTextView.text = fWatchDate.format(date)
     }
 
-    private fun getCallingPermission() {
-        if (ContextCompat.checkSelfPermission(activity!!, android.Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(activity!!, arrayOf(android.Manifest.permission.CALL_PHONE), REQUEST_PHONE_CALL)
-        } else {
-            Navigation.findNavController(main_content).navigate(R.id.action_mainFragment_to_dialerFragment)
-        }
-    }
 
     inner class ClockReceiver : BroadcastReceiver() {
         override fun onReceive(ctx: Context?, intent: Intent?) {
@@ -346,9 +332,5 @@ class MainFragment : StatusBarThemeFragment(), MainActivity.OnBackPressedListene
 //                MakeSlimAdminDialog().show(childFragmentManager, "Admin Dialog")
 //            }
         }
-    }
-
-    companion object {
-        const val REQUEST_PHONE_CALL = 1
     }
 }

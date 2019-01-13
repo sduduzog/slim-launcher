@@ -8,14 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.app.ActivityOptionsCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
 import com.sduduzog.slimlauncher.R
 import com.sduduzog.slimlauncher.data.HomeApp
-import androidx.core.content.ContextCompat.startActivity
-import android.app.ActivityOptions
-import androidx.core.app.ActivityOptionsCompat
 
 
 class HomeAppsAdapter(private var fragment: MainFragment)

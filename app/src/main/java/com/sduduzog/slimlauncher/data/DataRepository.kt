@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
 import android.os.AsyncTask
+import android.util.Log
 import androidx.lifecycle.LiveData
 import com.sduduzog.slimlauncher.BuildConfig
 import java.util.*
@@ -12,7 +13,6 @@ import java.util.*
 class DataRepository(application: Application) {
 
     private val db: DataRoomDatabase = DataRoomDatabase.getDatabase(application)!!
-    private val packageName = application.packageName
     private val appDao: AppDao = db.appDao()
     private val noteDao: NoteDao = db.noteDao()
     private var _apps: LiveData<List<App>> = appDao.apps
@@ -103,18 +103,12 @@ class DataRepository(application: Application) {
     private class RefreshAppsAsyncTask internal constructor(private val mAsyncTaskDao: AppDao) : AsyncTask<PackageManager, Void, Void>() {
 
         override fun doInBackground(vararg params: PackageManager): Void? {
+            mAsyncTaskDao.deleteAll() // Need to find a less expensive way of doing this
             val pm = params[0]
             val main = Intent(Intent.ACTION_MAIN, null)
-
             main.addCategory(Intent.CATEGORY_LAUNCHER)
-
             val activitiesList = pm.queryIntentActivities(main, 0)
-            Collections.sort(activitiesList.filter {
-
-                it.activityInfo.packageName != BuildConfig.APPLICATION_ID
-            },
-                    ResolveInfo.DisplayNameComparator(pm))
-            mAsyncTaskDao.deleteAll() // Need to find a less expensive way of doing this
+            Collections.sort(activitiesList, ResolveInfo.DisplayNameComparator(pm))
             for (i in activitiesList.indices) {
                 val item = activitiesList[i]
                 val activity = item.activityInfo

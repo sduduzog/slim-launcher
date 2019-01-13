@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package com.sduduzog.slimlauncher.ui.main
 
 import android.app.AlertDialog

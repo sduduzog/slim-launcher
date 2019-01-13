@@ -11,7 +11,6 @@ import androidx.navigation.Navigation
 import com.sduduzog.slimlauncher.R
 import com.sduduzog.slimlauncher.data.App
 import com.sduduzog.slimlauncher.ui.main.MainViewModel
-import kotlinx.android.synthetic.main.home_setup_fragment.*
 import kotlinx.android.synthetic.main.splash_fragment.*
 
 class SplashFragment : PagerHelperFragment(), ChooseAppsDialog.Companion.OnChooseAppsListener {

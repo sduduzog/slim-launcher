@@ -30,7 +30,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp" />
 
     <Button
         android:id="@+id/item_button"
@@ -43,7 +45,8 @@
         android:text="@string/settings_list_item_button_set_app"
         app:layout_constraintBottom_toBottomOf="@+id/item_text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/item_text" />
+        app:layout_constraintTop_toTopOf="@+id/item_text"
+        android:layout_marginRight="8dp" />
 
     <ImageView
         android:id="@+id/item_dragger"
@@ -58,6 +61,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_drag_handle" />
+        app:srcCompat="@drawable/ic_drag_handle"
+        android:layout_marginRight="8dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

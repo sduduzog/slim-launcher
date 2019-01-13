@@ -49,7 +49,6 @@
 
     <string name="settings_list_item_button_set_app">Set app</string>
     <string name="settings_list_item_text">Slot empty</string>
-    <string name="settings_list_item_subtext">Swipe left/right to remove an app. Drag handlebars to reorder. Long press to rename</string>
     <string name="settings_button_change_theme">Change</string>
     <string name="about_title">Slim launcher</string>
     <string name="about_text">
@@ -60,11 +59,6 @@
     <string name="main_photo_camera_icon">photo camera icon</string>
     <string name="setup_button_start">start</string>
 
-    <string name="setup_text_lets_get_you_set_up">
-    "Lets get you set up!\n Just a few tweaks and your new home screen will be ready for you."
-    </string>
-
-    <string name="setup_button_next">next</string>
     <string name="setup_button_finish">Finish</string>
 
     <string name="no_app_selected_toast_msg">Choose at least one app</string>
@@ -73,7 +67,6 @@
 
     <string name="notes_date_placeholder">Edited at %s</string>
 
-    <string name="dialer_chevron">deleter</string>
     <string name="settings_item_icon_drag_handler">Dragger</string>
 
     <string name="setup_choose_theme">Choose Theme</string>
@@ -83,22 +76,6 @@
     <string name="setup_text_teal">Teal</string>
     <string name="setup_text_candy">Candy</string>
     <string name="setup_text_pastel">Pastel</string>
-    <string name="setup_we_re_almost_done">We\'re almost done!</string>
-    <string name="setup_expand_note">1. To open Slim options, click the arrow or swipe upwards from it.</string>
-    <string name="setup_note_camera">3. Press the camera icon to launch the default camera app</string>
-    <string name="setup_note_dialer">2. Press the dialer icon to open the default dialer</string>
-    <string name="screenshot_nav">Nav screenshot</string>
-    <string name="setup_dialer_note2">2. Press the dialer icon to open the built-in dialer(experimental). Press and hold, open the default</string>
-    <string name="setup_your_home_screen">Your home screen</string>
-    <string name="setup_screen_description">
-        "This is what your home screen will look like.\n\n"
-        "You should pick five of the apps you use the most.\n\n"
-        "You can later change them in Preferences."
-    </string>
-    <string name="setup_choose_apps">Choose apps</string>
-    <string name="setup_home_screenshot">Screenshot</string>
-    <string name="setup_clock_type_text_description">This is also changeable in preferences. Whether you prefer a 12hr clock type or a 24hr clock type</string>
-    <string name="setup_clock_type">Clock Type</string>
 
 
     <!-- Content Description For Image Resources-->

@@ -41,15 +41,9 @@ class SetupFragmentTest {
     @Test
     fun isAlertDialogShown() {
         val appCompatButton = onView(
-                allOf(withId(R.id.setup_splash_button_start),
-                        withText(R.string.setup_button_start), isDisplayed()))
+                allOf(withText(R.string.setup_button_start), isDisplayed()))
         appCompatButton.perform(click())
 
-        val chooseAppsButton = onView(allOf(withText(R.string.setup_choose_apps)))
-
-        chooseAppsButton.check(matches(isDisplayed()))
-
-        chooseAppsButton.perform(click())
 
         val frameLayout = onView(
                 allOf(withId(android.R.id.content), isDisplayed()))
@@ -67,44 +61,13 @@ class SetupFragmentTest {
     }
 
     @Test
-    fun pressingStartShouldNavigateToChoosingHomeScreenApps() {
-        val startButton = onView(allOf(withText(R.string.setup_button_start), isDisplayed()))
-        startButton.perform(click())
-
-        val chooseAppsButton = onView(allOf(withText(R.string.setup_choose_apps)))
-
-        chooseAppsButton.check(matches(isDisplayed()))
-
-        chooseAppsButton.perform(click())
-
-        val frameLayout = onView(
-                allOf(withId(android.R.id.content), isDisplayed()))
-        frameLayout.check(matches(isDisplayed()))
-
-        val alertDialogTitle = onView(
-                allOf(withText(R.string.choose_apps_title)))
-
-
-        alertDialogTitle.check(matches(isDisplayed()))
-    }
-
-    @Test
     fun noAppsSelected() {
         val startButton = onView(allOf(withText(R.string.setup_button_start)))
         startButton.perform(click())
 
-        val chooseAppsButton = onView(allOf(withText(R.string.setup_choose_apps)))
-        chooseAppsButton.check(matches(isDisplayed()))
-
-        chooseAppsButton.perform(click())
-
         val appCompatButton2 = onView(
                 allOf(withText("DONE")))
         appCompatButton2.perform(ViewActions.scrollTo(), click())
-
-        val viewGroup = onView(
-                allOf(withId(R.id.home_setup_fragment), isDisplayed()))
-        viewGroup.check(matches(isDisplayed()))
 
         onView(withText(R.string.no_app_selected_toast_msg)).inRoot(
                 RootMatchers.withDecorView(Matchers.not(Matchers.`is`(mActivityTestRule.activity.window.decorView))))
