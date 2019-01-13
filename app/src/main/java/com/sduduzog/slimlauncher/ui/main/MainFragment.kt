@@ -229,9 +229,10 @@ class MainFragment : StatusBarThemeFragment(), MainActivity.OnBackPressedListene
     }
 
     private fun alternativeClockIntent(): Intent {
+        var intent = Intent()
         val alarmClockIntent = Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LAUNCHER)
         val pm = activity!!.packageManager
-// Verify clock implementation
+
         val clockImpls = arrayOf(arrayOf("HTC Alarm Clock", "com.htc.android.worldclock", "com.htc.android.worldclock.WorldClockTabControl"), arrayOf("Standar Alarm Clock", "com.android.deskclock", "com.android.deskclock.AlarmClock"), arrayOf("Froyo Nexus Alarm Clock", "com.google.android.deskclock", "com.android.deskclock.DeskClock"), arrayOf("Moto Blur Alarm Clock", "com.motorola.blur.alarmclock", "com.motorola.blur.alarmclock.AlarmClock"), arrayOf("Samsung Galaxy Clock", "com.sec.android.app.clockpackage", "com.sec.android.app.clockpackage.ClockPackage"), arrayOf("Sony Ericsson Xperia Z", "com.sonyericsson.organizer", "com.sonyericsson.organizer.Organizer_WorldClock"), arrayOf("ASUS Tablets", "com.asus.deskclock", "com.asus.deskclock.DeskClock"))
 
         var foundClockImpl = false
@@ -241,12 +242,14 @@ class MainFragment : StatusBarThemeFragment(), MainActivity.OnBackPressedListene
             val className = clockImpls[i][2]
             val cn = ComponentName(packageName, className)
             alarmClockIntent.component = cn
-            if (alarmClockIntent.resolveActivity(pm) != null)
+            if (alarmClockIntent.resolveActivity(pm) != null) {
                 foundClockImpl = true
+                intent = alarmClockIntent
+            }
         }
 
         return if (foundClockImpl) {
-            alarmClockIntent
+            intent
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             val i = Intent(AlarmClock.ACTION_SHOW_ALARMS)
             if (alarmClockIntent.resolveActivity(pm) != null) {
