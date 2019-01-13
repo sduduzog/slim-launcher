@@ -254,12 +254,12 @@ class MainFragment : StatusBarThemeFragment(), MainActivity.OnBackPressedListene
                 foundClockImpl = true
         }
 
-        if (!foundClockImpl) {
-            throw Exception()
+        return if (foundClockImpl) {
+            alarmClockIntent
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             val i = Intent(AlarmClock.ACTION_SHOW_ALARMS)
             if (alarmClockIntent.resolveActivity(pm) != null) {
-                return i
+                i
             } else {
                 throw Exception("No clock activity found for the intent")
             }
