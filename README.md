@@ -2,7 +2,6 @@
 
 > _All you need is less._
 
-</style>
 <img id="app-logo" src="docs/assets/ic_launcher-web.png">
 
 ## Now available on Google Play[![Google Play badge](docs/assets/google-play-badge.png)](https://play.google.com/store/apps/details?id=com.sduduzog.slimlauncher)
