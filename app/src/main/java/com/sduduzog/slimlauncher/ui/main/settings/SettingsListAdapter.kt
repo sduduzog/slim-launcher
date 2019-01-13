@@ -60,7 +60,7 @@ class SettingsListAdapter(private val fragment: Fragment) : RecyclerView.Adapter
             }
 
             holder.itemView.setOnClickListener {
-                val snackbar = Snackbar.make(it, "You're still in preferences, silly. Go back to the main screen to start this app", Snackbar.LENGTH_LONG)
+                val snackbar = Snackbar.make(it, "You're still in preferences, silly. Go back to the home screen to start this app", Snackbar.LENGTH_LONG)
                 snackbar.show()
             }
 

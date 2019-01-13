@@ -126,8 +126,6 @@ class MainFragment : StatusBarThemeFragment(), MainActivity.OnBackPressedListene
             }
         }
 
-        val settings = context!!.getSharedPreferences(getString(R.string.prefs_settings), Context.MODE_PRIVATE)
-        val isChecked = settings.getBoolean(getString(R.string.prefs_settings_key_app_dialer), false)
         ivCall.setOnClickListener {
             try {
                 val intent = Intent(Intent.ACTION_DIAL)
@@ -142,18 +140,16 @@ class MainFragment : StatusBarThemeFragment(), MainActivity.OnBackPressedListene
             }
         }
         ivCall.setOnLongClickListener {
-            if (isChecked) {
-                try {
-                    val intent = Intent(Intent.ACTION_DIAL, null)
-                    val left = 0
-                    val top = 0
-                    val width = it.measuredWidth
-                    val height = it.measuredHeight
-                    val opts = ActivityOptionsCompat.makeClipRevealAnimation(it, left, top, width, height)
-                    startActivity(intent, opts.toBundle())
-                } catch (e: ActivityNotFoundException) {
-                    // Do nothing
-                }
+            try {
+                val intent = Intent(Intent.ACTION_DIAL, null)
+                val left = 0
+                val top = 0
+                val width = it.measuredWidth
+                val height = it.measuredHeight
+                val opts = ActivityOptionsCompat.makeClipRevealAnimation(it, left, top, width, height)
+                startActivity(intent, opts.toBundle())
+            } catch (e: ActivityNotFoundException) {
+                // Do nothing
             }
             true
         }
