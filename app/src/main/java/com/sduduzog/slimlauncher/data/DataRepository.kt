@@ -6,11 +6,13 @@ import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
 import android.os.AsyncTask
 import androidx.lifecycle.LiveData
+import com.sduduzog.slimlauncher.BuildConfig
 import java.util.*
 
 class DataRepository(application: Application) {
 
     private val db: DataRoomDatabase = DataRoomDatabase.getDatabase(application)!!
+    private val packageName = application.packageName
     private val appDao: AppDao = db.appDao()
     private val noteDao: NoteDao = db.noteDao()
     private var _apps: LiveData<List<App>> = appDao.apps
@@ -106,14 +108,17 @@ class DataRepository(application: Application) {
 
             main.addCategory(Intent.CATEGORY_LAUNCHER)
 
-            val launchables = pm.queryIntentActivities(main, 0)
-            Collections.sort(launchables,
+            val activitiesList = pm.queryIntentActivities(main, 0)
+            Collections.sort(activitiesList.filter {
+
+                it.activityInfo.packageName != BuildConfig.APPLICATION_ID
+            },
                     ResolveInfo.DisplayNameComparator(pm))
             mAsyncTaskDao.deleteAll() // Need to find a less expensive way of doing this
-            for (i in launchables.indices) {
-                val item = launchables[i]
+            for (i in activitiesList.indices) {
+                val item = activitiesList[i]
                 val activity = item.activityInfo
-                val app = App(launchables[i].loadLabel(pm).toString(), activity.applicationInfo.packageName, activity.name)
+                val app = App(activitiesList[i].loadLabel(pm).toString(), activity.applicationInfo.packageName, activity.name)
                 mAsyncTaskDao.insert(app)
             }
             return null

@@ -9,7 +9,6 @@ import android.os.Bundle
 import android.provider.AlarmClock
 import android.provider.MediaStore
 import android.provider.Settings
-import android.util.Log
 import android.view.*
 import android.widget.FrameLayout
 import androidx.core.app.ActivityCompat
@@ -94,17 +93,12 @@ class MainFragment : StatusBarThemeFragment(), MainActivity.OnBackPressedListene
 
     private fun setEventListeners() {
 
-        main.setOnTouchListener(homeClickListener)
-
+        main.setOnClickListener(homeClickListener)
         mainAppsList.setOnTouchListener(homeClickListener)
 
         clockTextView.setOnClickListener {
             try {
-                val intent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                    Intent(AlarmClock.ACTION_SHOW_ALARMS)
-                } else {
-                    alternativeClockIntent()
-                }
+                val intent = alternativeClockIntent()
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
                 val left = 0
                 val top = 0
@@ -245,7 +239,7 @@ class MainFragment : StatusBarThemeFragment(), MainActivity.OnBackPressedListene
 
     private fun alternativeClockIntent(): Intent {
         val alarmClockIntent = Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LAUNCHER)
-
+        val pm = activity!!.packageManager
 // Verify clock implementation
         val clockImpls = arrayOf(arrayOf("HTC Alarm Clock", "com.htc.android.worldclock", "com.htc.android.worldclock.WorldClockTabControl"), arrayOf("Standar Alarm Clock", "com.android.deskclock", "com.android.deskclock.AlarmClock"), arrayOf("Froyo Nexus Alarm Clock", "com.google.android.deskclock", "com.android.deskclock.DeskClock"), arrayOf("Moto Blur Alarm Clock", "com.motorola.blur.alarmclock", "com.motorola.blur.alarmclock.AlarmClock"), arrayOf("Samsung Galaxy Clock", "com.sec.android.app.clockpackage", "com.sec.android.app.clockpackage.ClockPackage"), arrayOf("Sony Ericsson Xperia Z", "com.sonyericsson.organizer", "com.sonyericsson.organizer.Organizer_WorldClock"), arrayOf("ASUS Tablets", "com.asus.deskclock", "com.asus.deskclock.DeskClock"))
 
@@ -256,15 +250,24 @@ class MainFragment : StatusBarThemeFragment(), MainActivity.OnBackPressedListene
             val className = clockImpls[i][2]
             val cn = ComponentName(packageName, className)
             alarmClockIntent.component = cn
-            foundClockImpl = true
+            if (alarmClockIntent.resolveActivity(pm) != null)
+                foundClockImpl = true
         }
 
         if (!foundClockImpl) {
             throw Exception()
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            val i = Intent(AlarmClock.ACTION_SHOW_ALARMS)
+            if (alarmClockIntent.resolveActivity(pm) != null) {
+                return i
+            } else {
+                throw Exception("No clock activity found for the intent")
+            }
+        } else {
+            throw Exception("No clock activity found for the intent")
         }
-        return alarmClockIntent
-
     }
+
 
     private fun doBounceAnimation(targetView: View) {
         targetView.animate()
@@ -310,20 +313,29 @@ class MainFragment : StatusBarThemeFragment(), MainActivity.OnBackPressedListene
         }
     }
 
-    inner class HomeDoubleClickListener : View.OnTouchListener {
+    inner class HomeDoubleClickListener : View.OnTouchListener, DoubleClickListener() {
 
         private val gestureDetector = GestureDetector(context, object : GestureDetector.SimpleOnGestureListener() {
             override fun onDoubleTap(e: MotionEvent?): Boolean {
-                Log.d("MAIN", "double click")
+                performLock()
                 return super.onDoubleTap(e)
             }
         })
 
         @SuppressLint("ClickableViewAccessibility")
         override fun onTouch(p0: View?, p1: MotionEvent?): Boolean {
-            gestureDetector.onTouchEvent(p1)
-            return true
+            return gestureDetector.onTouchEvent(p1)
         }
+
+        override fun onDoubleClick(v: View) {
+            performLock()
+        }
+
+        override fun onSingleClick(v: View) {
+
+        }
+
+        private fun performLock() {}
     }
 
     companion object {
