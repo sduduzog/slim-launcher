@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import com.sduduzog.slimlauncher.R
 import com.sduduzog.slimlauncher.data.HomeApp
 import com.sduduzog.slimlauncher.ui.main.MainViewModel
@@ -57,6 +58,12 @@ class SettingsListAdapter(private val fragment: Fragment) : RecyclerView.Adapter
                 }
                 false
             }
+
+            holder.itemView.setOnClickListener {
+                val snackbar = Snackbar.make(it, "You're still in preferences, silly. Go back to the main screen to start this app", Snackbar.LENGTH_LONG)
+                snackbar.show()
+            }
+
             holder.itemView.setOnLongClickListener {
                 RenameAppDialog.rename(app, viewModel).show(fragment.childFragmentManager, "SettingsListAdapter")
                 renamedOnIndex = position

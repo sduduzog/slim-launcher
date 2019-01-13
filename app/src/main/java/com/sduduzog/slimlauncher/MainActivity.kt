@@ -17,7 +17,6 @@ import com.sduduzog.slimlauncher.ui.main.MainViewModel
 
 class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceChangeListener, NavController.OnDestinationChangedListener {
 
-    // TODO: Clickable apps while in preferences, intuitiveness
     // TODO: Move some apps to bottom sheet.
 
     private lateinit var settings: SharedPreferences
