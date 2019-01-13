@@ -96,17 +96,19 @@ class MainFragment : StatusBarThemeFragment(), MainActivity.OnBackPressedListene
         mainAppsList.setOnTouchListener(homeClickListener)
 
         clockTextView.setOnClickListener {
-            try {
-                val intent = alternativeClockIntent()
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                val left = 0
-                val top = 0
-                val width = it.measuredWidth
-                val height = it.measuredHeight
-                val opts = ActivityOptionsCompat.makeClipRevealAnimation(it, left, top, width, height)
-                startActivity(intent, opts.toBundle())
-            } finally {
-                // Do nothing
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                try {
+                    val intent = Intent(AlarmClock.ACTION_SHOW_ALARMS)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                    val left = 0
+                    val top = 0
+                    val width = it.measuredWidth
+                    val height = it.measuredHeight
+                    val opts = ActivityOptionsCompat.makeClipRevealAnimation(it, left, top, width, height)
+                    startActivity(intent, opts.toBundle())
+                } catch (e: ActivityNotFoundException) {
+                    // Do nothing, we've failed :(
+                }
             }
         }
 
@@ -121,8 +123,8 @@ class MainFragment : StatusBarThemeFragment(), MainActivity.OnBackPressedListene
                 val height = it.measuredHeight
                 val opts = ActivityOptionsCompat.makeClipRevealAnimation(it, left, top, width, height)
                 startActivity(intent, opts.toBundle())
-            } finally {
-                // Do nothing
+            } catch (e: ActivityNotFoundException) {
+                // Do nothing, we've failed :(
             }
         }
 
@@ -227,41 +229,6 @@ class MainFragment : StatusBarThemeFragment(), MainActivity.OnBackPressedListene
             }
         }
     }
-
-    private fun alternativeClockIntent(): Intent {
-        var intent = Intent()
-        val alarmClockIntent = Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LAUNCHER)
-        val pm = activity!!.packageManager
-
-        val clockImpls = arrayOf(arrayOf("HTC Alarm Clock", "com.htc.android.worldclock", "com.htc.android.worldclock.WorldClockTabControl"), arrayOf("Standar Alarm Clock", "com.android.deskclock", "com.android.deskclock.AlarmClock"), arrayOf("Froyo Nexus Alarm Clock", "com.google.android.deskclock", "com.android.deskclock.DeskClock"), arrayOf("Moto Blur Alarm Clock", "com.motorola.blur.alarmclock", "com.motorola.blur.alarmclock.AlarmClock"), arrayOf("Samsung Galaxy Clock", "com.sec.android.app.clockpackage", "com.sec.android.app.clockpackage.ClockPackage"), arrayOf("Sony Ericsson Xperia Z", "com.sonyericsson.organizer", "com.sonyericsson.organizer.Organizer_WorldClock"), arrayOf("ASUS Tablets", "com.asus.deskclock", "com.asus.deskclock.DeskClock"))
-
-        var foundClockImpl = false
-
-        for (i in clockImpls.indices) {
-            val packageName = clockImpls[i][1]
-            val className = clockImpls[i][2]
-            val cn = ComponentName(packageName, className)
-            alarmClockIntent.component = cn
-            if (alarmClockIntent.resolveActivity(pm) != null) {
-                foundClockImpl = true
-                intent = alarmClockIntent
-            }
-        }
-
-        return if (foundClockImpl) {
-            intent
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            val i = Intent(AlarmClock.ACTION_SHOW_ALARMS)
-            if (alarmClockIntent.resolveActivity(pm) != null) {
-                i
-            } else {
-                throw Exception("No clock activity found for the intent")
-            }
-        } else {
-            throw Exception("No clock activity found for the intent")
-        }
-    }
-
 
     private fun doBounceAnimation(targetView: View) {
         targetView.animate()
