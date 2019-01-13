@@ -28,7 +28,7 @@ class NoteFragment : Fragment(), Observer {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments.let {
-            note = if (it!!.containsKey("note")) {
+            note = if (it !=null && it.containsKey("note")) {
                 it.get("note") as Note
             } else {
                 Note("", -1L)
