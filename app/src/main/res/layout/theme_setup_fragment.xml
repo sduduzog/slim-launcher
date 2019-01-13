@@ -33,6 +33,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView18"
+        android:contentDescription="@string/setup_text_default"
         android:layout_marginLeft="8dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -42,6 +43,7 @@
         android:clickable="true"
         android:focusable="true"
         app:srcCompat="@drawable/ic_text_fields"
+        android:contentDescription="@string/setup_text_dark"
         android:tint="@color/inverseTextColor"
         app:backgroundTint="@color/primaryDarkColor"
         app:fabSize="normal"
@@ -56,6 +58,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:clickable="true"
+        android:contentDescription="@string/setup_text_jupiter"
         android:focusable="true"
         app:srcCompat="@drawable/ic_text_fields"
         android:tint="@color/inverseTextColor"
@@ -74,6 +77,7 @@
         android:layout_marginTop="32dp"
         android:clickable="true"
         android:focusable="true"
+        android:contentDescription="@string/setup_text_teal"
         app:srcCompat="@drawable/ic_text_fields"
         app:backgroundTint="@color/colorTeal"
         app:fabSize="normal"
@@ -87,6 +91,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
+        android:contentDescription="@string/setup_text_candy"
         android:focusable="true"
         app:srcCompat="@drawable/ic_text_fields"
         android:tint="@color/inverseTextColor"
@@ -107,6 +112,7 @@
         app:backgroundTint="@color/colorPink"
         app:fabSize="normal"
         app:layout_constraintEnd_toEndOf="parent"
+        android:contentDescription="@string/setup_text_pastel"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/setup_fab_candy"
         app:layout_constraintTop_toTopOf="@+id/setup_fab_candy" />

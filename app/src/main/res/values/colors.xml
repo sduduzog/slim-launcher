@@ -14,8 +14,8 @@
     <color name="colorPink">#fce4ec</color>
     <color name="colorPinkDark">#F8BBD0</color>
 
-    <color name="colorTeal">#e0f2f1</color>
-    <color name="colorTealDark">#B2DFDB</color>
+    <color name="colorTeal">#B2DFDB</color>
+    <color name="colorTealDark">#80CBC4</color>
 
     <color name="inverseTextColor">#e0e0e0</color>
     <color name="inverseAccentColor">#607d8b</color>

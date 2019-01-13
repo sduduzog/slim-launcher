@@ -1,6 +1,7 @@
 package com.sduduzog.slimlauncher.ui.main
 
 import android.annotation.SuppressLint
+import android.app.admin.DevicePolicyManager
 import android.content.*
 import android.net.Uri
 import android.os.Build
@@ -17,6 +18,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPS
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_HALF_EXPANDED
 import com.sduduzog.slimlauncher.MainActivity
 import com.sduduzog.slimlauncher.R
+import com.sduduzog.slimlauncher.SlimAdminReceiver
 import kotlinx.android.synthetic.main.main_bottom_sheet.*
 import kotlinx.android.synthetic.main.main_content.*
 import kotlinx.android.synthetic.main.main_fragment.*
@@ -322,15 +324,15 @@ class MainFragment : StatusBarThemeFragment(), MainActivity.OnBackPressedListene
         }
 
         private fun performLock() {
-//            val mComponentName = ComponentName(context!!, SlimAdminReceiver::class.java)
-//            val mDevicePolicyManager = activity!!.getSystemService(
-//                    Context.DEVICE_POLICY_SERVICE) as DevicePolicyManager
-//            val isAdmin = mDevicePolicyManager.isAdminActive(mComponentName)
-//            if (isAdmin) {
-//                mDevicePolicyManager.lockNow()
-//            } else {
-//                MakeSlimAdminDialog().show(childFragmentManager, "Admin Dialog")
-//            }
+            val mComponentName = ComponentName(context!!, SlimAdminReceiver::class.java)
+            val mDevicePolicyManager = activity!!.getSystemService(
+                    Context.DEVICE_POLICY_SERVICE) as DevicePolicyManager
+            val isAdmin = mDevicePolicyManager.isAdminActive(mComponentName)
+            if (isAdmin) {
+                mDevicePolicyManager.lockNow()
+            } else {
+                MakeSlimAdminDialog().show(childFragmentManager, "Admin Dialog")
+            }
         }
     }
 }
