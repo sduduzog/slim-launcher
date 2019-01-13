@@ -335,7 +335,17 @@ class MainFragment : StatusBarThemeFragment(), MainActivity.OnBackPressedListene
 
         }
 
-        private fun performLock() {}
+        private fun performLock() {
+//            val mComponentName = ComponentName(context!!, SlimAdminReceiver::class.java)
+//            val mDevicePolicyManager = activity!!.getSystemService(
+//                    Context.DEVICE_POLICY_SERVICE) as DevicePolicyManager
+//            val isAdmin = mDevicePolicyManager.isAdminActive(mComponentName)
+//            if (isAdmin) {
+//                mDevicePolicyManager.lockNow()
+//            } else {
+//                MakeSlimAdminDialog().show(childFragmentManager, "Admin Dialog")
+//            }
+        }
     }
 
     companion object {
