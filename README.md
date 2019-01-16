@@ -1,11 +1,11 @@
 # Slim launcher
-
 > _All you need is less._
 
-</style>
-<img id="app-logo" src="docs/assets/ic_launcher-web.png">
+![Slim Launcher Logo](docs/assets/ic_launcher-web.png)
 
-## Now available on Google Play[![Google Play badge](docs/assets/google-play-badge.png)](https://play.google.com/store/apps/details?id=com.sduduzog.slimlauncher)
+**Now available on Google Play!**
+
+[![Google Play badge](docs/assets/google-play-badge.png)](https://play.google.com/store/apps/details?id=com.sduduzog.slimlauncher)
 
 ## Background
 
@@ -13,7 +13,7 @@ This project was inspired by LessPhone [LessPhone](https://play.google.com/store
 
 **But!** I couldn't do with just 3 apps as daily apps so tah-daaa Slim launcher, everyone! with a couple of bells and whistles.
 
-## Milstones
+## Milestones
 
 - [x] Release on Google Play _(release the kraken!)_
 - [x] Variety of themes
