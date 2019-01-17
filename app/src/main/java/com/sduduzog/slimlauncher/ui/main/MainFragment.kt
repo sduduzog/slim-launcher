@@ -1,7 +1,5 @@
 package com.sduduzog.slimlauncher.ui.main
 
-import android.annotation.SuppressLint
-import android.app.admin.DevicePolicyManager
 import android.content.*
 import android.net.Uri
 import android.os.Build
@@ -9,7 +7,9 @@ import android.os.Bundle
 import android.provider.AlarmClock
 import android.provider.MediaStore
 import android.provider.Settings
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.core.app.ActivityOptionsCompat
 import androidx.navigation.Navigation
@@ -18,7 +18,6 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPS
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_HALF_EXPANDED
 import com.sduduzog.slimlauncher.MainActivity
 import com.sduduzog.slimlauncher.R
-import com.sduduzog.slimlauncher.SlimAdminReceiver
 import kotlinx.android.synthetic.main.main_bottom_sheet.*
 import kotlinx.android.synthetic.main.main_content.*
 import kotlinx.android.synthetic.main.main_fragment.*
@@ -30,7 +29,6 @@ class MainFragment : StatusBarThemeFragment(), MainActivity.OnBackPressedListene
 
     private lateinit var receiver: BroadcastReceiver
     private lateinit var sheetBehavior: BottomSheetBehavior<FrameLayout>
-    private val homeClickListener = HomeDoubleClickListener()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
@@ -92,21 +90,21 @@ class MainFragment : StatusBarThemeFragment(), MainActivity.OnBackPressedListene
 
     private fun setEventListeners() {
 
-        main.setOnClickListener(homeClickListener)
-        mainAppsList.setOnTouchListener(homeClickListener)
 
         clockTextView.setOnClickListener {
-            try {
-                val intent = alternativeClockIntent()
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                val left = 0
-                val top = 0
-                val width = it.measuredWidth
-                val height = it.measuredHeight
-                val opts = ActivityOptionsCompat.makeClipRevealAnimation(it, left, top, width, height)
-                startActivity(intent, opts.toBundle())
-            } finally {
-                // Do nothing
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                try {
+                    val intent = Intent(AlarmClock.ACTION_SHOW_ALARMS)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                    val left = 0
+                    val top = 0
+                    val width = it.measuredWidth
+                    val height = it.measuredHeight
+                    val opts = ActivityOptionsCompat.makeClipRevealAnimation(it, left, top, width, height)
+                    startActivity(intent, opts.toBundle())
+                } catch (e: ActivityNotFoundException) {
+                    // Do nothing, we've failed :(
+                }
             }
         }
 
@@ -121,13 +119,11 @@ class MainFragment : StatusBarThemeFragment(), MainActivity.OnBackPressedListene
                 val height = it.measuredHeight
                 val opts = ActivityOptionsCompat.makeClipRevealAnimation(it, left, top, width, height)
                 startActivity(intent, opts.toBundle())
-            } finally {
-                // Do nothing
+            } catch (e: ActivityNotFoundException) {
+                // Do nothing, we've failed :(
             }
         }
 
-        val settings = context!!.getSharedPreferences(getString(R.string.prefs_settings), Context.MODE_PRIVATE)
-        val isChecked = settings.getBoolean(getString(R.string.prefs_settings_key_app_dialer), false)
         ivCall.setOnClickListener {
             try {
                 val intent = Intent(Intent.ACTION_DIAL)
@@ -142,18 +138,16 @@ class MainFragment : StatusBarThemeFragment(), MainActivity.OnBackPressedListene
             }
         }
         ivCall.setOnLongClickListener {
-            if (isChecked) {
-                try {
-                    val intent = Intent(Intent.ACTION_DIAL, null)
-                    val left = 0
-                    val top = 0
-                    val width = it.measuredWidth
-                    val height = it.measuredHeight
-                    val opts = ActivityOptionsCompat.makeClipRevealAnimation(it, left, top, width, height)
-                    startActivity(intent, opts.toBundle())
-                } catch (e: ActivityNotFoundException) {
-                    // Do nothing
-                }
+            try {
+                val intent = Intent(Intent.ACTION_DIAL, null)
+                val left = 0
+                val top = 0
+                val width = it.measuredWidth
+                val height = it.measuredHeight
+                val opts = ActivityOptionsCompat.makeClipRevealAnimation(it, left, top, width, height)
+                startActivity(intent, opts.toBundle())
+            } catch (e: ActivityNotFoundException) {
+                // Do nothing
             }
             true
         }
@@ -232,38 +226,6 @@ class MainFragment : StatusBarThemeFragment(), MainActivity.OnBackPressedListene
         }
     }
 
-    private fun alternativeClockIntent(): Intent {
-        val alarmClockIntent = Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LAUNCHER)
-        val pm = activity!!.packageManager
-// Verify clock implementation
-        val clockImpls = arrayOf(arrayOf("HTC Alarm Clock", "com.htc.android.worldclock", "com.htc.android.worldclock.WorldClockTabControl"), arrayOf("Standar Alarm Clock", "com.android.deskclock", "com.android.deskclock.AlarmClock"), arrayOf("Froyo Nexus Alarm Clock", "com.google.android.deskclock", "com.android.deskclock.DeskClock"), arrayOf("Moto Blur Alarm Clock", "com.motorola.blur.alarmclock", "com.motorola.blur.alarmclock.AlarmClock"), arrayOf("Samsung Galaxy Clock", "com.sec.android.app.clockpackage", "com.sec.android.app.clockpackage.ClockPackage"), arrayOf("Sony Ericsson Xperia Z", "com.sonyericsson.organizer", "com.sonyericsson.organizer.Organizer_WorldClock"), arrayOf("ASUS Tablets", "com.asus.deskclock", "com.asus.deskclock.DeskClock"))
-
-        var foundClockImpl = false
-
-        for (i in clockImpls.indices) {
-            val packageName = clockImpls[i][1]
-            val className = clockImpls[i][2]
-            val cn = ComponentName(packageName, className)
-            alarmClockIntent.component = cn
-            if (alarmClockIntent.resolveActivity(pm) != null)
-                foundClockImpl = true
-        }
-
-        return if (foundClockImpl) {
-            alarmClockIntent
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            val i = Intent(AlarmClock.ACTION_SHOW_ALARMS)
-            if (alarmClockIntent.resolveActivity(pm) != null) {
-                i
-            } else {
-                throw Exception("No clock activity found for the intent")
-            }
-        } else {
-            throw Exception("No clock activity found for the intent")
-        }
-    }
-
-
     private fun doBounceAnimation(targetView: View) {
         targetView.animate()
                 .setStartDelay(500)
@@ -298,41 +260,6 @@ class MainFragment : StatusBarThemeFragment(), MainActivity.OnBackPressedListene
     inner class ClockReceiver : BroadcastReceiver() {
         override fun onReceive(ctx: Context?, intent: Intent?) {
             updateUi()
-        }
-    }
-
-    inner class HomeDoubleClickListener : View.OnTouchListener, DoubleClickListener() {
-
-        private val gestureDetector = GestureDetector(context, object : GestureDetector.SimpleOnGestureListener() {
-            override fun onDoubleTap(e: MotionEvent?): Boolean {
-                performLock()
-                return super.onDoubleTap(e)
-            }
-        })
-
-        @SuppressLint("ClickableViewAccessibility")
-        override fun onTouch(p0: View?, p1: MotionEvent?): Boolean {
-            return gestureDetector.onTouchEvent(p1)
-        }
-
-        override fun onDoubleClick(v: View) {
-            performLock()
-        }
-
-        override fun onSingleClick(v: View) {
-
-        }
-
-        private fun performLock() {
-            val mComponentName = ComponentName(context!!, SlimAdminReceiver::class.java)
-            val mDevicePolicyManager = activity!!.getSystemService(
-                    Context.DEVICE_POLICY_SERVICE) as DevicePolicyManager
-            val isAdmin = mDevicePolicyManager.isAdminActive(mComponentName)
-            if (isAdmin) {
-                mDevicePolicyManager.lockNow()
-            } else {
-                MakeSlimAdminDialog().show(childFragmentManager, "Admin Dialog")
-            }
         }
     }
 }
