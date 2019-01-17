@@ -1,6 +1,8 @@
 # Slim launcher
 > _All you need is less._
 
+[![CircleCI](https://circleci.com/gh/sduduzog/slim-launcher/tree/master.svg?style=svg)](https://circleci.com/gh/sduduzog/slim-launcher/tree/master)
+
 ![Slim Launcher Logo](docs/assets/ic_launcher-web.png)
 
 **Now available on Google Play!**
