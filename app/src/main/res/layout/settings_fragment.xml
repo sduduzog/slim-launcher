@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/frameLayout"
+    android:id="@+id/settings_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.main.settings.SettingsFragment">
@@ -12,7 +12,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="24dp"
         android:alpha="0.5"
         android:text="@string/settings_title"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,21 +32,60 @@
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textView14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="@string/settings_text_use_24_hour_clock"
+        android:layout_marginLeft="16dp"
+        android:text="@string/settings_hide_status_bar"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider4" />
 
     <TextView
+        android:id="@+id/textView16"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="@string/settings_status_bar_when_switched"
+        app:layout_constraintEnd_toStartOf="@+id/statusBarSwitch"
+        app:layout_constraintStart_toStartOf="@+id/textView14"
+        app:layout_constraintTop_toBottomOf="@+id/textView14" />
+
+    <Switch
+        android:id="@+id/statusBarSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginBottom="8dp"
+        android:padding="4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView16"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView14" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/settings_text_use_24_hour_clock"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView16" />
+
+    <TextView
         android:id="@+id/textView4"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:text="@string/settings_text_tap_to_check_between_24_hour_or_12_hour"
         app:layout_constraintEnd_toStartOf="@+id/clockSwitch"
         app:layout_constraintStart_toStartOf="@+id/textView2"
@@ -54,9 +94,10 @@
     <Switch
         android:id="@+id/clockSwitch"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
         android:layout_marginBottom="8dp"
         android:padding="4dp"
         app:layout_constraintBottom_toBottomOf="@+id/textView4"
@@ -64,48 +105,17 @@
         app:layout_constraintTop_toTopOf="@+id/textView2" />
 
     <TextView
-        android:id="@+id/textView9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/settings_use_slim_s_built_in_dialer"
-        android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
-    <TextView
-        android:id="@+id/textView10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/settings_faster_shortcut_to_your_calls"
-        app:layout_constraintStart_toStartOf="@+id/textView9"
-        app:layout_constraintTop_toBottomOf="@+id/textView9" />
-
-    <Switch
-        android:id="@+id/dialerSwitch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="8dp"
-        android:padding="4dp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView10"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView9" />
-
-    <TextView
         android:id="@+id/changeThemeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:text="@string/main_options_change_theme"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <TextView
         android:id="@+id/textView7"
@@ -120,7 +130,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
         android:alpha="0.5"
         android:text="@string/settings_text_home_screen_apps"
         app:layout_constraintStart_toStartOf="parent"
@@ -137,17 +148,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/settings_list_item_subtext"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/textView8"
-        app:layout_constraintTop_toBottomOf="@+id/divider2" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/settingsAppList"
         android:layout_width="0dp"
@@ -159,7 +159,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6"
+        app:layout_constraintTop_toBottomOf="@+id/divider2"
+        tools:itemCount="5"
         tools:listitem="@layout/settings_list_item" />
 
     <androidx.appcompat.widget.AppCompatCheckBox
@@ -169,6 +170,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
@@ -181,6 +183,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
         android:layout_marginBottom="8dp"
         android:text="@string/settings_button_change_theme"
         app:layout_constraintBottom_toBottomOf="@+id/textView7"

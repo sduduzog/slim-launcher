@@ -15,10 +15,13 @@
     <string name="prefs_settings">settings</string>
     <string name="prefs_settings_key_theme">key_theme</string>
     <string name="prefs_settings_key_clock_type">clock_type</string>
-    <string name="prefs_settings_key_app_dialer">app_dialer</string>
+    <string name="prefs_settings_key_hide_status_bar">hide_status_bar</string>
     <string name="prefs_settings_key_fresh_install_setup">key_fresh_install_setup</string>
 
     <!--main package strings-->
+
+    <string name="setup_welcome">Welcome!</string>
+    <string name="setup_welcome2">This is what your home screen will look like. But better! Let\'s get you setup.</string>
 
     <string name="main_slim_options">Slim options</string>
     <string name="main_options_change_theme">Change theme</string>
@@ -38,25 +41,23 @@
     <string name="settings_text_tap_to_change_app_theme">Choose from a variety of themes</string>
     <string name="settings_text_home_screen_apps">Home screen apps</string>
     <string name="settings_title">Preferences</string>
+    <string name="settings_use_slim_s_built_in_dialer">Use Slim\'s built-in dialer</string>
+    <string name="settings_faster_shortcut_to_your_calls">Faster shortcut to your calls</string>
+    <string name="settings_status_bar_when_switched">When switched on, you can still drag down from the top to reveal it</string>
+    <string name="settings_hide_status_bar">Hide status bar</string>
 
     <string name="settings_list_item_button_set_app">Set app</string>
     <string name="settings_list_item_text">Slot empty</string>
-    <string name="settings_list_item_subtext">Swipe left/right to remove an app. Drag handlebars to reorder. Long press to rename</string>
     <string name="settings_button_change_theme">Change</string>
     <string name="about_title">Slim launcher</string>
     <string name="about_text">
-    Slim v2.1.2 \u00a9 2018\n\nSource : <a href="https://github.com/sduduzog/slim-launcher">https://github.com/sduduzog/slim-launcher</a>\n\n<a href="mailto:gumedesduduzo@gmail.com">gumedesduduzo@gmail.com</a>\n\nBecome a tester <a href="https://play.google.com/apps/testing/com.sduduzog.slimlauncher">Click here</a>
+    Slim v2.2.4 \u00a9 2019\n\nSource : <a href="https://github.com/sduduzog/slim-launcher">https://github.com/sduduzog/slim-launcher</a>\n\n<a href="mailto:gumedesduduzo@gmail.com">gumedesduduzo@gmail.com</a>\n\nBecome a tester <a href="https://play.google.com/apps/testing/com.sduduzog.slimlauncher">Click here</a>
     </string>
     <string name="theme_chooser_dialog_title">Change theme</string>
     <string name="main_call_icon">call icon</string>
     <string name="main_photo_camera_icon">photo camera icon</string>
     <string name="setup_button_start">start</string>
-    <string name="setup_text_welcome">Welcome!</string>
-    <string name="setup_text_lets_get_you_set_up">
-    "Lets get you set up!\n Just a few tweaks and your new home screen will be ready for you."
-    </string>
 
-    <string name="setup_button_next">next</string>
     <string name="setup_button_finish">Finish</string>
 
     <string name="no_app_selected_toast_msg">Choose at least one app</string>
@@ -65,7 +66,6 @@
 
     <string name="notes_date_placeholder">Edited at %s</string>
 
-    <string name="dialer_chevron">deleter</string>
     <string name="settings_item_icon_drag_handler">Dragger</string>
 
     <string name="setup_choose_theme">Choose Theme</string>
@@ -75,23 +75,12 @@
     <string name="setup_text_teal">Teal</string>
     <string name="setup_text_candy">Candy</string>
     <string name="setup_text_pastel">Pastel</string>
-    <string name="setup_we_re_almost_done">We\'re almost done!</string>
-    <string name="setup_expand_note">1. To open Slim options, click the arrow or swipe upwards from it.</string>
-    <string name="setup_note_camera">3. Press the camera icon to launch the default camera app</string>
-    <string name="setup_note_dialer">2. Press the dialer icon to open the default dialer</string>
-    <string name="screenshot_nav">Nav screenshot</string>
-    <string name="setup_dialer_note2">2. Press the dialer icon to open the built-in dialer(experimental). Press and hold, open the default</string>
-    <string name="setup_your_home_screen">Your home screen</string>
-    <string name="setup_screen_description">
-        "This is what your home screen will look like.\n\n"
-        "You should pick five of the apps you use the most.\n\n"
-        "You can later change them in Preferences."
-    </string>
-    <string name="setup_choose_apps">Choose apps</string>
-    <string name="setup_home_screenshot">Screenshot</string>
-    <string name="setup_clock_type_text_description">This is also changeable in preferences. Whether you prefer a 12hr clock type or a 24hr clock type</string>
-    <string name="setup_clock_type">Clock Type</string>
-    <string name="settings_use_slim_s_built_in_dialer">Use Slim\'s built-in dialer</string>
-    <string name="settings_faster_shortcut_to_your_calls">Faster shortcut to your calls</string>
+
+
+    <!-- Content Description For Image Resources-->
+    <string name="content_description_my_phone">My phone</string>
+    <string name="main_admin_title">Allow Slim to lock your device</string>
+    <string name="main_admin_message">Double tapping on the free space on your home screen locks your device instantly.</string>
+
 
 </resources>

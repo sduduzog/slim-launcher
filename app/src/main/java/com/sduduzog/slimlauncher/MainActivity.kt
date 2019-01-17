@@ -1,9 +1,11 @@
 package com.sduduzog.slimlauncher
 
+import android.content.Intent
 import android.content.SharedPreferences
-import android.content.pm.PackageManager
 import android.content.res.Resources
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
@@ -14,15 +16,7 @@ import com.sduduzog.slimlauncher.ui.main.MainViewModel
 
 class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceChangeListener, NavController.OnDestinationChangedListener {
 
-    // TODO: Hide and show status bar (possibly bottom nav too) in preferences
-    // TODO: Click on date, opens calendar app
-    // TODO: Support more devices, screen densities
-
-    // TODO: Setup Wizard redesign to include,
-    // TODO: Have different text sizes, and typefaces
     // TODO: Move some apps to bottom sheet.
-    // TODO: Clickable apps while in preferences, intuitiveness
-    // TODO: Lock screen on double tap
 
     private lateinit var settings: SharedPreferences
     private val label = "main_fragment"
@@ -57,7 +51,6 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
         settings = getSharedPreferences(getString(R.string.prefs_settings), MODE_PRIVATE)
         settings.registerOnSharedPreferenceChangeListener(this)
         navigator = findNavController(this, R.id.nav_host_fragment)
-//        navigator.addOnNavigatedListener(this) : removed. a breaking change
         navigator.addOnDestinationChangedListener(this)
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
     }
@@ -67,9 +60,24 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
         viewModel.refreshApps()
     }
 
+    override fun onResume() {
+        super.onResume()
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+        toggleStatusBar()
+    }
+
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        if (hasFocus) toggleStatusBar()
+    }
+
+
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, s: String?) {
         if (s.equals(getString(R.string.prefs_settings_key_theme), true)) {
             recreate()
+        }
+        if (s.equals(getString(R.string.prefs_settings_key_hide_status_bar), true)) {
+            toggleStatusBar()
         }
     }
 
@@ -95,23 +103,38 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
         currentLabel = destination.label.toString()
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int,
-                                            permissions: Array<String>, grantResults: IntArray) {
-        when (requestCode) {
-            REQUEST_PHONE_CALL -> {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    navigator.navigate(R.id.action_mainFragment_to_dialerFragment)
-                } else {
-                    // Do nothing
-                }
-                return
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == REQUEST_CODE_ENABLE_ADMIN) {
+            if (resultCode == RESULT_OK) {
+                Toast.makeText(applicationContext, "Registered As Admin", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(applicationContext, "Failed to register as Admin", Toast.LENGTH_SHORT).show()
             }
-        }// other 'case' lines to check for other
-        // permissions this app might request
+        }
+    }
+
+    private fun showSystemUI() {
+        window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
+    }
+
+    private fun hideSystemUI() {
+        window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                or View.SYSTEM_UI_FLAG_FULLSCREEN)
+    }
+
+    private fun toggleStatusBar() {
+        val isHidden = settings.getBoolean(getString(R.string.prefs_settings_key_hide_status_bar), false)
+        if (isHidden) {
+            hideSystemUI()
+        } else {
+            showSystemUI()
+        }
     }
 
     companion object {
+
         fun resolveTheme(i: Int): Int {
             when (i) {
                 1 -> {
@@ -133,7 +156,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
             return R.style.AppTheme
         }
 
-        const val REQUEST_PHONE_CALL = 1
+        const val REQUEST_CODE_ENABLE_ADMIN = 1
     }
 
     interface OnBackPressedListener {

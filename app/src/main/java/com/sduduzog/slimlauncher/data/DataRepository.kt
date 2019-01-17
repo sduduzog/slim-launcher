@@ -5,7 +5,9 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
 import android.os.AsyncTask
+import android.util.Log
 import androidx.lifecycle.LiveData
+import com.sduduzog.slimlauncher.BuildConfig
 import java.util.*
 
 class DataRepository(application: Application) {
@@ -101,19 +103,16 @@ class DataRepository(application: Application) {
     private class RefreshAppsAsyncTask internal constructor(private val mAsyncTaskDao: AppDao) : AsyncTask<PackageManager, Void, Void>() {
 
         override fun doInBackground(vararg params: PackageManager): Void? {
+            mAsyncTaskDao.deleteAll() // Need to find a less expensive way of doing this
             val pm = params[0]
             val main = Intent(Intent.ACTION_MAIN, null)
-
             main.addCategory(Intent.CATEGORY_LAUNCHER)
-
-            val launchables = pm.queryIntentActivities(main, 0)
-            Collections.sort(launchables,
-                    ResolveInfo.DisplayNameComparator(pm))
-            mAsyncTaskDao.deleteAll() // Need to find a less expensive way of doing this
-            for (i in launchables.indices) {
-                val item = launchables[i]
+            val activitiesList = pm.queryIntentActivities(main, 0)
+            Collections.sort(activitiesList, ResolveInfo.DisplayNameComparator(pm))
+            for (i in activitiesList.indices) {
+                val item = activitiesList[i]
                 val activity = item.activityInfo
-                val app = App(launchables[i].loadLabel(pm).toString(), activity.applicationInfo.packageName, activity.name)
+                val app = App(activitiesList[i].loadLabel(pm).toString(), activity.applicationInfo.packageName, activity.name)
                 mAsyncTaskDao.insert(app)
             }
             return null

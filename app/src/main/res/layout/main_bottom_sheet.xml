@@ -112,7 +112,8 @@
             android:padding="16dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_call" />
+            app:srcCompat="@drawable/ic_call"
+            android:layout_marginLeft="8dp" />
 
         <ImageView
             android:id="@+id/ivExpand"
@@ -138,7 +139,8 @@
             android:padding="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_photo_camera" />
+            app:srcCompat="@drawable/ic_photo_camera"
+            android:layout_marginRight="8dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

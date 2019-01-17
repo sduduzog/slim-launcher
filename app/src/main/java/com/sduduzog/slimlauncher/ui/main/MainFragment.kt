@@ -1,35 +1,36 @@
 package com.sduduzog.slimlauncher.ui.main
 
+import android.annotation.SuppressLint
+import android.app.admin.DevicePolicyManager
 import android.content.*
-import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.AlarmClock
 import android.provider.MediaStore
 import android.provider.Settings
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.FrameLayout
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
+import androidx.core.app.ActivityOptionsCompat
 import androidx.navigation.Navigation
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPSED
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_HALF_EXPANDED
 import com.sduduzog.slimlauncher.MainActivity
 import com.sduduzog.slimlauncher.R
+import com.sduduzog.slimlauncher.SlimAdminReceiver
 import kotlinx.android.synthetic.main.main_bottom_sheet.*
 import kotlinx.android.synthetic.main.main_content.*
+import kotlinx.android.synthetic.main.main_fragment.*
 import java.text.SimpleDateFormat
 import java.util.*
 
 
-class MainFragment : Fragment(), MainActivity.OnBackPressedListener {
+class MainFragment : StatusBarThemeFragment(), MainActivity.OnBackPressedListener {
 
     private lateinit var receiver: BroadcastReceiver
     private lateinit var sheetBehavior: BottomSheetBehavior<FrameLayout>
+    private val homeClickListener = HomeDoubleClickListener()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
@@ -53,6 +54,9 @@ class MainFragment : Fragment(), MainActivity.OnBackPressedListener {
         doBounceAnimation(ivExpand)
     }
 
+    override fun getFragmentView(): View {
+        return main
+    }
 
     override fun onResume() {
         super.onResume()
@@ -87,39 +91,67 @@ class MainFragment : Fragment(), MainActivity.OnBackPressedListener {
     }
 
     private fun setEventListeners() {
+
+        main.setOnClickListener(homeClickListener)
+        mainAppsList.setOnTouchListener(homeClickListener)
+
         clockTextView.setOnClickListener {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                try {
+                    val intent = Intent(AlarmClock.ACTION_SHOW_ALARMS)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                    val left = 0
+                    val top = 0
+                    val width = it.measuredWidth
+                    val height = it.measuredHeight
+                    val opts = ActivityOptionsCompat.makeClipRevealAnimation(it, left, top, width, height)
+                    startActivity(intent, opts.toBundle())
+                } catch (e: ActivityNotFoundException) {
+                    // Do nothing, we've failed :(
+                }
+            }
+        }
+
+        dateTextView.setOnClickListener {
             try {
-                val intent = Intent(AlarmClock.ACTION_SHOW_ALARMS)
+                val intent = Intent(Intent.ACTION_MAIN)
+                intent.addCategory(Intent.CATEGORY_APP_CALENDAR)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                startActivity(intent)
-            } finally {
+                val left = 0
+                val top = 0
+                val width = it.measuredWidth
+                val height = it.measuredHeight
+                val opts = ActivityOptionsCompat.makeClipRevealAnimation(it, left, top, width, height)
+                startActivity(intent, opts.toBundle())
+            } catch (e: ActivityNotFoundException) {
+                // Do nothing, we've failed :(
+            }
+        }
+
+        ivCall.setOnClickListener {
+            try {
+                val intent = Intent(Intent.ACTION_DIAL)
+                val left = 0
+                val top = 0
+                val width = it.measuredWidth
+                val height = it.measuredHeight
+                val opts = ActivityOptionsCompat.makeClipRevealAnimation(it, left, top, width, height)
+                startActivity(intent, opts.toBundle())
+            } catch (e: Exception) {
                 // Do nothing
             }
         }
-
-
-        val settings = context!!.getSharedPreferences(getString(R.string.prefs_settings), Context.MODE_PRIVATE)
-        val isChecked = settings.getBoolean(getString(R.string.prefs_settings_key_app_dialer), false)
-        ivCall.setOnClickListener {
-            if (isChecked) {
-                getCallingPermission()
-            } else {
-                try {
-                    val intent = Intent(Intent.ACTION_DIAL)
-                    startActivity(intent)
-                } catch (e: Exception) {
-                    // Do nothing
-                }
-            }
-        }
         ivCall.setOnLongClickListener {
-            if (isChecked) {
-                try {
-                    val intent = Intent(Intent.ACTION_DIAL, null)
-                    startActivity(intent)
-                } catch (e: ActivityNotFoundException) {
-                    // Do nothing
-                }
+            try {
+                val intent = Intent(Intent.ACTION_DIAL, null)
+                val left = 0
+                val top = 0
+                val width = it.measuredWidth
+                val height = it.measuredHeight
+                val opts = ActivityOptionsCompat.makeClipRevealAnimation(it, left, top, width, height)
+                startActivity(intent, opts.toBundle())
+            } catch (e: ActivityNotFoundException) {
+                // Do nothing
             }
             true
         }
@@ -130,7 +162,12 @@ class MainFragment : Fragment(), MainActivity.OnBackPressedListener {
         ivCamera.setOnClickListener {
             try {
                 val intent = Intent(MediaStore.INTENT_ACTION_STILL_IMAGE_CAMERA)
-                startActivity(intent)
+                val left = 0
+                val top = 0
+                val width = it.measuredWidth
+                val height = it.measuredHeight
+                val opts = ActivityOptionsCompat.makeClipRevealAnimation(it, left, top, width, height)
+                startActivity(intent, opts.toBundle())
             } catch (e: Exception) {
                 // Do nothing
             }
@@ -146,7 +183,9 @@ class MainFragment : Fragment(), MainActivity.OnBackPressedListener {
                 val multi = 3 * p1
                 optionsView.alpha = multi
                 optionsView.cardElevation = p1 * 8
-                optionsView.elevation = p1 * 8
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    optionsView.elevation = p1 * 8
+                }
             }
 
             override fun onStateChanged(bottomSheet: View, newState: Int) {
@@ -161,19 +200,23 @@ class MainFragment : Fragment(), MainActivity.OnBackPressedListener {
 
         rateAppText.setOnClickListener {
             val uri = Uri.parse("market://details?id=" + context?.packageName)
-            val goToMarket = Intent(Intent.ACTION_VIEW, uri)
-            goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY or
+            val intent = Intent(Intent.ACTION_VIEW, uri)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY or
                     Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
-            goToMarket.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT)
+            }
             try {
-                startActivity(goToMarket)
+                startActivity(intent)
             } catch (e: ActivityNotFoundException) {
                 startActivity(Intent(Intent.ACTION_VIEW,
                         Uri.parse("http://play.google.com/store/apps/details?id=" + context?.packageName)))
             }
         }
         changeLauncherText.setOnClickListener {
-            startActivity(Intent(Settings.ACTION_HOME_SETTINGS))
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                startActivity(Intent(Settings.ACTION_HOME_SETTINGS))
+            }
         }
         aboutText.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_mainFragment_to_aboutFragment))
 
@@ -181,7 +224,9 @@ class MainFragment : Fragment(), MainActivity.OnBackPressedListener {
             startActivity(Intent(Settings.ACTION_SETTINGS))
         }
         changeLauncherText.setOnClickListener {
-            startActivity(Intent(Settings.ACTION_HOME_SETTINGS))
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                startActivity(Intent(Settings.ACTION_HOME_SETTINGS))
+            }
         }
     }
 
@@ -189,10 +234,11 @@ class MainFragment : Fragment(), MainActivity.OnBackPressedListener {
         targetView.animate()
                 .setStartDelay(500)
                 .translationYBy(-20f).withEndAction {
-            targetView.animate()
-                    .setStartDelay(0)
-                    .translationYBy(20f).duration = 100
-        }.duration = 100
+                    targetView.animate()
+                            .setStartDelay(0)
+                            .translationYBy(20f).duration = 100
+                }.duration = 100
+
     }
 
     fun updateUi() {
@@ -214,13 +260,6 @@ class MainFragment : Fragment(), MainActivity.OnBackPressedListener {
         dateTextView.text = fWatchDate.format(date)
     }
 
-    private fun getCallingPermission() {
-        if (ContextCompat.checkSelfPermission(activity!!, android.Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(activity!!, arrayOf(android.Manifest.permission.CALL_PHONE), REQUEST_PHONE_CALL)
-        } else {
-            Navigation.findNavController(main_content).navigate(R.id.action_mainFragment_to_dialerFragment)
-        }
-    }
 
     inner class ClockReceiver : BroadcastReceiver() {
         override fun onReceive(ctx: Context?, intent: Intent?) {
@@ -228,7 +267,38 @@ class MainFragment : Fragment(), MainActivity.OnBackPressedListener {
         }
     }
 
-    companion object {
-        const val REQUEST_PHONE_CALL = 1
+    inner class HomeDoubleClickListener : View.OnTouchListener, DoubleClickListener() {
+
+        private val gestureDetector = GestureDetector(context, object : GestureDetector.SimpleOnGestureListener() {
+            override fun onDoubleTap(e: MotionEvent?): Boolean {
+                performLock()
+                return super.onDoubleTap(e)
+            }
+        })
+
+        @SuppressLint("ClickableViewAccessibility")
+        override fun onTouch(p0: View?, p1: MotionEvent?): Boolean {
+            return gestureDetector.onTouchEvent(p1)
+        }
+
+        override fun onDoubleClick(v: View) {
+            performLock()
+        }
+
+        override fun onSingleClick(v: View) {
+
+        }
+
+        private fun performLock() {
+            val mComponentName = ComponentName(context!!, SlimAdminReceiver::class.java)
+            val mDevicePolicyManager = activity!!.getSystemService(
+                    Context.DEVICE_POLICY_SERVICE) as DevicePolicyManager
+            val isAdmin = mDevicePolicyManager.isAdminActive(mComponentName)
+            if (isAdmin) {
+                mDevicePolicyManager.lockNow()
+            } else {
+                MakeSlimAdminDialog().show(childFragmentManager, "Admin Dialog")
+            }
+        }
     }
 }
