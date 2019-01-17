@@ -16,8 +16,6 @@ import com.sduduzog.slimlauncher.ui.main.MainViewModel
 
 class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceChangeListener, NavController.OnDestinationChangedListener {
 
-    // TODO: Move some apps to bottom sheet.
-
     private lateinit var settings: SharedPreferences
     private val label = "main_fragment"
     private lateinit var currentLabel: String

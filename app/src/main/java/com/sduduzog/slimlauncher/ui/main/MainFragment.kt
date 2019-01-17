@@ -1,7 +1,5 @@
 package com.sduduzog.slimlauncher.ui.main
 
-import android.annotation.SuppressLint
-import android.app.admin.DevicePolicyManager
 import android.content.*
 import android.net.Uri
 import android.os.Build
@@ -9,7 +7,9 @@ import android.os.Bundle
 import android.provider.AlarmClock
 import android.provider.MediaStore
 import android.provider.Settings
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.core.app.ActivityOptionsCompat
 import androidx.navigation.Navigation
@@ -18,7 +18,6 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPS
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_HALF_EXPANDED
 import com.sduduzog.slimlauncher.MainActivity
 import com.sduduzog.slimlauncher.R
-import com.sduduzog.slimlauncher.SlimAdminReceiver
 import kotlinx.android.synthetic.main.main_bottom_sheet.*
 import kotlinx.android.synthetic.main.main_content.*
 import kotlinx.android.synthetic.main.main_fragment.*
@@ -30,7 +29,6 @@ class MainFragment : StatusBarThemeFragment(), MainActivity.OnBackPressedListene
 
     private lateinit var receiver: BroadcastReceiver
     private lateinit var sheetBehavior: BottomSheetBehavior<FrameLayout>
-    private val homeClickListener = HomeDoubleClickListener()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
@@ -92,8 +90,6 @@ class MainFragment : StatusBarThemeFragment(), MainActivity.OnBackPressedListene
 
     private fun setEventListeners() {
 
-        main.setOnClickListener(homeClickListener)
-        mainAppsList.setOnTouchListener(homeClickListener)
 
         clockTextView.setOnClickListener {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -264,41 +260,6 @@ class MainFragment : StatusBarThemeFragment(), MainActivity.OnBackPressedListene
     inner class ClockReceiver : BroadcastReceiver() {
         override fun onReceive(ctx: Context?, intent: Intent?) {
             updateUi()
-        }
-    }
-
-    inner class HomeDoubleClickListener : View.OnTouchListener, DoubleClickListener() {
-
-        private val gestureDetector = GestureDetector(context, object : GestureDetector.SimpleOnGestureListener() {
-            override fun onDoubleTap(e: MotionEvent?): Boolean {
-                performLock()
-                return super.onDoubleTap(e)
-            }
-        })
-
-        @SuppressLint("ClickableViewAccessibility")
-        override fun onTouch(p0: View?, p1: MotionEvent?): Boolean {
-            return gestureDetector.onTouchEvent(p1)
-        }
-
-        override fun onDoubleClick(v: View) {
-            performLock()
-        }
-
-        override fun onSingleClick(v: View) {
-
-        }
-
-        private fun performLock() {
-            val mComponentName = ComponentName(context!!, SlimAdminReceiver::class.java)
-            val mDevicePolicyManager = activity!!.getSystemService(
-                    Context.DEVICE_POLICY_SERVICE) as DevicePolicyManager
-            val isAdmin = mDevicePolicyManager.isAdminActive(mComponentName)
-            if (isAdmin) {
-                mDevicePolicyManager.lockNow()
-            } else {
-                MakeSlimAdminDialog().show(childFragmentManager, "Admin Dialog")
-            }
         }
     }
 }
