@@ -4,16 +4,17 @@
     android:id="@+id/frameLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="false"
     tools:context="com.sduduzog.slimlauncher.ui.main.notes.NotesListFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        app:elevation="10dp">
+        android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.Toolbar
+            android:layout_height="?attr/actionBarSize"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_marginTop="16dp"
             app:title="Notes" />
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -31,7 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
-        app:srcCompat="@drawable/ic_edit"
-        app:layout_anchorGravity="bottom|end" />
+        app:layout_anchorGravity="bottom|end"
+        app:srcCompat="@drawable/ic_edit" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
