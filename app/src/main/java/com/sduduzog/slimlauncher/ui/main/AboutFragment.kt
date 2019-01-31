@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.sduduzog.slimlauncher.BuildConfig
 import com.sduduzog.slimlauncher.R
 import kotlinx.android.synthetic.main.about_fragment.*
 
@@ -21,6 +22,7 @@ class AboutFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        aboutVersionText.text = getString(R.string.about_title, BuildConfig.VERSION_NAME)
         aboutDescriptionText.movementMethod = LinkMovementMethod.getInstance()
     }
 }
