@@ -5,9 +5,14 @@
 
 ![Slim Launcher Logo](docs/assets/ic_launcher-web.png)
 
-**Now available on Google Play!**
+**Now available on Google Play and F-Droid!**
 
-[![Google Play badge](docs/assets/google-play-badge.png)](https://play.google.com/store/apps/details?id=com.sduduzog.slimlauncher)
+[<img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png"
+     alt="Get it on Google Play"
+     height="80">](https://play.google.com/store/apps/details?id=com.sduduzog.slimlauncher)
+[<img src="https://f-droid.org/badge/get-it-on.png"
+     alt="Get it on F-Droid"
+     height="80">](https://f-droid.org/packages/com.sduduzog.slimlauncher/)
 
 ## Background
 
