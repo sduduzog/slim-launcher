@@ -1,7 +1,7 @@
 # Slim launcher
 > _All you need is less._
 
-[![CircleCI](https://circleci.com/gh/sduduzog/slim-launcher/tree/master.svg?style=svg)](https://circleci.com/gh/sduduzog/slim-launcher/tree/master)
+![CircleCI (all branches)](https://img.shields.io/circleci/project/github/sduduzog/slim-launcher.svg?style=plastic)
 
 ![Slim Launcher Logo](docs/assets/ic_launcher-web.png)
 
