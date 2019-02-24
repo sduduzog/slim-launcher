@@ -101,7 +101,8 @@ class MainFragment : StatusBarThemeFragment(), MainActivity.OnBackPressedListene
                     val width = it.measuredWidth
                     val height = it.measuredHeight
                     val opts = ActivityOptionsCompat.makeClipRevealAnimation(it, left, top, width, height)
-                    startActivity(intent, opts.toBundle())
+                    if (intent.resolveActivity(context!!.packageManager) != null)
+                        startActivity(intent, opts.toBundle())
                 } catch (e: ActivityNotFoundException) {
                     // Do nothing, we've failed :(
                 }
@@ -207,11 +208,6 @@ class MainFragment : StatusBarThemeFragment(), MainActivity.OnBackPressedListene
             } catch (e: ActivityNotFoundException) {
                 startActivity(Intent(Intent.ACTION_VIEW,
                         Uri.parse("http://play.google.com/store/apps/details?id=" + context?.packageName)))
-            }
-        }
-        changeLauncherText.setOnClickListener {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                startActivity(Intent(Settings.ACTION_HOME_SETTINGS))
             }
         }
         aboutText.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_mainFragment_to_aboutFragment))
