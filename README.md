@@ -19,26 +19,37 @@
      height="80">](https://f-droid.org/packages/com.sduduzog.slimlauncher/)
 
 ## Background
-
-This project was inspired by LessPhone [LessPhone](https://play.google.com/store/apps/details?id=me.aswinmohan.nophone) by Aswin Mohan. A launcher I adopted when I descided to take on minimalism as a lifestyle choice. I purged from personal belongings to my digital space. For my phone, I also needed a less distraction solution also, hence **_LessPhone_**. I loved it, _but it worked a little too much_. Do check it out!
-
-**But!** I couldn't do with just 3 apps as daily apps so tah-daaa Slim launcher, everyone! with a couple of bells and whistles.
+Slim launcher only allows you to use fewer apps on your phone. Giving you more time to enjoy life as it was intended. Also a perfect app for a minimalist lifestyle.
 
 ## Milestones
-
 - [x] Release on Google Play _(release the kraken!)_
 - [x] Variety of themes
 - [x] Clean up README _...continuous_.
 - [ ] Journal (text and audio)
 - [ ] Gesture controls for home screen modes
 - [ ] Tasks (like journal but better)
-- [ ] Figure out whether to fully adopt Material Design or continue mixing with flat principles. Open an issue...if there is one.
-- [ ] Tests and README badges **!important;**
+- [X] Figure out whether to fully adopt Material Design or continue mixing with flat principles. Open an issue...if there is one. **EDIT** _Flat_ design is good
+- [X] Tests and README badges **!important;**
 - [ ] Landing page for the app.
 - [ ] A tutorial series in how to build an android launcher
 - [ ] App usage analytics. Offline of course
 
-## Contribute
+# Contributions
 
-- PRs are more than welcome.
-- [Sign up as a tester](https://play.google.com/apps/testing/com.sduduzog.slimlauncher) and get releases before everyone else.
+## Issues
+**1.** See something you don't like, or that can be made better. Create an issue for it. Of course, its not going to be everything that we might agree on, _like adding yellow popup when phone screen turns on_ but I try to reason with you and make sure we're on the same page in terms of the direction the app is going.
+
+**2.** I honestly don't always have the time or resources to fix issues that come up in released apps. If you see anywhere where you can assist, please do so. I'll try to meet you halfway by labeling issues as they come.
+
+## Code reviews
+**3.** Whenever I get the chance, I work on implementing all these suggestions into the app. But the process is still fairly slow. I do however need help reviewing the code for the beta channel. This is where you're most likely can suggest a feature and see it being implemented for the next release. You just have to fork the repo and build the code from the `develop` branch. Though don't be suprised if something is broken there, please do ask about it.
+**4.** [Sign up as a tester](https://play.google.com/apps/testing/com.sduduzog.slimlauncher) to help with assessing any implementations that make it to the beta channel.
+
+## Buy me a coffee
+**5.** I won't lie, my motivation to continue working on this app comes from the great feedback I receive from the reviews on the Play Store and the emails people send to me. The fact that someone out there noticed the litle effort that I put into it gives me all the drive I need to type away code over and over again.
+
+Feel you can do more? [Buy me a cup!](buymeacoff.ee/sduduzog). I'd really appreciate it!
+
+**6.** How do I acknowledge people who have contributed to the project and my growth as a developer? How do I start adding those heads we always find on big project READMEs? I want to do that for my supporters too.
+
+Thank you
