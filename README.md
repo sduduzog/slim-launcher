@@ -19,7 +19,9 @@
      height="80">](https://f-droid.org/packages/com.sduduzog.slimlauncher/)
 
 ## Background
-Slim launcher only allows you to use fewer apps on your phone. Giving you more time to enjoy life as it was intended. Also a perfect app for a minimalist lifestyle.
+>Slim launcher only allows you to use fewer apps on your phone. Giving you more time to enjoy life as it was intended. Also a perfect app for a minimalist lifestyle.
+
+If you think you can come up with a better description, shoot me an email! I'm horrible at this marketing thing
 
 ## Milestones
 - [x] Release on Google Play _(release the kraken!)_
@@ -37,7 +39,7 @@ Slim launcher only allows you to use fewer apps on your phone. Giving you more t
 # Contributions
 
 ## Issues
-**1.** See something you don't like, or that can be made better. Create an issue for it. Of course, its not going to be everything that we might agree on, _like adding yellow popup when phone screen turns on_ but I try to reason with you and make sure we're on the same page in terms of the direction the app is going.
+**1.** See something you don't like, or that can be made better. Create an issue for it. Of course, its not going to be everything that we might agree on, _like adding a yellow popup when phone screen turns on_ but I try to reason with you and make sure we're on the same page in terms of the direction the app is going.
 
 **2.** I honestly don't always have the time or resources to fix issues that come up in released apps. If you see anywhere where you can assist, please do so. I'll try to meet you halfway by labeling issues as they come.
 
