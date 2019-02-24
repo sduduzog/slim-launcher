@@ -5,9 +5,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
 import android.os.AsyncTask
-import android.util.Log
 import androidx.lifecycle.LiveData
-import com.sduduzog.slimlauncher.BuildConfig
 import java.util.*
 
 class DataRepository(application: Application) {
