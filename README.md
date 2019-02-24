@@ -45,10 +45,10 @@ Slim launcher only allows you to use fewer apps on your phone. Giving you more t
 **3.** Whenever I get the chance, I work on implementing all these suggestions into the app. But the process is still fairly slow. I do however need help reviewing the code for the beta channel. This is where you're most likely can suggest a feature and see it being implemented for the next release. You just have to fork the repo and build the code from the `develop` branch. Though don't be suprised if something is broken there, please do ask about it.
 **4.** [Sign up as a tester](https://play.google.com/apps/testing/com.sduduzog.slimlauncher) to help with assessing any implementations that make it to the beta channel.
 
-## Buy me a coffee
+## [Buy me a coffee](https://buymeacoff.ee/sduduzog)
 **5.** I won't lie, my motivation to continue working on this app comes from the great feedback I receive from the reviews on the Play Store and the emails people send to me. The fact that someone out there noticed the litle effort that I put into it gives me all the drive I need to type away code over and over again.
 
-Feel you can do more? [Buy me a cup!](buymeacoff.ee/sduduzog). I'd really appreciate it!
+Feel you can do more? [Buy me a cup!](https://buymeacoff.ee/sduduzog). I'd really appreciate it!
 
 **6.** How do I acknowledge people who have contributed to the project and my growth as a developer? How do I start adding those heads we always find on big project READMEs? I want to do that for my supporters too.
 
