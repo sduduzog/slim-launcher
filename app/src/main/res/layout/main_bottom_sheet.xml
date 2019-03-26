@@ -118,21 +118,6 @@
             android:layout_marginLeft="8dp" />
 
         <ImageView
-            android:id="@+id/ivExpand"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:contentDescription="@string/main_slim_options"
-            android:padding="16dp"
-            app:layout_constraintEnd_toStartOf="@+id/ivCamera"
-            app:layout_constraintStart_toEndOf="@+id/ivCall"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_expand" />
-
-        <ImageView
             android:id="@+id/ivCamera"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

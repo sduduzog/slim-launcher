@@ -12,8 +12,8 @@ android {
         applicationId "com.sduduzog.slimlauncher"
         minSdkVersion 16
         targetSdkVersion 28
-        versionCode 29
-        versionName "2.2.7"
+        versionCode 30
+        versionName "2.2.8"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
@@ -47,11 +47,11 @@ dependencies {
     implementation 'com.google.android.material:material:1.0.0'
 
     // Arch Components
-    implementation 'androidx.core:core-ktx:1.1.0-alpha03'
+    implementation 'androidx.core:core-ktx:1.1.0-alpha05'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
-    implementation 'android.arch.navigation:navigation-fragment:1.0.0-alpha09'
-    implementation 'androidx.room:room-runtime:2.1.0-alpha03'
-    kapt "androidx.room:room-compiler:2.1.0-alpha03"
+    implementation 'android.arch.navigation:navigation-fragment:1.0.0'
+    implementation 'androidx.room:room-runtime:2.1.0-alpha06'
+    kapt "androidx.room:room-compiler:2.1.0-alpha06"
     kapt "androidx.lifecycle:lifecycle-compiler:2.0.0"
 
     //3rd party libs
@@ -61,13 +61,13 @@ dependencies {
     // Test libs
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.mockito:mockito-core:2.19.0'
-    androidTestImplementation 'androidx.room:room-testing:2.1.0-alpha03'
+    androidTestImplementation 'androidx.room:room-testing:2.1.0-alpha06'
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test:rules:1.1.1'
-    androidTestImplementation 'androidx.annotation:annotation:1.0.1'
+    androidTestImplementation 'androidx.annotation:annotation:1.0.2'
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test:rules:1.1.1'
-    androidTestImplementation "androidx.arch.core:core-testing:2.0.0"
+    androidTestImplementation "androidx.arch.core:core-testing:2.0.1"
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-intents:3.1.1'
 

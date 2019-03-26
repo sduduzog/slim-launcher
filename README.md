@@ -23,7 +23,7 @@
 
 If you think you can come up with a better description, shoot me an email! I'm horrible at this marketing thing
 
-## Milestones
+## Milestones to reach
 - [x] Release on Google Play _(release the kraken!)_
 - [x] Variety of themes
 - [x] Clean up README _...continuous_.

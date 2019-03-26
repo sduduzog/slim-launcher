@@ -15,7 +15,6 @@ import androidx.core.app.ActivityOptionsCompat
 import androidx.navigation.Navigation
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPSED
-import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_HALF_EXPANDED
 import com.sduduzog.slimlauncher.MainActivity
 import com.sduduzog.slimlauncher.R
 import kotlinx.android.synthetic.main.main_bottom_sheet.*
@@ -49,7 +48,6 @@ class MainFragment : StatusBarThemeFragment(), MainActivity.OnBackPressedListene
         receiver = ClockReceiver()
         activity?.registerReceiver(receiver, IntentFilter(Intent.ACTION_TIME_TICK))
         sheetBehavior.state = STATE_COLLAPSED
-        doBounceAnimation(ivExpand)
     }
 
     override fun getFragmentView(): View {
@@ -152,9 +150,6 @@ class MainFragment : StatusBarThemeFragment(), MainActivity.OnBackPressedListene
             }
             true
         }
-        ivExpand.setOnClickListener {
-            if (sheetBehavior.state == STATE_COLLAPSED) sheetBehavior.state = STATE_HALF_EXPANDED
-        }
 
         ivCamera.setOnClickListener {
             try {
@@ -220,17 +215,6 @@ class MainFragment : StatusBarThemeFragment(), MainActivity.OnBackPressedListene
                 startActivity(Intent(Settings.ACTION_HOME_SETTINGS))
             }
         }
-    }
-
-    private fun doBounceAnimation(targetView: View) {
-        targetView.animate()
-                .setStartDelay(500)
-                .translationYBy(-20f).withEndAction {
-                    targetView.animate()
-                            .setStartDelay(0)
-                            .translationYBy(20f).duration = 100
-                }.duration = 100
-
     }
 
     fun updateUi() {
