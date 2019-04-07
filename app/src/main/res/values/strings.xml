@@ -85,6 +85,11 @@
     <string name="main_admin_title">Allow Slim to lock your device</string>
     <string name="main_admin_message">Double tapping on the free space on your home screen locks your device instantly.</string>
     <string name="main_fragment_options">Options</string>
+    <string name="options_fragment_about_slim">About Slim</string>
+    <string name="options_fragment_device_settings">Device Settings</string>
+    <string name="options_fragment_change_theme">Change Theme</string>
+    <string name="options_fragment_choose_time_format">Choose Time Format</string>
+    <string name="options_fragment_customise_apps">Customise Apps</string>
 
 
 </resources>

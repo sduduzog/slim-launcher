@@ -9,14 +9,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityOptionsCompat
+import androidx.navigation.Navigation
 import com.sduduzog.slimlauncher.MainActivity
 import com.sduduzog.slimlauncher.R
+import com.sduduzog.slimlauncher.ui.BaseFragment
 import kotlinx.android.synthetic.main.main_fragment2.*
 import java.text.SimpleDateFormat
 import java.util.*
 
 
-class MainFragment : StatusBarThemeFragment(), MainActivity.OnBackPressedListener {
+class MainFragment : BaseFragment(), MainActivity.OnBackPressedListener {
 
     private lateinit var receiver: BroadcastReceiver
 
@@ -29,6 +31,8 @@ class MainFragment : StatusBarThemeFragment(), MainActivity.OnBackPressedListene
         super.onActivityCreated(savedInstanceState)
         main_fragment_list.adapter = HomeAppsAdapter(this)
         setEventListeners()
+
+        main_fragment_options.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_mainFragment_to_optionsFragment))
     }
 
     override fun onStart() {

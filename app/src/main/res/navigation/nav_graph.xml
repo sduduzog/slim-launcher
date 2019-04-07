@@ -20,6 +20,9 @@
         <action
             android:id="@+id/action_mainFragment_to_aboutFragment"
             app:destination="@id/aboutFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_optionsFragment"
+            app:destination="@id/optionsFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -63,5 +66,10 @@
         android:name="com.sduduzog.slimlauncher.ui.main.notes.NoteFragment"
         android:label="note_fragment"
         tools:layout="@layout/note_fragment" />
+    <fragment
+        android:id="@+id/optionsFragment"
+        android:name="com.sduduzog.slimlauncher.ui.options.OptionsFragment"
+        android:label="options_fragment"
+        tools:layout="@layout/options_fragment" />
 
 </navigation>
