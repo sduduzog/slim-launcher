@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_fragment2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layoutDescription="@xml/main_motion_scene"
+    tools:showPaths="true">
+
+    <TextView
+        android:id="@+id/main_fragment_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_64sdp"
+        android:text="@string/main_placeholder_clock"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textSize="@dimen/_40ssp" />
+
+    <TextView
+        android:id="@+id/main_fragment_time_format"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textSize="@dimen/_13sdp" />
+
+    <TextView
+        android:id="@+id/main_fragment_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_4sdp"
+        android:text="@string/main_placeholder_date"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textSize="@dimen/_12sdp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/main_fragment_list"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:itemCount="1"
+        tools:listitem="@layout/main_fragment_list_item" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/main_fragment_list_exp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:itemCount="3"
+        tools:listitem="@layout/main_fragment_list_item" />
+
+    <TextView
+        android:id="@+id/main_fragment_options"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_8sdp"
+        android:text="@string/main_fragment_options"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textSize="@dimen/_18ssp" />
+
+    <ImageView
+        android:id="@+id/main_fragment_call"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_8sdp"
+        app:srcCompat="@drawable/ic_call"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/main_fragment_camera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_8sdp"
+        app:srcCompat="@drawable/ic_photo_camera"
+        tools:ignore="ContentDescription" />
+
+</androidx.constraintlayout.motion.widget.MotionLayout>

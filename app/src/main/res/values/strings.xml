@@ -84,6 +84,7 @@
     <string name="content_description_my_phone">My phone</string>
     <string name="main_admin_title">Allow Slim to lock your device</string>
     <string name="main_admin_message">Double tapping on the free space on your home screen locks your device instantly.</string>
+    <string name="main_fragment_options">Options</string>
 
 
 </resources>
