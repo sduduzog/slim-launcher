@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.Navigation
 import com.sduduzog.slimlauncher.R
 import com.sduduzog.slimlauncher.data.App
 import com.sduduzog.slimlauncher.ui.main.MainViewModel
@@ -31,7 +30,7 @@ class SplashFragment : PagerHelperFragment(), ChooseAppsDialog.Companion.OnChoos
         }
         val settings = activity!!.getSharedPreferences(getString(R.string.prefs_settings), MODE_PRIVATE)
         if (!settings.getBoolean(getString(R.string.prefs_settings_key_fresh_install_setup), true)) {
-            Navigation.findNavController(splash_fragment).navigate(R.id.action_setupFragment_to_mainFragment2)
+//            Navigation.findNavController(splash_fragment).navigate(R.id.action_setupFragment_to_mainFragment2)
         }
     }
 

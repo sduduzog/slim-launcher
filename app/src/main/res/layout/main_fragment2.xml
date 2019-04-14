@@ -21,7 +21,7 @@
         android:id="@+id/main_fragment_time_format"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_16sdp"
+        android:layout_marginTop="16dp"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textSize="@dimen/_13sdp" />
 
@@ -58,6 +58,15 @@
         android:text="@string/main_fragment_options"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textSize="@dimen/_18ssp" />
+
+    <TextView
+        android:id="@+id/main_fragment_notes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:text="@string/main_fragment_notes"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textSize="18sp" />
 
     <ImageView
         android:id="@+id/main_fragment_call"

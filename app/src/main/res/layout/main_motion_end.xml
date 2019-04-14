@@ -10,6 +10,7 @@
         android:id="@+id/main_fragment_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:alpha="0"
         android:text="@string/main_placeholder_clock"
         android:textSize="@dimen/_40ssp"
         app:layout_constraintBottom_toTopOf="@+id/main_fragment_date"
@@ -22,6 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:alpha="0"
         android:textSize="@dimen/_13sdp"
         app:layout_constraintStart_toEndOf="@+id/main_fragment_time"
         app:layout_constraintTop_toTopOf="@+id/main_fragment_time" />
@@ -30,6 +32,7 @@
         android:id="@+id/main_fragment_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:alpha="0"
         android:padding="4dp"
         android:text="@string/main_placeholder_date"
         android:textSize="@dimen/_12sdp"
@@ -51,7 +54,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/main_fragment_date"
         app:layout_constraintVertical_chainStyle="packed"
-        tools:itemCount="5"
+        tools:itemCount="4"
         tools:listitem="@layout/main_fragment_list_item" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -75,21 +78,35 @@
         android:id="@+id/main_fragment_options"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:padding="8dp"
         android:text="@string/main_fragment_options"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/main_fragment_list_exp"
-        app:layout_constraintTop_toBottomOf="@+id/main_fragment_list_exp" />
+        app:layout_constraintStart_toStartOf="@+id/main_fragment_list_exp" />
+
+    <TextView
+        android:id="@+id/main_fragment_notes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:padding="8dp"
+        android:text="@string/main_fragment_notes"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/main_fragment_list_exp" />
 
     <ImageView
         android:id="@+id/main_fragment_call"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="8dp"
-        app:layout_constraintEnd_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         app:srcCompat="@drawable/ic_call"
         tools:ignore="ContentDescription" />
 
@@ -97,13 +114,13 @@
         android:id="@+id/main_fragment_camera"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:padding="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        android:padding="8dp"
-        app:layout_constraintStart_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="parent"
         app:srcCompat="@drawable/ic_photo_camera"
-        tools:ignore="ContentDescription" />
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="ContentDescription"
+        tools:layout_editor_absoluteX="320dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

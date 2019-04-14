@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.edit
-import androidx.navigation.Navigation
 import com.sduduzog.slimlauncher.R
 import kotlinx.android.synthetic.main.theme_setup_fragment.*
 
@@ -36,7 +35,7 @@ class ThemeSetupFragment : PagerHelperFragment(), View.OnClickListener {
             settings.edit {
                 putBoolean(getString(R.string.prefs_settings_key_fresh_install_setup), false)
             }
-            Navigation.findNavController(theme_setup_fragment).navigate(R.id.action_setupFragment_to_mainFragment2)
+//            Navigation.findNavController(theme_setup_fragment).navigate(R.id.action_setupFragment_to_mainFragment2)
         }
     }
 

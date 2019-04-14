@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.sduduzog.slimlauncher.R
@@ -25,7 +24,7 @@ class NotesListFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        fab_add_note.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_openNoteFragment))
+//        fab_add_note.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_openNoteFragment))
         fab_add_note.setOnLongClickListener {
             Log.d("NoteListFragment", "Long press")
             true

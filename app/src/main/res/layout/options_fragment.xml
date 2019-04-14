@@ -21,79 +21,79 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/options_fragment_about_slim"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="@dimen/_32sdp"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="32dp"
         android:text="@string/options_fragment_about_slim"
         android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textSize="@dimen/_24ssp"
-        app:layout_constraintBottom_toTopOf="@+id/textView9"
+        android:textSize="@dimen/_20ssp"
+        app:layout_constraintBottom_toTopOf="@+id/options_fragment_device_settings"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5"
         app:layout_constraintVertical_bias="0.17000002"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/options_fragment_device_settings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_32sdp"
+        android:layout_marginTop="32dp"
         android:text="@string/options_fragment_device_settings"
         android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textSize="@dimen/_24ssp"
-        app:layout_constraintBottom_toTopOf="@+id/textView10"
-        app:layout_constraintStart_toStartOf="@+id/textView6"
-        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+        android:textSize="@dimen/_20ssp"
+        app:layout_constraintBottom_toTopOf="@+id/options_fragment_change_theme"
+        app:layout_constraintStart_toStartOf="@+id/options_fragment_about_slim"
+        app:layout_constraintTop_toBottomOf="@+id/options_fragment_about_slim" />
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/options_fragment_change_theme"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_32sdp"
+        android:layout_marginTop="32dp"
         android:text="@string/options_fragment_change_theme"
         android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textSize="@dimen/_24ssp"
-        app:layout_constraintBottom_toTopOf="@+id/textView11"
-        app:layout_constraintStart_toStartOf="@+id/textView9"
-        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+        android:textSize="@dimen/_20ssp"
+        app:layout_constraintBottom_toTopOf="@+id/options_fragment_choose_time_format"
+        app:layout_constraintStart_toStartOf="@+id/options_fragment_device_settings"
+        app:layout_constraintTop_toBottomOf="@+id/options_fragment_device_settings" />
 
     <TextView
-        android:id="@+id/textView11"
+        android:id="@+id/options_fragment_choose_time_format"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_32sdp"
+        android:layout_marginTop="32dp"
         android:text="@string/options_fragment_choose_time_format"
         android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textSize="@dimen/_24ssp"
-        app:layout_constraintBottom_toTopOf="@+id/textView17"
-        app:layout_constraintStart_toStartOf="@+id/textView10"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+        android:textSize="@dimen/_20ssp"
+        app:layout_constraintBottom_toTopOf="@+id/options_fragment_hide_status_bar"
+        app:layout_constraintStart_toStartOf="@+id/options_fragment_change_theme"
+        app:layout_constraintTop_toBottomOf="@+id/options_fragment_change_theme" />
 
     <TextView
-        android:id="@+id/textView17"
+        android:id="@+id/options_fragment_hide_status_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_32sdp"
-        android:text="Hide Status Bar"
+        android:layout_marginTop="32dp"
+        android:text="@string/options_fragment_hide_status_bar"
         android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textSize="@dimen/_24ssp"
-        app:layout_constraintBottom_toTopOf="@+id/textView19"
-        app:layout_constraintStart_toStartOf="@+id/textView11"
-        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+        android:textSize="@dimen/_20ssp"
+        app:layout_constraintBottom_toTopOf="@+id/options_fragment_customise_apps"
+        app:layout_constraintStart_toStartOf="@+id/options_fragment_choose_time_format"
+        app:layout_constraintTop_toBottomOf="@+id/options_fragment_choose_time_format" />
 
     <TextView
-        android:id="@+id/textView19"
+        android:id="@+id/options_fragment_customise_apps"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_32sdp"
+        android:layout_marginTop="32dp"
         android:layout_marginBottom="32dp"
         android:text="@string/options_fragment_customise_apps"
         android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textSize="@dimen/_24ssp"
+        android:textSize="@dimen/_20ssp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/textView17"
-        app:layout_constraintTop_toBottomOf="@+id/textView17" />
+        app:layout_constraintStart_toStartOf="@+id/options_fragment_hide_status_bar"
+        app:layout_constraintTop_toBottomOf="@+id/options_fragment_hide_status_bar" />
 </androidx.constraintlayout.widget.ConstraintLayout>

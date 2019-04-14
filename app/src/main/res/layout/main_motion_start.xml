@@ -47,7 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="8dp"
@@ -57,7 +57,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/main_fragment_time"
         app:layout_constraintVertical_bias="0.494"
-        tools:itemCount="1"
+        tools:itemCount="5"
         tools:listitem="@layout/main_fragment_list_item" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -88,7 +88,17 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/main_fragment_list_exp"
         app:layout_constraintTop_toBottomOf="@+id/main_fragment_list_exp" />
-
+<TextView
+        android:id="@+id/main_fragment_notes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:text="@string/main_fragment_notes"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/main_fragment_list_exp"
+        app:layout_constraintTop_toBottomOf="@+id/main_fragment_list_exp" />
     <ImageView
         android:id="@+id/main_fragment_call"
         android:layout_width="wrap_content"

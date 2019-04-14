@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.sduduzog.slimlauncher.R
@@ -51,7 +50,7 @@ class NotesListAdapter(private val fragment: NotesListFragment) : RecyclerView.A
         holder.edited.text = fragment.getString(R.string.notes_date_placeholder, fWatchDate.format(note.edited))
         val bundle = Bundle()
         bundle.putSerializable("note", note)
-        holder.itemView.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_openNoteFragment, bundle))
+//        holder.itemView.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_openNoteFragment, bundle))
     }
 
     override fun getItemCount() = notes.size
