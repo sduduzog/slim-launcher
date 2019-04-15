@@ -13,7 +13,7 @@ import androidx.navigation.Navigation
 import com.sduduzog.slimlauncher.MainActivity
 import com.sduduzog.slimlauncher.R
 import com.sduduzog.slimlauncher.ui.BaseFragment
-import kotlinx.android.synthetic.main.main_fragment2.*
+import kotlinx.android.synthetic.main.home_fragment.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -24,15 +24,15 @@ class MainFragment : BaseFragment(), MainActivity.OnBackPressedListener {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
-        return inflater.inflate(R.layout.main_fragment2, container, false)
+        return inflater.inflate(R.layout.home_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        main_fragment_list.adapter = HomeAppsAdapter(this)
+        home_fragment_list.adapter = HomeAppsAdapter(this)
         setEventListeners()
 
-        main_fragment_options.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_mainFragment_to_optionsFragment))
+        home_fragment_options.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_mainFragment_to_optionsFragment))
     }
 
     override fun onStart() {
@@ -79,7 +79,7 @@ class MainFragment : BaseFragment(), MainActivity.OnBackPressedListener {
     private fun setEventListeners() {
 
 
-        main_fragment_time.setOnClickListener {
+        home_fragment_time.setOnClickListener {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                 try {
                     val intent = Intent(AlarmClock.ACTION_SHOW_ALARMS)
@@ -97,7 +97,7 @@ class MainFragment : BaseFragment(), MainActivity.OnBackPressedListener {
             }
         }
 
-        main_fragment_date.setOnClickListener {
+        home_fragment_date.setOnClickListener {
             try {
                 val intent = Intent(Intent.ACTION_MAIN)
                 intent.addCategory(Intent.CATEGORY_APP_CALENDAR)
@@ -113,7 +113,7 @@ class MainFragment : BaseFragment(), MainActivity.OnBackPressedListener {
             }
         }
 
-        main_fragment_call.setOnClickListener {
+        home_fragment_call.setOnClickListener {
             try {
                 val intent = Intent(Intent.ACTION_DIAL)
                 val left = 0
@@ -127,15 +127,10 @@ class MainFragment : BaseFragment(), MainActivity.OnBackPressedListener {
             }
         }
 
-        main_fragment_camera.setOnClickListener {
+        home_fragment_camera.setOnClickListener {
             try {
                 val intent = Intent(MediaStore.INTENT_ACTION_STILL_IMAGE_CAMERA)
-                val left = 0
-                val top = 0
-                val width = it.measuredWidth
-                val height = it.measuredHeight
-                val opts = ActivityOptionsCompat.makeClipRevealAnimation(it, left, top, width, height)
-                startActivity(intent, opts.toBundle())
+                launchActivity(it, intent)
             } catch (e: Exception) {
                 // Do nothing
             }
@@ -144,21 +139,21 @@ class MainFragment : BaseFragment(), MainActivity.OnBackPressedListener {
 
     fun updateUi() {
         val twenty4Hour = context?.getSharedPreferences(getString(R.string.prefs_settings), Context.MODE_PRIVATE)
-                ?.getBoolean(getString(R.string.prefs_settings_key_clock_type), false)
+                ?.getBoolean(getString(R.string.prefs_settings_key_time_format), true)
         val date = Date()
         if (twenty4Hour as Boolean) {
-            val fWatchTime = SimpleDateFormat("HH:mm", Locale.ENGLISH)
-            main_fragment_time.text = fWatchTime.format(date)
-            main_fragment_time_format.visibility = View.GONE
-        } else {
-            val fWatchTime = SimpleDateFormat("hh:mm", Locale.ENGLISH)
+            val fWatchTime = SimpleDateFormat("h:mm", Locale.ENGLISH)
             val fWatchTimeAP = SimpleDateFormat("aa", Locale.ENGLISH)
-            main_fragment_time.text = fWatchTime.format(date)
-            main_fragment_time_format.text = fWatchTimeAP.format(date)
-            main_fragment_time_format.visibility = View.VISIBLE
+            home_fragment_time.text = fWatchTime.format(date)
+            home_fragment_time_format.text = fWatchTimeAP.format(date)
+            home_fragment_time_format.visibility = View.VISIBLE
+        } else {
+            val fWatchTime = SimpleDateFormat("H:mm", Locale.ENGLISH)
+            home_fragment_time.text = fWatchTime.format(date)
+            home_fragment_time_format.visibility = View.GONE
         }
         val fWatchDate = SimpleDateFormat("EEE, MMM dd", Locale.ENGLISH)
-        main_fragment_date.text = fWatchDate.format(date)
+        home_fragment_date.text = fWatchDate.format(date)
     }
 
 

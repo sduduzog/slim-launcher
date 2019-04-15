@@ -12,9 +12,14 @@
         <item>Pastel</item>
     </string-array>
 
+    <string-array name="time_format_array">
+        <item>24 Hour</item>
+        <item>12 Hour</item>
+    </string-array>
+
     <string name="prefs_settings">settings</string>
     <string name="prefs_settings_key_theme">key_theme</string>
-    <string name="prefs_settings_key_clock_type">clock_type</string>
+    <string name="prefs_settings_key_time_format">clock_type</string>
     <string name="prefs_settings_key_hide_status_bar">hide_status_bar</string>
     <string name="prefs_settings_key_fresh_install_setup">key_fresh_install_setup</string>
 
@@ -56,7 +61,7 @@
     To become a beta tester <a href="https://play.google.com/apps/testing/com.sduduzog.slimlauncher">click here</a>\n\n
     <a href="https://github.com/sduduzog/slim-launcher/issues/new">Report a bug</a>
     </string>
-    <string name="theme_chooser_dialog_title">Change theme</string>
+    <string name="choose_theme_dialog_title">Change theme</string>
     <string name="main_call_icon">call icon</string>
     <string name="main_photo_camera_icon">photo camera icon</string>
     <string name="setup_button_start">start</string>
@@ -65,6 +70,7 @@
 
     <string name="no_app_selected_toast_msg">Choose at least one app</string>
     <string name="choose_apps_title">Choose Apps</string>
+    <string name="choose_time_format_dialog_title">Choose Time Format</string>
 
 
     <string name="notes_date_placeholder">Edited at %s</string>

@@ -83,10 +83,10 @@ class SettingsFragment : StatusBarThemeFragment() {
 
     private fun initComponents() {
         val settings = context!!.getSharedPreferences(getString(R.string.prefs_settings), MODE_PRIVATE)
-        clockSwitch.isChecked = settings.getBoolean(getString(R.string.prefs_settings_key_clock_type), false)
+        clockSwitch.isChecked = settings.getBoolean(getString(R.string.prefs_settings_key_time_format), false)
         clockSwitch.setOnCheckedChangeListener { _, b ->
             settings.edit {
-                putBoolean(getString(R.string.prefs_settings_key_clock_type), b)
+                putBoolean(getString(R.string.prefs_settings_key_time_format), b)
             }
         }
 

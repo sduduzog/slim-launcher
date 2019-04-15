@@ -5,11 +5,11 @@
     android:id="@+id/main_fragment2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layoutDescription="@xml/main_motion_scene"
+    app:layoutDescription="@xml/home_motion_scene"
     tools:showPaths="true">
 
     <TextView
-        android:id="@+id/main_fragment_time"
+        android:id="@+id/home_fragment_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_64sdp"
@@ -18,7 +18,7 @@
         android:textSize="@dimen/_40ssp" />
 
     <TextView
-        android:id="@+id/main_fragment_time_format"
+        android:id="@+id/home_fragment_time_format"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -26,7 +26,7 @@
         android:textSize="@dimen/_13sdp" />
 
     <TextView
-        android:id="@+id/main_fragment_date"
+        android:id="@+id/home_fragment_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="@dimen/_4sdp"
@@ -35,15 +35,15 @@
         android:textSize="@dimen/_12sdp" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/main_fragment_list"
+        android:id="@+id/home_fragment_list"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:itemCount="1"
+        tools:itemCount="4"
         tools:listitem="@layout/main_fragment_list_item" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/main_fragment_list_exp"
+        android:id="@+id/home_fragment_list_exp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -51,7 +51,7 @@
         tools:listitem="@layout/main_fragment_list_item" />
 
     <TextView
-        android:id="@+id/main_fragment_options"
+        android:id="@+id/home_fragment_options"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="@dimen/_8sdp"
@@ -60,16 +60,18 @@
         android:textSize="@dimen/_18ssp" />
 
     <TextView
-        android:id="@+id/main_fragment_notes"
+        android:id="@+id/home_fragment_notes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="8dp"
         android:text="@string/main_fragment_notes"
         android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="240dp"
+        tools:layout_editor_absoluteY="618dp" />
 
     <ImageView
-        android:id="@+id/main_fragment_call"
+        android:id="@+id/home_fragment_call"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="@dimen/_8sdp"
@@ -77,7 +79,7 @@
         tools:ignore="ContentDescription" />
 
     <ImageView
-        android:id="@+id/main_fragment_camera"
+        android:id="@+id/home_fragment_camera"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="@dimen/_8sdp"

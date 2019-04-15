@@ -2,63 +2,66 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/linearLayout"
+    android:id="@+id/linearLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/main_fragment_time"
+        android:id="@+id/home_fragment_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:alpha="0"
+        android:layout_marginTop="@dimen/_64sdp"
         android:text="@string/main_placeholder_clock"
+        android:textAppearance="@style/TextAppearance.AppCompat"
         android:textSize="@dimen/_40ssp"
-        app:layout_constraintBottom_toTopOf="@+id/main_fragment_date"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/main_fragment_time_format"
+        android:id="@+id/home_fragment_time_format"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:alpha="0"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:textAppearance="@style/TextAppearance.AppCompat"
         android:textSize="@dimen/_13sdp"
-        app:layout_constraintStart_toEndOf="@+id/main_fragment_time"
-        app:layout_constraintTop_toTopOf="@+id/main_fragment_time" />
+        app:layout_constraintStart_toEndOf="@+id/home_fragment_time"
+        app:layout_constraintTop_toTopOf="@+id/home_fragment_time" />
 
     <TextView
-        android:id="@+id/main_fragment_date"
+        android:id="@+id/home_fragment_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:alpha="0"
-        android:padding="4dp"
+        android:padding="@dimen/_4sdp"
         android:text="@string/main_placeholder_date"
+        android:textAppearance="@style/TextAppearance.AppCompat"
         android:textSize="@dimen/_12sdp"
-        app:layout_constraintBottom_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/main_fragment_time"
-        app:layout_constraintStart_toStartOf="@+id/main_fragment_time" />
+        app:layout_constraintEnd_toEndOf="@+id/home_fragment_time"
+        app:layout_constraintStart_toStartOf="@+id/home_fragment_time"
+        app:layout_constraintTop_toBottomOf="@+id/home_fragment_time" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/main_fragment_list"
+        android:id="@+id/home_fragment_list"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/main_fragment_list_exp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_fragment_date"
-        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintTop_toTopOf="@+id/home_fragment_time"
+        app:layout_constraintVertical_bias="0.494"
         tools:itemCount="4"
         tools:listitem="@layout/main_fragment_list_item" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/main_fragment_list_exp"
+        android:id="@+id/home_fragment_list_exp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -66,61 +69,60 @@
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="@dimen/_16sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_fragment_list"
+        app:layout_constraintTop_toBottomOf="parent"
         tools:itemCount="3"
         tools:listitem="@layout/main_fragment_list_item" />
 
     <TextView
-        android:id="@+id/main_fragment_options"
+        android:id="@+id/home_fragment_options"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:padding="8dp"
+        android:padding="@dimen/_8sdp"
         android:text="@string/main_fragment_options"
         android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textSize="18sp"
+        android:textSize="@dimen/_18ssp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/main_fragment_list_exp" />
+        app:layout_constraintStart_toStartOf="@+id/home_fragment_list_exp"
+        app:layout_constraintTop_toBottomOf="@+id/home_fragment_list_exp" />
 
     <TextView
-        android:id="@+id/main_fragment_notes"
+        android:id="@+id/home_fragment_notes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:padding="8dp"
         android:text="@string/main_fragment_notes"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/main_fragment_list_exp" />
-
+        app:layout_constraintEnd_toEndOf="@+id/home_fragment_list_exp"
+        app:layout_constraintTop_toBottomOf="@+id/home_fragment_list_exp" />
     <ImageView
-        android:id="@+id/main_fragment_call"
+        android:id="@+id/home_fragment_call"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="8dp"
-        app:layout_constraintTop_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
+        android:layout_marginBottom="8dp"
+        android:padding="@dimen/_8sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/ic_call"
         tools:ignore="ContentDescription" />
 
     <ImageView
-        android:id="@+id/main_fragment_camera"
+        android:id="@+id/home_fragment_camera"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        app:layout_constraintTop_toBottomOf="parent"
-        app:srcCompat="@drawable/ic_photo_camera"
+        android:layout_marginBottom="8dp"
+        android:padding="@dimen/_8sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:ignore="ContentDescription"
-        tools:layout_editor_absoluteX="320dp" />
-
+        app:srcCompat="@drawable/ic_photo_camera"
+        tools:ignore="ContentDescription" />
 </androidx.constraintlayout.widget.ConstraintLayout>
