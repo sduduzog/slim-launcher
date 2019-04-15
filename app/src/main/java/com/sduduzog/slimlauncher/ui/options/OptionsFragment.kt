@@ -1,6 +1,8 @@
 package com.sduduzog.slimlauncher.ui.options
 
+import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,7 +27,8 @@ class OptionsFragment : BaseFragment() {
             Toast.makeText(context, "This should have launched a browser but no landing page is built yet", Toast.LENGTH_LONG).show()
         }
         options_fragment_device_settings.setOnClickListener {
-//            val intent = Intent(Intent.)
+            val intent = Intent(Settings.ACTION_SETTINGS)
+            launchActivity(it, intent)
         }
         options_fragment_change_theme.setOnClickListener {
             val changeThemeDialog = ChangeThemeDialog.getThemeChooser()
@@ -34,6 +37,9 @@ class OptionsFragment : BaseFragment() {
         options_fragment_choose_time_format.setOnClickListener {
             val chooseTimeFormatDialog = ChooseTimeFormatDialog.getInstance()
             chooseTimeFormatDialog.showNow(fragmentManager, "TIME_FORMAT_CHOOSER")
+        }
+        options_fragment_hide_status_bar.setOnClickListener {
+            Toast.makeText(context, "Google how to do this, fast!!!", Toast.LENGTH_LONG).show()
         }
         options_fragment_customise_apps.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_optionsFragment_to_customiseAppsFragment))
     }
