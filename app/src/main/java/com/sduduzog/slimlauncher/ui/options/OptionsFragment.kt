@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.Navigation
 import com.sduduzog.slimlauncher.R
 import com.sduduzog.slimlauncher.dialogs.ChangeThemeDialog
@@ -20,7 +21,12 @@ class OptionsFragment : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        options_fragment_customise_apps.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_optionsFragment_to_customiseAppsFragment))
+        options_fragment_about_slim.setOnClickListener {
+            Toast.makeText(context, "This should have launched a browser but no landing page is built yet", Toast.LENGTH_LONG).show()
+        }
+        options_fragment_device_settings.setOnClickListener {
+//            val intent = Intent(Intent.)
+        }
         options_fragment_change_theme.setOnClickListener {
             val changeThemeDialog = ChangeThemeDialog.getThemeChooser()
             changeThemeDialog.showNow(fragmentManager, "THEME_CHOOSER")
@@ -29,5 +35,6 @@ class OptionsFragment : BaseFragment() {
             val chooseTimeFormatDialog = ChooseTimeFormatDialog.getInstance()
             chooseTimeFormatDialog.showNow(fragmentManager, "TIME_FORMAT_CHOOSER")
         }
+        options_fragment_customise_apps.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_optionsFragment_to_customiseAppsFragment))
     }
 }
