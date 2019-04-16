@@ -8,15 +8,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
 import androidx.fragment.app.Fragment
 import com.sduduzog.slimlauncher.R
+import com.sduduzog.slimlauncher.utils.Publisher
+import com.sduduzog.slimlauncher.utils.Subscriber
 
-abstract class BaseFragment: Fragment() {
+abstract class BaseFragment : Fragment(), Subscriber {
 
     abstract fun getFragmentView(): View
 
 
     override fun onResume() {
         super.onResume()
-        // When the Fragment resumes, check the theme and set the status bar color accordingly.
         val settings = context!!.getSharedPreferences(getString(R.string.prefs_settings), AppCompatActivity.MODE_PRIVATE)
         val active = settings.getInt(getString(R.string.prefs_settings_key_theme), 0)
 
@@ -35,7 +36,21 @@ abstract class BaseFragment: Fragment() {
         }
     }
 
-    protected fun launchActivity(view: View, intent: Intent){
+    override fun onStart() {
+        super.onStart()
+        with(activity as Publisher){
+            this.attatchSubscriber(this@BaseFragment)
+        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        with(activity as Publisher) {
+            this.detachSubscriber(this@BaseFragment)
+        }
+    }
+
+    protected fun launchActivity(view: View, intent: Intent) {
         val left = 0
         val top = 0
         val width = view.measuredWidth
@@ -43,4 +58,6 @@ abstract class BaseFragment: Fragment() {
         val opts = ActivityOptionsCompat.makeClipRevealAnimation(view, left, top, width, height)
         startActivity(intent, opts.toBundle())
     }
+
+    override fun onBack(): Boolean = false
 }

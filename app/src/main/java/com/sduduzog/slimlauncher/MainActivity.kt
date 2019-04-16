@@ -1,46 +1,36 @@
 package com.sduduzog.slimlauncher
 
-import android.content.Intent
 import android.content.SharedPreferences
 import android.content.res.Resources
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
-import androidx.navigation.NavDestination
 import androidx.navigation.Navigation.findNavController
 import com.sduduzog.slimlauncher.ui.main.MainViewModel
+import com.sduduzog.slimlauncher.utils.Publisher
+import com.sduduzog.slimlauncher.utils.Subscriber
 
 
-class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceChangeListener, NavController.OnDestinationChangedListener {
+class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceChangeListener, Publisher {
 
     private lateinit var settings: SharedPreferences
-    private val label = "home_fragment"
-    private lateinit var currentLabel: String
     private lateinit var viewModel: MainViewModel
     private lateinit var navigator: NavController
-    var onBackPressedListener: OnBackPressedListener? = null
+    private val subscribers: MutableSet<Subscriber> = mutableSetOf()
 
+    override fun attatchSubscriber(s: Subscriber) {
+        subscribers.add(s)
+    }
 
-    var dispatcher: Subject = object : Subject() {
+    override fun detachSubscriber(s: Subscriber) {
+        subscribers.remove(s)
+    }
 
-        var observers: MutableSet<Observer> = mutableSetOf()
-        override fun attachObserver(o: Observer) {
-            observers.add(o)
-        }
-
-        override fun detachObserver(o: Observer) {
-            observers.remove(o)
-        }
-
-        override fun notifyObservers() {
-            for (o in observers) {
-                o.update("onBackPressed")
-            }
-        }
-
+    override fun dispatchBack() {
+        for (s in subscribers) if (s.onBack()) return
+        completeBackAction()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,7 +39,6 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
         settings = getSharedPreferences(getString(R.string.prefs_settings), MODE_PRIVATE)
         settings.registerOnSharedPreferenceChangeListener(this)
         navigator = findNavController(this, R.id.nav_host_fragment)
-        navigator.addOnDestinationChangedListener(this)
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
     }
 
@@ -87,29 +76,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
         return theme
     }
 
-    override fun onBackPressed() {
-        dispatcher.notifyObservers()
-        if (currentLabel != label)
-            super.onBackPressed()
-        else onBackPressedListener?.onBackPress()
-    }
-
-    /**
-     * Make the activity aware of the current destination in our NavController.
-     */
-    override fun onDestinationChanged(controller: NavController, destination: NavDestination, arguments: Bundle?) {
-        currentLabel = destination.label.toString()
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == REQUEST_CODE_ENABLE_ADMIN) {
-            if (resultCode == RESULT_OK) {
-                Toast.makeText(applicationContext, "Registered As Admin", Toast.LENGTH_SHORT).show()
-            } else {
-                Toast.makeText(applicationContext, "Failed to register as Admin", Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
+    override fun onBackPressed() { dispatchBack() }
 
     private fun showSystemUI() {
         window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
@@ -153,12 +120,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
             }
             return R.style.AppTheme
         }
-
-        const val REQUEST_CODE_ENABLE_ADMIN = 1
     }
 
-    interface OnBackPressedListener {
-        fun onBackPress()
-        fun onBackPressed()
-    }
+    private fun completeBackAction(){ super.onBackPressed() }
 }

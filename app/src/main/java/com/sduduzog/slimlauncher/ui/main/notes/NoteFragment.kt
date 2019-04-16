@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
-import com.sduduzog.slimlauncher.MainActivity
 import com.sduduzog.slimlauncher.Observer
 import com.sduduzog.slimlauncher.R
 import com.sduduzog.slimlauncher.data.Note
@@ -70,20 +69,6 @@ class NoteFragment : Fragment(), Observer {
                 // Do nothing
             }
         })
-    }
-
-    override fun onAttach(context: Context?) {
-        super.onAttach(context)
-        with(context as MainActivity) {
-            this.dispatcher.attachObserver(this@NoteFragment)
-        }
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        with(context as MainActivity) {
-            this.dispatcher.detachObserver(this@NoteFragment)
-        }
     }
 
     override fun update(on: String) {
