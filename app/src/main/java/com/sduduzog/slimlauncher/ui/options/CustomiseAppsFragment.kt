@@ -42,6 +42,15 @@ class CustomiseAppsFragment : BaseFragment(), OnShitDoneToAppsListener {
         viewModel.apps.observe(this, Observer {
             it?.let { apps ->
                 adapter.setItems(apps)
+                when (apps.size) {
+                    in 0..6 -> {
+                        customise_apps_fragment_add.visibility = View.VISIBLE
+                    }
+                    else -> {
+                        customise_apps_fragment_add.visibility = View.GONE
+                    }
+                }
+                customise_apps_fragment_counter.text = getString(R.string.customise_apps_fragment_counter, (7 - apps.size))
             } ?: adapter.setItems(listOf())
         })
 
