@@ -17,7 +17,7 @@ import com.sduduzog.slimlauncher.ui.main.MainViewModel
 class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceChangeListener, NavController.OnDestinationChangedListener {
 
     private lateinit var settings: SharedPreferences
-    private val label = "main_fragment"
+    private val label = "home_fragment"
     private lateinit var currentLabel: String
     private lateinit var viewModel: MainViewModel
     private lateinit var navigator: NavController

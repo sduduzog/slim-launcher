@@ -25,14 +25,6 @@ abstract class DataRoomDatabase : RoomDatabase() {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.applicationContext,
                             DataRoomDatabase::class.java, "app_database")
-                            .addCallback(object : Callback(){
-                                override fun onCreate(db: SupportSQLiteDatabase) {
-                                    super.onCreate(db)
-                                    val database = DataRoomDatabase.getDatabase(context)!!
-                                    val dao = database.noteDao()
-                                    PopulateDatabaseTask(dao).execute()
-                                }
-                            })
                             .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
                             .build()
                 }

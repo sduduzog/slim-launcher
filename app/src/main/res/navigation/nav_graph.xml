@@ -3,16 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/mainFragment">
+    app:startDestination="@id/homeFragment">
 
     <fragment
-        android:id="@+id/mainFragment"
-        android:name="com.sduduzog.slimlauncher.ui.main.MainFragment"
-        android:label="main_fragment"
+        android:id="@+id/homeFragment"
+        android:name="com.sduduzog.slimlauncher.ui.main.HomeFragment"
+        android:label="home_fragment"
         tools:layout="@layout/main_fragment">
-
         <action
-            android:id="@+id/action_mainFragment_to_optionsFragment"
+            android:id="@+id/action_homeFragment_to_optionsFragment"
             app:destination="@id/optionsFragment" />
     </fragment>
     <fragment

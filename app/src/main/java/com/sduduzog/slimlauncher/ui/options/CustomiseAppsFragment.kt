@@ -3,23 +3,22 @@ package com.sduduzog.slimlauncher.ui.options
 import android.graphics.Canvas
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.PopupMenu
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.sduduzog.slimlauncher.R
 import com.sduduzog.slimlauncher.adapters.CustomAppsAdapter
 import com.sduduzog.slimlauncher.data.HomeApp
 import com.sduduzog.slimlauncher.data.MainViewModel
 import com.sduduzog.slimlauncher.ui.BaseFragment
-import com.sduduzog.slimlauncher.utils.OnShitDoneToAppsListener
 import com.sduduzog.slimlauncher.utils.OnItemActionListener
+import com.sduduzog.slimlauncher.utils.OnShitDoneToAppsListener
 import kotlinx.android.synthetic.main.customise_apps_fragment.*
-import androidx.appcompat.widget.PopupMenu
-import com.sduduzog.slimlauncher.R
 
 
 class CustomiseAppsFragment : BaseFragment(), OnShitDoneToAppsListener {
@@ -107,8 +106,9 @@ class CustomiseAppsFragment : BaseFragment(), OnShitDoneToAppsListener {
 
     override fun onAppMenuClicked(view: View, app: HomeApp) {
         showPopupMenu(view).setOnMenuItemClickListener {
-            when (it.itemId){
-                R.id.ca_menu_rename -> {}
+            when (it.itemId) {
+                R.id.ca_menu_rename -> {
+                }
                 R.id.ca_menu_remove -> {
                     viewModel.remove(app)
                 }

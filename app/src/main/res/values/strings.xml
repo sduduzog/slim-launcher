@@ -101,6 +101,7 @@
     <string name="customise_apps_fragment_add">Add</string>
     <string name="menu_rename">Rename</string>
     <string name="menu_remove">Remove</string>
+    <string name="customise_apps_fragment_counter">%s slots left</string>
 
 
 </resources>

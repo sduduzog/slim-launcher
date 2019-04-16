@@ -8,7 +8,7 @@
     app:behavior_hideable="false"
     app:behavior_peekHeight="60dp"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
-    tools:context="com.sduduzog.slimlauncher.ui.main.MainFragment">
+    tools:context="com.sduduzog.slimlauncher.ui.main.HomeFragment">
 
 
     <androidx.cardview.widget.CardView
