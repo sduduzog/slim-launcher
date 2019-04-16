@@ -1,26 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorAccent">#37474F</color>
 
     <color name="colorWhite">#ffffff</color>
     <color name="colorWhiteDark">#BDBDBD</color>
 
-    <color name="primaryColor">#212121</color>
     <color name="primaryDarkColor">#000000</color>
 
     <color name="colorBlueGrey">#37474f</color>
-    <color name="colorBlueGreyDark">#263238</color>
 
     <color name="colorPink">#fce4ec</color>
-    <color name="colorPinkDark">#F8BBD0</color>
 
     <color name="colorTeal">#B2DFDB</color>
-    <color name="colorTealDark">#80CBC4</color>
 
-    <color name="inverseTextColor">#e0e0e0</color>
-    <color name="inverseAccentColor">#607d8b</color>
+    <color name="lightAccentColor">#080808</color>
+    <color name="darkAccentColor">#e0e0e0</color>
 
     <color name="colorCandy">#f06292</color>
-    <color name="colorCandyDark">#e91e63</color>
 
 </resources>

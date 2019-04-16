@@ -3,65 +3,40 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/setupFragment">
+    app:startDestination="@id/mainFragment">
 
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.sduduzog.slimlauncher.ui.main.MainFragment"
         android:label="main_fragment"
         tools:layout="@layout/main_fragment">
-        <action
-            android:id="@+id/action_mainFragment_to_notesListFragment"
-            app:destination="@id/notesListFragment" />
 
         <action
-            android:id="@+id/action_mainFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_aboutFragment"
-            app:destination="@id/aboutFragment" />
+            android:id="@+id/action_mainFragment_to_optionsFragment"
+            app:destination="@id/optionsFragment" />
     </fragment>
     <fragment
-        android:id="@+id/settingsFragment"
-        android:name="com.sduduzog.slimlauncher.ui.main.settings.SettingsFragment"
-        android:label="fragment_settings"
-        tools:layout="@layout/settings_fragment">
+        android:id="@+id/optionsFragment"
+        android:name="com.sduduzog.slimlauncher.ui.options.OptionsFragment"
+        android:label="options_fragment"
+        tools:layout="@layout/options_fragment" >
         <action
-            android:id="@+id/action_openAppsFragment"
-            app:destination="@+id/appsFragment" />
+            android:id="@+id/action_optionsFragment_to_customiseAppsFragment"
+            app:destination="@id/customiseAppsFragment" />
     </fragment>
     <fragment
-        android:id="@+id/appsFragment"
-        android:name="com.sduduzog.slimlauncher.ui.main.settings.AppsFragment"
-        android:label="fragment_apps_list"
-        tools:layout="@layout/apps_fragment" />
-    <fragment
-        android:id="@+id/aboutFragment"
-        android:name="com.sduduzog.slimlauncher.ui.main.AboutFragment"
-        android:label="fragment_about"
-        tools:layout="@layout/about_fragment" />
-    <fragment
-        android:id="@+id/setupFragment"
-        android:name="com.sduduzog.slimlauncher.ui.main.setup.SetupFragment"
-        android:label="setup_fragment"
-        tools:layout="@layout/setup_fragment">
+        android:id="@+id/customiseAppsFragment"
+        android:name="com.sduduzog.slimlauncher.ui.options.CustomiseAppsFragment"
+        android:label="customise_apps_fragment"
+        tools:layout="@layout/customise_apps_fragment" >
         <action
-            android:id="@+id/action_setupFragment_to_mainFragment2"
-            app:destination="@id/mainFragment" />
+            android:id="@+id/action_customiseAppsFragment_to_addAppFragment"
+            app:destination="@id/addAppFragment" />
     </fragment>
     <fragment
-        android:id="@+id/notesListFragment"
-        android:name="com.sduduzog.slimlauncher.ui.main.notes.NotesListFragment"
-        android:label="notes_list_fragment"
-        tools:layout="@layout/notes_list_fragment">
-        <action
-            android:id="@+id/action_openNoteFragment"
-            app:destination="@id/noteFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/noteFragment"
-        android:name="com.sduduzog.slimlauncher.ui.main.notes.NoteFragment"
-        android:label="note_fragment"
-        tools:layout="@layout/note_fragment" />
+        android:id="@+id/addAppFragment"
+        android:name="com.sduduzog.slimlauncher.ui.options.AddAppFragment"
+        android:label="add_app_fragment"
+        tools:layout="@layout/add_app_fragment" />
 
 </navigation>

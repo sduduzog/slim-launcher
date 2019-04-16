@@ -14,16 +14,17 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
 import com.sduduzog.slimlauncher.R
 import com.sduduzog.slimlauncher.data.HomeApp
+import com.sduduzog.slimlauncher.data.MainViewModel
 
 
 class HomeAppsAdapter(private var fragment: MainFragment)
     : RecyclerView.Adapter<HomeAppsAdapter.ViewHolder>() {
 
     private var apps: List<HomeApp> = listOf()
-    private var viewModel = ViewModelProviders.of(fragment).get(MainViewModel::class.java)
+    private var viewModel = ViewModelProviders.of(fragment.activity!!).get(MainViewModel::class.java)
 
     init {
-        viewModel.homeApps.observe(fragment, Observer {
+        viewModel.apps.observe(fragment, Observer {
             if (it != null) {
                 apps = it
                 notifyDataSetChanged()
@@ -33,7 +34,7 @@ class HomeAppsAdapter(private var fragment: MainFragment)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeAppsAdapter.ViewHolder {
         val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.main_list_item, parent, false)
+                .inflate(R.layout.main_fragment_list_item, parent, false)
         return ViewHolder(view)
     }
 
@@ -56,7 +57,7 @@ class HomeAppsAdapter(private var fragment: MainFragment)
                 fragment.startActivity(intent, opts.toBundle())
             } catch (e: ActivityNotFoundException) {
                 Toast.makeText(fragment.context, "${item.appName} seems to be uninstalled, removing from list", Toast.LENGTH_LONG).show()
-                viewModel.deleteApp(item)
+                //viewModel.deleteApp(item)
             }
         }
     }

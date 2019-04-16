@@ -12,7 +12,6 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
@@ -76,8 +75,7 @@ class SettingsListAdapter(private val fragment: Fragment) : RecyclerView.Adapter
             holder.itemDragger.visibility = View.GONE
             val bundle = Bundle()
             bundle.putInt("index", position)
-            holder.itemButton.setOnClickListener(
-                    Navigation.createNavigateOnClickListener(R.id.action_openAppsFragment, bundle))
+//            holder.itemButton.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_openAppsFragment, bundle))
         }
     }
 

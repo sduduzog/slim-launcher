@@ -16,8 +16,11 @@ interface AppDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insert(app: App)
 
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    fun update(vararg apps: HomeApp)
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun addHomeApp(app: HomeApp)
+    fun add(app: HomeApp)
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     fun updateHomeApp(app: HomeApp)

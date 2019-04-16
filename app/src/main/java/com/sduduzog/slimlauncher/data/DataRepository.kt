@@ -69,7 +69,7 @@ class DataRepository(application: Application) {
     private class InsertHomeAppAsyncTask internal constructor(private val mAsyncTaskDao: AppDao) : AsyncTask<HomeApp, Void, Void>() {
 
         override fun doInBackground(vararg params: HomeApp): Void? {
-            mAsyncTaskDao.addHomeApp(params[0])
+            mAsyncTaskDao.add(params[0])
             return null
         }
     }
