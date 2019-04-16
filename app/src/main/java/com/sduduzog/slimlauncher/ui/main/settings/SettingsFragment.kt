@@ -90,10 +90,10 @@ class SettingsFragment : StatusBarThemeFragment() {
             }
         }
 
-        statusBarSwitch.isChecked = settings.getBoolean(getString(R.string.prefs_settings_key_hide_status_bar), false)
+        statusBarSwitch.isChecked = settings.getBoolean(getString(R.string.prefs_settings_key_toggle_status_bar), false)
         statusBarSwitch.setOnCheckedChangeListener { _, b ->
             settings.edit {
-                putBoolean(getString(R.string.prefs_settings_key_hide_status_bar), b)
+                putBoolean(getString(R.string.prefs_settings_key_toggle_status_bar), b)
             }
         }
     }

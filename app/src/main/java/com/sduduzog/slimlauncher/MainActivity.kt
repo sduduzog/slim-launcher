@@ -74,7 +74,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
         if (s.equals(getString(R.string.prefs_settings_key_theme), true)) {
             recreate()
         }
-        if (s.equals(getString(R.string.prefs_settings_key_hide_status_bar), true)) {
+        if (s.equals(getString(R.string.prefs_settings_key_toggle_status_bar), true)) {
             toggleStatusBar()
         }
     }
@@ -123,7 +123,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
     }
 
     private fun toggleStatusBar() {
-        val isHidden = settings.getBoolean(getString(R.string.prefs_settings_key_hide_status_bar), false)
+        val isHidden = settings.getBoolean(getString(R.string.prefs_settings_key_toggle_status_bar), false)
         if (isHidden) {
             hideSystemUI()
         } else {
