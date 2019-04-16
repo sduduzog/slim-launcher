@@ -23,7 +23,7 @@
         android:id="@+id/home_fragment_time_format"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_16sdp"
+        android:layout_marginTop="@dimen/_10sdp"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textSize="@dimen/_13sdp"
         app:layout_constraintStart_toEndOf="@+id/home_fragment_time"

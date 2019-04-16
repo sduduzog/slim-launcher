@@ -2,7 +2,7 @@
 <androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main_fragment2"
+    android:id="@+id/home_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layoutDescription="@xml/home_motion_scene"
@@ -21,7 +21,6 @@
         android:id="@+id/home_fragment_time_format"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textSize="@dimen/_13sdp" />
 
@@ -66,9 +65,7 @@
         android:padding="8dp"
         android:text="@string/main_fragment_notes"
         android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textSize="18sp"
-        tools:layout_editor_absoluteX="240dp"
-        tools:layout_editor_absoluteY="618dp" />
+        android:textSize="18sp" />
 
     <ImageView
         android:id="@+id/home_fragment_call"
