@@ -7,18 +7,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
-import com.sduduzog.slimlauncher.Observer
 import com.sduduzog.slimlauncher.R
 import com.sduduzog.slimlauncher.data.Note
+import com.sduduzog.slimlauncher.ui.BaseFragment
 import com.sduduzog.slimlauncher.ui.main.DoubleClickListener
 import kotlinx.android.synthetic.main.note_fragment.*
 import java.security.MessageDigest
 import java.util.*
 
 
-class NoteFragment : Fragment(), Observer {
+class NoteFragment : BaseFragment() {
+
+    override fun getFragmentView(): View = note_fragment
 
     private lateinit var note: Note
     private lateinit var viewModel: NotesViewModel
@@ -71,10 +72,6 @@ class NoteFragment : Fragment(), Observer {
         })
     }
 
-    override fun update(on: String) {
-        saveNote()
-    }
-
     private fun editBody() {
         textBody.visibility = View.GONE
         bodyEditText.visibility = View.VISIBLE
@@ -104,5 +101,10 @@ class NoteFragment : Fragment(), Observer {
         val md = MessageDigest.getInstance("MD5")
         md.update(bytes)
         return String(md.digest())
+    }
+
+    override fun onBack(): Boolean {
+        saveNote()
+        return false
     }
 }

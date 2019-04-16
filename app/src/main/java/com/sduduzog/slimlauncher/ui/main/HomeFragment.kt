@@ -55,8 +55,8 @@ class HomeFragment : BaseFragment(), OnLaunchAppListener {
         })
 
         setEventListeners()
-
         home_fragment_options.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_homeFragment_to_optionsFragment))
+        home_fragment_notes.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_homeFragment_to_notesListFragment))
     }
 
     override fun onStart() {
