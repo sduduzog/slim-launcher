@@ -11,10 +11,10 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.sduduzog.slimlauncher.R
 import com.sduduzog.slimlauncher.data.HomeApp
-import com.sduduzog.slimlauncher.utils.OnAppsUpdatedListener
+import com.sduduzog.slimlauncher.utils.OnShitDoneToAppsListener
 import com.sduduzog.slimlauncher.utils.OnItemActionListener
 
-class CustomAppsAdapter(private val listener: OnAppsUpdatedListener) : RecyclerView.Adapter<CustomAppsAdapter.ViewHolder>(), OnItemActionListener {
+class CustomAppsAdapter(private val listener: OnShitDoneToAppsListener) : RecyclerView.Adapter<CustomAppsAdapter.ViewHolder>(), OnItemActionListener {
 
     private var apps: MutableList<HomeApp> = mutableListOf()
     private lateinit var touchHelper: ItemTouchHelper
@@ -35,6 +35,9 @@ class CustomAppsAdapter(private val listener: OnAppsUpdatedListener) : RecyclerV
                 touchHelper.startDrag(holder)
             }
             false
+        }
+        holder.menuIcon.setOnClickListener {
+            listener.onAppMenuClicked(it, item)
         }
     }
 
@@ -81,6 +84,7 @@ class CustomAppsAdapter(private val listener: OnAppsUpdatedListener) : RecyclerV
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val dragHandle: ImageView = itemView.findViewById(R.id.ca_list_item_drag_handle)
         val appName: TextView = itemView.findViewById(R.id.ca_list_item_app_name)
+        val menuIcon: ImageView = itemView.findViewById(R.id.ca_list_item_more_icon)
 
         override fun toString(): String {
             return super.toString() + " '${appName.text}'"

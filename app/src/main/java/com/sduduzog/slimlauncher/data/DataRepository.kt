@@ -77,7 +77,7 @@ class DataRepository(application: Application) {
     private class DeleteHomeAppAsyncTask internal constructor(private val mAsyncTaskDao: AppDao) : AsyncTask<HomeApp, Void, Void>() {
 
         override fun doInBackground(vararg params: HomeApp): Void? {
-            mAsyncTaskDao.deleteHomeApp(params[0])
+            mAsyncTaskDao.remove(params[0])
             return null
         }
     }

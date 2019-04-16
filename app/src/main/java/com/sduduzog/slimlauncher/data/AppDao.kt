@@ -32,6 +32,6 @@ interface AppDao {
     fun clearHomeApps()
 
     @Delete
-    fun deleteHomeApp(app: HomeApp)
+    fun remove(vararg app: HomeApp)
 
 }
