@@ -5,10 +5,8 @@ import android.content.res.Resources
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.Navigation.findNavController
-import com.sduduzog.slimlauncher.ui.main.MainViewModel
 import com.sduduzog.slimlauncher.utils.Publisher
 import com.sduduzog.slimlauncher.utils.Subscriber
 
@@ -16,7 +14,6 @@ import com.sduduzog.slimlauncher.utils.Subscriber
 class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceChangeListener, Publisher {
 
     private lateinit var settings: SharedPreferences
-    private lateinit var viewModel: MainViewModel
     private lateinit var navigator: NavController
     private val subscribers: MutableSet<Subscriber> = mutableSetOf()
 
@@ -39,12 +36,6 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
         settings = getSharedPreferences(getString(R.string.prefs_settings), MODE_PRIVATE)
         settings.registerOnSharedPreferenceChangeListener(this)
         navigator = findNavController(this, R.id.nav_host_fragment)
-        viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
-    }
-
-    override fun onStart() {
-        super.onStart()
-        viewModel.refreshApps()
     }
 
     override fun onResume() {

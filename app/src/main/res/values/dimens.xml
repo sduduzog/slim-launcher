@@ -17,5 +17,5 @@
 
     <!--<dimen name="main_clock_marginTop">16dp</dimen>-->
     <!--<dimen name="main_top_guide_begin">150dp</dimen>-->
-    <dimen name="main_bottom_guide_end">56dp</dimen>
+    <!--<dimen name="main_bottom_guide_end">56dp</dimen>-->
 </resources>
