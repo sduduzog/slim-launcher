@@ -1,4 +1,4 @@
-package com.sduduzog.slimlauncher.ui.main.settings
+package com.sduduzog.slimlauncher.dialogs
 
 import android.app.Dialog
 import android.os.Bundle
@@ -8,7 +8,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import com.sduduzog.slimlauncher.R
 import com.sduduzog.slimlauncher.data.HomeApp
-import com.sduduzog.slimlauncher.ui.main.MainViewModel
+import com.sduduzog.slimlauncher.data.MainViewModel
 import kotlinx.android.synthetic.main.settings_fragment.*
 
 class RenameAppDialog : DialogFragment() {
@@ -25,7 +25,7 @@ class RenameAppDialog : DialogFragment() {
         builder.setView(view)
         builder.setPositiveButton("DONE") { _, _ ->
             app.appName = editText.text.toString()
-            model.renameApp(app)
+            model.update(app)
         }
         return builder.create()
     }

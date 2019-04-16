@@ -15,6 +15,7 @@ import com.sduduzog.slimlauncher.R
 import com.sduduzog.slimlauncher.adapters.CustomAppsAdapter
 import com.sduduzog.slimlauncher.data.HomeApp
 import com.sduduzog.slimlauncher.data.MainViewModel
+import com.sduduzog.slimlauncher.dialogs.RenameAppDialog
 import com.sduduzog.slimlauncher.ui.BaseFragment
 import com.sduduzog.slimlauncher.utils.OnItemActionListener
 import com.sduduzog.slimlauncher.utils.OnShitDoneToAppsListener
@@ -117,6 +118,7 @@ class CustomiseAppsFragment : BaseFragment(), OnShitDoneToAppsListener {
         showPopupMenu(view).setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.ca_menu_rename -> {
+                    RenameAppDialog.rename(app, viewModel).show(childFragmentManager, "SettingsListAdapter")
                 }
                 R.id.ca_menu_remove -> {
                     viewModel.remove(app)

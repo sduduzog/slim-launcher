@@ -64,7 +64,7 @@ class SettingsListAdapter(private val fragment: Fragment) : RecyclerView.Adapter
             }
 
             holder.itemView.setOnLongClickListener {
-                RenameAppDialog.rename(app, viewModel).show(fragment.childFragmentManager, "SettingsListAdapter")
+//                RenameAppDialog.rename(app, viewModel).show(fragment.childFragmentManager, "SettingsListAdapter")
                 renamedOnIndex = position
                 true
             }
