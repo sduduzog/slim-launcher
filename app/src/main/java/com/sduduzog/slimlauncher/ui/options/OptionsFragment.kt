@@ -26,7 +26,7 @@ class OptionsFragment : BaseFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         options_fragment_about_slim.setOnClickListener {
-            Toast.makeText(context, "This should have launched a browser but no landing page is built yet", Toast.LENGTH_LONG).show()
+            Toast.makeText(context, "Coming soon!", Toast.LENGTH_LONG).show()
         }
         options_fragment_device_settings.setOnClickListener {
             val intent = Intent(Settings.ACTION_SETTINGS)
