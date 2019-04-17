@@ -36,8 +36,9 @@ class AddAppFragment : BaseFragment(), OnAppClickedListener {
             viewModel = ViewModelProviders.of(it).get(MainViewModel::class.java)
         } ?: throw Error("How the fuck is this fragment alive while there's no activity?")
         viewModel.installedApps.observe(this, Observer {
+            val homeApps = viewModel.apps.value.orEmpty()
             it?.let { apps ->
-                adapter.setItems(apps)
+                adapter.setItems(apps.filterNot { app -> homeApps.map { homeApp -> homeApp.packageName }.contains(app.packageName) })
                 add_app_fragment_progress_bar.visibility = View.GONE
             } ?: run {
                 add_app_fragment_progress_bar.visibility = View.VISIBLE
