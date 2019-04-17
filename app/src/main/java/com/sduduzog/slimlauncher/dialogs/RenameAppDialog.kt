@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import com.sduduzog.slimlauncher.R
@@ -17,17 +18,32 @@ class RenameAppDialog : DialogFragment() {
     private lateinit var model: MainViewModel
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val view = LayoutInflater.from(context).inflate(R.layout.settings_rename_app, customise_apps_fragment)
-        val editText = view.findViewById<EditText>(R.id.rename_editText)
+        val view = LayoutInflater.from(context).inflate(R.layout.rename_app_dialog_edit_text, customise_apps_fragment, false)
+        val editText: EditText = view.findViewById(R.id.rename_editText)
         editText.text.append(app.appName)
         val builder = AlertDialog.Builder(context!!)
         builder.setTitle("Rename ${app.appName}")
         builder.setView(view)
         builder.setPositiveButton("DONE") { _, _ ->
-            app.appName = editText.text.toString()
-            model.update(app)
+            val name = editText.text.toString()
+            updateApp(name)
+        }
+        editText.setOnEditorActionListener { v, _, _ ->
+            val name = v.text.toString()
+            updateApp(name)
+            this@RenameAppDialog.dismiss()
+            true
         }
         return builder.create()
+    }
+
+    private fun updateApp(newName: String) {
+        if (newName.isNotEmpty()) {
+            app.appName = newName
+            model.update(app)
+        } else {
+            Toast.makeText(context, "App name shouldn't be empty", Toast.LENGTH_LONG).show()
+        }
     }
 
     companion object {

@@ -23,7 +23,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="Autofill,LabelFor" />
+        tools:ignore="Autofill,LabelFor"
+        android:hint="Search apps" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/add_app_fragment_list"
