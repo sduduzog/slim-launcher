@@ -154,6 +154,7 @@ class HomeFragment : BaseFragment(), OnLaunchAppListener {
     }
 
     override fun onBack(): Boolean {
+        home_fragment.transitionToStart()
         return true
     }
 
