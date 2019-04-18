@@ -8,8 +8,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import com.sduduzog.slimlauncher.R
-import com.sduduzog.slimlauncher.data.HomeApp
 import com.sduduzog.slimlauncher.data.MainViewModel
+import com.sduduzog.slimlauncher.data.model.HomeApp
 import kotlinx.android.synthetic.main.customise_apps_fragment.*
 
 class RenameAppDialog : DialogFragment() {

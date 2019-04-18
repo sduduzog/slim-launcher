@@ -7,8 +7,8 @@ import android.os.AsyncTask
 import android.os.Build
 import android.provider.AlarmClock
 import android.provider.MediaStore
-import com.sduduzog.slimlauncher.data.App
 import com.sduduzog.slimlauncher.data.MainViewModel
+import com.sduduzog.slimlauncher.data.model.App
 import java.util.*
 
 class LoadInstalledApps(private val viewModel: MainViewModel?, private val filterString: String = "") : AsyncTask<PackageManager, Unit, List<App>>() {

@@ -13,8 +13,8 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.sduduzog.slimlauncher.R
 import com.sduduzog.slimlauncher.adapters.CustomAppsAdapter
-import com.sduduzog.slimlauncher.data.HomeApp
 import com.sduduzog.slimlauncher.data.MainViewModel
+import com.sduduzog.slimlauncher.data.model.HomeApp
 import com.sduduzog.slimlauncher.dialogs.RenameAppDialog
 import com.sduduzog.slimlauncher.ui.BaseFragment
 import com.sduduzog.slimlauncher.utils.OnItemActionListener

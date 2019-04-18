@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.lifecycle.ViewModelProviders
 import com.sduduzog.slimlauncher.R
-import com.sduduzog.slimlauncher.data.Note
+import com.sduduzog.slimlauncher.data.model.Note
 import com.sduduzog.slimlauncher.ui.BaseFragment
 import com.sduduzog.slimlauncher.ui.main.DoubleClickListener
 import kotlinx.android.synthetic.main.note_fragment.*

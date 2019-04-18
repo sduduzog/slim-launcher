@@ -10,9 +10,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.sduduzog.slimlauncher.R
-import com.sduduzog.slimlauncher.data.HomeApp
-import com.sduduzog.slimlauncher.utils.OnShitDoneToAppsListener
+import com.sduduzog.slimlauncher.data.model.HomeApp
 import com.sduduzog.slimlauncher.utils.OnItemActionListener
+import com.sduduzog.slimlauncher.utils.OnShitDoneToAppsListener
 
 class CustomAppsAdapter(private val listener: OnShitDoneToAppsListener) : RecyclerView.Adapter<CustomAppsAdapter.ViewHolder>(), OnItemActionListener {
 

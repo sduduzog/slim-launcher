@@ -3,6 +3,7 @@ package com.sduduzog.slimlauncher.data
 import android.app.Application
 import android.os.AsyncTask
 import androidx.lifecycle.LiveData
+import com.sduduzog.slimlauncher.data.model.HomeApp
 
 class AppRepository(application: Application) {
     private val db: DataRoomDatabase = DataRoomDatabase.getDatabase(application)!!

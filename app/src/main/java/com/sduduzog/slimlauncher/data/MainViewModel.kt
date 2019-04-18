@@ -4,6 +4,8 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.sduduzog.slimlauncher.data.model.App
+import com.sduduzog.slimlauncher.data.model.HomeApp
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
 

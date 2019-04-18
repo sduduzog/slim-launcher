@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import com.sduduzog.slimlauncher.data.DataRepository
-import com.sduduzog.slimlauncher.data.Note
+import com.sduduzog.slimlauncher.data.model.Note
 
 class NotesViewModel(application: Application) : AndroidViewModel(application) {
     private var _repository: DataRepository = DataRepository.getInstance(application)

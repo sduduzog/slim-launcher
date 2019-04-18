@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.sduduzog.slimlauncher.R
-import com.sduduzog.slimlauncher.data.HomeApp
+import com.sduduzog.slimlauncher.data.model.HomeApp
 import com.sduduzog.slimlauncher.utils.OnLaunchAppListener
 
 

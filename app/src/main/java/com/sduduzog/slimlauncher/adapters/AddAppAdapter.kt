@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.sduduzog.slimlauncher.R
-import com.sduduzog.slimlauncher.data.App
+import com.sduduzog.slimlauncher.data.model.App
 import com.sduduzog.slimlauncher.utils.OnAppClickedListener
 
 class AddAppAdapter(private val listener: OnAppClickedListener) : RecyclerView.Adapter<AddAppAdapter.ViewHolder>() {

@@ -6,6 +6,9 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.sduduzog.slimlauncher.data.model.App
+import com.sduduzog.slimlauncher.data.model.HomeApp
+import com.sduduzog.slimlauncher.data.model.Note
 
 
 @Database(entities = [App::class, HomeApp::class, Note::class], version = 3, exportSchema = false)

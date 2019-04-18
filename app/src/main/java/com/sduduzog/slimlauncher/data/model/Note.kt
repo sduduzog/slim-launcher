@@ -1,4 +1,4 @@
-package com.sduduzog.slimlauncher.data
+package com.sduduzog.slimlauncher.data.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
