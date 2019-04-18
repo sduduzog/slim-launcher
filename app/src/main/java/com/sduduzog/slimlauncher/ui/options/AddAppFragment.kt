@@ -1,6 +1,8 @@
 package com.sduduzog.slimlauncher.ui.options
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -45,6 +47,22 @@ class AddAppFragment : BaseFragment(), OnAppClickedListener {
             }
         })
         LoadInstalledApps(viewModel).execute(context!!.packageManager)
+        add_app_fragment_edit_text.addTextChangedListener(object: TextWatcher {
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                // Do nothing
+                s?.let {
+                    LoadInstalledApps(viewModel, it.toString()).execute(context!!.packageManager)
+                }
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // Do nothing
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                // Do nothing
+            }
+        })
     }
 
 

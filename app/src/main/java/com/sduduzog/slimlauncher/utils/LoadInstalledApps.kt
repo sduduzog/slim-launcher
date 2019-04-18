@@ -11,7 +11,7 @@ import com.sduduzog.slimlauncher.data.App
 import com.sduduzog.slimlauncher.data.MainViewModel
 import java.util.*
 
-class LoadInstalledApps(private val viewModel: MainViewModel?) : AsyncTask<PackageManager, Unit, List<App>>() {
+class LoadInstalledApps(private val viewModel: MainViewModel?, private val filterString: String = "") : AsyncTask<PackageManager, Unit, List<App>>() {
 
     private lateinit var packageManager: PackageManager
 
@@ -53,6 +53,6 @@ class LoadInstalledApps(private val viewModel: MainViewModel?) : AsyncTask<Packa
     }
 
     override fun onPostExecute(result: List<App>) {
-        viewModel?.installedApps?.value = result
+        viewModel?.installedApps?.value = result.filter { it.appName.startsWith(filterString, true) }
     }
 }
