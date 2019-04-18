@@ -41,6 +41,18 @@
         app:layout_constraintStart_toStartOf="@+id/home_fragment_time"
         app:layout_constraintTop_toBottomOf="@+id/home_fragment_time" />
 
+    <TextView
+        android:id="@+id/home_fragment_tasks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:padding="12dp"
+        android:text="@string/home_fragment_tasks"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textSize="@dimen/_24ssp"
+        app:layout_constraintBottom_toTopOf="@+id/home_fragment_list"
+        app:layout_constraintStart_toStartOf="@+id/home_fragment_list" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/home_fragment_list"
         android:layout_width="0dp"
@@ -56,7 +68,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/home_fragment_time"
-        app:layout_constraintVertical_bias="0.494"
+        app:layout_constraintVertical_bias="0.650"
         tools:itemCount="4"
         tools:listitem="@layout/main_fragment_list_item" />
 
