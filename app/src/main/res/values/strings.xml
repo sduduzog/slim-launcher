@@ -17,6 +17,14 @@
         <item>12 Hour</item>
     </string-array>
 
+    <plurals name="slots_plurals">
+        <item quantity="zero">%d slots left</item>
+        <item quantity="one">%d slot left</item>
+        <item quantity="few">%d slots left</item>
+        <item quantity="two">%d slots left</item>
+        <item quantity="other">%d slots left</item>
+    </plurals>
+
     <string name="prefs_settings">settings</string>
     <string name="prefs_settings_key_theme">key_theme</string>
     <string name="prefs_settings_key_time_format">clock_type</string>

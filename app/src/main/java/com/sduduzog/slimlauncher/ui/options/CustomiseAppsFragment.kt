@@ -51,7 +51,8 @@ class CustomiseAppsFragment : BaseFragment(), OnShitDoneToAppsListener {
                         customise_apps_fragment_add.visibility = View.GONE
                     }
                 }
-                customise_apps_fragment_counter.text = getString(R.string.customise_apps_fragment_counter, (7 - apps.size))
+                val count = 7 - apps.size
+                customise_apps_fragment_counter.text = resources.getQuantityString(R.plurals.slots_plurals, count, count)
             } ?: adapter.setItems(listOf())
         })
 
