@@ -72,7 +72,7 @@ class HomeFragment : BaseFragment(), OnLaunchAppListener {
 
     override fun onResume() {
         super.onResume()
-        updateUi()
+        updateClock()
     }
 
     override fun onStop() {
@@ -82,13 +82,16 @@ class HomeFragment : BaseFragment(), OnLaunchAppListener {
 
     private fun setEventListeners() {
 
-        home_fragment_time.setOnClickListener {
+        home_fragment_time.setOnClickListener { view ->
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                 try {
+                    val pm = context?.packageManager!!
                     val intent = Intent(AlarmClock.ACTION_SHOW_ALARMS)
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                    if (intent.resolveActivity(context!!.packageManager) != null)
-                        launchActivity(it, intent)
+                    val componentName = intent.resolveActivity(pm)
+                    pm.getLaunchIntentForPackage(componentName.packageName)?.let {
+                        launchActivity(view, it)
+                    }
                 } catch (e: ActivityNotFoundException) {
                     // Do nothing, we've failed :(
                 }
@@ -106,10 +109,14 @@ class HomeFragment : BaseFragment(), OnLaunchAppListener {
             }
         }
 
-        home_fragment_call.setOnClickListener {
+        home_fragment_call.setOnClickListener { view ->
             try {
+                val pm = context?.packageManager!!
                 val intent = Intent(Intent.ACTION_DIAL)
-                launchActivity(it, intent)
+                val componentName = intent.resolveActivity(pm)
+                pm.getLaunchIntentForPackage(componentName.packageName)?.let {
+                    launchActivity(view, it)
+                }
             } catch (e: Exception) {
                 // Do nothing
             }
@@ -125,7 +132,7 @@ class HomeFragment : BaseFragment(), OnLaunchAppListener {
         }
     }
 
-    fun updateUi() {
+    fun updateClock() {
         val twenty4Hour = context?.getSharedPreferences(getString(R.string.prefs_settings), Context.MODE_PRIVATE)
                 ?.getBoolean(getString(R.string.prefs_settings_key_time_format), true)
         val date = Date()
@@ -161,7 +168,7 @@ class HomeFragment : BaseFragment(), OnLaunchAppListener {
 
     inner class ClockReceiver : BroadcastReceiver() {
         override fun onReceive(ctx: Context?, intent: Intent?) {
-            updateUi()
+            updateClock()
         }
     }
 }
