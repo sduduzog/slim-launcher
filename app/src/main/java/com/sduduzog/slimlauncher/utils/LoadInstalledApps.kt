@@ -7,6 +7,7 @@ import android.os.AsyncTask
 import android.os.Build
 import android.provider.AlarmClock
 import android.provider.MediaStore
+import com.sduduzog.slimlauncher.BuildConfig
 import com.sduduzog.slimlauncher.data.MainViewModel
 import com.sduduzog.slimlauncher.data.model.App
 import java.util.*
@@ -48,6 +49,8 @@ class LoadInstalledApps(private val viewModel: MainViewModel?, private val filte
         Intent(MediaStore.INTENT_ACTION_STILL_IMAGE_CAMERA).resolveActivity(packageManager)?.let {
             filter.add(it.packageName)
         }
+
+        filter.add(BuildConfig.APPLICATION_ID)
 
         return list.filterNot { filter.contains(it.packageName) }
     }
