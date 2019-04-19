@@ -21,7 +21,6 @@
         <item name="colorPrimary">@color/colorBlueGrey</item>
         <item name="colorPrimaryDark">@color/colorBlueGrey</item>
         <item name="android:colorBackground">@color/colorBlueGrey</item>
-        <item name="cardBackgroundColor">@color/colorBlueGrey</item>
         <item name="colorAccent">@color/darkAccentColor</item>
     </style>
 
