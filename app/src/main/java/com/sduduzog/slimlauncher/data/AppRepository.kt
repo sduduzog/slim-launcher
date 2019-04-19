@@ -9,7 +9,7 @@ class AppRepository(application: Application) {
     private val db: DataRoomDatabase = DataRoomDatabase.getDatabase(application)!!
     private val appDao: AppDao = db.appDao()
 
-    private val _apps = appDao.homeApps
+    private val _apps = appDao.apps
 
     val apps: LiveData<List<HomeApp>>
         get() = _apps

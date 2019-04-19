@@ -56,7 +56,6 @@ class CustomiseAppsFragment : BaseFragment(), OnShitDoneToAppsListener {
             } ?: adapter.setItems(listOf())
         })
 
-
         customise_apps_fragment_list.adapter = adapter
         val listener: OnItemActionListener = adapter
         val simpleItemTouchCallback = object : ItemTouchHelper.Callback() {

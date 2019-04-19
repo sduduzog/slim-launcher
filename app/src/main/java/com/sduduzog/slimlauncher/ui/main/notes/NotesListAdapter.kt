@@ -51,7 +51,7 @@ class NotesListAdapter(private val fragment: NotesListFragment) : RecyclerView.A
         holder.edited.text = fragment.getString(R.string.notes_date_placeholder, fWatchDate.format(note.edited))
         val bundle = Bundle()
         bundle.putSerializable("note", note)
-        holder.itemView.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_notesListFragment_to_noteFragment, bundle))
+        holder.itemView.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_notesFragment_to_noteFragment, bundle))
     }
 
     override fun getItemCount() = notes.size

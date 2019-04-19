@@ -1,4 +1,4 @@
-package com.sduduzog.slimlauncher.ui.main
+package com.sduduzog.slimlauncher.utils
 
 import android.view.View
 

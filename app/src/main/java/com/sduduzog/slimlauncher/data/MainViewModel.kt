@@ -6,15 +6,19 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.sduduzog.slimlauncher.data.model.App
 import com.sduduzog.slimlauncher.data.model.HomeApp
+import com.sduduzog.slimlauncher.data.model.Note
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     private val _appRepository = AppRepository(application)
+    private val _noteRepository  = NoteRepository(application)
 
     private var _apps: LiveData<List<HomeApp>>
+    private var _notes: LiveData<List<Note>>
 
     init {
         _apps = _appRepository.apps
+        _notes = _noteRepository.notes
     }
 
     val apps: LiveData<List<HomeApp>>

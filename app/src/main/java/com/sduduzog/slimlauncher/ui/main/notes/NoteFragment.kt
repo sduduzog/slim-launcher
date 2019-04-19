@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.sduduzog.slimlauncher.R
 import com.sduduzog.slimlauncher.data.model.Note
 import com.sduduzog.slimlauncher.ui.BaseFragment
-import com.sduduzog.slimlauncher.ui.main.DoubleClickListener
+import com.sduduzog.slimlauncher.utils.DoubleClickListener
 import kotlinx.android.synthetic.main.note_fragment.*
 import java.security.MessageDigest
 import java.util.*

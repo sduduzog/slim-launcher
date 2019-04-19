@@ -14,8 +14,8 @@
             android:id="@+id/action_homeFragment_to_optionsFragment"
             app:destination="@id/optionsFragment" />
         <action
-            android:id="@+id/action_homeFragment_to_notesListFragment"
-            app:destination="@id/notesListFragment" />
+            android:id="@+id/action_homeFragment_to_notesFragment"
+            app:destination="@id/notesFragment" />
     </fragment>
     <fragment
         android:id="@+id/optionsFragment"
@@ -41,18 +41,18 @@
         android:label="add_app_fragment"
         tools:layout="@layout/add_app_fragment" />
     <fragment
-        android:id="@+id/notesListFragment"
-        android:name="com.sduduzog.slimlauncher.ui.main.notes.NotesListFragment"
-        android:label="notes_list_fragment"
-        tools:layout="@layout/notes_list_fragment" >
-        <action
-            android:id="@+id/action_notesListFragment_to_noteFragment"
-            app:destination="@id/noteFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/noteFragment"
         android:name="com.sduduzog.slimlauncher.ui.main.notes.NoteFragment"
         android:label="note_fragment"
         tools:layout="@layout/note_fragment" />
+    <fragment
+        android:id="@+id/notesFragment"
+        android:name="com.sduduzog.slimlauncher.ui.main.NotesFragment"
+        android:label="notes_fragment"
+        tools:layout="@layout/notes_fragment" >
+        <action
+            android:id="@+id/action_notesFragment_to_noteFragment"
+            app:destination="@id/noteFragment" />
+    </fragment>
 
 </navigation>

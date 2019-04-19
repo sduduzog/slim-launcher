@@ -38,7 +38,7 @@ class HomeAdapter(private val listener: OnLaunchAppListener)
 
 
     inner class ViewHolder(mView: View) : RecyclerView.ViewHolder(mView) {
-        val mLabelView: TextView = mView.findViewById(R.id.main_label)
+        val mLabelView: TextView = mView.findViewById(R.id.home_fragment_list_item_app_name)
 
         override fun toString(): String {
             return super.toString() + " '" + mLabelView.text + "'"

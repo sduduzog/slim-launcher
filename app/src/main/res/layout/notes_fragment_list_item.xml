@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/_12sdp">
+
+    <TextView
+        android:id="@+id/notes_fragment_list_item_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textSize="@dimen/_18ssp" />
+
+    <TextView
+        android:id="@+id/notes_fragment_list_item_snippet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>

@@ -3,19 +3,13 @@ package com.sduduzog.slimlauncher.data
 import android.app.Application
 import android.os.AsyncTask
 import androidx.lifecycle.LiveData
-import com.sduduzog.slimlauncher.data.model.App
 import com.sduduzog.slimlauncher.data.model.Note
 
 class DataRepository(application: Application) {
 
     private val db: DataRoomDatabase = DataRoomDatabase.getDatabase(application)!!
-    private val appDao: AppDao = db.appDao()
     private val noteDao: NoteDao = db.noteDao()
-    private var _apps: LiveData<List<App>> = appDao.apps
     private var _notes: LiveData<List<Note>> = noteDao.notes
-
-    val apps: LiveData<List<App>>
-        get() = _apps
 
     val notes: LiveData<List<Note>>
         get() = _notes

@@ -6,12 +6,11 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.sduduzog.slimlauncher.data.model.App
 import com.sduduzog.slimlauncher.data.model.HomeApp
 import com.sduduzog.slimlauncher.data.model.Note
 
 
-@Database(entities = [App::class, HomeApp::class, Note::class], version = 3, exportSchema = false)
+@Database(entities = [HomeApp::class, Note::class], version = 4, exportSchema = false)
 abstract class DataRoomDatabase : RoomDatabase() {
 
     abstract fun appDao(): AppDao
@@ -28,7 +27,7 @@ abstract class DataRoomDatabase : RoomDatabase() {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.applicationContext,
                             DataRoomDatabase::class.java, "app_database")
-                            .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
+                            .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4)
                             .build()
                 }
                 return INSTANCE
@@ -53,6 +52,12 @@ abstract class DataRoomDatabase : RoomDatabase() {
         private val MIGRATION_2_3 = object : Migration(2, 3) {
             override fun migrate(database: SupportSQLiteDatabase) {
                 database.execSQL("CREATE TABLE IF NOT EXISTS `notes` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `title` TEXT, `body` TEXT NOT NULL, `edited` INTEGER NOT NULL)")
+            }
+        }
+
+        private val MIGRATION_3_4 = object : Migration(3, 4){
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL("DROP TABLE IF EXISTS `apps`")
             }
         }
     }

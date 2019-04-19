@@ -53,6 +53,7 @@
     <string name="customise_apps_fragment_counter">%d slot(s) left</string>
     <string name="choose_theme_dialog_title">Choose Theme</string>
     <string name="home_fragment_tasks">Tasks</string>
+    <string name="notes_fragment_create_new_note">Create New Note</string>
 
 
 </resources>
