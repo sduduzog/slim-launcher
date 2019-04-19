@@ -7,25 +7,24 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.Navigation.findNavController
-import com.sduduzog.slimlauncher.utils.Publisher
-import com.sduduzog.slimlauncher.utils.Subscriber
+import com.sduduzog.slimlauncher.utils.BaseFragment
 
 
-class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceChangeListener, Publisher {
+class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceChangeListener {
 
     private lateinit var settings: SharedPreferences
     private lateinit var navigator: NavController
-    private val subscribers: MutableSet<Subscriber> = mutableSetOf()
+    private val subscribers: MutableSet<BaseFragment> = mutableSetOf()
 
-    override fun attatchSubscriber(s: Subscriber) {
+    fun attachSubscriber(s: BaseFragment) {
         subscribers.add(s)
     }
 
-    override fun detachSubscriber(s: Subscriber) {
+    fun detachSubscriber(s: BaseFragment) {
         subscribers.remove(s)
     }
 
-    override fun dispatchBack() {
+    private fun dispatchBack() {
         for (s in subscribers) if (s.onBack()) return
         completeBackAction()
     }

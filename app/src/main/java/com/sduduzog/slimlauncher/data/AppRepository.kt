@@ -5,9 +5,7 @@ import android.os.AsyncTask
 import androidx.lifecycle.LiveData
 import com.sduduzog.slimlauncher.data.model.HomeApp
 
-class AppRepository(application: Application) {
-    private val db: DataRoomDatabase = DataRoomDatabase.getDatabase(application)!!
-    private val appDao: AppDao = db.appDao()
+class AppRepository(application: Application) : Repository(application) {
 
     private val _apps = appDao.apps
 

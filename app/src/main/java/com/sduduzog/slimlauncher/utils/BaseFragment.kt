@@ -7,9 +7,10 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
 import androidx.fragment.app.Fragment
+import com.sduduzog.slimlauncher.MainActivity
 import com.sduduzog.slimlauncher.R
 
-abstract class BaseFragment : Fragment(), Subscriber {
+abstract class BaseFragment : Fragment() {
 
     abstract fun getFragmentView(): View
 
@@ -36,14 +37,14 @@ abstract class BaseFragment : Fragment(), Subscriber {
 
     override fun onStart() {
         super.onStart()
-        with(activity as Publisher){
-            this.attatchSubscriber(this@BaseFragment)
+        with(activity as MainActivity) {
+            this.attachSubscriber(this@BaseFragment)
         }
     }
 
     override fun onStop() {
         super.onStop()
-        with(activity as Publisher) {
+        with(activity as MainActivity) {
             this.detachSubscriber(this@BaseFragment)
         }
     }
@@ -57,5 +58,5 @@ abstract class BaseFragment : Fragment(), Subscriber {
         startActivity(intent, opts.toBundle())
     }
 
-    override fun onBack(): Boolean = false
+    open fun onBack(): Boolean = false
 }

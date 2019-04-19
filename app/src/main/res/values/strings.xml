@@ -53,6 +53,10 @@
     <string name="home_fragment_tasks">Tasks</string>
     <string name="notes_fragment_create_new_note">Create New Note</string>
     <string name="add_apps_fragment_search_apps">Search apps</string>
+    <string name="tasks_fragment_list_item"><strike>Checkbox</strike></string>
+    <string name="tasks_fragment_sort">Sort</string>
+    <string name="tasks_fragment_clear_completed_tasks">Clear completed tasks</string>
+    <string name="tasks_fragment_enter_a_new_task">Enter a new task</string>
 
 
 </resources>

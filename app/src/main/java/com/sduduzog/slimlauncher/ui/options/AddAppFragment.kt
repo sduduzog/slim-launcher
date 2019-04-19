@@ -47,24 +47,30 @@ class AddAppFragment : BaseFragment(), OnAppClickedListener {
             }
         })
         LoadInstalledApps(viewModel).execute(context!!.packageManager)
-        add_app_fragment_edit_text.addTextChangedListener(object: TextWatcher {
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                // Do nothing
-                s?.let {
-                    LoadInstalledApps(viewModel, it.toString()).execute(context!!.packageManager)
-                }
-            }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                // Do nothing
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-                // Do nothing
-            }
-        })
+        add_app_fragment_edit_text.addTextChangedListener(onTextChangeListener)
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        add_app_fragment_edit_text.removeTextChangedListener(onTextChangeListener)
+    }
+
+    private val onTextChangeListener: TextWatcher = object : TextWatcher {
+
+        override fun afterTextChanged(s: Editable?) {
+            // Do nothing
+        }
+
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            // Do nothing
+        }
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            s?.let {
+                LoadInstalledApps(viewModel, s.toString()).execute(context!!.packageManager)
+            }
+        }
+    }
 
     override fun onAppClicked(app: App) {
         viewModel.add(app)

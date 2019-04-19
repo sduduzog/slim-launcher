@@ -5,20 +5,18 @@ import android.os.AsyncTask
 import androidx.lifecycle.LiveData
 import com.sduduzog.slimlauncher.data.model.Note
 
-class NoteRepository(application: Application) {
-    private val db: DataRoomDatabase = DataRoomDatabase.getDatabase(application)!!
-    private val noteDao: NoteDao = db.noteDao()
+class NoteRepository(application: Application) : Repository(application) {
 
     private val _notes = noteDao.notes
 
     val notes: LiveData<List<Note>>
         get() = _notes
-    
-    fun add(args: Note){
+
+    fun add(args: Note) {
         AddNoteAsyncTask(noteDao).execute(args)
     }
 
-    fun update(vararg args: Note){
+    fun update(vararg args: Note) {
         UpdateNotesAsyncTask(noteDao).execute(*args)
     }
 

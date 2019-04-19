@@ -8,14 +8,17 @@ import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.sduduzog.slimlauncher.data.model.HomeApp
 import com.sduduzog.slimlauncher.data.model.Note
+import com.sduduzog.slimlauncher.data.model.Task
 
 
-@Database(entities = [HomeApp::class, Note::class], version = 4, exportSchema = false)
+@Database(entities = [HomeApp::class, Note::class, Task::class], version = 4, exportSchema = false)
 abstract class DataRoomDatabase : RoomDatabase() {
 
     abstract fun appDao(): AppDao
 
     abstract fun noteDao(): NoteDao
+
+    abstract fun taskDao(): TaskDao
 
     companion object {
         @Volatile
@@ -58,6 +61,7 @@ abstract class DataRoomDatabase : RoomDatabase() {
         private val MIGRATION_3_4 = object : Migration(3, 4){
             override fun migrate(database: SupportSQLiteDatabase) {
                 database.execSQL("DROP TABLE IF EXISTS `apps`")
+                database.execSQL("CREATE TABLE IF NOT EXISTS `tasks` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `body` TEXT NOT NULL, `is_complete` INTEGER NOT NULL, `sorting_index` INTEGER NOT NULL)")
             }
         }
     }
