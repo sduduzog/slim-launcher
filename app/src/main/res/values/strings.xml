@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Slim Launcher</string>
+    <string name="slim_url">http://sduduzog.github.io/slim-launcher/</string>
     <string name="main_placeholder_clock">00:00</string>
     <string name="main_placeholder_date">Date</string>
 
@@ -51,7 +52,7 @@
     <string name="menu_remove">Remove</string>
     <string name="choose_theme_dialog_title">Choose Theme</string>
     <string name="home_fragment_tasks">Tasks</string>
-    <string name="notes_fragment_create_new_note">Create New Note</string>
+    <string name="notes_fragment_create_new_note">Create new</string>
     <string name="add_apps_fragment_search_apps">Search apps</string>
     <string name="tasks_fragment_list_item_complete">&lt;strike>%s&lt;/strike></string>
     <string name="tasks_fragment_sort">Sort</string>

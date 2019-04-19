@@ -2,12 +2,12 @@ package com.sduduzog.slimlauncher.ui.options
 
 import android.content.Context.MODE_PRIVATE
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.content.edit
 import androidx.navigation.Navigation
 import com.sduduzog.slimlauncher.R
@@ -26,7 +26,8 @@ class OptionsFragment : BaseFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         options_fragment_about_slim.setOnClickListener {
-            Toast.makeText(context, "Coming soon!", Toast.LENGTH_LONG).show()
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.slim_url)))
+            launchActivity(it, intent)
         }
         options_fragment_device_settings.setOnClickListener {
             val intent = Intent(Settings.ACTION_SETTINGS)
