@@ -13,7 +13,7 @@ import com.sduduzog.slimlauncher.R
 import com.sduduzog.slimlauncher.adapters.NotesAdapter
 import com.sduduzog.slimlauncher.data.MainViewModel
 import com.sduduzog.slimlauncher.data.model.Note
-import com.sduduzog.slimlauncher.ui.BaseFragment
+import com.sduduzog.slimlauncher.utils.BaseFragment
 import com.sduduzog.slimlauncher.utils.OnItemActionListener
 import com.sduduzog.slimlauncher.utils.OnShitDoneToNotesListener
 import kotlinx.android.synthetic.main.notes_fragment.*

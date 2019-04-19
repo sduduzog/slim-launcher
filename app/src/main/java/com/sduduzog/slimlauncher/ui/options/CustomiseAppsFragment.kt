@@ -16,7 +16,7 @@ import com.sduduzog.slimlauncher.adapters.CustomAppsAdapter
 import com.sduduzog.slimlauncher.data.MainViewModel
 import com.sduduzog.slimlauncher.data.model.HomeApp
 import com.sduduzog.slimlauncher.dialogs.RenameAppDialog
-import com.sduduzog.slimlauncher.ui.BaseFragment
+import com.sduduzog.slimlauncher.utils.BaseFragment
 import com.sduduzog.slimlauncher.utils.OnItemActionListener
 import com.sduduzog.slimlauncher.utils.OnShitDoneToAppsListener
 import kotlinx.android.synthetic.main.customise_apps_fragment.*

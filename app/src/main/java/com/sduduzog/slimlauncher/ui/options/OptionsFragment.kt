@@ -13,7 +13,7 @@ import androidx.navigation.Navigation
 import com.sduduzog.slimlauncher.R
 import com.sduduzog.slimlauncher.dialogs.ChangeThemeDialog
 import com.sduduzog.slimlauncher.dialogs.ChooseTimeFormatDialog
-import com.sduduzog.slimlauncher.ui.BaseFragment
+import com.sduduzog.slimlauncher.utils.BaseFragment
 import kotlinx.android.synthetic.main.options_fragment.*
 
 class OptionsFragment : BaseFragment() {

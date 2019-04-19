@@ -15,7 +15,7 @@ import com.sduduzog.slimlauncher.R
 import com.sduduzog.slimlauncher.adapters.HomeAdapter
 import com.sduduzog.slimlauncher.data.MainViewModel
 import com.sduduzog.slimlauncher.data.model.HomeApp
-import com.sduduzog.slimlauncher.ui.BaseFragment
+import com.sduduzog.slimlauncher.utils.BaseFragment
 import com.sduduzog.slimlauncher.utils.OnLaunchAppListener
 import kotlinx.android.synthetic.main.home_fragment.*
 import java.text.SimpleDateFormat
