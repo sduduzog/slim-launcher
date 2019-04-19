@@ -118,7 +118,7 @@ class CustomiseAppsFragment : BaseFragment(), OnShitDoneToAppsListener {
         showPopupMenu(view).setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.ca_menu_rename -> {
-                    RenameAppDialog.rename(app, viewModel).show(childFragmentManager, "SettingsListAdapter")
+                    RenameAppDialog.getInstance(app, viewModel).show(childFragmentManager, "SettingsListAdapter")
                 }
                 R.id.ca_menu_remove -> {
                     viewModel.remove(app)

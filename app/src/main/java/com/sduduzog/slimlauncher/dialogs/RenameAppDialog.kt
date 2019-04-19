@@ -42,12 +42,12 @@ class RenameAppDialog : DialogFragment() {
             app.appName = newName
             model.update(app)
         } else {
-            Toast.makeText(context, "App name shouldn't be empty", Toast.LENGTH_LONG).show()
+            Toast.makeText(context, "Couldn't save, App name shouldn't be empty", Toast.LENGTH_LONG).show()
         }
     }
 
     companion object {
-        fun rename(app: HomeApp, model: MainViewModel): RenameAppDialog {
+        fun getInstance(app: HomeApp, model: MainViewModel): RenameAppDialog {
             return RenameAppDialog().apply {
                 this.model = model
                 this.app = app
