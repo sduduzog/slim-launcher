@@ -11,7 +11,7 @@ import com.sduduzog.slimlauncher.data.model.Note
 class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     private val _appRepository = AppRepository(application)
-    private val _noteRepository  = NoteRepository(application)
+    private val _noteRepository = NoteRepository(application)
 
     private var _apps: LiveData<List<HomeApp>>
     private var _notes: LiveData<List<Note>>
@@ -26,16 +26,19 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     val installedApps = MutableLiveData<List<App>>()
 
-    fun add(app: App){
+    val notes: LiveData<List<Note>>
+        get() = _notes
+
+    fun add(app: App) {
         val index = _apps.value!!.size
         _appRepository.add(HomeApp.from(app, index))
     }
 
-    fun update(vararg args: HomeApp){
+    fun update(vararg args: HomeApp) {
         _appRepository.update(*args)
     }
 
-    fun remove(app: HomeApp){
+    fun remove(app: HomeApp) {
         _appRepository.remove(app)
     }
 }

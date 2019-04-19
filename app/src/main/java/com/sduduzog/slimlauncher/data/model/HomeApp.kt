@@ -15,7 +15,7 @@ data class HomeApp(
         var activityName: String,
         @field:ColumnInfo(name = "sorting_index")
         var sortingIndex: Int
-) {
+){
     companion object {
         fun from(app: App, sortingIndex: Int = 0): HomeApp {
             return HomeApp(appName = app.appName, activityName = app.activityName, packageName = app.packageName, sortingIndex = sortingIndex)

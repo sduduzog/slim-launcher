@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.sduduzog.slimlauncher.R
 import com.sduduzog.slimlauncher.data.model.Note
-import com.sduduzog.slimlauncher.ui.main.OnItemActionListener
+import com.sduduzog.slimlauncher.utils.OnItemActionListener
 import java.text.SimpleDateFormat
 import java.util.*
 

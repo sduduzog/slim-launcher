@@ -11,7 +11,7 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.sduduzog.slimlauncher.R
-import com.sduduzog.slimlauncher.ui.main.OnItemActionListener
+import com.sduduzog.slimlauncher.utils.OnItemActionListener
 import kotlinx.android.synthetic.main.notes_list_fragment.*
 
 
