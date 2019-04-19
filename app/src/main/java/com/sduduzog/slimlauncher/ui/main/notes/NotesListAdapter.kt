@@ -1,6 +1,5 @@
 package com.sduduzog.slimlauncher.ui.main.notes
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +9,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.snackbar.Snackbar
 import com.sduduzog.slimlauncher.R
 import com.sduduzog.slimlauncher.data.model.Note
 import com.sduduzog.slimlauncher.utils.OnItemActionListener
@@ -62,18 +60,7 @@ class NotesListAdapter(private val fragment: NotesListFragment) : RecyclerView.A
     }
 
     override fun onViewSwiped(position: Int) {
-        deletedFrom = position
-        if (position < notes.size) {
-            val note = notes[position]
-            viewModel.deleteNote(note)
-            Snackbar.make(fragment.view!!, "Note deleted successfully", Snackbar.LENGTH_LONG)
-                    .setActionTextColor(Color.WHITE)
-                    .setAction("UNDO") {
-                        viewModel.saveNote(note)
-                    }
-                    .show()
-        } else
-            notifyDataSetChanged()
+
     }
 
     override fun onViewIdle() {

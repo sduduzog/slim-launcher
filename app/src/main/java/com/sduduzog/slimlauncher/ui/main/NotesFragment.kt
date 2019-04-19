@@ -12,11 +12,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sduduzog.slimlauncher.R
 import com.sduduzog.slimlauncher.adapters.NotesAdapter
 import com.sduduzog.slimlauncher.data.MainViewModel
-import com.sduduzog.slimlauncher.data.model.HomeApp
 import com.sduduzog.slimlauncher.data.model.Note
 import com.sduduzog.slimlauncher.ui.BaseFragment
 import com.sduduzog.slimlauncher.utils.OnItemActionListener
-import com.sduduzog.slimlauncher.utils.OnLaunchAppListener
 import com.sduduzog.slimlauncher.utils.OnShitDoneToNotesListener
 import kotlinx.android.synthetic.main.notes_fragment.*
 
@@ -70,9 +68,13 @@ class NotesFragment : BaseFragment(), OnShitDoneToNotesListener {
     }
 
 
-    override fun onViewNote(note: Note) {
+    override fun onView(note: Note) {
         val bundle = Bundle()
         bundle.putSerializable("note", note)
         Navigation.findNavController(notes_fragment).navigate(R.id.action_notesFragment_to_noteFragment, bundle)
+    }
+
+    override fun onDelete(note: Note) {
+        viewModel.remove(note)
     }
 }

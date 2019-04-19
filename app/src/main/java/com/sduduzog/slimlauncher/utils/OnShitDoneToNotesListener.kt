@@ -3,5 +3,6 @@ package com.sduduzog.slimlauncher.utils
 import com.sduduzog.slimlauncher.data.model.Note
 
 interface OnShitDoneToNotesListener{
-    fun onViewNote(note: Note)
+    fun onView(note: Note)
+    fun onDelete(note: Note)
 }

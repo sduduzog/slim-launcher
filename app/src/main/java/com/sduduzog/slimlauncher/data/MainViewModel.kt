@@ -41,4 +41,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun remove(app: HomeApp) {
         _appRepository.remove(app)
     }
+    fun remove(note: Note){
+        _noteRepository.remove(note)
+    }
 }

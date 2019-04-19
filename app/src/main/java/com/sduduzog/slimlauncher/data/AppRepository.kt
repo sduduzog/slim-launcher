@@ -14,7 +14,7 @@ class AppRepository(application: Application) {
     val apps: LiveData<List<HomeApp>>
         get() = _apps
 
-    fun add(app: HomeApp){
+    fun add(app: HomeApp) {
         AddAppAsyncTask(appDao).execute(app)
     }
 
@@ -22,7 +22,7 @@ class AppRepository(application: Application) {
         UpdateAppAsyncTask(appDao).execute(*list)
     }
 
-    fun remove(app: HomeApp){
+    fun remove(app: HomeApp) {
         RemoveAppAsyncTask(appDao).execute(app)
     }
 
@@ -42,7 +42,7 @@ class AppRepository(application: Application) {
         }
     }
 
-     private class RemoveAppAsyncTask(private val mAsyncTaskDao: AppDao) : AsyncTask<HomeApp, Void, Void>() {
+    private class RemoveAppAsyncTask(private val mAsyncTaskDao: AppDao) : AsyncTask<HomeApp, Void, Void>() {
 
         override fun doInBackground(vararg params: HomeApp): Void? {
             mAsyncTaskDao.remove(*params)

@@ -24,6 +24,7 @@
         android:id="@+id/notes_fragment_create_note"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:alpha="0.5"
         android:layout_marginTop="@dimen/_8sdp"
         android:padding="@dimen/_12sdp"
         android:text="@string/notes_fragment_create_new_note"

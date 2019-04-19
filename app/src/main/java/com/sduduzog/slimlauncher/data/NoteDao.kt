@@ -14,8 +14,8 @@ interface NoteDao {
     fun saveNote(note: Note)
 
     @Update
-    fun updateNote(note: Note)
+    fun updateNote(vararg note: Note)
 
     @Delete
-    fun deleteNote(note: Note)
+    fun remove(vararg note: Note)
 }

@@ -12,7 +12,8 @@ import com.sduduzog.slimlauncher.utils.OnShitDoneToNotesListener
 
 class NotesAdapter(private val listener: OnShitDoneToNotesListener) : RecyclerView.Adapter<NotesAdapter.ViewHolder>() , OnItemActionListener{
 
-    private var notes: List<Note> = listOf()
+    private val notes: MutableList<Note> = mutableListOf()
+    private var indexOfRemovedNote = 0
 
     override fun getItemCount(): Int = notes.size
 
@@ -25,7 +26,7 @@ class NotesAdapter(private val listener: OnShitDoneToNotesListener) : RecyclerVi
             holder.itemTitle.visibility = View.VISIBLE
         }
         holder.itemSnippet.text = note.body
-        holder.itemView.setOnClickListener { listener.onViewNote(note) }
+        holder.itemView.setOnClickListener { listener.onView(note) }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -34,19 +35,30 @@ class NotesAdapter(private val listener: OnShitDoneToNotesListener) : RecyclerVi
     }
 
     fun setItems(list: List<Note>) {
-        this.notes = list
-        notifyDataSetChanged()
+        val size = notes.size
+        notes.clear()
+        notes.addAll(list)
+        if (size > list.size) {
+            notifyItemRemoved(indexOfRemovedNote)
+        } else notifyDataSetChanged()
     }
 
     override fun onViewIdle() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        // do nothing
     }
 
     override fun onViewMoved(oldPosition: Int, newPosition: Int): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        // do nothing
+        return false
     }
 
     override fun onViewSwiped(position: Int) {
+        indexOfRemovedNote = position
+        if (position < notes.size) {
+            val note = notes[position]
+            listener.onDelete(note)
+        } else
+            notifyDataSetChanged()
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
