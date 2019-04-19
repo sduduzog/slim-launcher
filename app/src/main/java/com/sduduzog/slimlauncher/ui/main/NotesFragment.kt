@@ -65,6 +65,8 @@ class NotesFragment : BaseFragment(), OnShitDoneToNotesListener {
 
         val itemTouchHelper = ItemTouchHelper(simpleItemTouchCallback)
         itemTouchHelper.attachToRecyclerView(notes_fragment_list)
+
+        notes_fragment_create_note.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_notesFragment_to_noteFragment))
     }
 
 
