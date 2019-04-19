@@ -15,6 +15,7 @@
         android:ems="10"
         android:hint="@string/tasks_fragment_enter_a_new_task"
         android:inputType="textCapSentences"
+        android:imeOptions="actionDone"
         android:padding="@dimen/_12sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
