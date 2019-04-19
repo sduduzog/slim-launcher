@@ -2,7 +2,7 @@ package com.sduduzog.slimlauncher.utils
 
 import android.view.View
 
-abstract class DoubleClickListener : View.OnClickListener { // courtesy of Xar E Ahmer @ stackoverflow
+abstract class DoubleClickListener : View.OnClickListener {
 
     private var lastTickTime: Long = 0
 
