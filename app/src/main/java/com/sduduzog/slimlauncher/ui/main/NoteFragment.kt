@@ -1,4 +1,4 @@
-package com.sduduzog.slimlauncher.ui.notes
+package com.sduduzog.slimlauncher.ui.main
 
 
 import android.content.Context
