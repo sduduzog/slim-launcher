@@ -58,6 +58,10 @@ class Repository(application: Application) {
         RemoveNoteAsyncTask(baseDao).execute(note)
     }
 
+    fun remove(vararg args: Task) {
+        RemoveTaskAsyncTask(baseDao).execute(*args)
+    }
+
     private class AddAppAsyncTask(private val mAsyncTaskDao: BaseDao) : AsyncTask<HomeApp, Void, Void>() {
 
         override fun doInBackground(vararg params: HomeApp): Void? {
@@ -117,6 +121,14 @@ class Repository(application: Application) {
     private class RemoveNoteAsyncTask(private val mAsyncTaskDao: BaseDao) : AsyncTask<Note, Void, Void>() {
 
         override fun doInBackground(vararg params: Note): Void? {
+            mAsyncTaskDao.remove(*params)
+            return null
+        }
+    }
+
+    private class RemoveTaskAsyncTask(private val mAsyncTaskDao: BaseDao) : AsyncTask<Task, Void, Void>() {
+
+        override fun doInBackground(vararg params: Task): Void? {
             mAsyncTaskDao.remove(*params)
             return null
         }

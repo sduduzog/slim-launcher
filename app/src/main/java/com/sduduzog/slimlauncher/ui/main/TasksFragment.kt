@@ -44,5 +44,17 @@ class TasksFragment : BaseFragment() {
             v.text = ""
             true
         }
+        tasks_fragment_clear.setOnClickListener {
+            val tasks = viewModel.tasks.value.orEmpty().filter { it.isCompleted }
+            viewModel.remove(*tasks.toTypedArray())
+        }
+
+        tasks_fragment_sort.setOnClickListener {
+            val tasks = viewModel.tasks.value.orEmpty().sortedBy { it.sortingIndex }
+            var count = 0
+            tasks.filter { it.isCompleted }.forEach { it.sortingIndex = count++ }
+            tasks.filter { !it.isCompleted }.forEach { it.sortingIndex = count++ }
+            viewModel.update(*tasks.toTypedArray())
+        }
     }
 }

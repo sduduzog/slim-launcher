@@ -66,4 +66,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun remove(note: Note) {
         _baseRepository.remove(note)
     }
+
+    fun remove(vararg args: Task) {
+        _baseRepository.remove(*args)
+    }
 }
