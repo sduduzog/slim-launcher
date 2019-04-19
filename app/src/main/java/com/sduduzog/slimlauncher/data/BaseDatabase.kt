@@ -12,24 +12,20 @@ import com.sduduzog.slimlauncher.data.model.Task
 
 
 @Database(entities = [HomeApp::class, Note::class, Task::class], version = 4, exportSchema = false)
-abstract class DataRoomDatabase : RoomDatabase() {
+abstract class BaseDatabase : RoomDatabase() {
 
-    abstract fun appDao(): AppDao
-
-    abstract fun noteDao(): NoteDao
-
-    abstract fun taskDao(): TaskDao
+    abstract fun baseDao(): BaseDao
 
     companion object {
         @Volatile
         @JvmStatic
-        private var INSTANCE: DataRoomDatabase? = null
+        private var INSTANCE: BaseDatabase? = null
 
-        fun getDatabase(context: Context): DataRoomDatabase? {
-            synchronized(DataRoomDatabase::class.java) {
+        fun getDatabase(context: Context): BaseDatabase? {
+            synchronized(Database::class.java) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.applicationContext,
-                            DataRoomDatabase::class.java, "app_database")
+                            BaseDatabase::class.java, "app_database")
                             .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4)
                             .build()
                 }
@@ -58,7 +54,7 @@ abstract class DataRoomDatabase : RoomDatabase() {
             }
         }
 
-        private val MIGRATION_3_4 = object : Migration(3, 4){
+        private val MIGRATION_3_4 = object : Migration(3, 4) {
             override fun migrate(database: SupportSQLiteDatabase) {
                 database.execSQL("DROP TABLE IF EXISTS `apps`")
                 database.execSQL("CREATE TABLE IF NOT EXISTS `tasks` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `body` TEXT NOT NULL, `is_complete` INTEGER NOT NULL, `sorting_index` INTEGER NOT NULL)")

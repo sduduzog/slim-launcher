@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Build
 import android.util.TypedValue
 import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
 import androidx.fragment.app.Fragment
@@ -12,7 +13,7 @@ import com.sduduzog.slimlauncher.R
 
 abstract class BaseFragment : Fragment() {
 
-    abstract fun getFragmentView(): View
+    abstract fun getFragmentView(): ViewGroup
 
 
     override fun onResume() {

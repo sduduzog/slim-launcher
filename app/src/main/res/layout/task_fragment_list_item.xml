@@ -5,5 +5,5 @@
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/_8sdp"
     android:layout_marginTop="@dimen/_16sdp"
-    android:text="@string/tasks_fragment_list_item"
+    android:text="@string/tasks_fragment_list_item_complete"
     android:textSize="20sp" />

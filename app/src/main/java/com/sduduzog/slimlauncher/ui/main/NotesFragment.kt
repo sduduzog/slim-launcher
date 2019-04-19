@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.notes_fragment.*
 
 class NotesFragment : BaseFragment(), OnShitDoneToNotesListener {
 
-    override fun getFragmentView(): View = notes_fragment
+    override fun getFragmentView(): ViewGroup = notes_fragment
 
     private lateinit var viewModel: MainViewModel
 

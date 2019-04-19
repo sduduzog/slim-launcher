@@ -7,18 +7,20 @@ import androidx.lifecycle.MutableLiveData
 import com.sduduzog.slimlauncher.data.model.App
 import com.sduduzog.slimlauncher.data.model.HomeApp
 import com.sduduzog.slimlauncher.data.model.Note
+import com.sduduzog.slimlauncher.data.model.Task
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val _appRepository = AppRepository(application)
-    private val _noteRepository = NoteRepository(application)
+    private val _baseRepository = Repository(application)
 
     private var _apps: LiveData<List<HomeApp>>
     private var _notes: LiveData<List<Note>>
+    private var _tasks: LiveData<List<Task>>
 
     init {
-        _apps = _appRepository.apps
-        _notes = _noteRepository.notes
+        _apps = _baseRepository.apps
+        _notes = _baseRepository.notes
+        _tasks = _baseRepository.tasks
     }
 
     val apps: LiveData<List<HomeApp>>
@@ -29,27 +31,39 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val notes: LiveData<List<Note>>
         get() = _notes
 
+    val tasks: LiveData<List<Task>>
+        get() = _tasks
+
     fun add(app: App) {
         val index = _apps.value!!.size
-        _appRepository.add(HomeApp.from(app, index))
+        _baseRepository.add(HomeApp.from(app, index))
     }
 
-    fun add(note: Note){
-        _noteRepository.add(note)
+    fun add(note: Note) {
+        _baseRepository.add(note)
+    }
+
+    fun add(task: Task) {
+        _baseRepository.add(task)
     }
 
     fun update(vararg args: HomeApp) {
-        _appRepository.update(*args)
+        _baseRepository.update(*args)
     }
 
-    fun update(vararg args: Note){
-        _noteRepository.update(*args)
+    fun update(vararg args: Note) {
+        _baseRepository.update(*args)
+    }
+
+    fun update(vararg args: Task) {
+        _baseRepository.update(*args)
     }
 
     fun remove(app: HomeApp) {
-        _appRepository.remove(app)
+        _baseRepository.remove(app)
     }
-    fun remove(note: Note){
-        _noteRepository.remove(note)
+
+    fun remove(note: Note) {
+        _baseRepository.remove(note)
     }
 }

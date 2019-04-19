@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.add_app_fragment.*
 
 class AddAppFragment : BaseFragment(), OnAppClickedListener {
 
-    override fun getFragmentView(): View = add_app_fragment as View
+    override fun getFragmentView(): ViewGroup = add_app_fragment
 
     private lateinit var viewModel: MainViewModel
 
@@ -52,7 +52,7 @@ class AddAppFragment : BaseFragment(), OnAppClickedListener {
 
     override fun onDestroy() {
         super.onDestroy()
-        add_app_fragment_edit_text.removeTextChangedListener(onTextChangeListener)
+        add_app_fragment_edit_text?.removeTextChangedListener(onTextChangeListener)
     }
 
     private val onTextChangeListener: TextWatcher = object : TextWatcher {

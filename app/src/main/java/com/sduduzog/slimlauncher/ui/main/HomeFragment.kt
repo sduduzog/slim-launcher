@@ -66,7 +66,7 @@ class HomeFragment : BaseFragment(), OnLaunchAppListener {
         activity?.registerReceiver(receiver, IntentFilter(Intent.ACTION_TIME_TICK))
     }
 
-    override fun getFragmentView(): View {
+    override fun getFragmentView(): ViewGroup {
         return home_fragment
     }
 

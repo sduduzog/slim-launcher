@@ -20,7 +20,7 @@ import java.util.*
 
 class NoteFragment : BaseFragment() {
 
-    override fun getFragmentView(): View = note_fragment
+    override fun getFragmentView(): ViewGroup = note_fragment
 
     private lateinit var note: Note
     private lateinit var viewModel: MainViewModel

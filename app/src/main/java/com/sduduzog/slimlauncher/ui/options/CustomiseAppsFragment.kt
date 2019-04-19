@@ -24,7 +24,7 @@ import kotlinx.android.synthetic.main.customise_apps_fragment.*
 
 class CustomiseAppsFragment : BaseFragment(), OnShitDoneToAppsListener {
 
-    override fun getFragmentView(): View = customise_apps_fragment as View
+    override fun getFragmentView(): ViewGroup = customise_apps_fragment
 
     private lateinit var viewModel: MainViewModel
 
