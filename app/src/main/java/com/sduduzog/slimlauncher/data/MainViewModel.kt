@@ -34,8 +34,16 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         _appRepository.add(HomeApp.from(app, index))
     }
 
+    fun add(note: Note){
+        _noteRepository.add(note)
+    }
+
     fun update(vararg args: HomeApp) {
         _appRepository.update(*args)
+    }
+
+    fun update(vararg args: Note){
+        _noteRepository.update(*args)
     }
 
     fun remove(app: HomeApp) {

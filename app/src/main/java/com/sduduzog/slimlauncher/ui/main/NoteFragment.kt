@@ -9,9 +9,9 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.lifecycle.ViewModelProviders
 import com.sduduzog.slimlauncher.R
+import com.sduduzog.slimlauncher.data.MainViewModel
 import com.sduduzog.slimlauncher.data.model.Note
 import com.sduduzog.slimlauncher.ui.BaseFragment
-import com.sduduzog.slimlauncher.ui.main.notes.NotesViewModel
 import com.sduduzog.slimlauncher.utils.DoubleClickListener
 import kotlinx.android.synthetic.main.note_fragment.*
 import java.security.MessageDigest
@@ -23,7 +23,7 @@ class NoteFragment : BaseFragment() {
     override fun getFragmentView(): View = note_fragment
 
     private lateinit var note: Note
-    private lateinit var viewModel: NotesViewModel
+    private lateinit var viewModel: MainViewModel
     private lateinit var initialDigest: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,7 +36,9 @@ class NoteFragment : BaseFragment() {
             }
         }
         initialDigest = hash(note.title + note.body)
-        viewModel = ViewModelProviders.of(this).get(NotesViewModel::class.java)
+        activity?.let {
+            viewModel = ViewModelProviders.of(it).get(MainViewModel::class.java)
+        } ?: throw Error("Activity null, something here is fucked up")
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -93,7 +95,7 @@ class NoteFragment : BaseFragment() {
         val currentDigest = hash(newNote.title + newNote.body)
         if (body.isEmpty()) return
         if (initialDigest == currentDigest) return
-        if (note.id == null) viewModel.saveNote(newNote) else viewModel.updateNote(newNote)
+        if (note.id == null) viewModel.add(newNote) else viewModel.update(newNote)
 
     }
 

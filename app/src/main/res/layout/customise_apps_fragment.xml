@@ -54,7 +54,6 @@
         android:id="@+id/customise_apps_fragment_counter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/customise_apps_fragment_counter"
         android:textSize="@dimen/_16ssp"
         android:padding="@dimen/_12sdp"
         android:layout_marginRight="8dp"

@@ -5,9 +5,9 @@ import androidx.lifecycle.Observer
 import androidx.room.Room
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import androidx.test.platform.app.InstrumentationRegistry
-import com.sduduzog.slimlauncher.data.App
 import com.sduduzog.slimlauncher.data.AppDao
 import com.sduduzog.slimlauncher.data.DataRoomDatabase
+import com.sduduzog.slimlauncher.data.model.HomeApp
 import org.hamcrest.CoreMatchers.equalTo
 import org.junit.After
 import org.junit.Assert.assertThat
@@ -42,16 +42,16 @@ class DBTest {
     @Test
     @Throws(InterruptedException::class)
     fun testInsertLiveDataApps() {
-        val app = App("TestApp", "com.test.test.app", "TestMainActivity")
-        mAppDao!!.insert(app)
+        val app = HomeApp("TestApp", "com.test.test.app", "TestMainActivity", 0)
+        mAppDao!!.add(app)
 
-        var appsInstalled: List<App> = listOf()
+        var appsInstalled: List<HomeApp> = listOf()
 
         val latch = CountDownLatch(1)
 
         val appsLiveData = mAppDao!!.apps
 
-        val observer = Observer<List<App>> {
+        val observer = Observer<List<HomeApp>> {
             appsInstalled = it
             latch.countDown()
         }

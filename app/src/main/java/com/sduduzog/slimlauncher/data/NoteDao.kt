@@ -11,10 +11,10 @@ interface NoteDao {
     val notes: LiveData<List<Note>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun saveNote(note: Note)
+    fun add(note: Note)
 
     @Update
-    fun updateNote(vararg note: Note)
+    fun update(vararg note: Note)
 
     @Delete
     fun remove(vararg note: Note)
