@@ -38,10 +38,11 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/note_fragment_body"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:padding="12dp"
+            android:textSize="14sp"
             android:textAppearance="@style/Base.TextAppearance.AppCompat"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
