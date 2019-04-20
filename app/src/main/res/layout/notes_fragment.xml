@@ -22,10 +22,8 @@
 
     <TextView
         android:id="@+id/notes_fragment_create_note"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_8sdp"
-        android:layout_marginLeft="@dimen/_8sdp"
         android:layout_marginTop="@dimen/_8sdp"
         android:layout_marginEnd="@dimen/_8sdp"
         android:layout_marginRight="@dimen/_8sdp"
@@ -35,15 +33,16 @@
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textSize="@dimen/_18ssp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/notes_fragment_title" />
+        app:layout_constraintBottom_toBottomOf="@id/notes_fragment_title"
+        app:layout_constraintTop_toTopOf="@+id/notes_fragment_title" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/notes_fragment_list"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginTop="@dimen/_8sdp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/notes_fragment_create_note"

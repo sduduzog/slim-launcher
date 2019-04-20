@@ -36,9 +36,7 @@ class NoteFragment : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        note.title?.let {
-            note_fragment_title.text = it
-        }
+        note.title?.let { if (it.isNotBlank()) note_fragment_title.text = it }
         note_fragment_body.text = note.body
         val bundle = Bundle()
         bundle.putSerializable(getString(R.string.nav_key_note), note)
