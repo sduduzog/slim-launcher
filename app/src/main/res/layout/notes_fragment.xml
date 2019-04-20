@@ -24,17 +24,14 @@
         android:id="@+id/notes_fragment_create_note"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_8sdp"
-        android:layout_marginEnd="@dimen/_8sdp"
-        android:layout_marginRight="@dimen/_8sdp"
-        android:alpha="0.5"
-        android:padding="@dimen/_12sdp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:padding="12dp"
         android:text="@string/notes_fragment_create_new_note"
-        android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textSize="@dimen/_18ssp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/notes_fragment_title"
-        app:layout_constraintTop_toTopOf="@+id/notes_fragment_title" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/notes_fragment_list"
