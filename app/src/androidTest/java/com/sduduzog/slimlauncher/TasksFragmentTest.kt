@@ -24,16 +24,6 @@ class TasksFragmentTest {
     @JvmField
     var mActivityTestRule = ActivityTestRule(MainActivity::class.java)
 
-//    private lateinit var sharedPreferences: SharedPreferences
-
-//    @Before
-//    fun clearPreferences() {
-//        val context = InstrumentationRegistry.getInstrumentation().targetContext
-//        sharedPreferences = context.getSharedPreferences(context.getString(R.string.prefs_settings), MODE_PRIVATE)
-//        sharedPreferences.edit().clear().commit()
-//    }
-
-
     @Test
     fun userCanAddTask() {
         val taskButton = onView(allOf(withText(R.string.home_fragment_tasks), isDisplayed()))
