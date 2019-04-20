@@ -3,6 +3,7 @@ package com.sduduzog.slimlauncher.ui.options
 import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.view.LayoutInflater
@@ -33,6 +34,13 @@ class OptionsFragment : BaseFragment() {
             val intent = Intent(Settings.ACTION_SETTINGS)
             launchActivity(it, intent)
         }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            options_fragment_device_settings.setOnLongClickListener {
+                val intent = Intent(Settings.ACTION_HOME_SETTINGS)
+                launchActivity(it, intent)
+                true
+            }
+        }
         options_fragment_change_theme.setOnClickListener {
             val changeThemeDialog = ChangeThemeDialog.getThemeChooser()
             changeThemeDialog.showNow(fragmentManager, "THEME_CHOOSER")
@@ -44,7 +52,7 @@ class OptionsFragment : BaseFragment() {
         options_fragment_toggle_status_bar.setOnClickListener {
             val settings = context!!.getSharedPreferences(getString(R.string.prefs_settings), MODE_PRIVATE)
             val isHidden = settings.getBoolean(getString(R.string.prefs_settings_key_toggle_status_bar), false)
-            settings.edit{
+            settings.edit {
                 putBoolean(getString(R.string.prefs_settings_key_toggle_status_bar), !isHidden)
             }
         }
