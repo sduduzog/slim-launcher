@@ -32,7 +32,6 @@
     <string name="prefs_settings_key_theme">key_theme</string>
     <string name="prefs_settings_key_time_format">clock_type</string>
     <string name="prefs_settings_key_toggle_status_bar">hide_status_bar</string>
-    <string name="note_fragment_hint_title">Title</string>
     <string name="note_fragment_hint_body">Start here</string>
     <string name="setup_button_start">start</string>
     <string name="no_app_selected_toast_msg">Choose at least one app</string>
