@@ -46,7 +46,6 @@ class AddAppFragment : BaseFragment(), OnAppClickedListener {
                 add_app_fragment_progress_bar.visibility = View.VISIBLE
             }
         })
-        LoadInstalledApps(viewModel).execute(context!!.packageManager)
         add_app_fragment_edit_text.addTextChangedListener(onTextChangeListener)
     }
 

@@ -17,6 +17,7 @@ import com.sduduzog.slimlauncher.data.MainViewModel
 import com.sduduzog.slimlauncher.data.model.HomeApp
 import com.sduduzog.slimlauncher.dialogs.RenameAppDialog
 import com.sduduzog.slimlauncher.utils.BaseFragment
+import com.sduduzog.slimlauncher.utils.LoadInstalledApps
 import com.sduduzog.slimlauncher.utils.OnItemActionListener
 import com.sduduzog.slimlauncher.utils.OnShitDoneToAppsListener
 import kotlinx.android.synthetic.main.customise_apps_fragment.*
@@ -55,6 +56,8 @@ class CustomiseAppsFragment : BaseFragment(), OnShitDoneToAppsListener {
                 customise_apps_fragment_counter.text = resources.getQuantityString(R.plurals.slots_plurals, count, count)
             } ?: adapter.setItems(listOf())
         })
+
+        LoadInstalledApps(viewModel).execute(context!!.packageManager)
 
         customise_apps_fragment_list.adapter = adapter
         val listener: OnItemActionListener = adapter
