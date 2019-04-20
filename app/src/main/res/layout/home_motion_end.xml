@@ -42,15 +42,17 @@
 
     <TextView
         android:id="@+id/home_fragment_tasks"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_64sdp"
         android:alpha="-1"
+        android:gravity="start"
         android:padding="@dimen/_12sdp"
         android:text="@string/home_fragment_tasks"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textSize="@dimen/_24ssp"
         app:layout_constraintBottom_toTopOf="@+id/home_fragment_list"
+        app:layout_constraintEnd_toEndOf="@+id/home_fragment_list"
         app:layout_constraintStart_toStartOf="@+id/home_fragment_list" />
 
     <androidx.recyclerview.widget.RecyclerView

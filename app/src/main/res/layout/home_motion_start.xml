@@ -43,14 +43,16 @@
 
     <TextView
         android:id="@+id/home_fragment_tasks"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_4sdp"
+        android:gravity="start"
         android:padding="@dimen/_12sdp"
         android:text="@string/home_fragment_tasks"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textSize="@dimen/_24ssp"
         app:layout_constraintBottom_toTopOf="@+id/home_fragment_list"
+        app:layout_constraintEnd_toEndOf="@+id/home_fragment_list"
         app:layout_constraintStart_toStartOf="@+id/home_fragment_list" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -78,11 +80,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_16sdp"
         android:layout_marginLeft="@dimen/_16sdp"
+        android:layout_marginTop="@dimen/_16sdp"
         android:layout_marginEnd="@dimen/_16sdp"
-        android:alpha="-2"
         android:layout_marginRight="@dimen/_16sdp"
         android:layout_marginBottom="@dimen/_8sdp"
-        android:layout_marginTop="@dimen/_16sdp"
+        android:alpha="-2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -94,9 +96,9 @@
         android:id="@+id/home_fragment_options"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:alpha="-3"
         android:padding="@dimen/_8sdp"
         android:text="@string/main_fragment_options"
-        android:alpha="-3"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textSize="@dimen/_18ssp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -107,14 +109,15 @@
         android:id="@+id/home_fragment_notes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:alpha="-3"
         android:padding="@dimen/_8sdp"
         android:text="@string/main_fragment_notes"
-        android:alpha="-3"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textSize="@dimen/_18ssp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/home_fragment_list_exp"
         app:layout_constraintTop_toBottomOf="@+id/home_fragment_list_exp" />
+
     <ImageView
         android:id="@+id/home_fragment_call"
         android:layout_width="wrap_content"
