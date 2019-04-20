@@ -26,19 +26,18 @@
         <item quantity="other">%d slots left</item>
     </plurals>
 
+    <string name="home_fragment_tasks">Tasks</string>
+
     <string name="prefs_settings">settings</string>
     <string name="prefs_settings_key_theme">key_theme</string>
     <string name="prefs_settings_key_time_format">clock_type</string>
     <string name="prefs_settings_key_toggle_status_bar">hide_status_bar</string>
-    <!--main package strings-->
     <string name="note_fragment_hint_title">Title</string>
     <string name="note_fragment_hint_body">Start here</string>
-    <!--settings package strings-->
     <string name="setup_button_start">start</string>
     <string name="no_app_selected_toast_msg">Choose at least one app</string>
     <string name="choose_apps_title">Choose Apps</string>
     <string name="choose_time_format_dialog_title">Choose Time Format</string>
-    <!-- Content Description For Image Resources-->
     <string name="main_fragment_options">Options</string>
     <string name="options_fragment_about_slim">About Slim</string>
     <string name="options_fragment_device_settings">Device Settings</string>
@@ -51,14 +50,12 @@
     <string name="menu_rename">Rename</string>
     <string name="menu_remove">Remove</string>
     <string name="choose_theme_dialog_title">Choose Theme</string>
-    <string name="home_fragment_tasks">Tasks</string>
     <string name="notes_fragment_create_new_note">Create</string>
     <string name="add_apps_fragment_search_apps">Search apps</string>
     <string name="tasks_fragment_list_item_complete">&lt;strike>%s&lt;/strike></string>
     <string name="tasks_fragment_sort">Sort</string>
     <string name="tasks_fragment_clear_completed_tasks">Clear completed tasks</string>
     <string name="tasks_fragment_enter_a_new_task">Enter a new task</string>
-
     <string name="edit_note_fragment_save">SAVE</string>
     <string name="edit_note_fragment_untitled">Untitled</string>
     <string name="note_fragment_edit">EDIT</string>
