@@ -16,6 +16,7 @@
         android:id="@+id/notes_fragment_list_item_snippet"
         android:layout_width="match_parent"
         android:ellipsize="end"
+        android:textAppearance="@style/TextAppearance.AppCompat"
         android:maxLines="5"
         android:layout_height="wrap_content" />
 </LinearLayout>

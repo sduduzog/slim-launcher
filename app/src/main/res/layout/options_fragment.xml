@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_16sdp"
         android:layout_marginLeft="@dimen/_16sdp"
-        android:layout_marginTop="@dimen/_32sdp"
+        android:layout_marginTop="@dimen/_8sdp"
         android:text="@string/main_fragment_options"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textSize="@dimen/_36ssp"

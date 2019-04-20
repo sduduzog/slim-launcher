@@ -47,7 +47,11 @@
         android:id="@+id/noteFragment"
         android:name="com.sduduzog.slimlauncher.ui.main.NoteFragment"
         android:label="note_fragment"
-        tools:layout="@layout/note_fragment" />
+        tools:layout="@layout/note_fragment">
+        <action
+            android:id="@+id/action_noteFragment_to_editNoteFragment"
+            app:destination="@id/editNoteFragment" />
+    </fragment>
     <fragment
         android:id="@+id/notesFragment"
         android:name="com.sduduzog.slimlauncher.ui.main.NotesFragment"
@@ -56,11 +60,20 @@
         <action
             android:id="@+id/action_notesFragment_to_noteFragment"
             app:destination="@id/noteFragment" />
+        <action
+            android:id="@+id/action_notesFragment_to_editNoteFragment"
+            app:destination="@id/editNoteFragment"
+            app:popUpTo="@+id/noteFragment" />
     </fragment>
     <fragment
         android:id="@+id/tasksFragment"
         android:name="com.sduduzog.slimlauncher.ui.main.TasksFragment"
         android:label="tasks_fragment"
         tools:layout="@layout/tasks_fragment" />
+    <fragment
+        android:id="@+id/editNoteFragment"
+        android:name="com.sduduzog.slimlauncher.ui.main.EditNoteFragment"
+        android:label="edit_note_fragment"
+        tools:layout="@layout/edit_note_fragment" />
 
 </navigation>
