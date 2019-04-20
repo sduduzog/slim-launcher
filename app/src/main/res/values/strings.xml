@@ -107,5 +107,8 @@ Efficacy We hone our skills and optimize our tools to make the best use of the t
 Being effective means more time can be invested in being creative. You cannot scale creativity or be effective at it.
 Because of this, we are ruthless at driving efficiency and automating the rote so we can spend more time on the problems that really challenge us."
 </string>
+    <string name="edit_note_fragment_save">SAVE</string>
+    <string name="edit_note_fragment_untitled">Untitled</string>
+    <string name="note_fragment_edit">EDIT</string>
 
 </resources>
