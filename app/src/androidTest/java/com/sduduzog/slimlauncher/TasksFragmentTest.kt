@@ -1,57 +1,51 @@
 package com.sduduzog.slimlauncher
 
 
-import android.content.Context.MODE_PRIVATE
-import android.content.SharedPreferences
+import android.view.KeyEvent
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions
-import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.RootMatchers
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.filters.LargeTest
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
-import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
 import org.hamcrest.CoreMatchers.allOf
 import org.hamcrest.Matchers
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @LargeTest
 @RunWith(AndroidJUnit4ClassRunner::class)
-class SetupFragmentTest {
+class TasksFragmentTest {
 
     @Rule
     @JvmField
     var mActivityTestRule = ActivityTestRule(MainActivity::class.java)
 
-    private lateinit var sharedPreferences: SharedPreferences
+//    private lateinit var sharedPreferences: SharedPreferences
 
-    @Before
-    fun clearPreferences() {
-        val context = InstrumentationRegistry.getInstrumentation().targetContext
-        sharedPreferences = context.getSharedPreferences(context.getString(R.string.prefs_settings), MODE_PRIVATE)
-        sharedPreferences.edit().clear().commit()
-    }
+//    @Before
+//    fun clearPreferences() {
+//        val context = InstrumentationRegistry.getInstrumentation().targetContext
+//        sharedPreferences = context.getSharedPreferences(context.getString(R.string.prefs_settings), MODE_PRIVATE)
+//        sharedPreferences.edit().clear().commit()
+//    }
 
 
     @Test
-    fun isAlertDialogShown() {
-        val appCompatButton = onView(
-                allOf(withText(R.string.setup_button_start), isDisplayed()))
-        appCompatButton.perform(click())
+    fun userCanAddTask() {
+        val taskButton = onView(allOf(withText(R.string.home_fragment_tasks), isDisplayed()))
+        taskButton.perform(click())
+        val inputField = onView(allOf(withHint(R.string.tasks_fragment_enter_a_new_task), isDisplayed()))
 
+        inputField.perform(typeText("Testing"))
+        inputField.perform(pressKey(KeyEvent.KEYCODE_ENTER))
 
-        val frameLayout = onView(
-                allOf(withId(android.R.id.content), isDisplayed()))
-        frameLayout.check(matches(isDisplayed()))
+        val checkBox = onView(allOf(withText("Testing"), isDisplayed()))
 
-        val alertDialogTitle = onView(
-                allOf(withText(R.string.choose_apps_title)))
-        alertDialogTitle.check(matches(isDisplayed()))
+        checkBox.check(matches(isNotChecked()))
     }
 
     @Test
@@ -67,7 +61,7 @@ class SetupFragmentTest {
 
         val appCompatButton2 = onView(
                 allOf(withText("DONE")))
-        appCompatButton2.perform(ViewActions.scrollTo(), click())
+        appCompatButton2.perform(scrollTo(), click())
 
         onView(withText(R.string.no_app_selected_toast_msg)).inRoot(
                 RootMatchers.withDecorView(Matchers.not(Matchers.`is`(mActivityTestRule.activity.window.decorView))))
