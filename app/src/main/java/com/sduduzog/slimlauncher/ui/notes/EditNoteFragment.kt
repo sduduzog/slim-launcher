@@ -62,6 +62,10 @@ class EditNoteFragment : BaseFragment() {
                 Navigation.findNavController(edit_note_fragment).navigate(R.id.action_editNoteFragment_to_noteFragment, bundle)
             }
         }
+        if (edit_note_fragment_body.requestFocus()) {
+            val imm = activity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.showSoftInput(edit_note_fragment_body, InputMethodManager.SHOW_IMPLICIT)
+        }
     }
 
     private fun hash(input: String): String {
@@ -85,6 +89,9 @@ class EditNoteFragment : BaseFragment() {
         }
         val currentDigest = hash(title + body)
         if (initialDigest == currentDigest) return null
+        note.title = title.trim()
+        note.body = body.trim()
+        note.edited = timestamp
         viewModel.update(note)
         return note.id
     }

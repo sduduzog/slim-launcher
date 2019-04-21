@@ -19,7 +19,6 @@ class NoteFragment : BaseFragment() {
 
     override fun getFragmentView(): ViewGroup = note_fragment
     private lateinit var viewModel: MainViewModel
-    private lateinit var note: Note
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -28,8 +27,7 @@ class NoteFragment : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        note.title?.let { if (it.isNotBlank()) note_fragment_title.text = it }
-        note_fragment_body.text = note.body
+
         activity?.let {
             viewModel = ViewModelProviders.of(it).get(MainViewModel::class.java)
         } ?: throw Error("This is just dumb")
@@ -41,12 +39,17 @@ class NoteFragment : BaseFragment() {
         }
         viewModel.notes.observe(this, Observer {
             it?.let { notes ->
-                note = notes.first { note.id == id }
-                val bundle = Bundle()
-                bundle.putSerializable(getString(R.string.nav_key_note), note)
-                note_fragment_edit.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_noteFragment_to_editNoteFragment, bundle))
+                notes.firstOrNull { n -> n.id == id }?.let { note -> loadNote(note) }
             }
         })
+    }
+
+    private fun loadNote(note: Note) {
+        note.title?.let { title -> if (title.isNotBlank()) note_fragment_title.text = title }
+        note_fragment_body.text = note.body
+        val bundle = Bundle()
+        bundle.putSerializable(getString(R.string.nav_key_note), note)
+        note_fragment_edit.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_noteFragment_to_editNoteFragment, bundle))
     }
 
     override fun onBack(): Boolean = false

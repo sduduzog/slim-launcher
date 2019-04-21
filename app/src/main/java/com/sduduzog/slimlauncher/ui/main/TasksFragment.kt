@@ -1,11 +1,9 @@
 package com.sduduzog.slimlauncher.ui.main
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.sduduzog.slimlauncher.R
@@ -58,9 +56,6 @@ class TasksFragment : BaseFragment() {
             tasks.filter { !it.isCompleted }.forEach { it.sortingIndex = count++ }
             viewModel.update(*tasks.toTypedArray())
         }
-        if (tasks_fragment_input.requestFocus()) {
-            val imm = activity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.showSoftInput(tasks_fragment_input, InputMethodManager.SHOW_IMPLICIT)
-        }
+
     }
 }
