@@ -68,8 +68,11 @@ abstract class BaseDatabase : RoomDatabase() {
 
         private val MIGRATION_4_5 = object : Migration(4, 5) {
             override fun migrate(database: SupportSQLiteDatabase) {
-                database.execSQL("ALTER TABLE `notes` ADD COLUMN `is_voice` INTEGER NOT NULL DEFAULT 0")
-                database.execSQL("ALTER TABLE `notes` ADD COLUMN `path` TEXT")
+                database.beginTransaction()
+                database.execSQL("ALTER TABLE `notes` RENAME TO `notes_old`")
+                database.execSQL("CREATE TABLE IF NOT EXISTS `notes` (`body` TEXT NOT NULL, `edited` INTEGER NOT NULL, `is_voice` INTEGER NOT NULL DEFAULT 0, `id` INTEGER PRIMARY KEY, `title` TEXT, `path` TEXT)")
+                database.execSQL("INSERT INTO `notes` (`body`, `edited`, `id`, `title`) SELECT `body`, `edited`, `id`, `title` FROM `notes_old`")
+                database.endTransaction()
             }
         }
     }

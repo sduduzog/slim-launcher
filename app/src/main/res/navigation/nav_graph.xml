@@ -63,6 +63,9 @@
         <action
             android:id="@+id/action_notesFragment_to_editNoteFragment"
             app:destination="@id/editNoteFragment" />
+        <action
+            android:id="@+id/action_notesFragment_to_voiceNoteFragment"
+            app:destination="@id/voiceNoteFragment" />
     </fragment>
     <fragment
         android:id="@+id/tasksFragment"
@@ -79,5 +82,10 @@
             app:destination="@id/noteFragment"
             app:popUpTo="@+id/notesFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/voiceNoteFragment"
+        android:name="com.sduduzog.slimlauncher.ui.notes.VoiceNoteFragment"
+        android:label="voice_note_fragment"
+        tools:layout="@layout/voice_note_fragment" />
 
 </navigation>
