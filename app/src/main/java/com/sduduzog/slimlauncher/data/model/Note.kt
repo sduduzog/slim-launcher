@@ -13,12 +13,17 @@ data class Note(
         var id: Long,
         @field:ColumnInfo(name = "body")
         var body: String,
-        @field:ColumnInfo(name = "edited")
-        var edited: Long = -1L,
-        @field:ColumnInfo(name = "is_voice")
-        var is_voice: Boolean = false,
         @field:ColumnInfo(name = "title")
         var title: String? = null,
+        @field:ColumnInfo(name = "edited")
+        var edited: Long = -1L,
+        @field:ColumnInfo(name = "type")
+        var type: Int = 0,
         @field:ColumnInfo(name = "path")
         var path: String? = null
-) : Serializable
+) : Serializable {
+    companion object {
+        const val TYPE_TEXT = 0
+        const val TYPE_VOICE = 2
+    }
+}

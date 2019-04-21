@@ -77,7 +77,7 @@ class EditNoteFragment : BaseFragment() {
         val title = edit_note_fragment_title.text.toString()
         val timestamp = Date().time
         if (note.id == -1L) {
-            val newNote = Note(timestamp, body, timestamp)
+            val newNote = Note(timestamp, body, edited = timestamp)
             newNote.title = title.trim()
             newNote.body = body.trim()
             viewModel.add(newNote)

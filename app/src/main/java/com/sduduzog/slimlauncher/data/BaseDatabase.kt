@@ -22,7 +22,7 @@ abstract class BaseDatabase : RoomDatabase() {
         private var INSTANCE: BaseDatabase? = null
 
         fun getDatabase(context: Context): BaseDatabase? {
-            synchronized(Database::class.java) {
+            synchronized(BaseDatabase::class.java) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.applicationContext,
                             BaseDatabase::class.java, "app_database")
@@ -69,9 +69,9 @@ abstract class BaseDatabase : RoomDatabase() {
         private val MIGRATION_4_5 = object : Migration(4, 5) {
             override fun migrate(database: SupportSQLiteDatabase) {
                 database.execSQL("ALTER TABLE `notes` RENAME TO `notes_old`")
-                database.execSQL("CREATE TABLE IF NOT EXISTS `notes` (`id` INTEGER PRIMARY KEY, `body` TEXT NOT NULL, `title` TEXT, `edited` INTEGER NOT NULL)")
+                database.execSQL("CREATE TABLE IF NOT EXISTS `notes` (`id` INTEGER PRIMARY KEY NOT NULL, `body` TEXT NOT NULL, `title` TEXT, `edited` INTEGER NOT NULL)")
                 database.execSQL("INSERT INTO `notes` (`id`, `body`, `edited`, `title`) SELECT `id`, `body`, `edited`, `title` FROM `notes_old`")
-                database.execSQL("ALTER TABLE `notes` ADD COLUMN `is_voice` INTEGER NOT NULL DEFAULT 0")
+                database.execSQL("ALTER TABLE `notes` ADD COLUMN `type` INTEGER NOT NULL DEFAULT 0")
                 database.execSQL("ALTER TABLE `notes` ADD COLUMN `path` TEXT")
             }
         }
