@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/edit_note_fragment"
+    android:id="@+id/voice_note_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
@@ -10,7 +10,7 @@
     tools:context="com.sduduzog.slimlauncher.ui.notes.EditNoteFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/edit_note_fragment_layout"
+        android:id="@+id/voice_note_fragment_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -20,13 +20,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:background="@android:color/transparent"
-            android:padding="12dp"
             android:hint="@string/edit_note_fragment_untitled"
-            android:textSize="18sp"
             android:inputType="textCapSentences"
+            android:padding="12dp"
+            android:singleLine="true"
+            android:textSize="18sp"
             app:layout_constraintEnd_toStartOf="@+id/edit_note_fragment_save"
             app:layout_constraintStart_toStartOf="parent"
-            android:singleLine="true"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="Autofill,TextFields" />
 

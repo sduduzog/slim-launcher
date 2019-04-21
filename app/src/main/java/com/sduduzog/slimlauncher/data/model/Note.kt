@@ -11,11 +11,14 @@ data class Note(
         @field:ColumnInfo(name = "body")
         var body: String,
         @field:ColumnInfo(name = "edited")
-        var edited: Long = -1L
-) : Serializable {
-    @field:ColumnInfo(name = "id")
-    @PrimaryKey(autoGenerate = true)
-    var id: Int? = null
-    @field:ColumnInfo(name = "title")
-    var title: String? = null
-}
+        var edited: Long = -1L,
+        @field:ColumnInfo(name = "is_voice")
+        var is_voice: Boolean = false,
+        @field:ColumnInfo(name = "id")
+        @PrimaryKey(autoGenerate = true)
+        var id: Int? = null,
+        @field:ColumnInfo(name = "title")
+        var title: String? = null,
+        @field:ColumnInfo(name = "path")
+        var path: String? = null
+) : Serializable

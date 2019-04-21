@@ -46,6 +46,7 @@
     <string name="menu_remove">Remove</string>
     <string name="choose_theme_dialog_title">Choose Theme</string>
     <string name="notes_fragment_create_new_note">CREATE</string>
+    <string name="notes_fragment_stop_recording">STOP</string>
     <string name="add_apps_fragment_search_apps">Search apps</string>
     <string name="tasks_fragment_list_item_complete">&lt;strike>%s&lt;/strike></string>
     <string name="tasks_fragment_sort">Sort</string>

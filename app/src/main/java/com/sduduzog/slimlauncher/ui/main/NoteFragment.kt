@@ -41,6 +41,9 @@ class NoteFragment : BaseFragment() {
         val bundle = Bundle()
         bundle.putSerializable(getString(R.string.nav_key_note), note)
         note_fragment_edit.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_noteFragment_to_editNoteFragment, bundle))
+        if (note.is_voice) {
+
+        }
     }
 
     override fun onBack(): Boolean = false

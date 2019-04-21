@@ -1,6 +1,7 @@
 package com.sduduzog.slimlauncher
 
 import android.content.SharedPreferences
+import android.content.pm.PackageManager
 import android.content.res.Resources
 import android.os.Bundle
 import android.view.View
@@ -8,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.Navigation.findNavController
 import com.sduduzog.slimlauncher.utils.BaseFragment
+import com.sduduzog.slimlauncher.utils.Permissions
+import com.sduduzog.slimlauncher.utils.VoiceRecorder
 
 
 class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceChangeListener {
@@ -68,6 +71,17 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
 
     override fun onBackPressed() {
         dispatchBack()
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        when (requestCode) {
+            Permissions.RECORD_AUDIO -> {
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    VoiceRecorder.getInstance().startRecording(filesDir.absolutePath)
+                }
+                return
+            }
+        }
     }
 
     private fun showSystemUI() {

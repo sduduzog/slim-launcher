@@ -1,8 +1,7 @@
-package com.sduduzog.slimlauncher.ui.main
+package com.sduduzog.slimlauncher.ui.notes
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -60,7 +59,6 @@ class EditNoteFragment : BaseFragment() {
             save()?.let {
                 val bundle = Bundle()
                 bundle.putSerializable(getString(R.string.nav_key_note), it)
-                Log.d("check", "$it")
                 Navigation.findNavController(edit_note_fragment).navigate(R.id.action_editNoteFragment_to_noteFragment, bundle)
             }
         }
@@ -77,13 +75,13 @@ class EditNoteFragment : BaseFragment() {
         val body = edit_note_fragment_body.text.toString()
         val title = edit_note_fragment_title.text.toString()
         val newNote = Note(body, Date().time)
-        newNote.title = title
+        newNote.title = title.trim()
         newNote.body = body.trim()
         newNote.id = note.id
         val currentDigest = hash(newNote.title + newNote.body)
         if (body.isEmpty()) return null
         if (initialDigest == currentDigest) return null
-        if (note.id == null) viewModel.add(newNote) else viewModel.update(newNote)
+        if (note.edited == -1L) viewModel.add(newNote) else viewModel.update(newNote)
         return newNote
     }
 }

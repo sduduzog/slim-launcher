@@ -8,6 +8,7 @@ import com.sduduzog.slimlauncher.data.model.Note
 import com.sduduzog.slimlauncher.data.model.Task
 
 class Repository(application: Application) {
+
     private val database: BaseDatabase = BaseDatabase.getDatabase(application)!!
 
     private val baseDao: BaseDao = database.baseDao()

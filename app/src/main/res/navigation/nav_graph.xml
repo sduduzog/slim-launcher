@@ -71,7 +71,7 @@
         tools:layout="@layout/tasks_fragment" />
     <fragment
         android:id="@+id/editNoteFragment"
-        android:name="com.sduduzog.slimlauncher.ui.main.EditNoteFragment"
+        android:name="com.sduduzog.slimlauncher.ui.notes.EditNoteFragment"
         android:label="edit_note_fragment"
         tools:layout="@layout/edit_note_fragment">
         <action
