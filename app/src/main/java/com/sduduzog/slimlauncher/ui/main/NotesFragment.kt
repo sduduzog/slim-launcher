@@ -115,7 +115,7 @@ class NotesFragment : BaseFragment(), OnShitDoneToNotesListener {
 
     override fun onView(note: Note) {
         val bundle = Bundle()
-        bundle.putInt(getString(R.string.nav_key_note), note.id!!)
+        bundle.putLong(getString(R.string.nav_key_note), note.id)
         if (note.is_voice)
             Navigation.findNavController(notes_fragment)
                     .navigate(R.id.action_notesFragment_to_voiceNoteFragment, bundle)

@@ -28,7 +28,7 @@ class EditNoteFragment : BaseFragment() {
             note = if (it != null && it.containsKey(getString(R.string.nav_key_note))) {
                 it.get(getString(R.string.nav_key_note)) as Note
             } else {
-                Note("")
+                Note(-1L, "")
             }
         }
         initialDigest = hash(note.title + note.body)
@@ -71,17 +71,21 @@ class EditNoteFragment : BaseFragment() {
         return String(md.digest())
     }
 
-    private fun save(): Note? {
+    private fun save(): Long? {
         val body = edit_note_fragment_body.text.toString()
-        val title = edit_note_fragment_title.text.toString()
-        val newNote = Note(body, Date().time)
-        newNote.title = title.trim()
-        newNote.body = body.trim()
-        newNote.id = note.id
-        val currentDigest = hash(newNote.title + newNote.body)
         if (body.isEmpty()) return null
+        val title = edit_note_fragment_title.text.toString()
+        val timestamp = Date().time
+        if (note.id == -1L) {
+            val newNote = Note(timestamp, body, timestamp)
+            newNote.title = title.trim()
+            newNote.body = body.trim()
+            viewModel.add(newNote)
+            return newNote.id
+        }
+        val currentDigest = hash(title + body)
         if (initialDigest == currentDigest) return null
-        if (note.edited == -1L) viewModel.add(newNote) else viewModel.update(newNote)
-        return newNote
+        viewModel.update(note)
+        return note.id
     }
 }
