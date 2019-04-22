@@ -47,7 +47,7 @@
     <string name="choose_theme_dialog_title">Choose Theme</string>
     <string name="notes_fragment_create_new_note">CREATE</string>
     <string name="notes_fragment_counter">%s</string>
-    <string name="notes_fragment_stop_recording">STOP RECORDING</string>
+    <string name="notes_fragment_stop">STOP</string>
     <string name="add_apps_fragment_search_apps">Search apps</string>
     <string name="tasks_fragment_list_item_complete">&lt;strike>%s&lt;/strike></string>
     <string name="tasks_fragment_sort">Sort</string>
@@ -56,11 +56,11 @@
     <string name="edit_note_fragment_save">SAVE</string>
     <string name="edit_note_fragment_untitled">Untitled</string>
     <string name="note_fragment_edit">EDIT</string>
-    <string name="nav_key_note">note</string>
+    <string name="nav_key_note">nav_key_note</string>
     <string name="voice_note_fragment_pause">PAUSE</string>
     <string name="voice_note_fragment_play">PLAY</string>
     <string name="menu_share">Share</string>
     <string name="menu_delete">Delete</string>
-    <string name="voice_note_fragment_stop">STOP</string>
+    <string name="notes_fragment_undo">UNDO</string>
 
 </resources>

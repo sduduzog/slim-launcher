@@ -18,7 +18,7 @@ class RenameAppDialog : DialogFragment() {
     private lateinit var model: MainViewModel
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val view = LayoutInflater.from(context).inflate(R.layout.rename_app_dialog_edit_text, customise_apps_fragment, false)
+        val view = LayoutInflater.from(context).inflate(R.layout.rename_dialog_edit_text, customise_apps_fragment, false)
         val editText: EditText = view.findViewById(R.id.rename_editText)
         editText.text.append(app.appName)
         val builder = AlertDialog.Builder(context!!)

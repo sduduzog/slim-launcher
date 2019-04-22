@@ -12,12 +12,12 @@ import java.util.*
 
 class VoiceRecorder private constructor() {
 
-    var state: State = State.IDLE
+    var state: Int = IDLE
         set(value) {
             stateLiveData.value = value
             field = value
         }
-    val stateLiveData = MutableLiveData<State>()
+    val stateLiveData = MutableLiveData<Int>()
     private var note: Note? = null
     private var mediaRecorder: MediaRecorder? = null
 
@@ -34,17 +34,17 @@ class VoiceRecorder private constructor() {
         try {
             mediaRecorder?.prepare()
             mediaRecorder?.start()
-            state = State.RECORDING
+            state = RECORDING
         } catch (e: IOException) {
             note = null
-            state = State.ERROR
+            state = ERROR
         }
     }
 
     fun stopRecording() {
         mediaRecorder?.stop()
         mediaRecorder?.reset()
-        state = State.IDLE
+        state = IDLE
     }
 
     fun save(viewModel: MainViewModel) {
@@ -52,7 +52,7 @@ class VoiceRecorder private constructor() {
     }
 
     fun onStart() {
-        state = State.IDLE
+        state = IDLE
         mediaRecorder = MediaRecorder()
     }
 
@@ -76,10 +76,8 @@ class VoiceRecorder private constructor() {
             }
         }
 
-        enum class State {
-            RECORDING,
-            IDLE,
-            ERROR
-        }
+        const val RECORDING = 1
+        const val IDLE = 2
+        const val ERROR = 4
     }
 }

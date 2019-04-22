@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.SystemClock
 import android.text.format.DateUtils
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,6 +22,7 @@ import com.sduduzog.slimlauncher.data.MainViewModel
 import com.sduduzog.slimlauncher.data.model.Note
 import com.sduduzog.slimlauncher.utils.*
 import kotlinx.android.synthetic.main.notes_fragment.*
+import java.io.File
 
 
 class NotesFragment : BaseFragment(), OnShitDoneToNotesListener {
@@ -40,10 +40,23 @@ class NotesFragment : BaseFragment(), OnShitDoneToNotesListener {
             timeInMilliseconds = SystemClock.uptimeMillis()
             updateTime = timeInMilliseconds - startTime
             val time = DateUtils.formatElapsedTime(updateTime / 1000)
-            notes_fragment_create_note.text = getString(R.string.notes_fragment_stop_recording)
+            notes_fragment_create_note.text = getString(R.string.notes_fragment_stop)
             notes_fragment_counter.text = getString(R.string.notes_fragment_counter, time)
             customHandler.postDelayed(this, 100)
         }
+    }
+
+    private var isDeletePending = false
+    private var noteToDelete: Note? = null
+
+    private val deleteNoteThread = Runnable {
+        if (isDeletePending) {
+            noteToDelete?.let {
+                deleteNote(it)
+            }
+        }
+        notes_fragment_create_note.text = getString(R.string.notes_fragment_create_new_note)
+        isDeletePending = false
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -81,15 +94,19 @@ class NotesFragment : BaseFragment(), OnShitDoneToNotesListener {
         val itemTouchHelper = ItemTouchHelper(simpleItemTouchCallback)
         itemTouchHelper.attachToRecyclerView(notes_fragment_list)
         notes_fragment_create_note.setOnClickListener {
-            if (voiceRecorder.state == VoiceRecorder.Companion.State.RECORDING) {
-                try {
+            when {
+                isDeletePending -> {
+                    isDeletePending = false
+                    adapter.notifyDataSetChanged()
+                    notes_fragment_create_note.text = getString(R.string.notes_fragment_create_new_note)
+                }
+                voiceRecorder.state == VoiceRecorder.RECORDING -> try {
                     voiceRecorder.stopRecording()
                     voiceRecorder.save(viewModel)
                 } catch (e: RuntimeException) {
-                    Log.e("check", "$e")
+                    // I pray this doesn't happen
                 }
-            } else {
-                Navigation.findNavController(notes_fragment)
+                else -> Navigation.findNavController(notes_fragment)
                         .navigate(R.id.action_notesFragment_to_editNoteFragment)
             }
         }
@@ -106,12 +123,12 @@ class NotesFragment : BaseFragment(), OnShitDoneToNotesListener {
         voiceRecorder.stateLiveData.observe(this, Observer {
             it?.let { state ->
                 when (state) {
-                    VoiceRecorder.Companion.State.RECORDING -> startTimer()
-                    VoiceRecorder.Companion.State.IDLE -> {
+                    VoiceRecorder.RECORDING -> startTimer()
+                    VoiceRecorder.IDLE -> {
                         notes_fragment_create_note.text = getString(R.string.notes_fragment_create_new_note)
                         stopTimer()
                     }
-                    VoiceRecorder.Companion.State.ERROR -> stopTimer()
+                    VoiceRecorder.ERROR -> stopTimer()
                 }
             }
         })
@@ -128,6 +145,11 @@ class NotesFragment : BaseFragment(), OnShitDoneToNotesListener {
         notes_fragment_counter.visibility = View.GONE
     }
 
+    private fun deleteNote(note: Note) {
+        if (note.type == Note.TYPE_VOICE) File(note.path).delete()
+        viewModel.remove(note)
+    }
+
     override fun onStart() {
         super.onStart()
         voiceRecorder.onStart()
@@ -140,7 +162,7 @@ class NotesFragment : BaseFragment(), OnShitDoneToNotesListener {
     }
 
     override fun onView(note: Note) {
-        if (voiceRecorder.state == VoiceRecorder.Companion.State.RECORDING) return
+        if (voiceRecorder.state == VoiceRecorder.RECORDING) return
         val bundle = Bundle()
         bundle.putLong(getString(R.string.nav_key_note), note.id)
         if (note.type == Note.TYPE_TEXT)
@@ -152,11 +174,16 @@ class NotesFragment : BaseFragment(), OnShitDoneToNotesListener {
     }
 
     override fun onDelete(note: Note) {
-        if (voiceRecorder.state == VoiceRecorder.Companion.State.RECORDING) {
-            notes_fragment_list.adapter?.notifyDataSetChanged()
-            return
+        notes_fragment_create_note.text = getString(R.string.notes_fragment_undo)
+        if (isDeletePending) {
+            customHandler.removeCallbacks(deleteNoteThread)
+            noteToDelete?.let {
+                deleteNote(it)
+            }
         }
-        if (note.type == Note.TYPE_VOICE) context?.deleteFile(note.path)
-        viewModel.remove(note)
+
+        noteToDelete = note.copy()
+        isDeletePending = true
+        customHandler.postDelayed(deleteNoteThread, 2000)
     }
 }

@@ -28,17 +28,13 @@ class HomeWatcher(private val context: Context) {
         }
     }
 
-    @Suppress("PrivatePropertyName")
     inner class InnerReceiver : BroadcastReceiver() {
-
-        private val SYSTEM_DIALOG_REASON_KEY = "reason"
-        private val SYSTEM_DIALOG_REASON_HOME_KEY = "homekey"
 
         override fun onReceive(context: Context?, intent: Intent?) {
             if (intent == null) return
             if (intent.action != Intent.ACTION_CLOSE_SYSTEM_DIALOGS) return
-            val reason = intent.getStringExtra(SYSTEM_DIALOG_REASON_KEY) ?: return
-            if (reason != SYSTEM_DIALOG_REASON_HOME_KEY) return
+            val reason = intent.getStringExtra("reason") ?: return
+            if (reason != "homekey") return
             listener?.onHomePressed()
         }
     }

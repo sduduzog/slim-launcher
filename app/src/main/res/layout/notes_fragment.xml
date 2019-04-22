@@ -49,11 +49,13 @@
 
     <TextView
         android:id="@+id/notes_fragment_counter"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="?attr/colorPrimary"
         android:gravity="center"
-        android:textSize="@dimen/_68ssp"
+        android:textSize="@dimen/_64ssp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/notes_fragment_create_note"
         tools:visibility="gone" />

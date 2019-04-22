@@ -123,24 +123,14 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
     companion object {
 
         fun resolveTheme(i: Int): Int {
-            when (i) {
-                1 -> {
-                    return R.style.AppDarkTheme
-                }
-                2 -> {
-                    return R.style.AppGreyTheme
-                }
-                3 -> {
-                    return R.style.AppTealTheme
-                }
-                4 -> {
-                    return R.style.AppCandyTheme
-                }
-                5 -> {
-                    return R.style.AppPinkTheme
-                }
+            return when (i) {
+                1 -> R.style.AppDarkTheme
+                2 -> R.style.AppGreyTheme
+                3 -> R.style.AppTealTheme
+                4 -> R.style.AppCandyTheme
+                5 -> R.style.AppPinkTheme
+                else -> R.style.AppTheme
             }
-            return R.style.AppTheme
         }
     }
 
