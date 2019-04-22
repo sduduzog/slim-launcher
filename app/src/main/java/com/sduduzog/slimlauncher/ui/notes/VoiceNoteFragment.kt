@@ -1,22 +1,28 @@
 package com.sduduzog.slimlauncher.ui.notes
 
+import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
 import android.os.SystemClock
 import android.text.format.DateUtils
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.PopupMenu
+import androidx.core.content.FileProvider
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.Navigation
 import com.sduduzog.slimlauncher.R
 import com.sduduzog.slimlauncher.data.MainViewModel
 import com.sduduzog.slimlauncher.data.model.Note
 import com.sduduzog.slimlauncher.dialogs.RenameNoteDialog
 import com.sduduzog.slimlauncher.utils.BaseFragment
 import kotlinx.android.synthetic.main.voice_note_fragment.*
+import java.io.File
+
 
 class VoiceNoteFragment : BaseFragment() {
 
@@ -31,11 +37,15 @@ class VoiceNoteFragment : BaseFragment() {
     private var pauseTime = 0L
     private val updateTimerThread = object : Runnable {
         override fun run() {
-            timeInMilliseconds = SystemClock.uptimeMillis()
-            updateTime = (timeInMilliseconds + pauseTime) - startTime
-            val time = DateUtils.formatElapsedTime(updateTime / 1000)
-            voice_note_fragment_counter.text = getString(R.string.notes_fragment_counter, time)
-            customHandler.postDelayed(this, 10)
+            try {
+                timeInMilliseconds = SystemClock.uptimeMillis()
+                updateTime = (timeInMilliseconds + pauseTime) - startTime
+                val time = DateUtils.formatElapsedTime(updateTime / 1000)
+                voice_note_fragment_counter.text = getString(R.string.notes_fragment_counter, time)
+                customHandler.postDelayed(this, 10)
+            } finally {
+                // Do something
+            }
         }
     }
 
@@ -113,7 +123,10 @@ class VoiceNoteFragment : BaseFragment() {
             showDuration()
             voice_note_fragment_play.text = getString(R.string.voice_note_fragment_play)
         }
-        mediaPlayer?.setDataSource(note.path)
+        val imagePath = File(context!!.filesDir, getString(R.string.audio_file_path))
+        val newFile = File(imagePath, note.filename)
+        Log.d("check", newFile.absolutePath)
+        mediaPlayer?.setDataSource(newFile.absolutePath)
         mediaPlayer?.prepare()
         showDuration()
         voice_note_fragment_options.setOnClickListener { showPopupMenu(it, note) }
@@ -128,13 +141,30 @@ class VoiceNoteFragment : BaseFragment() {
 
 
     private fun showPopupMenu(view: View, note: Note) {
+        stopTimer()
+        showDuration()
+        voice_note_fragment_play.text = getString(R.string.voice_note_fragment_play)
         val popup = PopupMenu(context!!, view)
         popup.menuInflater.inflate(R.menu.voice_note_popup_menu, popup.menu)
         popup.setOnMenuItemClickListener {
-            if (it.itemId == R.id.vn_menu_rename) {
-                RenameNoteDialog.getInstance(note, viewModel).show(fragmentManager, "note_dialog")
-            } else if (it.itemId == R.id.vn_menu_share) {
-            } else if (it.itemId == R.id.vn_menu_delete) {
+            when {
+                it.itemId == R.id.vn_menu_rename -> RenameNoteDialog.getInstance(note, viewModel)
+                        .show(fragmentManager, "note_dialog")
+                it.itemId == R.id.vn_menu_share -> {
+                    val intent = Intent(Intent.ACTION_SEND)
+                    val imagePath = File(context!!.filesDir, getString(R.string.audio_file_path))
+                    val newFile = File(imagePath, note.filename)
+                    val contentUri = FileProvider.getUriForFile(context!!, getString(R.string.app_authority_for_file_provider), newFile)
+                    val type = context!!.contentResolver.getType(contentUri)
+                    intent.setDataAndType(contentUri, type)
+                    intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                    startActivity(Intent.createChooser(intent, "Send audio note"))
+                }
+                it.itemId == R.id.vn_menu_delete -> {
+                    Navigation.findNavController(voice_note_fragment).popBackStack()
+                    context!!.deleteFile(note.filename)
+                    viewModel.remove(note)
+                }
             }
             true
         }

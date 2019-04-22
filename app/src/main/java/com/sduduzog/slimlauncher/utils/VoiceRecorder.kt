@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.sduduzog.slimlauncher.data.MainViewModel
 import com.sduduzog.slimlauncher.data.model.Note
+import java.io.File
 import java.io.IOException
 import java.text.DateFormat
 import java.util.*
@@ -22,11 +23,13 @@ class VoiceRecorder private constructor() {
     private var mediaRecorder: MediaRecorder? = null
 
     fun startRecording(fileDir: String) {
+        File(fileDir).mkdir()
         val timestamp = Date().time
         val title = "VN-$timestamp"
         val body = "Recorded at ${DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(Date(timestamp))}"
-        val path = "$fileDir/$title.m4a"
-        note = Note(timestamp, body, title, timestamp, Note.TYPE_VOICE, path)
+        val filename = "$title.m4a"
+        val path = "$fileDir/$filename"
+        note = Note(timestamp, body, title, timestamp, Note.TYPE_VOICE, filename)
         mediaRecorder?.setAudioSource(MediaRecorder.AudioSource.MIC)
         mediaRecorder?.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4)
         mediaRecorder?.setOutputFile(path)
@@ -41,6 +44,7 @@ class VoiceRecorder private constructor() {
         } catch (e: IOException) {
             note = null
             state = ERROR
+            Log.e("check", "$e")
         }
     }
 

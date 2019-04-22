@@ -114,7 +114,9 @@ class NotesFragment : BaseFragment(), OnShitDoneToNotesListener {
             val permissionCheck = ContextCompat.checkSelfPermission(activity!!,
                     Manifest.permission.RECORD_AUDIO)
             val isPermissionGranted = permissionCheck == PackageManager.PERMISSION_GRANTED
-            if (isPermissionGranted) voiceRecorder.startRecording(context!!.filesDir.absolutePath)
+            val file = File(context!!.filesDir, getString(R.string.audio_file_path))
+            val dir = file.canonicalPath
+            if (isPermissionGranted) voiceRecorder.startRecording(dir)
             else ActivityCompat.requestPermissions(activity!!,
                     arrayOf(Manifest.permission.RECORD_AUDIO),
                     Permissions.RECORD_AUDIO)
@@ -146,7 +148,7 @@ class NotesFragment : BaseFragment(), OnShitDoneToNotesListener {
     }
 
     private fun deleteNote(note: Note) {
-        if (note.type == Note.TYPE_VOICE) File(note.path).delete()
+        if (note.type == Note.TYPE_VOICE) context?.deleteFile(note.filename)
         viewModel.remove(note)
     }
 

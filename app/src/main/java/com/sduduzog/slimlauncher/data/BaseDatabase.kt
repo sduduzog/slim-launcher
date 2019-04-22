@@ -72,7 +72,7 @@ abstract class BaseDatabase : RoomDatabase() {
                 database.execSQL("CREATE TABLE IF NOT EXISTS `notes` (`id` INTEGER PRIMARY KEY NOT NULL, `body` TEXT NOT NULL, `title` TEXT, `edited` INTEGER NOT NULL)")
                 database.execSQL("INSERT INTO `notes` (`id`, `body`, `edited`, `title`) SELECT `id`, `body`, `edited`, `title` FROM `notes_old`")
                 database.execSQL("ALTER TABLE `notes` ADD COLUMN `type` INTEGER NOT NULL DEFAULT 0")
-                database.execSQL("ALTER TABLE `notes` ADD COLUMN `path` TEXT")
+                database.execSQL("ALTER TABLE `notes` ADD COLUMN `filename` TEXT")
             }
         }
     }

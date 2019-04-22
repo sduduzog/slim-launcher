@@ -19,8 +19,8 @@ data class Note(
         var edited: Long = -1L,
         @field:ColumnInfo(name = "type")
         var type: Int = 0,
-        @field:ColumnInfo(name = "path")
-        var path: String? = null
+        @field:ColumnInfo(name = "filename")
+        var filename: String? = null
 ) : Serializable {
     companion object {
         const val TYPE_TEXT = 0

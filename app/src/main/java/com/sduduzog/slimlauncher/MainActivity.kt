@@ -12,6 +12,7 @@ import com.sduduzog.slimlauncher.utils.BaseFragment
 import com.sduduzog.slimlauncher.utils.HomeWatcher
 import com.sduduzog.slimlauncher.utils.Permissions
 import com.sduduzog.slimlauncher.utils.VoiceRecorder
+import java.io.File
 
 
 class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceChangeListener, HomeWatcher.OnHomePressedListener {
@@ -95,7 +96,9 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
         when (requestCode) {
             Permissions.RECORD_AUDIO -> {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    VoiceRecorder.getInstance().startRecording(filesDir.absolutePath)
+                    val file = File(filesDir, getString(R.string.audio_file_path))
+                    val dir = file.canonicalPath
+                    VoiceRecorder.getInstance().startRecording(dir)
                 }
                 return
             }
