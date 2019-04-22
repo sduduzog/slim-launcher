@@ -56,5 +56,7 @@
     <string name="edit_note_fragment_untitled">Untitled</string>
     <string name="note_fragment_edit">EDIT</string>
     <string name="nav_key_note">note</string>
+    <string name="voice_note_fragment_pause">PAUSE</string>
+    <string name="voice_note_fragment_play">PLAY</string>
 
 </resources>

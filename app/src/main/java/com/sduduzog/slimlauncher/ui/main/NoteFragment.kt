@@ -51,6 +51,4 @@ class NoteFragment : BaseFragment() {
         bundle.putSerializable(getString(R.string.nav_key_note), note)
         note_fragment_edit.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_noteFragment_to_editNoteFragment, bundle))
     }
-
-    override fun onBack(): Boolean = false
 }
