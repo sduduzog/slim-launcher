@@ -23,8 +23,8 @@ class VoiceRecorder private constructor() {
 
     fun startRecording(fileName: String) {
         val timestamp = Date().time
-        val title = "Voice note : ${DateFormat.getDateInstance(DateFormat.SHORT).format(Date(timestamp))}"
-        val body = "Recorded at ${DateFormat.getTimeInstance(DateFormat.SHORT).format(Date(timestamp))}"
+        val title = "VN-$timestamp"
+        val body = "Recorded at ${DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(Date(timestamp))}"
         val path = "$fileName/$timestamp.3gp"
         note = Note(timestamp, body, title, timestamp, Note.TYPE_VOICE, path)
         mediaRecorder?.setAudioSource(MediaRecorder.AudioSource.MIC)

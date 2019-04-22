@@ -18,23 +18,23 @@
         android:padding="12dp"
         android:textAppearance="@style/Base.AlertDialog.AppCompat"
         android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/voice_note_fragment_save"
+        app:layout_constraintEnd_toStartOf="@+id/voice_note_fragment_options"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/voice_note_fragment_save"
+    <ImageView
+        android:id="@+id/voice_note_fragment_options"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:padding="12dp"
-
-        android:text="SHARE"
+        android:padding="8dp"
+        app:layout_constraintTop_toTopOf="parent"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:srcCompat="@drawable/ic_more_vert"
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/voice_note_fragment_body"
@@ -51,7 +51,6 @@
         android:id="@+id/voice_note_fragment_counter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="00:00"
         android:textAppearance="@style/Base.AlertDialog.AppCompat"
         android:textSize="@dimen/_64ssp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -64,18 +63,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="@dimen/_8sdp"
-        android:text="PLAY"
+        android:text="@string/voice_note_fragment_play"
         android:textAppearance="@style/Base.AlertDialog.AppCompat"
         android:textSize="@dimen/_18ssp"
         app:layout_constraintStart_toStartOf="@+id/voice_note_fragment_counter"
         app:layout_constraintTop_toBottomOf="@+id/voice_note_fragment_counter" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/voice_note_fragment_stop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="@dimen/_8sdp"
-        android:text="STOP"
+        android:text="@string/voice_note_fragment_stop"
         android:textAppearance="@style/Base.AlertDialog.AppCompat"
         android:textSize="@dimen/_18ssp"
         app:layout_constraintRight_toRightOf="@+id/voice_note_fragment_counter"

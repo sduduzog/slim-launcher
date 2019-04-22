@@ -9,14 +9,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.Navigation.findNavController
 import com.sduduzog.slimlauncher.utils.BaseFragment
+import com.sduduzog.slimlauncher.utils.HomeWatcher
 import com.sduduzog.slimlauncher.utils.Permissions
 import com.sduduzog.slimlauncher.utils.VoiceRecorder
 
 
-class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceChangeListener {
+class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceChangeListener, HomeWatcher.OnHomePressedListener {
 
     private lateinit var settings: SharedPreferences
     private lateinit var navigator: NavController
+    private lateinit var homeWatcher: HomeWatcher
     private val subscribers: MutableSet<BaseFragment> = mutableSetOf()
 
     fun attachSubscriber(s: BaseFragment) {
@@ -38,12 +40,24 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
         settings = getSharedPreferences(getString(R.string.prefs_settings), MODE_PRIVATE)
         settings.registerOnSharedPreferenceChangeListener(this)
         navigator = findNavController(this, R.id.nav_host_fragment)
+        homeWatcher = HomeWatcher(this)
+        homeWatcher.setOnHomePressedListener(this)
     }
 
     override fun onResume() {
         super.onResume()
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         toggleStatusBar()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        homeWatcher.startWatch()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        homeWatcher.stopWatch()
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
@@ -71,6 +85,10 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
 
     override fun onBackPressed() {
         dispatchBack()
+    }
+
+    override fun onHomePressed() {
+        navigator.popBackStack(R.id.homeFragment, false)
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {

@@ -2,9 +2,11 @@ package com.sduduzog.slimlauncher.ui.notes
 
 import android.media.MediaPlayer
 import android.os.Bundle
+import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.PopupMenu
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.sduduzog.slimlauncher.R
@@ -50,6 +52,12 @@ class VoiceNoteFragment : BaseFragment() {
                 voice_note_fragment_play.text = getString(R.string.voice_note_fragment_pause)
             }
         }
+        voice_note_fragment_stop.setOnClickListener {
+            mediaPlayer?.stop()
+            mediaPlayer?.prepare()
+            showDuration()
+            voice_note_fragment_play.text = getString(R.string.voice_note_fragment_play)
+        }
     }
 
     override fun onStop() {
@@ -67,5 +75,26 @@ class VoiceNoteFragment : BaseFragment() {
         mediaPlayer = MediaPlayer()
         mediaPlayer?.setDataSource(note.path)
         mediaPlayer?.prepare()
+        showDuration()
+        voice_note_fragment_options.setOnClickListener {
+            showPopupMenu(it).setOnMenuItemClickListener {
+
+                true
+            }
+        }
+    }
+
+    private fun showDuration() {
+        mediaPlayer?.let {
+            val duration = it.duration
+            voice_note_fragment_counter.text = DateUtils.formatElapsedTime(duration.toLong() / 1000)
+        }
+    }
+
+    private fun showPopupMenu(view: View): PopupMenu {
+        val popup = PopupMenu(context!!, view)
+        popup.menuInflater.inflate(R.menu.voice_note_popup_menu, popup.menu)
+        popup.show()
+        return popup
     }
 }
