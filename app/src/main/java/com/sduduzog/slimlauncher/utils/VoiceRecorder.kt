@@ -21,16 +21,19 @@ class VoiceRecorder private constructor() {
     private var note: Note? = null
     private var mediaRecorder: MediaRecorder? = null
 
-    fun startRecording(fileName: String) {
+    fun startRecording(fileDir: String) {
         val timestamp = Date().time
         val title = "VN-$timestamp"
         val body = "Recorded at ${DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(Date(timestamp))}"
-        val path = "$fileName/$timestamp.3gp"
+        val path = "$fileDir/$title.m4a"
         note = Note(timestamp, body, title, timestamp, Note.TYPE_VOICE, path)
         mediaRecorder?.setAudioSource(MediaRecorder.AudioSource.MIC)
-        mediaRecorder?.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
+        mediaRecorder?.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4)
         mediaRecorder?.setOutputFile(path)
-        mediaRecorder?.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_WB)
+        mediaRecorder?.setAudioEncoder(MediaRecorder.AudioEncoder.HE_AAC)
+        mediaRecorder?.setAudioChannels(1)
+        mediaRecorder?.setAudioEncodingBitRate(384000)
+        mediaRecorder?.setAudioSamplingRate(44100)
         try {
             mediaRecorder?.prepare()
             mediaRecorder?.start()
