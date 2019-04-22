@@ -35,7 +35,7 @@ class VoiceNoteFragment : BaseFragment() {
             updateTime = (timeInMilliseconds + pauseTime) - startTime
             val time = DateUtils.formatElapsedTime(updateTime / 1000)
             voice_note_fragment_counter.text = getString(R.string.notes_fragment_counter, time)
-            customHandler.postDelayed(this, 100)
+            customHandler.postDelayed(this, 10)
         }
     }
 
@@ -133,6 +133,8 @@ class VoiceNoteFragment : BaseFragment() {
         popup.setOnMenuItemClickListener {
             if (it.itemId == R.id.vn_menu_rename) {
                 RenameNoteDialog.getInstance(note, viewModel).show(fragmentManager, "note_dialog")
+            } else if (it.itemId == R.id.vn_menu_share) {
+            } else if (it.itemId == R.id.vn_menu_delete) {
             }
             true
         }
