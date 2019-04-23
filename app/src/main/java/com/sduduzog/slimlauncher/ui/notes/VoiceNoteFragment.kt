@@ -156,7 +156,8 @@ class VoiceNoteFragment : BaseFragment() {
                     val newFile = File(imagePath, note.filename)
                     val contentUri = FileProvider.getUriForFile(context!!, getString(R.string.app_authority_for_file_provider), newFile)
                     val type = context!!.contentResolver.getType(contentUri)
-                    intent.setDataAndType(contentUri, type)
+                    intent.putExtra(Intent.EXTRA_STREAM, contentUri)
+                    intent.type = type
                     intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                     startActivity(Intent.createChooser(intent, "Send audio note"))
                 }
