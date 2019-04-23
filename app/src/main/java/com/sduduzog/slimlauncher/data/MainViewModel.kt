@@ -59,8 +59,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         _baseRepository.update(*args)
     }
 
-    fun remove(app: HomeApp) {
-        _baseRepository.remove(app)
+    fun remove(vararg app: HomeApp) {
+        _baseRepository.remove(*app)
     }
 
     fun remove(note: Note) {

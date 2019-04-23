@@ -52,11 +52,13 @@ class CustomiseAppsFragment : BaseFragment(), OnShitDoneToAppsListener {
                         customise_apps_fragment_add.visibility = View.GONE
                     }
                 }
-                val count = 7 - apps.size
-                customise_apps_fragment_counter.text = resources.getQuantityString(R.plurals.slots_plurals, count, count)
             } ?: adapter.setItems(listOf())
         })
-
+        customise_apps_fragment_remove_all.setOnClickListener {
+            viewModel.apps.value?.let {
+                viewModel.remove(*it.toTypedArray())
+            }
+        }
         LoadInstalledApps(viewModel).execute(context!!.packageManager)
 
         customise_apps_fragment_list.adapter = adapter

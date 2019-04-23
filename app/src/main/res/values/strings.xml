@@ -64,5 +64,6 @@
     <string name="menu_share">Share</string>
     <string name="menu_delete">Delete</string>
     <string name="notes_fragment_undo">UNDO</string>
+    <string name="customise_apps_fragment_remove_all">Remove all</string>
 
 </resources>

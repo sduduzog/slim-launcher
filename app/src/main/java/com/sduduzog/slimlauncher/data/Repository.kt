@@ -51,8 +51,8 @@ class Repository(application: Application) {
         UpdateTaskAsyncTask(baseDao).execute(*args)
     }
 
-    fun remove(app: HomeApp) {
-        RemoveAppAsyncTask(baseDao).execute(app)
+    fun remove(vararg app: HomeApp) {
+        RemoveAppAsyncTask(baseDao).execute(*app)
     }
 
     fun remove(note: Note) {
