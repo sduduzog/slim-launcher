@@ -1,0 +1,13 @@
+Personal information
+
+We made Apps with your privacy in mind, so we do not collect personally identifiable information about you. In other words, we do not collect information such as your name, address, phone number, email address or precise geographic location.
+
+
+
+Explains for some permission requests
+
+in my application, I request somes sensitive permissions to make functions of application work properly:
+
+android.permission.RECORD_AUDIO: to use microphone to record voice as the main feature of the app described
+android.permission.STORAGE android.permission.WRITE_EXTERNAL_STORAGE android.permission.READ_EXTERNAL_STORAGE: to save files on storage (internal and external)
+android.permission.READ_PHONE_STATE: to detect incomming calls to handle voice recording properly, stop and save recording when user pick up the call.
