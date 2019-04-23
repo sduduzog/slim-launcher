@@ -35,6 +35,10 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
         completeBackAction()
     }
 
+    private fun dispatchHome() {
+        for (s in subscribers) s.onHome()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
@@ -89,6 +93,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
     }
 
     override fun onHomePressed() {
+        dispatchHome()
         navigator.popBackStack(R.id.homeFragment, false)
     }
 

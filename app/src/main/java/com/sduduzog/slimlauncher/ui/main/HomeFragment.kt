@@ -166,6 +166,10 @@ class HomeFragment : BaseFragment(), OnLaunchAppListener {
         return true
     }
 
+    override fun onHome() {
+        home_fragment.transitionToEnd()
+    }
+
     inner class ClockReceiver : BroadcastReceiver() {
         override fun onReceive(ctx: Context?, intent: Intent?) {
             updateClock()
