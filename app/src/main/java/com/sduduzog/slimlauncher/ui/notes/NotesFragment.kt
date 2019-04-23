@@ -1,4 +1,4 @@
-package com.sduduzog.slimlauncher.ui.main
+package com.sduduzog.slimlauncher.ui.notes
 
 import android.Manifest
 import android.content.pm.PackageManager

@@ -45,7 +45,7 @@
         tools:layout="@layout/add_app_fragment" />
     <fragment
         android:id="@+id/noteFragment"
-        android:name="com.sduduzog.slimlauncher.ui.main.NoteFragment"
+        android:name="com.sduduzog.slimlauncher.ui.notes.NoteFragment"
         android:label="note_fragment"
         tools:layout="@layout/note_fragment">
         <action
@@ -54,7 +54,7 @@
     </fragment>
     <fragment
         android:id="@+id/notesFragment"
-        android:name="com.sduduzog.slimlauncher.ui.main.NotesFragment"
+        android:name="com.sduduzog.slimlauncher.ui.notes.NotesFragment"
         android:label="notes_fragment"
         tools:layout="@layout/notes_fragment">
         <action

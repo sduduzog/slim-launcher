@@ -5,7 +5,7 @@
     android:id="@+id/notes_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.main.NotesFragment">
+    tools:context=".ui.notes.NotesFragment">
 
     <TextView
         android:id="@+id/notes_fragment_title"
