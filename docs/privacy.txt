@@ -1,0 +1,14 @@
+Definitions
+We - The dev, contributors and/or the app itself as an entity
+
+Personal information
+
+Slim was made with your privacy in mind, so we do not collect personally identifiable information about you. In other words, we do not collect information such as your name, address, phone number, email address or precise geographic location.
+
+
+
+Explains for some permission requests
+
+in my application, I request some sensitive permissions to make functions of application work properly:
+
+android.permission.RECORD_AUDIO: to use microphone to record voice notes as the additional feature of the app described
