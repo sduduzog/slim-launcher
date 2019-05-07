@@ -4,7 +4,6 @@
     <string name="slim_url">http://sduduzog.github.io/slim-launcher/</string>
     <string name="main_placeholder_clock">00:00</string>
     <string name="main_placeholder_date">Sat, Apr 20</string>
-    <string name="audio_file_path">audio</string>
 
     <string-array name="themes_array">
         <item>Default</item>
@@ -19,14 +18,6 @@
         <item>24 Hour</item>
         <item>12 Hour</item>
     </string-array>
-
-    <plurals name="slots_plurals">
-        <item quantity="zero">%d slots left</item>
-        <item quantity="one">%d slot left</item>
-        <item quantity="few">%d slots left</item>
-        <item quantity="two">%d slots left</item>
-        <item quantity="other">%d slots left</item>
-    </plurals>
 
     <string name="home_fragment_tasks">Tasks</string>
 
@@ -47,23 +38,8 @@
     <string name="menu_rename">Rename</string>
     <string name="menu_remove">Remove</string>
     <string name="choose_theme_dialog_title">Choose Theme</string>
-    <string name="notes_fragment_create_new_note">CREATE</string>
-    <string name="notes_fragment_counter">%s</string>
-    <string name="notes_fragment_stop">STOP</string>
     <string name="add_apps_fragment_search_apps">Search apps</string>
-    <string name="tasks_fragment_list_item_complete">&lt;strike>%s&lt;/strike></string>
-    <string name="tasks_fragment_sort">Sort</string>
-    <string name="tasks_fragment_clear_completed_tasks">Clear completed tasks</string>
     <string name="tasks_fragment_enter_a_new_task">Enter a new task</string>
-    <string name="edit_note_fragment_save">SAVE</string>
-    <string name="edit_note_fragment_untitled">Untitled</string>
-    <string name="note_fragment_edit">EDIT</string>
-    <string name="nav_key_note">nav_key_note</string>
-    <string name="voice_note_fragment_pause">PAUSE</string>
-    <string name="voice_note_fragment_play">PLAY</string>
-    <string name="menu_share">Share</string>
-    <string name="menu_delete">Delete</string>
-    <string name="notes_fragment_undo">UNDO</string>
     <string name="customise_apps_fragment_remove_all">Remove all</string>
 
 </resources>
