@@ -1,7 +1,6 @@
 package com.sduduzog.slimlauncher
 
 import android.content.SharedPreferences
-import android.content.pm.PackageManager
 import android.content.res.Resources
 import android.os.Bundle
 import android.view.View
@@ -10,9 +9,6 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation.findNavController
 import com.sduduzog.slimlauncher.utils.BaseFragment
 import com.sduduzog.slimlauncher.utils.HomeWatcher
-import com.sduduzog.slimlauncher.utils.Permissions
-import com.sduduzog.slimlauncher.utils.VoiceRecorder
-import java.io.File
 
 
 class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceChangeListener, HomeWatcher.OnHomePressedListener {
@@ -95,19 +91,6 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
     override fun onHomePressed() {
         dispatchHome()
         navigator.popBackStack(R.id.homeFragment, false)
-    }
-
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        when (requestCode) {
-            Permissions.RECORD_AUDIO -> {
-                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    val file = File(filesDir, getString(R.string.audio_file_path))
-                    val dir = file.canonicalPath
-                    VoiceRecorder.getInstance().startRecording(dir)
-                }
-                return
-            }
-        }
     }
 
     private fun showSystemUI() {

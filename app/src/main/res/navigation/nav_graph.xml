@@ -13,12 +13,6 @@
         <action
             android:id="@+id/action_homeFragment_to_optionsFragment"
             app:destination="@id/optionsFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_notesFragment"
-            app:destination="@id/notesFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_tasksFragment"
-            app:destination="@id/tasksFragment" />
     </fragment>
     <fragment
         android:id="@+id/optionsFragment"
@@ -43,49 +37,5 @@
         android:name="com.sduduzog.slimlauncher.ui.options.AddAppFragment"
         android:label="add_app_fragment"
         tools:layout="@layout/add_app_fragment" />
-    <fragment
-        android:id="@+id/noteFragment"
-        android:name="com.sduduzog.slimlauncher.ui.notes.NoteFragment"
-        android:label="note_fragment"
-        tools:layout="@layout/note_fragment">
-        <action
-            android:id="@+id/action_noteFragment_to_editNoteFragment"
-            app:destination="@id/editNoteFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/notesFragment"
-        android:name="com.sduduzog.slimlauncher.ui.notes.NotesFragment"
-        android:label="notes_fragment"
-        tools:layout="@layout/notes_fragment">
-        <action
-            android:id="@+id/action_notesFragment_to_noteFragment"
-            app:destination="@id/noteFragment" />
-        <action
-            android:id="@+id/action_notesFragment_to_editNoteFragment"
-            app:destination="@id/editNoteFragment" />
-        <action
-            android:id="@+id/action_notesFragment_to_voiceNoteFragment"
-            app:destination="@id/voiceNoteFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/tasksFragment"
-        android:name="com.sduduzog.slimlauncher.ui.main.TasksFragment"
-        android:label="tasks_fragment"
-        tools:layout="@layout/tasks_fragment" />
-    <fragment
-        android:id="@+id/editNoteFragment"
-        android:name="com.sduduzog.slimlauncher.ui.notes.EditNoteFragment"
-        android:label="edit_note_fragment"
-        tools:layout="@layout/edit_note_fragment">
-        <action
-            android:id="@+id/action_editNoteFragment_to_noteFragment"
-            app:destination="@id/noteFragment"
-            app:popUpTo="@+id/notesFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/voiceNoteFragment"
-        android:name="com.sduduzog.slimlauncher.ui.notes.VoiceNoteFragment"
-        android:label="voice_note_fragment"
-        tools:layout="@layout/voice_note_fragment" />
 
 </navigation>
