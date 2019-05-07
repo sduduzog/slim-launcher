@@ -56,6 +56,6 @@ class LoadInstalledApps(private val viewModel: MainViewModel?, private val filte
     }
 
     override fun onPostExecute(result: List<App>) {
-        viewModel?.installedApps?.value = result.filter { it.appName.startsWith(filterString, true) }
+        viewModel?.installedApps?.value = result.filter { it.appName.contains(filterString, true) }
     }
 }

@@ -7,11 +7,9 @@ import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.sduduzog.slimlauncher.data.model.HomeApp
-import com.sduduzog.slimlauncher.data.model.Note
-import com.sduduzog.slimlauncher.data.model.Task
 
 
-@Database(entities = [HomeApp::class, Note::class, Task::class], version = 5, exportSchema = false)
+@Database(entities = [HomeApp::class], version = 6, exportSchema = false)
 abstract class BaseDatabase : RoomDatabase() {
 
     abstract fun baseDao(): BaseDao
@@ -30,7 +28,8 @@ abstract class BaseDatabase : RoomDatabase() {
                                     MIGRATION_1_2,
                                     MIGRATION_2_3,
                                     MIGRATION_3_4,
-                                    MIGRATION_4_5
+                                    MIGRATION_4_5,
+                                    MIGRATION_5_6
                             )
                             .build()
                 }
@@ -73,6 +72,12 @@ abstract class BaseDatabase : RoomDatabase() {
                 database.execSQL("INSERT INTO `notes` (`id`, `body`, `edited`, `title`) SELECT `id`, `body`, `edited`, `title` FROM `notes_old`")
                 database.execSQL("ALTER TABLE `notes` ADD COLUMN `type` INTEGER NOT NULL DEFAULT 0")
                 database.execSQL("ALTER TABLE `notes` ADD COLUMN `filename` TEXT")
+            }
+        }
+        private val MIGRATION_5_6 = object : Migration(5, 6) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL("DROP TABLE IF EXISTS `notes`")
+                database.execSQL("DROP TABLE IF EXISTS `tasks`")
             }
         }
     }

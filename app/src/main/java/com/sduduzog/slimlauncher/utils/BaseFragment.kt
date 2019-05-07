@@ -60,4 +60,6 @@ abstract class BaseFragment : Fragment() {
     }
 
     open fun onBack(): Boolean = false
+
+    open fun onHome() {}
 }

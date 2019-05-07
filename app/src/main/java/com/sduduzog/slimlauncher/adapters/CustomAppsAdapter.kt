@@ -82,7 +82,7 @@ class CustomAppsAdapter(private val listener: OnShitDoneToAppsListener) : Recycl
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val dragHandle: ImageView = itemView.findViewById(R.id.ca_list_item_drag_handle)
+        val dragHandle: TextView = itemView.findViewById(R.id.ca_list_item_drag_handle)
         val appName: TextView = itemView.findViewById(R.id.ca_list_item_app_name)
         val menuIcon: ImageView = itemView.findViewById(R.id.ca_list_item_more_icon)
 

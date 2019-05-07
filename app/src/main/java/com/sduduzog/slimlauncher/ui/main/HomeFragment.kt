@@ -55,9 +55,7 @@ class HomeFragment : BaseFragment(), OnLaunchAppListener {
         })
 
         setEventListeners()
-        home_fragment_tasks.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_homeFragment_to_tasksFragment))
         home_fragment_options.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_homeFragment_to_optionsFragment))
-        home_fragment_notes.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_homeFragment_to_notesFragment))
     }
 
     override fun onStart() {
@@ -164,6 +162,10 @@ class HomeFragment : BaseFragment(), OnLaunchAppListener {
     override fun onBack(): Boolean {
         home_fragment.transitionToStart()
         return true
+    }
+
+    override fun onHome() {
+        home_fragment.transitionToEnd()
     }
 
     inner class ClockReceiver : BroadcastReceiver() {
