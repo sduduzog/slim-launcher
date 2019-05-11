@@ -11,4 +11,8 @@ Explains for some permission requests
 
 in my application, I request some sensitive permissions to make functions of application work properly:
 
+<<<<<<< HEAD
 android.permission.RECORD_AUDIO: to use microphone to record voice notes as the additional feature of the app described
+=======
+android.permission.RECORD_AUDIO: to use microphone to record voice notes as the additional feature of the app described
+>>>>>>> release/v2.3.0
