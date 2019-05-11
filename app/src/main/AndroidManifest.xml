@@ -3,9 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.sduduzog.slimlauncher">
 
-    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
-
     <application
         android:allowBackup="false"
         android:configChanges="orientation|keyboardHidden|screenSize"
