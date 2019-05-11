@@ -91,6 +91,7 @@ class HomeFragment : BaseFragment(), OnLaunchAppListener {
                         launchActivity(view, it)
                     }
                 } catch (e: ActivityNotFoundException) {
+                    e.printStackTrace()
                     // Do nothing, we've failed :(
                 }
             }
