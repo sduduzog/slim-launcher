@@ -24,17 +24,10 @@
 If you think you can come up with a better description, shoot me an email! I'm horrible at this marketing thing
 
 ## Milestones to reach
-- [x] Release on Google Play _(release the kraken!)_
-- [x] Variety of themes
-- [x] Clean up README _...continuous_.
-- [ ] Journal (text and audio)
-- [ ] Gesture controls for home screen modes
-- [ ] Tasks (like journal but better)
-- [X] Figure out whether to fully adopt Material Design or continue mixing with flat principles. Open an issue...if there is one. **EDIT** _Flat_ design is good
-- [X] Tests and README badges **!important;**
+- [X] Gesture controls for home screen modes
+- [X]README badges **!important;**
 - [ ] Landing page for the app.
-- [ ] A tutorial series in how to build an android launcher
-- [ ] App usage analytics. Offline of course
+- [ ] Phase 2 basically of this app. see https://github.com/sduduzog/slim-launcher/issues/14
 
 # Contributions
 
