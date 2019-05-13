@@ -1,0 +1,16 @@
+*{
+  box-sizing: border-box;
+}
+body{
+  margin: 0;
+  font-family: monospace;
+}
+
+header{
+  padding: 20px;
+}
+
+main{
+  margin: auto;
+  padding: 20px;
+}
