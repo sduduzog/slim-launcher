@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">Slim Launcher</string>
+    <string name="app_authority_for_file_provider">com.sduduzog.slimlauncher.fileprovider</string>
+    <string name="slim_url">http://sduduzog.github.io/slim-launcher/</string>
     <string name="main_placeholder_clock">00:00</string>
-    <string name="main_placeholder_date">Date</string>
+    <string name="main_placeholder_date">Sat, Apr 20</string>
 
     <string-array name="themes_array">
         <item>Default</item>
@@ -12,78 +14,32 @@
         <item>Pastel</item>
     </string-array>
 
+    <string-array name="time_format_array">
+        <item>24 Hour</item>
+        <item>12 Hour</item>
+    </string-array>
+
+    <string name="home_fragment_tasks">Tasks</string>
+
     <string name="prefs_settings">settings</string>
     <string name="prefs_settings_key_theme">key_theme</string>
-    <string name="prefs_settings_key_clock_type">clock_type</string>
-    <string name="prefs_settings_key_hide_status_bar">hide_status_bar</string>
-    <string name="prefs_settings_key_fresh_install_setup">key_fresh_install_setup</string>
-
-    <!--main package strings-->
-
-    <string name="setup_welcome">Welcome!</string>
-    <string name="setup_welcome2">This is what your home screen will look like. But better! Let\'s get you setup.</string>
-
-    <string name="main_slim_options">Slim options</string>
-    <string name="main_options_change_theme">Change theme</string>
-    <string name="main_options_home_screen_apps">Preferences</string>
-    <string name="main_options_settings">Device Settings</string>
-    <string name="main_options_about_slim">About Slim</string>
-    <string name="main_options_feedback">Give us Feedback</string>
-    <string name="main_options_change_launcher">Change launcher</string>
-    <string name="main_options_text_notes">Notes</string>
-
-    <string name="note_fragment_hint_title">Title</string>
-    <string name="note_fragment_hint_body">Start here</string>
-
-    <!--settings package strings-->
-    <string name="settings_text_use_24_hour_clock">Use 24 hour clock</string>
-    <string name="settings_text_tap_to_check_between_24_hour_or_12_hour">Tap to check between 24 hour or 12 hour</string>
-    <string name="settings_text_tap_to_change_app_theme">Choose from a variety of themes</string>
-    <string name="settings_text_home_screen_apps">Home screen apps</string>
-    <string name="settings_title">Preferences</string>
-    <string name="settings_use_slim_s_built_in_dialer">Use Slim\'s built-in dialer</string>
-    <string name="settings_faster_shortcut_to_your_calls">Faster shortcut to your calls</string>
-    <string name="settings_status_bar_when_switched">When switched on, you can still drag down from the top to reveal it</string>
-    <string name="settings_hide_status_bar">Hide status bar</string>
-
-    <string name="settings_list_item_button_set_app">Set app</string>
-    <string name="settings_list_item_text">Slot empty</string>
-    <string name="settings_button_change_theme">Change</string>
-    <string name="about_title">2019 \u00a9 Slim v%s</string>
-    <string name="about_text">
-    <a href="https://github.com/sduduzog/slim-launcher">https://github.com/sduduzog/slim-launcher</a>\n\n
-    <a href="mailto:gumedesduduzo@gmail.com">gumedesduduzo@gmail.com</a>\n\n
-    To become a beta tester <a href="https://play.google.com/apps/testing/com.sduduzog.slimlauncher">click here</a>\n\n
-    <a href="https://github.com/sduduzog/slim-launcher/issues/new">Report a bug</a>
-    </string>
-    <string name="theme_chooser_dialog_title">Change theme</string>
-    <string name="main_call_icon">call icon</string>
-    <string name="main_photo_camera_icon">photo camera icon</string>
-    <string name="setup_button_start">start</string>
-
-    <string name="setup_button_finish">Finish</string>
-
-    <string name="no_app_selected_toast_msg">Choose at least one app</string>
-    <string name="choose_apps_title">Choose Apps</string>
-
-
-    <string name="notes_date_placeholder">Edited at %s</string>
-
-    <string name="settings_item_icon_drag_handler">Dragger</string>
-
-    <string name="setup_choose_theme">Choose Theme</string>
-    <string name="setup_text_default">Default</string>
-    <string name="setup_text_dark">Dark</string>
-    <string name="setup_text_jupiter">Jupiter</string>
-    <string name="setup_text_teal">Teal</string>
-    <string name="setup_text_candy">Candy</string>
-    <string name="setup_text_pastel">Pastel</string>
-
-
-    <!-- Content Description For Image Resources-->
-    <string name="content_description_my_phone">My phone</string>
-    <string name="main_admin_title">Allow Slim to lock your device</string>
-    <string name="main_admin_message">Double tapping on the free space on your home screen locks your device instantly.</string>
-
+    <string name="prefs_settings_key_time_format">clock_type</string>
+    <string name="prefs_settings_key_toggle_status_bar">hide_status_bar</string>
+    <string name="choose_time_format_dialog_title">Choose Time Format</string>
+    <string name="main_fragment_options">Options</string>
+    <string name="options_fragment_about_slim">About Slim</string>
+    <string name="options_fragment_device_settings">Device Settings</string>
+    <string name="options_fragment_change_theme">Change Theme</string>
+    <string name="options_fragment_choose_time_format">Choose Time Format</string>
+    <string name="options_fragment_customise_apps">Customise Apps</string>
+    <string name="options_fragment_toggle_status_bar">Toggle Status Bar</string>
+    <string name="main_fragment_notes">Notes</string>
+    <string name="customise_apps_fragment_add">Add</string>
+    <string name="menu_rename">Rename</string>
+    <string name="menu_remove">Remove</string>
+    <string name="choose_theme_dialog_title">Choose Theme</string>
+    <string name="add_apps_fragment_search_apps">Search apps</string>
+    <string name="tasks_fragment_enter_a_new_task">Enter a new task</string>
+    <string name="customise_apps_fragment_remove_all">Remove all</string>
 
 </resources>
