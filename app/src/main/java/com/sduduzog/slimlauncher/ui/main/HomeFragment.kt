@@ -87,9 +87,10 @@ class HomeFragment : BaseFragment(), OnLaunchAppListener {
                     val intent = Intent(AlarmClock.ACTION_SHOW_ALARMS)
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
                     val componentName = intent.resolveActivity(pm)
-                    pm.getLaunchIntentForPackage(componentName.packageName)?.let {
-                        launchActivity(view, it)
-                    }
+                    if (componentName == null) launchActivity(view, intent) else
+                        pm.getLaunchIntentForPackage(componentName.packageName)?.let {
+                            launchActivity(view, it)
+                        }
                 } catch (e: ActivityNotFoundException) {
                     e.printStackTrace()
                     // Do nothing, we've failed :(
@@ -113,9 +114,10 @@ class HomeFragment : BaseFragment(), OnLaunchAppListener {
                 val pm = context?.packageManager!!
                 val intent = Intent(Intent.ACTION_DIAL)
                 val componentName = intent.resolveActivity(pm)
-                pm.getLaunchIntentForPackage(componentName.packageName)?.let {
-                    launchActivity(view, it)
-                }
+                if (componentName == null) launchActivity(view, intent) else
+                    pm.getLaunchIntentForPackage(componentName.packageName)?.let {
+                        launchActivity(view, it)
+                    }
             } catch (e: Exception) {
                 // Do nothing
             }
@@ -151,13 +153,19 @@ class HomeFragment : BaseFragment(), OnLaunchAppListener {
     }
 
     override fun onLaunch(app: HomeApp, view: View) {
-        val intent = Intent()
-        val name = ComponentName(app.packageName, app.activityName)
-        intent.action = Intent.ACTION_MAIN
-        intent.addCategory(Intent.CATEGORY_LAUNCHER)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED
-        intent.component = name
-        launchActivity(view, intent)
+        try {
+            val intent = Intent()
+            val name = ComponentName(app.packageName, app.activityName)
+            intent.action = Intent.ACTION_MAIN
+            intent.addCategory(Intent.CATEGORY_LAUNCHER)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED
+            intent.component = name
+            intent.resolveActivity(activity!!.packageManager)?.let {
+                launchActivity(view, intent)
+            }
+        } catch (e: Exception) {
+            // Do no shit yet
+        }
     }
 
     override fun onBack(): Boolean {
