@@ -29,6 +29,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
@@ -40,14 +44,14 @@ dependencies {
     // Support Libraries
     implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha5'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta1'
 
     // Arch Components
-    implementation 'androidx.core:core-ktx:1.1.0-beta01'
+    implementation 'androidx.core:core-ktx:1.2.0-alpha02'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
     implementation 'android.arch.navigation:navigation-fragment:1.0.0'
-    implementation 'androidx.room:room-runtime:2.1.0-beta01'
-    kapt "androidx.room:room-compiler:2.1.0-beta01"
+    implementation 'androidx.room:room-runtime:2.1.0'
+    kapt "androidx.room:room-compiler:2.1.0"
     kapt "androidx.lifecycle:lifecycle-compiler:2.0.0"
 
     //3rd party libs
@@ -57,14 +61,14 @@ dependencies {
     // Test libs
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.mockito:mockito-core:2.19.0'
-    androidTestImplementation 'androidx.room:room-testing:2.1.0-beta01'
-    androidTestImplementation 'androidx.test:runner:1.1.1'
-    androidTestImplementation 'androidx.test:rules:1.1.1'
-    androidTestImplementation 'androidx.annotation:annotation:1.0.2'
-    androidTestImplementation 'androidx.test:runner:1.1.1'
-    androidTestImplementation 'androidx.test:rules:1.1.1'
+    androidTestImplementation 'androidx.room:room-testing:2.1.0'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test:rules:1.2.0'
+    androidTestImplementation 'androidx.annotation:annotation:1.1.0'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test:rules:1.2.0'
     androidTestImplementation "androidx.arch.core:core-testing:2.0.1"
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-intents:3.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-intents:3.2.0'
 
 }
