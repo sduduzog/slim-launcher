@@ -117,7 +117,7 @@ class HomeFragment : BaseFragment(), OnLaunchAppListener {
                 if (componentName == null) launchActivity(view, intent) else
                     pm.getLaunchIntentForPackage(componentName.packageName)?.let {
                         launchActivity(view, it)
-                    }
+                    } ?: run { launchActivity(view, intent) }
             } catch (e: Exception) {
                 // Do nothing
             }
