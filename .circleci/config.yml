@@ -1,9 +1,6 @@
 version: 2
 jobs:
   build:
-    branches:
-      only:
-        - master
     working_directory: ~/code
     docker:
       - image: circleci/android:api-29
@@ -22,11 +19,9 @@ jobs:
       - run:
           name: Download Dependencies
           command: ./gradlew androidDependencies
-      - save_cache:publish task as the last step in your config.yml file.
--
+      - save_cache:
           paths:
-            - ~/.gradlepublish task as the last step in your config.yml file.
--
+            - ~/.gradle
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - run:
           name: Run Tests
