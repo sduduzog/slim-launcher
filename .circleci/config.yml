@@ -19,17 +19,14 @@ jobs:
       - run:
           name: Run build
           command:  export TERM=${TERM:-dumb} && ./gradlew clean build
-      - run: echo $ENCODED_KEYSTORE | base64 --decode --ignore-garbage >> ${HOME}/keystore.jks
-      - run: echo ‘export KEYSTORE=${HOME}/keystore.jks’ >> $BASH_ENV
-
-      - run: echo $DEPLOYMENT_PRIVATE_KEY | base64 --decode --ignore-garbage >> ${HOME}/deployment_private_key.json
-      - run: echo ‘export PRIVATE_KEY=${HOME}/deployment_private_key.json’ >> $BASH_ENV
       - run:
           name: Download Dependencies
           command: ./gradlew androidDependencies
-      - save_cache:
+      - save_cache:publish task as the last step in your config.yml file.
+-
           paths:
-            - ~/.gradle
+            - ~/.gradlepublish task as the last step in your config.yml file.
+-
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - run:
           name: Run Tests
@@ -39,7 +36,4 @@ jobs:
           destination: reports
       - store_test_results:
           path: app/build/test-results
-      - run:
-          name: Upload to Google Play
-          command: ./gradlew publishRelease
 # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
