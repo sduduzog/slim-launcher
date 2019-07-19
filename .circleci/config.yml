@@ -19,6 +19,8 @@ jobs:
       - run:
           name: Run build
           command:  export TERM=${TERM:-dumb} && ./gradlew clean build
+      - run: echo $ENCODED_KEYSTORE | base64 --decode >> ${HOME}/keystore.jks
+      - run: echo ‘export KEYSTORE=${HOME}/keystore.jks’ >> $BASH_ENV
       - run:
           name: Download Dependencies
           command: ./gradlew androidDependencies
