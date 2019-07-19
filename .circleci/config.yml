@@ -6,7 +6,7 @@ jobs:
         - master
     working_directory: ~/code
     docker:
-      - image: circleci/android:api-28
+      - image: circleci/android:api-29
     environment:
       JVM_OPTS: -Xmx3200m
     steps:
@@ -22,9 +22,11 @@ jobs:
       - run:
           name: Download Dependencies
           command: ./gradlew androidDependencies
-      - save_cache:
+      - save_cache:publish task as the last step in your config.yml file.
+-
           paths:
-            - ~/.gradle
+            - ~/.gradlepublish task as the last step in your config.yml file.
+-
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - run:
           name: Run Tests
