@@ -6,8 +6,6 @@ plugins{
     id 'kotlin-android-extensions'
 
     id 'kotlin-kapt'
-
-    id 'com.github.triplet.play' version '2.0.0'
 }
 
 android {
@@ -21,20 +19,12 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
-    signingConfigs {
-        release {
-            storeFile file(System.getenv("KEYSTORE") ?: "keystore.jks")
-            storePassword System.getenv("KEYSTORE_PASSWORD")
-            keyAlias System.getenv("KEY_ALIAS")
-            keyPassword System.getenv("KEYSTORE_PASSWORD")
-        }
-    }
+
     buildTypes {
         release {
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
         }
         debug {
             minifyEnabled false
@@ -84,12 +74,4 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-intents:3.2.0'
 
-}
-
-// Configuration for com.github.triplet.play deployment
-play {
-    track = 'beta' // or alpha or beta...
-    serviceAccountCredentials = file(System.getenv("PRIVATE_KEY") ?: "private_key.json")
-    defaultToAppBundles = true // Use App Bundle instead of APK
-    resolutionStrategy = "ignore" //If the deployment fails due to an API error, don't fail the CI Build
 }
