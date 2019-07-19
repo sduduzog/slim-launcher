@@ -6,7 +6,7 @@ jobs:
         - master
     working_directory: ~/code
     docker:
-      - image: circleci/android:api-28
+      - image: circleci/android:api-29
     environment:
       JVM_OPTS: -Xmx3200m
     steps:
@@ -19,7 +19,7 @@ jobs:
       - run:
           name: Run build
           command:  export TERM=${TERM:-dumb} && ./gradlew clean build
-      - run: echo $ENCODED_KEYSTORE | base64 --decode >> ${HOME}/keystore.jks
+      - run: echo $ENCODED_KEYSTORE | base64 --decode --ignore-garbage >> ${HOME}/keystore.jks
       - run: echo ‘export KEYSTORE=${HOME}/keystore.jks’ >> $BASH_ENV
       - run:
           name: Download Dependencies
