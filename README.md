@@ -21,13 +21,7 @@
 ## Background
 >Slim launcher only allows you to use fewer apps on your phone. Giving you more time to enjoy life as it was intended. Also a perfect app for a minimalist lifestyle.
 
-If you think you can come up with a better description, shoot me an email! I'm horrible at this marketing thing
-
-## Milestones to reach
-- [X] Gesture controls for home screen modes
-- [X]README badges **!important;**
-- [ ] Landing page for the app.
-- [ ] Phase 2 basically of this app. see https://github.com/sduduzog/slim-launcher/issues/14
+If you think you can come up with a better description, shoot submit an issue! I'm horrible at this marketing thing
 
 # Contributions
 
