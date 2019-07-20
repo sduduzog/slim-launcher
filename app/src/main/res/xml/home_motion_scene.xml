@@ -125,15 +125,6 @@
             motion:layout_constraintStart_toStartOf="parent" />
 
         <Constraint
-            android:id="@+id/home_fragment_time_format"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_16sdp"
-            android:alpha="-1"
-            motion:layout_constraintStart_toEndOf="@+id/home_fragment_time"
-            motion:layout_constraintTop_toTopOf="@+id/home_fragment_time" />
-
-        <Constraint
             android:id="@+id/home_fragment_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

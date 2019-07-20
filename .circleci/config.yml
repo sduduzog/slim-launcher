@@ -2,6 +2,11 @@ version: 2
 jobs:
   build:
     working_directory: ~/code
+    filters:
+      tags:
+        only: /^v.*/
+      branches:
+        ignore: /[^(^master$)]/
     docker:
       - image: circleci/android:api-29
     environment:

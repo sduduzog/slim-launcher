@@ -138,15 +138,11 @@ class HomeFragment : BaseFragment(), OnLaunchAppListener {
                 ?.getBoolean(getString(R.string.prefs_settings_key_time_format), true)
         val date = Date()
         if (twenty4Hour as Boolean) {
-            val fWatchTime = SimpleDateFormat("h:mm", Locale.ROOT)
-            val fWatchTimeAP = SimpleDateFormat("aa", Locale.ROOT)
+            val fWatchTime = SimpleDateFormat("h:mm aa", Locale.ROOT)
             home_fragment_time.text = fWatchTime.format(date)
-            home_fragment_time_format.text = fWatchTimeAP.format(date)
-            home_fragment_time_format.visibility = View.VISIBLE
         } else {
             val fWatchTime = SimpleDateFormat("H:mm", Locale.ROOT)
             home_fragment_time.text = fWatchTime.format(date)
-            home_fragment_time_format.visibility = View.GONE
         }
         val fWatchDate = SimpleDateFormat("EEE, MMM dd", Locale.ROOT)
         home_fragment_date.text = fWatchDate.format(date)
