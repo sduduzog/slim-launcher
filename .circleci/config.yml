@@ -4,7 +4,6 @@ jobs:
     working_directory: ~/code
     docker:
       - image: circleci/android:api-29
-    parallelism: 4
     tags:
       only: /^v.*/
       branches:
