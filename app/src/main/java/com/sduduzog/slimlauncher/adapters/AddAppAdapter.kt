@@ -29,6 +29,7 @@ class AddAppAdapter(private val listener: OnAppClickedListener) : RecyclerView.A
     }
 
     fun setItems(apps: List<App>) {
+        this.apps.clear()
         this.apps.addAll(apps)
         notifyDataSetChanged()
     }
