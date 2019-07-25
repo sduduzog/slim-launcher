@@ -11,7 +11,7 @@ import com.sduduzog.slimlauncher.utils.OnAppClickedListener
 
 class AddAppAdapter(private val listener: OnAppClickedListener) : RecyclerView.Adapter<AddAppAdapter.ViewHolder>() {
 
-    private var apps: List<App> = listOf()
+    private val apps: MutableList<App> = mutableListOf()
 
     override fun getItemCount(): Int = apps.size
 
@@ -28,8 +28,9 @@ class AddAppAdapter(private val listener: OnAppClickedListener) : RecyclerView.A
         return ViewHolder(view)
     }
 
-    fun setItems(apps: List<App>){
-        this.apps = apps
+    fun setItems(apps: List<App>) {
+        this.apps.clear()
+        this.apps.addAll(apps)
         notifyDataSetChanged()
     }
 
@@ -37,8 +38,6 @@ class AddAppAdapter(private val listener: OnAppClickedListener) : RecyclerView.A
 
         val appName: TextView = itemView.findViewById(R.id.aa_list_item_app_name)
 
-        override fun toString(): String {
-            return super.toString() + " '${appName.text}'"
-        }
+        override fun toString(): String = "${super.toString()} '${appName.text}'"
     }
 }

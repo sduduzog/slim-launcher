@@ -9,22 +9,21 @@ import androidx.core.content.edit
 import androidx.fragment.app.DialogFragment
 import com.sduduzog.slimlauncher.R
 
-class ChooseTimeFormatDialog : DialogFragment(){
+class ChooseTimeFormatDialog private constructor() : DialogFragment() {
 
     private lateinit var settings: SharedPreferences
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val builder = AlertDialog.Builder(context!!)
+        val builder = AlertDialog.Builder(context)
         settings = context!!.getSharedPreferences(getString(R.string.prefs_settings), MODE_PRIVATE)
 
         val is24Hour = settings.getBoolean(getString(R.string.prefs_settings_key_time_format), true)
         val index = if (is24Hour) 1 else 0
         builder.setTitle(R.string.choose_time_format_dialog_title)
-        builder.setSingleChoiceItems(R.array.time_format_array, index) {dialogInterface, i ->
+        builder.setSingleChoiceItems(R.array.time_format_array, index) { dialogInterface, i ->
             dialogInterface.dismiss()
             settings.edit {
-                val b = i != 0
-                putBoolean(getString(R.string.prefs_settings_key_time_format), b)
+                putBoolean(getString(R.string.prefs_settings_key_time_format), i != 0)
             }
 
         }
@@ -33,8 +32,6 @@ class ChooseTimeFormatDialog : DialogFragment(){
 
 
     companion object {
-        fun getInstance(): ChooseTimeFormatDialog{
-            return ChooseTimeFormatDialog()
-        }
+        fun getInstance(): ChooseTimeFormatDialog = ChooseTimeFormatDialog()
     }
 }

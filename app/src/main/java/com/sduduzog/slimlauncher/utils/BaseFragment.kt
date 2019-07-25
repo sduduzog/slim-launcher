@@ -15,12 +15,10 @@ abstract class BaseFragment : Fragment() {
 
     abstract fun getFragmentView(): ViewGroup
 
-
     override fun onResume() {
         super.onResume()
         val settings = context!!.getSharedPreferences(getString(R.string.prefs_settings), AppCompatActivity.MODE_PRIVATE)
         val active = settings.getInt(getString(R.string.prefs_settings_key_theme), 0)
-
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             when (active) {
