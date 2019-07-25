@@ -37,6 +37,7 @@ class AddAppFragment : BaseFragment(), OnAppClickedListener {
         activity?.let {
             viewModel = ViewModelProviders.of(it).get(MainViewModel::class.java)
         } ?: throw Error("How the fuck is this fragment alive while there's no activity?")
+
         viewModel.installedApps.observe(this, Observer {
             val homeApps = viewModel.apps.value.orEmpty()
             it?.let { apps ->
@@ -64,10 +65,8 @@ class AddAppFragment : BaseFragment(), OnAppClickedListener {
             // Do nothing
         }
 
-        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            s?.let {
-                LoadInstalledApps(viewModel, s.toString()).execute(context!!.packageManager)
-            }
+        override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+            LoadInstalledApps(viewModel, s.toString()).execute(context!!.packageManager)
         }
     }
 

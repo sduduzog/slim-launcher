@@ -1,7 +1,7 @@
 package com.sduduzog.slimlauncher.data.model
 
 data class App(
-        var appName: String,
-        var packageName: String,
-        var activityName: String
+        val appName: String,
+        val packageName: String,
+        val activityName: String
 )
