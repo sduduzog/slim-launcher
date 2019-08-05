@@ -1,11 +1,6 @@
 package com.sduduzog.slimlauncher.ui.main
 
-import android.content.ActivityNotFoundException
-import android.content.BroadcastReceiver
-import android.content.ComponentName
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
+import android.content.*
 import android.os.Build
 import android.os.Bundle
 import android.provider.AlarmClock
@@ -24,8 +19,7 @@ import com.sduduzog.slimlauncher.utils.BaseFragment
 import com.sduduzog.slimlauncher.utils.OnLaunchAppListener
 import kotlinx.android.synthetic.main.home_fragment.*
 import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
+import java.util.*
 
 
 class HomeFragment : BaseFragment(), OnLaunchAppListener {
@@ -70,7 +64,9 @@ class HomeFragment : BaseFragment(), OnLaunchAppListener {
         activity?.registerReceiver(receiver, IntentFilter(Intent.ACTION_TIME_TICK))
     }
 
-    override fun getFragmentView(): ViewGroup = home_fragment
+    override fun getFragmentView(): ViewGroup {
+        return home_fragment
+    }
 
     override fun onResume() {
         super.onResume()
@@ -104,11 +100,10 @@ class HomeFragment : BaseFragment(), OnLaunchAppListener {
 
         home_fragment_date.setOnClickListener {
             try {
-                Intent(Intent.ACTION_MAIN).apply {
-                    addCategory(Intent.CATEGORY_APP_CALENDAR)
-                    flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                    launchActivity(it, this)
-                }
+                val intent = Intent(Intent.ACTION_MAIN)
+                intent.addCategory(Intent.CATEGORY_APP_CALENDAR)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                launchActivity(it, intent)
             } catch (e: ActivityNotFoundException) {
                 // Do nothing, we've failed :(
             }
@@ -142,15 +137,12 @@ class HomeFragment : BaseFragment(), OnLaunchAppListener {
         val twenty4Hour = context?.getSharedPreferences(getString(R.string.prefs_settings), Context.MODE_PRIVATE)
                 ?.getBoolean(getString(R.string.prefs_settings_key_time_format), true)
         val date = Date()
-        when (twenty4Hour) {
-            is Boolean -> {
-                val fWatchTime = SimpleDateFormat("h:mm aa", Locale.ROOT)
-                home_fragment_time.text = fWatchTime.format(date)
-            }
-            else -> {
-                val fWatchTime = SimpleDateFormat("H:mm", Locale.ROOT)
-                home_fragment_time.text = fWatchTime.format(date)
-            }
+        if (twenty4Hour as Boolean) {
+            val fWatchTime = SimpleDateFormat("h:mm aa", Locale.ROOT)
+            home_fragment_time.text = fWatchTime.format(date)
+        } else {
+            val fWatchTime = SimpleDateFormat("H:mm", Locale.ROOT)
+            home_fragment_time.text = fWatchTime.format(date)
         }
         val fWatchDate = SimpleDateFormat("EEE, MMM dd", Locale.ROOT)
         home_fragment_date.text = fWatchDate.format(date)
@@ -158,15 +150,14 @@ class HomeFragment : BaseFragment(), OnLaunchAppListener {
 
     override fun onLaunch(app: HomeApp, view: View) {
         try {
+            val intent = Intent()
             val name = ComponentName(app.packageName, app.activityName)
-            Intent().apply {
-                action = Intent.ACTION_MAIN
-                addCategory(Intent.CATEGORY_LAUNCHER)
-                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED
-                component = name
-                resolveActivity(activity!!.packageManager)?.let {
-                    launchActivity(view, this)
-                }
+            intent.action = Intent.ACTION_MAIN
+            intent.addCategory(Intent.CATEGORY_LAUNCHER)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED
+            intent.component = name
+            intent.resolveActivity(activity!!.packageManager)?.let {
+                launchActivity(view, intent)
             }
         } catch (e: Exception) {
             // Do no shit yet

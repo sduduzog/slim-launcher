@@ -27,12 +27,12 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
     }
 
     private fun dispatchBack() {
-        subscribers.forEach { if (it.onBack()) return@forEach }
+        for (s in subscribers) if (s.onBack()) return
         completeBackAction()
     }
 
     private fun dispatchHome() {
-        subscribers.forEach { it.onHome() }
+        for (s in subscribers) s.onHome()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -13,7 +13,7 @@ import com.sduduzog.slimlauncher.utils.OnLaunchAppListener
 class HomeAdapter(private val listener: OnLaunchAppListener)
     : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
 
-    private val apps: MutableList<HomeApp> = mutableListOf()
+    private var apps: List<HomeApp> = listOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -22,7 +22,7 @@ class HomeAdapter(private val listener: OnLaunchAppListener)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = apps[position]
+        val item = apps.elementAt(position)
         holder.mLabelView.text = item.appName
         holder.mLabelView.setOnClickListener {
             listener.onLaunch(item, it)
@@ -32,15 +32,16 @@ class HomeAdapter(private val listener: OnLaunchAppListener)
     override fun getItemCount(): Int = apps.size
 
     fun setItems(list: List<HomeApp>) {
-        apps.addAll(list)
+        this.apps = list
         notifyDataSetChanged()
     }
 
 
     inner class ViewHolder(mView: View) : RecyclerView.ViewHolder(mView) {
-
         val mLabelView: TextView = mView.findViewById(R.id.home_fragment_list_item_app_name)
 
-        override fun toString(): String = "${super.toString()} '${mLabelView.text}'"
+        override fun toString(): String {
+            return super.toString() + " '" + mLabelView.text + "'"
+        }
     }
 }

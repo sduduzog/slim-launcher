@@ -10,7 +10,7 @@ import android.provider.MediaStore
 import com.sduduzog.slimlauncher.BuildConfig
 import com.sduduzog.slimlauncher.data.MainViewModel
 import com.sduduzog.slimlauncher.data.model.App
-import java.util.Collections
+import java.util.*
 
 class LoadInstalledApps(private val viewModel: MainViewModel?, private val filterString: String = "") : AsyncTask<PackageManager, Unit, List<App>>() {
 
@@ -24,13 +24,10 @@ class LoadInstalledApps(private val viewModel: MainViewModel?, private val filte
         main.addCategory(Intent.CATEGORY_LAUNCHER)
         val activitiesList = pm.queryIntentActivities(main, 0)
         Collections.sort(activitiesList, ResolveInfo.DisplayNameComparator(pm))
-        activitiesList.indices.forEach {
-            val item = activitiesList[it]
+        for (i in activitiesList.indices) {
+            val item = activitiesList[i]
             val activity = item.activityInfo
-            val app = App(
-                    activitiesList[it].loadLabel(pm).toString(),
-                    activity.applicationInfo.packageName, activity.name
-            )
+            val app = App(activitiesList[i].loadLabel(pm).toString(), activity.applicationInfo.packageName, activity.name)
             list.add(app)
         }
 
