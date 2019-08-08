@@ -7,15 +7,6 @@ body {
   font-family: 'Ubuntu', sans-serif;
 }
 
-header {
-  background-color: red;
-}
-
-header nav {
-  height: 60px;
-  display: none;
-}
-
 main {
   margin: auto;
 }
