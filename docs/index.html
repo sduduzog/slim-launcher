@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!--suppress HtmlFormInputWithoutLabel, HtmlUnknownTag -->
 <html lang="en">
 
 <head>
@@ -7,15 +8,29 @@
   <meta content="ie=edge" http-equiv="X-UA-Compatible"/>
   <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
   <link href="./main.css" rel="stylesheet">
-  <link rel="icon" type="image/png" href="./assets/favicon-32x32.png" sizes="32x32" />
-  <link rel="icon" type="image/png" href="./assets/favicon-16x16.png" sizes="16x16" />
+  <link rel="icon" type="image/png" href="./assets/favicon-32x32.png" sizes="32x32"/>
+  <link rel="icon" type="image/png" href="./assets/favicon-16x16.png" sizes="16x16"/>
   <title>Slim</title>
 </head>
 
 <body>
-<header>
-  <nav>
-    <a href="#">Donate</a>
+<header class="site-header">
+  <a href="/">
+    <img src="./assets/slim-logo.jpg" class="site-header__logo" alt="Slim logo">
+  </a>
+  <h2 class="site-header__title">Slim Launcher</h2>
+  <nav class="header-nav">
+    <input type="checkbox" class="nav-trigger" name="nav-trigger" id="nav-trigger"/>
+    <label for="nav-trigger">
+      <div class="menu-icon">
+        <span class="menu-icon__elem"></span>
+        <span class="menu-icon__elem"></span>
+        <span class="menu-icon__elem"></span>
+      </div>
+    </label>
+    <div class="trigger">
+      <a href="https://github.com/sduduzog/slim-launcher" class="header-nav__elem">Github Repo</a>
+    </div>
   </nav>
 </header>
 <main role="main">
@@ -36,6 +51,9 @@
     </div>
   </section>
 </main>
+<footer>
+  <p>Made with love by Sdu</p>
+</footer>
 </body>
 
 </html>

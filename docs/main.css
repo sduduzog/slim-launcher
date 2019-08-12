@@ -1,3 +1,6 @@
+:root{
+  --max-width: 1280px;
+}
 * {
   box-sizing: border-box;
 }
@@ -7,27 +10,61 @@ body {
   font-family: 'Ubuntu', sans-serif;
 }
 
-header {
-  background-color: red;
+.site-header{
+  display: flex;
+  padding: 5px 50px;
+  margin: 30px auto;
+  max-width: var(--max-width);
 }
 
-header nav {
-  height: 60px;
+.site-header__title{
+  margin: 0;
+  padding: 10px;
+}
+
+.site-header__logo{
+  height: 50px;
+  width: 50px;
+  display: block;
+  flex-shrink: 0;
+}
+.header-nav{
+  flex-grow: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.nav-trigger{
   display: none;
 }
 
+.menu-icon{
+  display: none;
+}
+
+.header-nav__elem{
+  color: #000000;
+  display: inline-block;
+  margin: 15px;
+  text-transform: capitalize;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.header-nav__elem:hover{
+  text-decoration: underline;
+}
 main {
   margin: auto;
 }
 
 main section > * {
-  max-width: 1280px;
+  max-width: var(--max-width);
 }
 
 .wrapper {
   padding: 80px 100px;
   margin: auto;
-  max-width: 1200px;
 }
 
 .banner .wrapper {
@@ -73,6 +110,10 @@ main section > * {
   margin-left: 0;
 }
 
+footer{
+  text-align: center;
+}
+
 @media screen and (max-width: 768px) {
   .banner .wrapper {
     grid-template-columns: 1fr 250px;
@@ -109,6 +150,66 @@ main section > * {
 }
 
 @media screen and (max-width: 450px) {
+
+  .site-header{
+    padding: 5px;
+    margin: 0;
+  }
+
+  label[for=nav-trigger]{
+    display: block;
+    width: 40px;
+    margin: 5px;
+    height: 38px;
+    z-index: 2;
+    cursor: pointer;
+  }
+
+  .header-nav{
+    position: absolute;
+    /*border: 1px solid black;*/
+    border-radius: 5px;
+    box-shadow: 0 0 5px 1px #cccccc;
+    background-color: white;
+  }
+
+  .header-nav{
+    position: absolute;
+    right: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 130px;
+  }
+
+  .menu-icon{
+    right: 0;
+    display: block;
+  }
+
+  .menu-icon__elem{
+    display: block;
+    height: 3px;
+    width: 20px;
+    border-radius: 4px;
+    margin: 7px 10px;
+    background-color: black;
+  }
+  input ~ .trigger{
+    display: none;
+  }
+
+  input:checked ~ .trigger{
+    display: block;
+    flex-basis: 100%;
+    padding: 5px;
+  }
+
+  .header-nav__elem{
+    text-align: right;
+    margin: 0;
+    padding: 10px 5px;
+    display: block;
+  }
   .wrapper {
     padding: 0;
   }
