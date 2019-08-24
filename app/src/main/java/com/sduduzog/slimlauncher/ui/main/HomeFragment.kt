@@ -1,8 +1,6 @@
 package com.sduduzog.slimlauncher.ui.main
 
 import android.content.*
-import android.os.Build
-import android.content.*
 import android.os.Bundle
 import android.provider.AlarmClock
 import android.provider.MediaStore
