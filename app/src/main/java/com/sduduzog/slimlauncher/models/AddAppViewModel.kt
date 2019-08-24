@@ -5,7 +5,6 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.sduduzog.slimlauncher.data.model.App
-import com.sduduzog.slimlauncher.data.model.HomeApp
 
 class AddAppViewModel(application: Application) : AndroidViewModel(application) {
     private val repository = Repository(application)

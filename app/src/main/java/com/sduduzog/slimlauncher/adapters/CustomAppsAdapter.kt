@@ -10,7 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.sduduzog.slimlauncher.R
-import com.sduduzog.slimlauncher.data.model.HomeApp
+import com.sduduzog.slimlauncher.models.HomeApp
 import com.sduduzog.slimlauncher.utils.OnItemActionListener
 import com.sduduzog.slimlauncher.utils.OnShitDoneToAppsListener
 
@@ -29,7 +29,7 @@ class CustomAppsAdapter(private val listener: OnShitDoneToAppsListener) : Recycl
     @SuppressLint("ClickableViewAccessibility")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = apps[position]
-        holder.appName.text = item.appName
+        holder.appName.text = item.appNickname ?: item.appName
         holder.dragHandle.setOnTouchListener { _, motionEvent ->
             if (motionEvent.actionMasked == MotionEvent.ACTION_DOWN) {
                 touchHelper.startDrag(holder)

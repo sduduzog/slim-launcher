@@ -8,7 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import com.sduduzog.slimlauncher.R
-import com.sduduzog.slimlauncher.data.model.HomeApp
+import com.sduduzog.slimlauncher.models.HomeApp
 import com.sduduzog.slimlauncher.models.CustomiseAppsViewModel
 import kotlinx.android.synthetic.main.customise_apps_fragment.*
 
@@ -20,9 +20,10 @@ class RenameAppDialog : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val view = LayoutInflater.from(context).inflate(R.layout.rename_dialog_edit_text, customise_apps_fragment, false)
         val editText: EditText = view.findViewById(R.id.rename_editText)
-        editText.text.append(app.appName)
+        val appName: String = app.appNickname ?: app.appName
+        editText.text.append(appName)
         val builder = AlertDialog.Builder(context!!)
-        builder.setTitle("Rename ${app.appName}")
+        builder.setTitle("Rename $appName")
         builder.setView(view)
         builder.setPositiveButton("DONE") { _, _ ->
             val name = editText.text.toString()
@@ -39,7 +40,7 @@ class RenameAppDialog : DialogFragment() {
 
     private fun updateApp(newName: String) {
         if (newName.isNotEmpty()) {
-            app.appName = newName
+            app.appNickname = newName
             model.update(app)
         } else {
             Toast.makeText(context, "Couldn't save, App name shouldn't be empty", Toast.LENGTH_LONG).show()

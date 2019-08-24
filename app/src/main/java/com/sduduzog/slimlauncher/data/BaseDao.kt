@@ -2,7 +2,7 @@ package com.sduduzog.slimlauncher.data
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.sduduzog.slimlauncher.data.model.HomeApp
+import com.sduduzog.slimlauncher.models.HomeApp
 
 @Dao
 interface BaseDao {

@@ -3,7 +3,6 @@ package com.sduduzog.slimlauncher.models
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import com.sduduzog.slimlauncher.data.model.HomeApp
 
 class CustomiseAppsViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -21,7 +20,10 @@ class CustomiseAppsViewModel(application: Application) : AndroidViewModel(applic
         repository.update(*args)
     }
 
-    fun reset(homeApp: HomeApp) {}
+    fun reset(homeApp: HomeApp) {
+        homeApp.appNickname = null
+        update(homeApp)
+    }
     fun remove(vararg app: HomeApp) {
         repository.remove(*app)
     }
