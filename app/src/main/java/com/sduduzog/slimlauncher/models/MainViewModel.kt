@@ -1,4 +1,4 @@
-package com.sduduzog.slimlauncher.data
+package com.sduduzog.slimlauncher.models
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -20,8 +20,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     val apps: LiveData<List<HomeApp>>
         get() = _apps
-
-    val installedApps = MutableLiveData<List<App>>()
 
     fun add(app: App) {
         val index = _apps.value!!.size

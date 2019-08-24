@@ -15,7 +15,7 @@ import com.sduduzog.slimlauncher.BuildConfig
 import com.sduduzog.slimlauncher.R
 import com.sduduzog.slimlauncher.adapters.AddAppAdapter
 import com.sduduzog.slimlauncher.data.model.App
-import com.sduduzog.slimlauncher.models.AddAppFragmentViewModel
+import com.sduduzog.slimlauncher.models.AddAppViewModel
 import com.sduduzog.slimlauncher.utils.BaseFragment
 import com.sduduzog.slimlauncher.utils.OnAppClickedListener
 import kotlinx.android.synthetic.main.add_app_fragment.*
@@ -25,7 +25,7 @@ class AddAppFragment : BaseFragment(), OnAppClickedListener {
 
     override fun getFragmentView(): ViewGroup = add_app_fragment
 
-    private lateinit var viewModel: AddAppFragmentViewModel
+    private lateinit var viewModel: AddAppViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.add_app_fragment, container, false)
@@ -38,7 +38,7 @@ class AddAppFragment : BaseFragment(), OnAppClickedListener {
         add_app_fragment_list.adapter = adapter
 
         activity?.let {
-            viewModel = ViewModelProviders.of(it).get(AddAppFragmentViewModel::class.java)
+            viewModel = ViewModelProviders.of(it).get(AddAppViewModel::class.java)
         } ?: throw Error("How the fuck is this fragment alive while there's no activity?")
         viewModel.apps.observe(this, Observer {
             it?.let { apps ->

@@ -1,4 +1,4 @@
-package com.sduduzog.slimlauncher.dialogs
+package com.sduduzog.slimlauncher.ui.dialogs
 
 import android.app.AlertDialog
 import android.app.Dialog

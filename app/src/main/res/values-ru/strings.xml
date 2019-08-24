@@ -16,4 +16,5 @@
     <string name="options_fragment_toggle_status_bar">Вкл\\выкл строку состояния</string>
     <string name="options_fragment_hide_status_bar">Скрыть строку состояния</string>
     <string name="options_fragment_show_status_bar">Показать строку состояния</string>
+    <string name="menu_reset">Сброс</string>
 </resources>

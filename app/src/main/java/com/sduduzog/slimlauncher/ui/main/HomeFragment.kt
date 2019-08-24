@@ -12,7 +12,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import com.sduduzog.slimlauncher.R
 import com.sduduzog.slimlauncher.adapters.HomeAdapter
-import com.sduduzog.slimlauncher.data.MainViewModel
+import com.sduduzog.slimlauncher.models.MainViewModel
 import com.sduduzog.slimlauncher.data.model.HomeApp
 import com.sduduzog.slimlauncher.utils.BaseFragment
 import com.sduduzog.slimlauncher.utils.OnLaunchAppListener

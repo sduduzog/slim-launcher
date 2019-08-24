@@ -11,8 +11,8 @@ import android.view.ViewGroup
 import androidx.core.content.edit
 import androidx.navigation.Navigation
 import com.sduduzog.slimlauncher.R
-import com.sduduzog.slimlauncher.dialogs.ChangeThemeDialog
-import com.sduduzog.slimlauncher.dialogs.ChooseTimeFormatDialog
+import com.sduduzog.slimlauncher.ui.dialogs.ChangeThemeDialog
+import com.sduduzog.slimlauncher.ui.dialogs.ChooseTimeFormatDialog
 import com.sduduzog.slimlauncher.utils.BaseFragment
 import kotlinx.android.synthetic.main.options_fragment.*
 

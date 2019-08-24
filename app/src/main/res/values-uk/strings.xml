@@ -16,4 +16,5 @@
     <string name="options_fragment_toggle_status_bar">Вкл\\вимк смужку стану</string>
     <string name="options_fragment_hide_status_bar">Сховати рядок стану</string>
     <string name="options_fragment_show_status_bar">Показати рядок стану</string>
+    <string name="menu_reset">Ясно</string>
 </resources>
