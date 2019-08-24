@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.sduduzog.slimlauncher.data.model.App
 import com.sduduzog.slimlauncher.data.model.HomeApp
+import com.sduduzog.slimlauncher.models.Repository
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
 

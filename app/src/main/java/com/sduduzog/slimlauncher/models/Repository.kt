@@ -1,8 +1,10 @@
-package com.sduduzog.slimlauncher.data
+package com.sduduzog.slimlauncher.models
 
 import android.app.Application
 import android.os.AsyncTask
 import androidx.lifecycle.LiveData
+import com.sduduzog.slimlauncher.data.BaseDao
+import com.sduduzog.slimlauncher.data.BaseDatabase
 import com.sduduzog.slimlauncher.data.model.HomeApp
 
 class Repository(application: Application) {
