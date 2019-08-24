@@ -107,10 +107,10 @@ class CustomiseAppsFragment : BaseFragment(), OnShitDoneToAppsListener {
     }
 
     private fun showPopupMenu(view: View): PopupMenu {
-        return PopupMenu(context!!, view).apply {
-            menuInflater.inflate(R.menu.customise_apps_popup_menu, menu)
-            show()
-        }
+        val popup = PopupMenu(context!!, view)
+        popup.menuInflater.inflate(R.menu.customise_apps_popup_menu, popup.menu)
+        popup.show()
+        return popup
     }
 
     override fun onAppsUpdated(list: List<HomeApp>) {
@@ -121,8 +121,7 @@ class CustomiseAppsFragment : BaseFragment(), OnShitDoneToAppsListener {
         showPopupMenu(view).setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.ca_menu_rename -> {
-                    RenameAppDialog.getInstance(app, viewModel)
-                            .show(childFragmentManager, "SettingsListAdapter")
+                    RenameAppDialog.getInstance(app, viewModel).show(childFragmentManager, "SettingsListAdapter")
                 }
                 R.id.ca_menu_remove -> {
                     viewModel.remove(app)
