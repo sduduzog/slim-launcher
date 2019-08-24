@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Slim Launcher</string>
-    <string name="slim_url">http://sduduzog.github.io/slim-launcher/</string>
-    <string name="main_placeholder_clock">00:00</string>
-    <string name="main_placeholder_date">Sat, Apr 20</string>
+    <string name="slim_url" translatable="false">http://sduduzog.github.io/slim-launcher/</string>
+    <string name="main_placeholder_clock" translatable="false">00:00</string>
+    <string name="main_placeholder_date" translatable="false">Sat, Apr 20</string>
 
     <string-array name="themes_array">
         <item>Default</item>
@@ -20,10 +20,10 @@
 
     <string name="home_fragment_tasks">Tasks</string>
 
-    <string name="prefs_settings">settings</string>
-    <string name="prefs_settings_key_theme">key_theme</string>
-    <string name="prefs_settings_key_time_format">clock_type</string>
-    <string name="prefs_settings_key_toggle_status_bar">hide_status_bar</string>
+    <string name="prefs_settings" translatable="false">settings</string>
+    <string name="prefs_settings_key_theme" translatable="false">key_theme</string>
+    <string name="prefs_settings_key_time_format" translatable="false">clock_type</string>
+    <string name="prefs_settings_key_toggle_status_bar" translatable="false">hide_status_bar</string>
     <string name="choose_time_format_dialog_title">Choose Time Format</string>
     <string name="main_fragment_options">Options</string>
     <string name="options_fragment_about_slim">About Slim</string>
