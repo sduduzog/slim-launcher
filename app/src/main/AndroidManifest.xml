@@ -6,6 +6,7 @@
     <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
 
     <application
+        android:name=".AppController"
         android:allowBackup="false"
         android:configChanges="orientation|keyboardHidden|screenSize"
         android:icon="@mipmap/ic_launcher"
@@ -16,7 +17,7 @@
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:allowBackup">
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:stateNotNeeded="true">

@@ -1,30 +1,37 @@
-package com.sduduzog.slimlauncher.ui.main
+package com.sduduzog.slimlauncher.ui.home
 
 import android.content.*
 import android.os.Bundle
 import android.provider.AlarmClock
-import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import com.sduduzog.slimlauncher.R
 import com.sduduzog.slimlauncher.adapters.HomeAdapter
-import com.sduduzog.slimlauncher.models.MainViewModel
-import com.sduduzog.slimlauncher.models.HomeApp
+import com.sduduzog.slimlauncher.data.entity.HomeApp
 import com.sduduzog.slimlauncher.utils.BaseFragment
 import com.sduduzog.slimlauncher.utils.OnLaunchAppListener
+import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.home_fragment.*
-import java.text.SimpleDateFormat
-import java.util.*
+import javax.inject.Inject
 
 
 class HomeFragment : BaseFragment(), OnLaunchAppListener {
 
+    @Inject
+    internal lateinit var viewModelFactory: ViewModelProvider.Factory
+
     private lateinit var receiver: BroadcastReceiver
-    private lateinit var viewModel: MainViewModel
+    private lateinit var viewModel: HomeViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        AndroidSupportInjection.inject(this)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
@@ -33,29 +40,27 @@ class HomeFragment : BaseFragment(), OnLaunchAppListener {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        val adapter1 = HomeAdapter(this)
-        val adapter2 = HomeAdapter(this)
-        home_fragment_list.adapter = adapter1
-        home_fragment_list_exp.adapter = adapter2
-
-        activity?.let {
-            viewModel = ViewModelProviders.of(it).get(MainViewModel::class.java)
-        } ?: throw Error("Activity null, something here is fucked up")
-
-        viewModel.apps.observe(this, Observer { list ->
-            list?.let { apps ->
-                adapter1.setItems(apps.filter {
-                    it.sortingIndex < 4
-                })
-                adapter2.setItems(apps.filter {
-                    it.sortingIndex >= 4
-                })
-            }
-        })
-
+        home_fragment_list.adapter = HomeAdapter(this)
+        home_fragment_list_exp.adapter = HomeAdapter(this)
+        setupViewModel()
         setEventListeners()
-        home_fragment_options.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_homeFragment_to_optionsFragment))
+        home_fragment_options
+                .setOnClickListener(Navigation
+                        .createNavigateOnClickListener(R.id.action_homeFragment_to_optionsFragment))
     }
+
+    private fun setupViewModel() {
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(HomeViewModel::class.java)
+        viewModel.time.observe(this, Observer { home_fragment_time.text = it })
+        viewModel.date.observe(this, Observer { home_fragment_date.text = it })
+        viewModel.firstAdapterApps.observe(this, Observer {
+            it.let { apps -> (home_fragment_list.adapter as HomeAdapter).setItems(apps) }
+        })
+        viewModel.secondAdapterApps.observe(this, Observer {
+            it.let { apps -> (home_fragment_list_exp.adapter as HomeAdapter).setItems(apps) }
+        })
+    }
+
 
     override fun onStart() {
         super.onStart()
@@ -104,43 +109,34 @@ class HomeFragment : BaseFragment(), OnLaunchAppListener {
             }
         }
 
-        home_fragment_call.setOnClickListener { view ->
-            try {
-                val pm = context?.packageManager!!
-                val intent = Intent(Intent.ACTION_DIAL)
-                val componentName = intent.resolveActivity(pm)
-                if (componentName == null) launchActivity(view, intent) else
-                    pm.getLaunchIntentForPackage(componentName.packageName)?.let {
-                        launchActivity(view, it)
-                    } ?: run { launchActivity(view, intent) }
-            } catch (e: Exception) {
-                // Do nothing
-            }
-        }
-
-        home_fragment_camera.setOnClickListener {
-            try {
-                val intent = Intent(MediaStore.INTENT_ACTION_STILL_IMAGE_CAMERA)
-                launchActivity(it, intent)
-            } catch (e: Exception) {
-                // Do nothing
-            }
-        }
+//        home_fragment_call.setOnClickListener { view ->
+//            try {
+//                val pm = context?.packageManager!!
+//                val intent = Intent(Intent.ACTION_DIAL)
+//                val componentName = intent.resolveActivity(pm)
+//                if (componentName == null) launchActivity(view, intent) else
+//                    pm.getLaunchIntentForPackage(componentName.packageName)?.let {
+//                        launchActivity(view, it)
+//                    } ?: run { launchActivity(view, intent) }
+//            } catch (e: Exception) {
+//                // Do nothing
+//            }
+//        }
+//
+//        home_fragment_camera.setOnClickListener {
+//            try {
+//                val intent = Intent(MediaStore.INTENT_ACTION_STILL_IMAGE_CAMERA)
+//                launchActivity(it, intent)
+//            } catch (e: Exception) {
+//                // Do nothing
+//            }
+//        }
     }
 
-    fun updateClock() {
+    internal fun updateClock() {
         val twenty4Hour = context?.getSharedPreferences(getString(R.string.prefs_settings), Context.MODE_PRIVATE)
-                ?.getBoolean(getString(R.string.prefs_settings_key_time_format), true)
-        val date = Date()
-        if (twenty4Hour as Boolean) {
-            val fWatchTime = SimpleDateFormat("h:mm aa", Locale.ROOT)
-            home_fragment_time.text = fWatchTime.format(date)
-        } else {
-            val fWatchTime = SimpleDateFormat("H:mm", Locale.ROOT)
-            home_fragment_time.text = fWatchTime.format(date)
-        }
-        val fWatchDate = SimpleDateFormat("EEE, MMM dd", Locale.ROOT)
-        home_fragment_date.text = fWatchDate.format(date)
+                ?.getBoolean(getString(R.string.prefs_settings_key_time_format), true) ?: true
+        viewModel.clockTick(twenty4Hour)
     }
 
     override fun onLaunch(app: HomeApp, view: View) {

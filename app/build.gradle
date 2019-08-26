@@ -9,9 +9,6 @@ plugins{
 }
 
 android {
-    dataBinding {
-        enabled = true
-    }
     compileSdkVersion 29
     defaultConfig {
         applicationId "com.sduduzog.slimlauncher"
@@ -34,6 +31,9 @@ android {
             applicationIdSuffix ".debug"
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+    dataBinding{
+        enabled true
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -66,6 +66,11 @@ dependencies {
     //3rd party libs
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
     implementation 'com.intuit.ssp:ssp-android:1.0.6'
+    implementation 'com.google.dagger:dagger:2.24'
+    implementation 'com.google.dagger:dagger-android:2.24'
+    implementation 'com.google.dagger:dagger-android-support:2.24'
+    kapt 'com.google.dagger:dagger-android-processor:2.24'
+    kapt 'com.google.dagger:dagger-compiler:2.24'
 
     // Test libs
     testImplementation 'junit:junit:4.12'
@@ -73,7 +78,7 @@ dependencies {
     androidTestImplementation 'androidx.room:room-testing:2.1.0'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test:rules:1.2.0'
-    androidTestImplementation 'androidx.annotation:annotation:1.1.0'
+    implementation 'androidx.annotation:annotation:1.1.0'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test:rules:1.2.0'
     androidTestImplementation "androidx.arch.core:core-testing:2.0.1"

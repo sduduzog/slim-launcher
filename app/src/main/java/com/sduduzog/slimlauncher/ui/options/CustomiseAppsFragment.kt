@@ -13,21 +13,22 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.sduduzog.slimlauncher.R
 import com.sduduzog.slimlauncher.adapters.CustomAppsAdapter
-import com.sduduzog.slimlauncher.models.HomeApp
-import com.sduduzog.slimlauncher.models.CustomiseAppsViewModel
+import com.sduduzog.slimlauncher.data.entity.HomeApp
 import com.sduduzog.slimlauncher.ui.dialogs.RemoveAllAppsDialog
 import com.sduduzog.slimlauncher.ui.dialogs.RenameAppDialog
-import com.sduduzog.slimlauncher.utils.BaseFragment
+import com.sduduzog.slimlauncher.utils.InjectableFragment
 import com.sduduzog.slimlauncher.utils.OnItemActionListener
 import com.sduduzog.slimlauncher.utils.OnShitDoneToAppsListener
 import kotlinx.android.synthetic.main.customise_apps_fragment.*
 
 
-class CustomiseAppsFragment : BaseFragment(), OnShitDoneToAppsListener {
+class CustomiseAppsFragment : InjectableFragment(), OnShitDoneToAppsListener {
 
     override fun getFragmentView(): ViewGroup = customise_apps_fragment
 
+
     private lateinit var viewModel: CustomiseAppsViewModel
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.customise_apps_fragment, container, false)
@@ -37,10 +38,7 @@ class CustomiseAppsFragment : BaseFragment(), OnShitDoneToAppsListener {
         super.onActivityCreated(savedInstanceState)
 
         val adapter = CustomAppsAdapter(this)
-        activity?.let {
-            viewModel = ViewModelProviders.of(it).get(CustomiseAppsViewModel::class.java)
-        } ?: throw Error("Activity null, something here is fucked up")
-
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(CustomiseAppsViewModel::class.java)
         viewModel.apps.observe(this, Observer {
             it?.let { apps ->
                 adapter.setItems(apps)

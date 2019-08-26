@@ -1,41 +1,32 @@
 package com.sduduzog.slimlauncher.data
 
-import android.content.Context
+import android.annotation.SuppressLint
 import androidx.room.Database
-import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.sduduzog.slimlauncher.models.HomeApp
+import com.sduduzog.slimlauncher.data.dao.AppDao
+import com.sduduzog.slimlauncher.data.entity.HomeApp
 
 
 @Database(entities = [HomeApp::class], version = 7, exportSchema = false)
 abstract class BaseDatabase : RoomDatabase() {
 
-    abstract fun baseDao(): BaseDao
+    abstract fun appDao(): AppDao
+    abstract fun configDao(): ConfigDao
 
     companion object {
-        @Volatile
-        @JvmStatic
-        private var INSTANCE: BaseDatabase? = null
 
-        fun getDatabase(context: Context): BaseDatabase? {
-            synchronized(BaseDatabase::class.java) {
-                if (INSTANCE == null) {
-                    INSTANCE = Room.databaseBuilder(context.applicationContext,
-                            BaseDatabase::class.java, "app_database")
-                            .addMigrations(
-                                    MIGRATION_1_2,
-                                    MIGRATION_2_3,
-                                    MIGRATION_3_4,
-                                    MIGRATION_4_5,
-                                    MIGRATION_5_6,
-                                    MIGRATION_6_7
-                            )
-                            .build()
-                }
-                return INSTANCE
-            }
+        @SuppressLint("SyntheticAccessor")
+        fun getMigrations(): Array<Migration> {
+            return arrayOf(
+                    MIGRATION_1_2,
+                    MIGRATION_2_3,
+                    MIGRATION_3_4,
+                    MIGRATION_4_5,
+                    MIGRATION_5_6,
+                    MIGRATION_6_7
+            )
         }
 
         private val MIGRATION_1_2 = object : Migration(1, 2) {
@@ -81,9 +72,9 @@ abstract class BaseDatabase : RoomDatabase() {
                 database.execSQL("DROP TABLE IF EXISTS `tasks`")
             }
         }
-        private val MIGRATION_6_7 = object : Migration(6, 7){
+        private val MIGRATION_6_7 = object : Migration(6, 7) {
             override fun migrate(database: SupportSQLiteDatabase) {
-               database.execSQL("ALTER TABLE `home_apps` ADD COLUMN `app_nickname` TEXT")
+                database.execSQL("ALTER TABLE `home_apps` ADD COLUMN `app_nickname` TEXT")
             }
         }
     }

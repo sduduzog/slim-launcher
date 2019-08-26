@@ -5,8 +5,11 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="4dp"
     android:layout_marginBottom="4dp"
+    android:layout_marginStart="@dimen/_16sdp"
+    android:layout_marginEnd="@dimen/_16sdp"
     android:padding="12dp"
     android:textAppearance="@style/TextAppearance.AppCompat"
-    android:textSize="@dimen/_24ssp">
+    android:textSize="@dimen/_24ssp"
+    android:textIsSelectable="false">
 
 </TextView>

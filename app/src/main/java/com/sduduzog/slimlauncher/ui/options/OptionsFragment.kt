@@ -25,6 +25,15 @@ class OptionsFragment : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        setupLaunchers()
+        setupDialogs()
+        setupPreferences()
+        val destinationId = R.id.action_optionsFragment_to_customiseAppsFragment
+        options_fragment_customise_apps
+                .setOnClickListener(Navigation.createNavigateOnClickListener(destinationId))
+    }
+
+    private fun setupLaunchers() {
         options_fragment_about_slim.setOnClickListener {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.slim_url)))
             launchActivity(it, intent)
@@ -38,6 +47,9 @@ class OptionsFragment : BaseFragment() {
             launchActivity(it, intent)
             true
         }
+    }
+
+    private fun setupDialogs() {
         options_fragment_change_theme.setOnClickListener {
             val changeThemeDialog = ChangeThemeDialog.getThemeChooser()
             changeThemeDialog.showNow(fragmentManager, "THEME_CHOOSER")
@@ -46,13 +58,15 @@ class OptionsFragment : BaseFragment() {
             val chooseTimeFormatDialog = ChooseTimeFormatDialog.getInstance()
             chooseTimeFormatDialog.showNow(fragmentManager, "TIME_FORMAT_CHOOSER")
         }
+    }
+
+    private fun setupPreferences() {
+        val settings = context!!.getSharedPreferences(getString(R.string.prefs_settings), MODE_PRIVATE)
         options_fragment_toggle_status_bar.setOnClickListener {
-            val settings = context!!.getSharedPreferences(getString(R.string.prefs_settings), MODE_PRIVATE)
-            val isHidden = settings.getBoolean(getString(R.string.prefs_settings_key_toggle_status_bar), false)
+            val hidden = settings.getBoolean(getString(R.string.prefs_settings_key_toggle_status_bar), false)
             settings.edit {
-                putBoolean(getString(R.string.prefs_settings_key_toggle_status_bar), !isHidden)
+                putBoolean(getString(R.string.prefs_settings_key_toggle_status_bar), !hidden)
             }
         }
-        options_fragment_customise_apps.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_optionsFragment_to_customiseAppsFragment))
     }
 }

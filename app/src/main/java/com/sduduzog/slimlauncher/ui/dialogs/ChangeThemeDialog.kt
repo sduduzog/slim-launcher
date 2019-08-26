@@ -9,13 +9,13 @@ import androidx.core.content.edit
 import androidx.fragment.app.DialogFragment
 import com.sduduzog.slimlauncher.R
 
-class ChangeThemeDialog : DialogFragment(){
+class ChangeThemeDialog : DialogFragment() {
 
     private lateinit var settings: SharedPreferences
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val builder = AlertDialog.Builder(context!!)
-        settings  = context!!.getSharedPreferences(getString(R.string.prefs_settings), MODE_PRIVATE)
+        settings = context!!.getSharedPreferences(getString(R.string.prefs_settings), MODE_PRIVATE)
 
         val active = settings.getInt(getString(R.string.prefs_settings_key_theme), 0)
         builder.setTitle(R.string.choose_theme_dialog_title)
@@ -29,7 +29,7 @@ class ChangeThemeDialog : DialogFragment(){
     }
 
     companion object {
-        fun getThemeChooser(): ChangeThemeDialog{
+        fun getThemeChooser(): ChangeThemeDialog {
             return ChangeThemeDialog()
         }
     }

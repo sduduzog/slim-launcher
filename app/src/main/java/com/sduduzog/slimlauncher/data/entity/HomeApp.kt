@@ -1,9 +1,8 @@
-package com.sduduzog.slimlauncher.models
+package com.sduduzog.slimlauncher.data.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.sduduzog.slimlauncher.data.model.App
 
 @Entity(tableName = "home_apps")
 data class HomeApp(

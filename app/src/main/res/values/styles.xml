@@ -7,6 +7,7 @@
         <item name="colorPrimary">@color/colorWhite</item>
         <item name="colorPrimaryDark">@color/colorWhiteDark</item>
         <item name="android:colorBackground">@color/colorWhite</item>
+        <item name="android:navigationBarColor">@color/colorWhiteDark</item>
         <item name="android:fontFamily">@font/ubuntu</item>
     </style>
 
@@ -16,13 +17,16 @@
         <item name="colorPrimaryDark">@color/primaryDarkColor</item>
         <item name="android:colorBackground">@color/primaryDarkColor</item>
         <item name="android:colorForeground">@color/darkAccentColor</item>
+        <item name="android:navigationBarColor">@color/primaryDarkColor</item>
         <item name="android:fontFamily">@font/ubuntu</item>
+
     </style>
 
     <style name="AppGreyTheme" parent="@style/AppDarkTheme">
         <item name="colorPrimary">@color/colorBlueGrey</item>
         <item name="colorPrimaryDark">@color/colorBlueGrey</item>
         <item name="android:colorBackground">@color/colorBlueGrey</item>
+        <item name="android:navigationBarColor">@color/colorBlueGrey</item>
         <item name="colorAccent">@color/darkAccentColor</item>
     </style>
 
@@ -30,17 +34,20 @@
         <item name="colorPrimary">@color/colorCandy</item>
         <item name="colorPrimaryDark">@color/colorCandy</item>
         <item name="android:colorBackground">@color/colorCandy</item>
+        <item name="android:navigationBarColor">@color/colorCandy</item>
     </style>
 
     <style name="AppPinkTheme" parent="AppTheme">
         <item name="colorPrimary">@color/colorPink</item>
         <item name="colorPrimaryDark">@color/colorPink</item>
         <item name="android:colorBackground">@color/colorPink</item>
+        <item name="android:navigationBarColor">@color/colorPink</item>
     </style>
 
     <style name="AppTealTheme" parent="AppTheme">
         <item name="colorPrimary">@color/colorTeal</item>
         <item name="colorPrimaryDark">@color/colorTeal</item>
         <item name="android:colorBackground">@color/colorTeal</item>
+        <item name="android:navigationBarColor">@color/colorTeal</item>
     </style>
 </resources>

@@ -1,13 +1,15 @@
-package com.sduduzog.slimlauncher.models
+package com.sduduzog.slimlauncher.ui.options
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import com.sduduzog.slimlauncher.data.model.App
+import androidx.lifecycle.ViewModel
+import com.sduduzog.slimlauncher.data.entity.App
+import com.sduduzog.slimlauncher.data.entity.HomeApp
+import com.sduduzog.slimlauncher.data.repository.AppRepository
+import javax.inject.Inject
 
-class AddAppViewModel(application: Application) : AndroidViewModel(application) {
-    private val repository = Repository(application)
+class AddAppViewModel @Inject constructor(private val repository: AppRepository) : ViewModel() {
+
     private var filterQuery = ""
     private val _installedApps = mutableListOf<App>()
     private val _homeApps = mutableListOf<App>()
@@ -16,7 +18,7 @@ class AddAppViewModel(application: Application) : AndroidViewModel(application) 
         it.orEmpty().forEach { item -> this._homeApps.add(App.from(item)) }
         if (it !== null) updateDisplayedApps()
     }
-    val apps = MutableLiveData<List<App>>()
+    val apps: MutableLiveData<List<App>> = MutableLiveData()
 
     init {
         repository.apps.observeForever(homeAppsObserver)
@@ -36,6 +38,7 @@ class AddAppViewModel(application: Application) : AndroidViewModel(application) 
         this.filterQuery = ""
         this._installedApps.clear()
         this._installedApps.addAll(apps)
+        updateDisplayedApps()
     }
 
     fun addAppToHomeScreen(app: App) {

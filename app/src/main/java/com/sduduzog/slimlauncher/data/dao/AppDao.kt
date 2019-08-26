@@ -1,11 +1,11 @@
-package com.sduduzog.slimlauncher.data
+package com.sduduzog.slimlauncher.data.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.sduduzog.slimlauncher.models.HomeApp
+import com.sduduzog.slimlauncher.data.entity.HomeApp
 
 @Dao
-interface BaseDao {
+interface AppDao {
 
     @get:Query("SELECT * FROM home_apps ORDER BY sorting_index ASC")
     val apps: LiveData<List<HomeApp>>

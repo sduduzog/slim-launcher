@@ -8,14 +8,14 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import com.sduduzog.slimlauncher.R
-import com.sduduzog.slimlauncher.models.HomeApp
-import com.sduduzog.slimlauncher.models.CustomiseAppsViewModel
+import com.sduduzog.slimlauncher.data.entity.HomeApp
+import com.sduduzog.slimlauncher.ui.options.CustomiseAppsViewModel
 import kotlinx.android.synthetic.main.customise_apps_fragment.*
 
 class RenameAppDialog : DialogFragment() {
 
-    private lateinit var app: HomeApp
-    private lateinit var model: CustomiseAppsViewModel
+    internal lateinit var app: HomeApp
+    internal lateinit var model: CustomiseAppsViewModel
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val view = LayoutInflater.from(context).inflate(R.layout.rename_dialog_edit_text, customise_apps_fragment, false)

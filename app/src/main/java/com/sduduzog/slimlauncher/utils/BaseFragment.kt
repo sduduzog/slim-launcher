@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
 import androidx.fragment.app.Fragment
-import com.sduduzog.slimlauncher.MainActivity
 import com.sduduzog.slimlauncher.R
+import com.sduduzog.slimlauncher.ui.MainActivity
 
 abstract class BaseFragment : Fragment() {
 
@@ -61,6 +61,8 @@ abstract class BaseFragment : Fragment() {
     }
 
     open fun onBack(): Boolean = false
+
+    open fun onTick() {}
 
     open fun onHome() {}
 }

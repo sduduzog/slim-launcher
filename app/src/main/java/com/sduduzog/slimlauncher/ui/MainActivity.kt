@@ -1,21 +1,33 @@
-package com.sduduzog.slimlauncher
+package com.sduduzog.slimlauncher.ui
 
-import android.content.SharedPreferences
+import android.content.*
 import android.content.res.Resources
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.Navigation.findNavController
+import com.sduduzog.slimlauncher.R
 import com.sduduzog.slimlauncher.utils.BaseFragment
 import com.sduduzog.slimlauncher.utils.HomeWatcher
+import dagger.android.AndroidInjection
+import javax.inject.Inject
 
 
-class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceChangeListener, HomeWatcher.OnHomePressedListener {
+class MainActivity : AppCompatActivity(),
+        SharedPreferences.OnSharedPreferenceChangeListener, HomeWatcher.OnHomePressedListener {
+
+
+    @Inject
+    internal lateinit var viewModelFactory: ViewModelProvider.Factory
 
     private lateinit var settings: SharedPreferences
     private lateinit var navigator: NavController
     private lateinit var homeWatcher: HomeWatcher
+    internal lateinit var viewModel: MainViewModel
+    private lateinit var receiver: ClockReceiver
     private val subscribers: MutableSet<BaseFragment> = mutableSetOf()
 
     fun attachSubscriber(s: BaseFragment) {
@@ -35,14 +47,23 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
         for (s in subscribers) s.onHome()
     }
 
+    internal fun dispatchTick() {
+        subscribers.forEach { it.onTick() }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        AndroidInjection.inject(this)
+
         setContentView(R.layout.main_activity)
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(MainViewModel::class.java)
         settings = getSharedPreferences(getString(R.string.prefs_settings), MODE_PRIVATE)
         settings.registerOnSharedPreferenceChangeListener(this)
         navigator = findNavController(this, R.id.nav_host_fragment)
         homeWatcher = HomeWatcher(this)
         homeWatcher.setOnHomePressedListener(this)
+        receiver = ClockReceiver()
     }
 
     override fun onResume() {
@@ -54,11 +75,13 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
     override fun onStart() {
         super.onStart()
         homeWatcher.startWatch()
+        registerReceiver(receiver, IntentFilter(Intent.ACTION_TIME_TICK))
     }
 
     override fun onStop() {
         super.onStop()
         homeWatcher.stopWatch()
+        unregisterReceiver(receiver)
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
@@ -127,5 +150,12 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
 
     private fun completeBackAction() {
         super.onBackPressed()
+    }
+
+    inner class ClockReceiver : BroadcastReceiver() {
+        override fun onReceive(ctx: Context?, intent: Intent?) {
+            viewModel.tick()
+            dispatchTick()
+        }
     }
 }
