@@ -3,7 +3,7 @@
     <Transition
         motion:constraintSetEnd="@layout/home_motion_02"
         motion:constraintSetStart="@layout/home_motion_01"
-        motion:duration="250">
+        motion:duration="200">
         <OnSwipe
             motion:dragDirection="dragUp"
             motion:touchAnchorId="@+id/home_fragment_date"

@@ -52,16 +52,17 @@ class OptionsFragment : BaseFragment() {
     private fun setupDialogs() {
         options_fragment_change_theme.setOnClickListener {
             val changeThemeDialog = ChangeThemeDialog.getThemeChooser()
-            changeThemeDialog.showNow(fragmentManager, "THEME_CHOOSER")
+            fragmentManager?.let { it1 -> changeThemeDialog.showNow(it1, "THEME_CHOOSER") }
         }
         options_fragment_choose_time_format.setOnClickListener {
             val chooseTimeFormatDialog = ChooseTimeFormatDialog.getInstance()
-            chooseTimeFormatDialog.showNow(fragmentManager, "TIME_FORMAT_CHOOSER")
+            fragmentManager?.let { it1 -> chooseTimeFormatDialog.showNow(it1, "TIME_FORMAT_CHOOSER") }
         }
     }
 
     private fun setupPreferences() {
-        val settings = context!!.getSharedPreferences(getString(R.string.prefs_settings), MODE_PRIVATE)
+        val settings = (context
+                ?: return).getSharedPreferences(getString(R.string.prefs_settings), MODE_PRIVATE)
         options_fragment_toggle_status_bar.setOnClickListener {
             val hidden = settings.getBoolean(getString(R.string.prefs_settings_key_toggle_status_bar), false)
             settings.edit {

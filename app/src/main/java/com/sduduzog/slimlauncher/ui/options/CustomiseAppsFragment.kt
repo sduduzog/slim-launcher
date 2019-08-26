@@ -53,7 +53,10 @@ class CustomiseAppsFragment : InjectableFragment(), OnShitDoneToAppsListener {
             } ?: adapter.setItems(listOf())
         })
         customise_apps_fragment_remove_all.setOnClickListener {
-            RemoveAllAppsDialog.getInstance(viewModel.apps.value!!, viewModel).show(fragmentManager, "REMOVE_APPS")
+            fragmentManager?.let { it1 ->
+                RemoveAllAppsDialog.getInstance(viewModel.apps.value
+                        ?: return@let, viewModel).show(it1, "REMOVE_APPS")
+            }
         }
 
         customise_apps_fragment_list.adapter = adapter

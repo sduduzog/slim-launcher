@@ -7,7 +7,7 @@ import android.content.IntentFilter
 
 class HomeWatcher(private val context: Context) {
 
-    private var listener: OnHomePressedListener? = null
+    internal var listener: OnHomePressedListener? = null
     private var receiver: InnerReceiver? = null
     private val filter = IntentFilter(Intent.ACTION_CLOSE_SYSTEM_DIALOGS)
 

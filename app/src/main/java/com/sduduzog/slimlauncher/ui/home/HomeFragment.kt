@@ -7,31 +7,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import com.sduduzog.slimlauncher.R
 import com.sduduzog.slimlauncher.adapters.HomeAdapter
 import com.sduduzog.slimlauncher.data.entity.HomeApp
-import com.sduduzog.slimlauncher.utils.BaseFragment
+import com.sduduzog.slimlauncher.utils.InjectableFragment
 import com.sduduzog.slimlauncher.utils.OnLaunchAppListener
-import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.home_fragment.*
-import javax.inject.Inject
 
 
-class HomeFragment : BaseFragment(), OnLaunchAppListener {
-
-    @Inject
-    internal lateinit var viewModelFactory: ViewModelProvider.Factory
+class HomeFragment : InjectableFragment(), OnLaunchAppListener {
 
     private lateinit var receiver: BroadcastReceiver
     private lateinit var viewModel: HomeViewModel
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        AndroidSupportInjection.inject(this)
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
@@ -109,28 +99,6 @@ class HomeFragment : BaseFragment(), OnLaunchAppListener {
             }
         }
 
-//        home_fragment_call.setOnClickListener { view ->
-//            try {
-//                val pm = context?.packageManager!!
-//                val intent = Intent(Intent.ACTION_DIAL)
-//                val componentName = intent.resolveActivity(pm)
-//                if (componentName == null) launchActivity(view, intent) else
-//                    pm.getLaunchIntentForPackage(componentName.packageName)?.let {
-//                        launchActivity(view, it)
-//                    } ?: run { launchActivity(view, intent) }
-//            } catch (e: Exception) {
-//                // Do nothing
-//            }
-//        }
-//
-//        home_fragment_camera.setOnClickListener {
-//            try {
-//                val intent = Intent(MediaStore.INTENT_ACTION_STILL_IMAGE_CAMERA)
-//                launchActivity(it, intent)
-//            } catch (e: Exception) {
-//                // Do nothing
-//            }
-//        }
     }
 
     internal fun updateClock() {
