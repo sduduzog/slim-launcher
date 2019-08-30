@@ -47,10 +47,6 @@ class MainActivity : AppCompatActivity(),
         for (s in subscribers) s.onHome()
     }
 
-    internal fun dispatchTick() {
-        subscribers.forEach { it.onTick() }
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -155,7 +151,6 @@ class MainActivity : AppCompatActivity(),
     inner class ClockReceiver : BroadcastReceiver() {
         override fun onReceive(ctx: Context?, intent: Intent?) {
             viewModel.tick()
-            dispatchTick()
         }
     }
 }

@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import com.sduduzog.slimlauncher.BuildConfig
@@ -19,8 +20,12 @@ import com.sduduzog.slimlauncher.utils.InjectableFragment
 import com.sduduzog.slimlauncher.utils.OnAppClickedListener
 import kotlinx.android.synthetic.main.add_app_fragment.*
 import java.util.*
+import javax.inject.Inject
 
 class AddAppFragment : InjectableFragment(), OnAppClickedListener {
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
 
     override fun getFragmentView(): ViewGroup = add_app_fragment
 

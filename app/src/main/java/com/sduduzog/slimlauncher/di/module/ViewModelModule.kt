@@ -7,6 +7,7 @@ import com.sduduzog.slimlauncher.ui.MainViewModel
 import com.sduduzog.slimlauncher.ui.home.HomeViewModel
 import com.sduduzog.slimlauncher.ui.options.AddAppViewModel
 import com.sduduzog.slimlauncher.ui.options.CustomiseAppsViewModel
+import com.sduduzog.slimlauncher.ui.options.OptionsViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -37,4 +38,9 @@ internal abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(CustomiseAppsViewModel::class)
     protected abstract fun addCustomiseAppsViewModel(customiseAppsViewModel: CustomiseAppsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(OptionsViewModel::class)
+    protected abstract fun addOptionsViewModel(optionsViewModel: OptionsViewModel): ViewModel
 }

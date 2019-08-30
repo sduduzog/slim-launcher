@@ -3,6 +3,7 @@ package com.sduduzog.slimlauncher.di.module
 import com.sduduzog.slimlauncher.ui.home.HomeFragment
 import com.sduduzog.slimlauncher.ui.options.AddAppFragment
 import com.sduduzog.slimlauncher.ui.options.CustomiseAppsFragment
+import com.sduduzog.slimlauncher.ui.options.OptionsFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -17,4 +18,7 @@ abstract class FragmentModule {
 
     @ContributesAndroidInjector
     abstract fun contributeAddAppFragment(): AddAppFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeOptionsFragment(): OptionsFragment
 }

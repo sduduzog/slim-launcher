@@ -4,10 +4,11 @@ import android.os.AsyncTask
 import androidx.lifecycle.LiveData
 import com.sduduzog.slimlauncher.data.dao.AppDao
 import com.sduduzog.slimlauncher.data.entity.HomeApp
+import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class AppRepository(private val appDao: AppDao) {
+class AppRepository @Inject constructor(private val appDao: AppDao) {
 
     private val _apps = appDao.apps
 

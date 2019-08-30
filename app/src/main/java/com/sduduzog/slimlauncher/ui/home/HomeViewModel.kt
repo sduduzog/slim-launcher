@@ -3,16 +3,20 @@ package com.sduduzog.slimlauncher.ui.home
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
+import com.sduduzog.slimlauncher.AppConstants
 import com.sduduzog.slimlauncher.data.entity.HomeApp
 import com.sduduzog.slimlauncher.data.repository.AppRepository
+import com.sduduzog.slimlauncher.data.repository.ConfigRepository
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 
-class HomeViewModel @Inject constructor(private val repository: AppRepository) : ViewModel() {
+class HomeViewModel @Inject constructor(private val appRepository: AppRepository,
+                                        private val configRepository: ConfigRepository)
+    : ViewModel() {
 
     private val threshold = 4
-
+    private var timeFormatString: String? = null
     val time: MutableLiveData<String> = MutableLiveData()
     val date: MutableLiveData<String> = MutableLiveData()
     val firstAdapterApps: MutableLiveData<List<HomeApp>> = MutableLiveData()
@@ -26,20 +30,28 @@ class HomeViewModel @Inject constructor(private val repository: AppRepository) :
         }
     }
 
-    init {
-        repository.apps.observeForever(homeAppsObserver)
+    private val timeFormatObserver = Observer<String> {
+        this.timeFormatString = (it ?: return@Observer)
+        configRepository.tick()
     }
 
-    fun clockTick(twenty4Hour: Boolean) {
-        val clockFormat = if (twenty4Hour) SimpleDateFormat("h:mm aa", Locale.ROOT)
-        else SimpleDateFormat("H:mm", Locale.ROOT)
-        val dateFormat = SimpleDateFormat("EEE MMM dd", Locale.ROOT)
-        val dateObject = Date()
-        time.postValue(clockFormat.format(dateObject))
-        date.postValue(dateFormat.format(dateObject))
+    private val currentDateObserver = Observer<Date> {
+        it.let { date ->
+            val clockFormat = SimpleDateFormat(timeFormatString
+                    ?: AppConstants.DEFAULT_TIME_FORMAT, Locale.getDefault())
+            time.postValue(clockFormat.format(date))
+        }
+    }
+
+    init {
+        appRepository.apps.observeForever(homeAppsObserver)
+        configRepository.timeFormatLiveData.observeForever(timeFormatObserver)
+        configRepository.currentDate.observeForever(currentDateObserver)
     }
 
     override fun onCleared() {
-        repository.apps.removeObserver(homeAppsObserver)
+        appRepository.apps.removeObserver(homeAppsObserver)
+        configRepository.timeFormatLiveData.removeObserver(timeFormatObserver)
+        configRepository.currentDate.removeObserver(currentDateObserver)
     }
 }

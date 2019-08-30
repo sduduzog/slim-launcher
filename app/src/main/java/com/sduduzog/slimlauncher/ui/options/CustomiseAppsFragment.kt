@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.PopupMenu
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -20,12 +21,15 @@ import com.sduduzog.slimlauncher.utils.InjectableFragment
 import com.sduduzog.slimlauncher.utils.OnItemActionListener
 import com.sduduzog.slimlauncher.utils.OnShitDoneToAppsListener
 import kotlinx.android.synthetic.main.customise_apps_fragment.*
+import javax.inject.Inject
 
 
 class CustomiseAppsFragment : InjectableFragment(), OnShitDoneToAppsListener {
 
-    override fun getFragmentView(): ViewGroup = customise_apps_fragment
+    @Inject
+    internal lateinit var viewModelFactory: ViewModelProvider.Factory
 
+    override fun getFragmentView(): ViewGroup = customise_apps_fragment
 
     private lateinit var viewModel: CustomiseAppsViewModel
 

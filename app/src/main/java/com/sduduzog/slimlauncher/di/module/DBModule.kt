@@ -2,9 +2,9 @@ package com.sduduzog.slimlauncher.di.module
 
 import android.app.Application
 import androidx.room.Room
-import com.sduduzog.slimlauncher.data.BaseDatabase
-import com.sduduzog.slimlauncher.data.ConfigDao
+import com.sduduzog.slimlauncher.data.AppDatabase
 import com.sduduzog.slimlauncher.data.dao.AppDao
+import com.sduduzog.slimlauncher.data.dao.ConfigDao
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -14,17 +14,17 @@ class DBModule {
 
     @Provides
     @Singleton
-    internal fun provideDatabase(application: Application): BaseDatabase {
-        return Room.databaseBuilder(application, BaseDatabase::class.java, "app_database")
-                .addMigrations(*BaseDatabase.getMigrations())
+    internal fun provideDatabase(application: Application): AppDatabase {
+        return Room.databaseBuilder(application, AppDatabase::class.java, AppDatabase.DATABASE_NAME)
+                .addMigrations(*AppDatabase.getMigrations())
                 .build()
     }
 
     @Provides
     @Singleton
-    internal fun provideConfigDao(baseDatabase: BaseDatabase): ConfigDao = baseDatabase.configDao()
+    internal fun provideConfigDao(appDatabase: AppDatabase): ConfigDao = appDatabase.configDao()
 
     @Provides
     @Singleton
-    internal fun provideAppDao(baseDatabase: BaseDatabase): AppDao = baseDatabase.appDao()
+    internal fun provideAppDao(appDatabase: AppDatabase): AppDao = appDatabase.appDao()
 }

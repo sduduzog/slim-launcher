@@ -9,14 +9,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.edit
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import com.sduduzog.slimlauncher.R
 import com.sduduzog.slimlauncher.ui.dialogs.ChangeThemeDialog
 import com.sduduzog.slimlauncher.ui.dialogs.ChooseTimeFormatDialog
-import com.sduduzog.slimlauncher.utils.BaseFragment
+import com.sduduzog.slimlauncher.utils.InjectableFragment
 import kotlinx.android.synthetic.main.options_fragment.*
+import javax.inject.Inject
 
-class OptionsFragment : BaseFragment() {
+class OptionsFragment : InjectableFragment() {
+
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    private lateinit var optionsViewModel: OptionsViewModel
+
     override fun getFragmentView(): ViewGroup = options_fragment
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -25,6 +36,14 @@ class OptionsFragment : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        optionsViewModel = ViewModelProviders.of(this, viewModelFactory).get(OptionsViewModel::class.java)
+        optionsViewModel.timeFormat.observe(this, Observer { format ->
+            options_fragment_choose_time_format.setOnClickListener {
+                val chooseTimeFormatDialog = ChooseTimeFormatDialog.getInstance(format
+                        ?: return@setOnClickListener, optionsViewModel)
+                fragmentManager?.let { it1 -> chooseTimeFormatDialog.showNow(it1, "TIME_FORMAT_CHOOSER") }
+            }
+        })
         setupLaunchers()
         setupDialogs()
         setupPreferences()
@@ -54,10 +73,7 @@ class OptionsFragment : BaseFragment() {
             val changeThemeDialog = ChangeThemeDialog.getThemeChooser()
             fragmentManager?.let { it1 -> changeThemeDialog.showNow(it1, "THEME_CHOOSER") }
         }
-        options_fragment_choose_time_format.setOnClickListener {
-            val chooseTimeFormatDialog = ChooseTimeFormatDialog.getInstance()
-            fragmentManager?.let { it1 -> chooseTimeFormatDialog.showNow(it1, "TIME_FORMAT_CHOOSER") }
-        }
+
     }
 
     private fun setupPreferences() {

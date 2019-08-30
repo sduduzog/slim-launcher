@@ -5,18 +5,21 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.sduduzog.slimlauncher.AppConstants
 import com.sduduzog.slimlauncher.data.dao.AppDao
+import com.sduduzog.slimlauncher.data.dao.ConfigDao
+import com.sduduzog.slimlauncher.data.entity.Config
 import com.sduduzog.slimlauncher.data.entity.HomeApp
 
 
-@Database(entities = [HomeApp::class], version = 7, exportSchema = false)
-abstract class BaseDatabase : RoomDatabase() {
+@Database(entities = [HomeApp::class, Config::class], version = 8, exportSchema = false)
+abstract class AppDatabase : RoomDatabase() {
 
     abstract fun appDao(): AppDao
     abstract fun configDao(): ConfigDao
 
     companion object {
-
+        const val DATABASE_NAME: String = "app_database" // Never change this! Ever!
         @SuppressLint("SyntheticAccessor")
         fun getMigrations(): Array<Migration> {
             return arrayOf(
@@ -25,7 +28,8 @@ abstract class BaseDatabase : RoomDatabase() {
                     MIGRATION_3_4,
                     MIGRATION_4_5,
                     MIGRATION_5_6,
-                    MIGRATION_6_7
+                    MIGRATION_6_7,
+                    MIGRATION_7_8
             )
         }
 
@@ -75,6 +79,14 @@ abstract class BaseDatabase : RoomDatabase() {
         private val MIGRATION_6_7 = object : Migration(6, 7) {
             override fun migrate(database: SupportSQLiteDatabase) {
                 database.execSQL("ALTER TABLE `home_apps` ADD COLUMN `app_nickname` TEXT")
+            }
+        }
+        private val MIGRATION_7_8 = object : Migration(7, 8) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL("CREATE TABLE IF NOT EXISTS `app_config` (`key` TEXT PRIMARY KEY NOT NULL, `value` TEXT NOT NULL)")
+                database.execSQL("INSERT INTO `app_config` (`key`, `value`) VALUES ('${AppConstants.TIME_FORMAT_KEY}', '${AppConstants.DEFAULT_TIME_FORMAT}')")
+                database.execSQL("INSERT INTO `app_config` (`key`, `value`) VALUES ('theme', '${AppConstants.Companion.THEMES.Midnight}')")
+                database.execSQL("INSERT INTO `app_config` (`key`, `value`) VALUES ('hide_bar', 'true')")
             }
         }
     }
