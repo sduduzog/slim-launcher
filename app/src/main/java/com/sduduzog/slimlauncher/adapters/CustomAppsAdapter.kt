@@ -16,7 +16,7 @@ import com.sduduzog.slimlauncher.utils.OnShitDoneToAppsListener
 
 class CustomAppsAdapter(private val listener: OnShitDoneToAppsListener) : RecyclerView.Adapter<CustomAppsAdapter.ViewHolder>(), OnItemActionListener {
 
-    private var apps: MutableList<HomeApp> = mutableListOf()
+    private val apps: MutableList<HomeApp> = mutableListOf()
     private lateinit var touchHelper: ItemTouchHelper
 
     override fun getItemCount(): Int = apps.size
@@ -42,13 +42,16 @@ class CustomAppsAdapter(private val listener: OnShitDoneToAppsListener) : Recycl
     }
 
     fun setItems(apps: List<HomeApp>) {
-        this.apps = sanitiseIndexes(apps) as MutableList<HomeApp>
+        this.apps.apply {
+            clear()
+            addAll(sanitiseIndexes(apps))
+        }
         notifyDataSetChanged()
     }
 
     private fun sanitiseIndexes(apps: List<HomeApp>): List<HomeApp> {
-        for (i in apps.indices) {
-            apps[i].sortingIndex = i
+        apps.indices.forEach {
+            apps[it].sortingIndex = it
         }
         return apps
     }
@@ -82,12 +85,11 @@ class CustomAppsAdapter(private val listener: OnShitDoneToAppsListener) : Recycl
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
         val dragHandle: TextView = itemView.findViewById(R.id.ca_list_item_drag_handle)
         val appName: TextView = itemView.findViewById(R.id.ca_list_item_app_name)
         val menuIcon: ImageView = itemView.findViewById(R.id.ca_list_item_more_icon)
 
-        override fun toString(): String {
-            return super.toString() + " '${appName.text}'"
-        }
+        override fun toString(): String = "${super.toString()} '${appName.text}'"
     }
 }

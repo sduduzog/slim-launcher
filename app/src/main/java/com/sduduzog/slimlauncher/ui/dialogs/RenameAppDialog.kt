@@ -22,12 +22,13 @@ class RenameAppDialog : DialogFragment() {
         val editText: EditText = view.findViewById(R.id.rename_editText)
         val appName: String = app.appNickname ?: app.appName
         editText.text.append(appName)
-        val builder = AlertDialog.Builder(context!!)
-        builder.setTitle("Rename $appName")
-        builder.setView(view)
-        builder.setPositiveButton("DONE") { _, _ ->
-            val name = editText.text.toString()
-            updateApp(name)
+        val builder = AlertDialog.Builder(context!!).apply {
+            setTitle("Rename $appName")
+            setView(view)
+            setPositiveButton("DONE") { _, _ ->
+                val name = editText.text.toString()
+                updateApp(name)
+            }
         }
         editText.setOnEditorActionListener { v, _, _ ->
             val name = v.text.toString()
@@ -48,11 +49,6 @@ class RenameAppDialog : DialogFragment() {
     }
 
     companion object {
-        fun getInstance(app: HomeApp, model: CustomiseAppsViewModel): RenameAppDialog {
-            return RenameAppDialog().apply {
-                this.model = model
-                this.app = app
-            }
-        }
+        fun getInstance(app: HomeApp, model: CustomiseAppsViewModel) = RenameAppDialog(app, model)
     }
 }
