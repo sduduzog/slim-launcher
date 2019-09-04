@@ -3,8 +3,8 @@ package com.sduduzog.slimlauncher.ui.options
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
-import com.sduduzog.slimlauncher.data.entity.App
 import com.sduduzog.slimlauncher.data.entity.HomeApp
+import com.sduduzog.slimlauncher.data.model.App
 import com.sduduzog.slimlauncher.data.repository.AppRepository
 import javax.inject.Inject
 

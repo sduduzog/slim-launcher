@@ -12,10 +12,10 @@ import com.sduduzog.slimlauncher.data.entity.HomeApp
 import com.sduduzog.slimlauncher.ui.options.CustomiseAppsViewModel
 import kotlinx.android.synthetic.main.customise_apps_fragment.*
 
-class RenameAppDialog : DialogFragment() {
-
-    internal lateinit var app: HomeApp
-    internal lateinit var model: CustomiseAppsViewModel
+class RenameAppDialog private constructor(
+        private val app: HomeApp,
+        private val model: CustomiseAppsViewModel
+) : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val view = LayoutInflater.from(context).inflate(R.layout.rename_dialog_edit_text, customise_apps_fragment, false)

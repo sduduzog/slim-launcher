@@ -15,7 +15,7 @@ import androidx.navigation.Navigation
 import com.sduduzog.slimlauncher.BuildConfig
 import com.sduduzog.slimlauncher.R
 import com.sduduzog.slimlauncher.adapters.AddAppAdapter
-import com.sduduzog.slimlauncher.data.entity.App
+import com.sduduzog.slimlauncher.data.model.App
 import com.sduduzog.slimlauncher.utils.InjectableFragment
 import com.sduduzog.slimlauncher.utils.OnAppClickedListener
 import kotlinx.android.synthetic.main.add_app_fragment.*
