@@ -1,8 +1,8 @@
 package com.sduduzog.slimlauncher.utils
 
 import android.view.View
-import com.sduduzog.slimlauncher.data.model.HomeApp
+import com.sduduzog.slimlauncher.data.entity.HomeApp
 
-interface OnLaunchAppListener{
+interface OnLaunchAppListener {
     fun onLaunch(app: HomeApp, view: View)
 }

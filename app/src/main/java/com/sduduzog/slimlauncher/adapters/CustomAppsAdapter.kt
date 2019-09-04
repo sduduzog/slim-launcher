@@ -10,13 +10,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.sduduzog.slimlauncher.R
-import com.sduduzog.slimlauncher.data.model.HomeApp
+import com.sduduzog.slimlauncher.data.entity.HomeApp
 import com.sduduzog.slimlauncher.utils.OnItemActionListener
 import com.sduduzog.slimlauncher.utils.OnShitDoneToAppsListener
 
 class CustomAppsAdapter(private val listener: OnShitDoneToAppsListener) : RecyclerView.Adapter<CustomAppsAdapter.ViewHolder>(), OnItemActionListener {
 
-    private val apps: MutableList<HomeApp> = mutableListOf()
+    private var apps: MutableList<HomeApp> = mutableListOf()
     private lateinit var touchHelper: ItemTouchHelper
 
     override fun getItemCount(): Int = apps.size
@@ -29,7 +29,7 @@ class CustomAppsAdapter(private val listener: OnShitDoneToAppsListener) : Recycl
     @SuppressLint("ClickableViewAccessibility")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = apps[position]
-        holder.appName.text = item.appName
+        holder.appName.text = item.appNickname ?: item.appName
         holder.dragHandle.setOnTouchListener { _, motionEvent ->
             if (motionEvent.actionMasked == MotionEvent.ACTION_DOWN) {
                 touchHelper.startDrag(holder)
@@ -42,16 +42,13 @@ class CustomAppsAdapter(private val listener: OnShitDoneToAppsListener) : Recycl
     }
 
     fun setItems(apps: List<HomeApp>) {
-        this.apps.apply {
-            clear()
-            addAll(sanitiseIndexes(apps))
-        }
+        this.apps = sanitiseIndexes(apps) as MutableList<HomeApp>
         notifyDataSetChanged()
     }
 
     private fun sanitiseIndexes(apps: List<HomeApp>): List<HomeApp> {
-        apps.indices.forEach {
-            apps[it].sortingIndex = it
+        for (i in apps.indices) {
+            apps[i].sortingIndex = i
         }
         return apps
     }
@@ -85,11 +82,12 @@ class CustomAppsAdapter(private val listener: OnShitDoneToAppsListener) : Recycl
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
         val dragHandle: TextView = itemView.findViewById(R.id.ca_list_item_drag_handle)
         val appName: TextView = itemView.findViewById(R.id.ca_list_item_app_name)
         val menuIcon: ImageView = itemView.findViewById(R.id.ca_list_item_more_icon)
 
-        override fun toString(): String = "${super.toString()} '${appName.text}'"
+        override fun toString(): String {
+            return super.toString() + " '${appName.text}'"
+        }
     }
 }

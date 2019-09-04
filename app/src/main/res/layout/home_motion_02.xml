@@ -75,7 +75,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_16sdp"
-        android:layout_marginLeft="@dimen/_16sdp"
         android:layout_marginBottom="@dimen/_16sdp"
         android:padding="@dimen/_8sdp"
         android:text="@string/main_fragment_options"
@@ -83,33 +82,6 @@
         android:textSize="@dimen/_18ssp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/home_fragment_list_exp" />
-
-
-    <ImageView
-        android:id="@+id/home_fragment_call"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_8sdp"
-        android:layout_marginLeft="@dimen/_8sdp"
-        android:alpha="-1"
-        android:padding="@dimen/_8sdp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="parent"
-        app:srcCompat="@drawable/ic_call"
-        tools:ignore="ContentDescription" />
-
-    <ImageView
-        android:id="@+id/home_fragment_camera"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/_8sdp"
-        android:layout_marginRight="@dimen/_8sdp"
-        android:alpha="-1"
-        android:padding="@dimen/_8sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="parent"
-        app:srcCompat="@drawable/ic_photo_camera"
-        tools:ignore="ContentDescription" />
 
 </androidx.constraintlayout.motion.widget.MotionLayout>
 

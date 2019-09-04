@@ -8,17 +8,19 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
 import androidx.fragment.app.Fragment
-import com.sduduzog.slimlauncher.MainActivity
 import com.sduduzog.slimlauncher.R
+import com.sduduzog.slimlauncher.ui.MainActivity
 
 abstract class BaseFragment : Fragment() {
 
     abstract fun getFragmentView(): ViewGroup
 
+
     override fun onResume() {
         super.onResume()
         val settings = context!!.getSharedPreferences(getString(R.string.prefs_settings), AppCompatActivity.MODE_PRIVATE)
         val active = settings.getInt(getString(R.string.prefs_settings_key_theme), 0)
+
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             when (active) {
@@ -32,6 +34,7 @@ abstract class BaseFragment : Fragment() {
             context!!.theme.resolveAttribute(R.attr.colorPrimary, value, true)
             activity!!.window.statusBarColor = value.data
         }
+
     }
 
     override fun onStart() {
@@ -58,6 +61,8 @@ abstract class BaseFragment : Fragment() {
     }
 
     open fun onBack(): Boolean = false
+
+    open fun onTick() {}
 
     open fun onHome() {}
 }

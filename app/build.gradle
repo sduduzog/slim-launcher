@@ -1,10 +1,7 @@
 plugins{
     id 'com.android.application'
-
     id'kotlin-android'
-
     id 'kotlin-android-extensions'
-
     id 'kotlin-kapt'
 }
 
@@ -12,10 +9,10 @@ android {
     compileSdkVersion 29
     defaultConfig {
         applicationId "com.sduduzog.slimlauncher"
-        minSdkVersion 16
+        minSdkVersion 21
         targetSdkVersion 29
-        versionCode 40
-        versionName "2.3.5"
+        versionCode 41
+        versionName "2.4.6"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
@@ -32,9 +29,15 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    dataBinding{
+        enabled true
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 }
 
@@ -44,22 +47,27 @@ dependencies {
     // Kotlin Libraries
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    // Support Libraries
+    // Androidx Libraries
+    implementation 'androidx.annotation:annotation:1.1.0'
     implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta2'
-
-    // Arch Components
-    implementation 'androidx.core:core-ktx:1.2.0-alpha02'
+    implementation 'androidx.core:core-ktx:1.2.0-alpha03'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
-    implementation 'android.arch.navigation:navigation-fragment:1.0.0'
     implementation 'androidx.room:room-runtime:2.1.0'
+    implementation 'androidx.lifecycle:lifecycle-common-java8:2.0.0'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.2.0-alpha01'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.2.0-alpha01'
     kapt "androidx.room:room-compiler:2.1.0"
-    kapt "androidx.lifecycle:lifecycle-compiler:2.0.0"
 
     //3rd party libs
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
     implementation 'com.intuit.ssp:ssp-android:1.0.6'
+    implementation 'com.google.dagger:dagger:2.24'
+    implementation 'com.google.dagger:dagger-android:2.24'
+    implementation 'com.google.dagger:dagger-android-support:2.24'
+    kapt 'com.google.dagger:dagger-android-processor:2.24'
+    kapt 'com.google.dagger:dagger-compiler:2.24'
 
     // Test libs
     testImplementation 'junit:junit:4.12'
@@ -67,11 +75,14 @@ dependencies {
     androidTestImplementation 'androidx.room:room-testing:2.1.0'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test:rules:1.2.0'
-    androidTestImplementation 'androidx.annotation:annotation:1.1.0'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test:rules:1.2.0'
     androidTestImplementation "androidx.arch.core:core-testing:2.0.1"
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-intents:3.2.0'
+
+
+    kaptAndroidTest 'com.google.dagger:dagger-compiler:2.24'
+    kaptAndroidTest 'com.google.dagger:dagger-android-processor:2.24'
 
 }

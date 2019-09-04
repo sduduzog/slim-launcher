@@ -9,10 +9,10 @@
         android:id="@+id/home_fragment_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_42sdp"
+        android:layout_marginTop="@dimen/_62sdp"
         android:text="@string/main_placeholder_clock"
         android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textSize="@dimen/_40ssp"
+        android:textSize="@dimen/_36ssp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
@@ -46,7 +46,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.55"
+        app:layout_constraintVertical_bias="0.65"
         tools:itemCount="4"
         tools:listitem="@layout/main_fragment_list_item" />
 
@@ -81,32 +81,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/home_fragment_list_exp"
         app:layout_constraintTop_toBottomOf="@+id/home_fragment_list_exp" />
-
-    <ImageView
-        android:id="@+id/home_fragment_call"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_8sdp"
-        android:layout_marginLeft="@dimen/_8sdp"
-        android:layout_marginBottom="@dimen/_8sdp"
-        android:padding="@dimen/_8sdp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ic_call"
-        tools:ignore="ContentDescription" />
-
-
-    <ImageView
-        android:id="@+id/home_fragment_camera"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/_8sdp"
-        android:layout_marginRight="@dimen/_8sdp"
-        android:layout_marginBottom="@dimen/_8sdp"
-        android:padding="@dimen/_8sdp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_photo_camera"
-        tools:ignore="ContentDescription" />
 
 </androidx.constraintlayout.motion.widget.MotionLayout>

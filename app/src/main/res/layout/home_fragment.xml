@@ -25,22 +25,6 @@
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textSize="@dimen/_12sdp" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/home_fragment_list"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:itemCount="4"
-        tools:listitem="@layout/main_fragment_list_item" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/home_fragment_list_exp"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:itemCount="3"
-        tools:listitem="@layout/main_fragment_list_item" />
-
     <TextView
         android:id="@+id/home_fragment_options"
         android:layout_width="wrap_content"
@@ -50,20 +34,20 @@
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textSize="@dimen/_18ssp" />
 
-    <ImageView
-        android:id="@+id/home_fragment_call"
-        android:layout_width="wrap_content"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/home_fragment_list_exp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:padding="@dimen/_8sdp"
-        app:srcCompat="@drawable/ic_call"
-        tools:ignore="ContentDescription" />
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:itemCount="3"
+        tools:listitem="@layout/main_fragment_list_item" />
 
-    <ImageView
-        android:id="@+id/home_fragment_camera"
-        android:layout_width="wrap_content"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/home_fragment_list"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:padding="@dimen/_8sdp"
-        app:srcCompat="@drawable/ic_photo_camera"
-        tools:ignore="ContentDescription" />
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:itemCount="4"
+        tools:listitem="@layout/main_fragment_list_item" />
 
 </androidx.constraintlayout.motion.widget.MotionLayout>

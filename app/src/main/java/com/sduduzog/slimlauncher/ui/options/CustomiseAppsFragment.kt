@@ -7,27 +7,32 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.PopupMenu
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.sduduzog.slimlauncher.R
 import com.sduduzog.slimlauncher.adapters.CustomAppsAdapter
-import com.sduduzog.slimlauncher.data.MainViewModel
-import com.sduduzog.slimlauncher.data.model.HomeApp
-import com.sduduzog.slimlauncher.dialogs.RenameAppDialog
-import com.sduduzog.slimlauncher.utils.BaseFragment
-import com.sduduzog.slimlauncher.utils.LoadInstalledApps
+import com.sduduzog.slimlauncher.data.entity.HomeApp
+import com.sduduzog.slimlauncher.ui.dialogs.RemoveAllAppsDialog
+import com.sduduzog.slimlauncher.ui.dialogs.RenameAppDialog
+import com.sduduzog.slimlauncher.utils.InjectableFragment
 import com.sduduzog.slimlauncher.utils.OnItemActionListener
 import com.sduduzog.slimlauncher.utils.OnShitDoneToAppsListener
 import kotlinx.android.synthetic.main.customise_apps_fragment.*
+import javax.inject.Inject
 
 
-class CustomiseAppsFragment : BaseFragment(), OnShitDoneToAppsListener {
+class CustomiseAppsFragment : InjectableFragment(), OnShitDoneToAppsListener {
+
+    @Inject
+    internal lateinit var viewModelFactory: ViewModelProvider.Factory
 
     override fun getFragmentView(): ViewGroup = customise_apps_fragment
 
-    private lateinit var viewModel: MainViewModel
+    private lateinit var viewModel: CustomiseAppsViewModel
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.customise_apps_fragment, container, false)
@@ -37,10 +42,7 @@ class CustomiseAppsFragment : BaseFragment(), OnShitDoneToAppsListener {
         super.onActivityCreated(savedInstanceState)
 
         val adapter = CustomAppsAdapter(this)
-        activity?.let {
-            viewModel = ViewModelProviders.of(it).get(MainViewModel::class.java)
-        } ?: throw Error("Activity null, something here is fucked up")
-
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(CustomiseAppsViewModel::class.java)
         viewModel.apps.observe(this, Observer {
             it?.let { apps ->
                 adapter.setItems(apps)
@@ -55,11 +57,11 @@ class CustomiseAppsFragment : BaseFragment(), OnShitDoneToAppsListener {
             } ?: adapter.setItems(listOf())
         })
         customise_apps_fragment_remove_all.setOnClickListener {
-            viewModel.apps.value?.let {
-                viewModel.remove(*it.toTypedArray())
+            fragmentManager?.let { it1 ->
+                RemoveAllAppsDialog.getInstance(viewModel.apps.value
+                        ?: return@let, viewModel).show(it1, "REMOVE_APPS")
             }
         }
-        LoadInstalledApps(viewModel).execute(context!!.packageManager)
 
         customise_apps_fragment_list.adapter = adapter
         val listener: OnItemActionListener = adapter
@@ -109,10 +111,10 @@ class CustomiseAppsFragment : BaseFragment(), OnShitDoneToAppsListener {
     }
 
     private fun showPopupMenu(view: View): PopupMenu {
-        return PopupMenu(context!!, view).apply {
-            menuInflater.inflate(R.menu.customise_apps_popup_menu, menu)
-            show()
-        }
+        val popup = PopupMenu(context!!, view)
+        popup.menuInflater.inflate(R.menu.customise_apps_popup_menu, popup.menu)
+        popup.show()
+        return popup
     }
 
     override fun onAppsUpdated(list: List<HomeApp>) {
@@ -123,11 +125,13 @@ class CustomiseAppsFragment : BaseFragment(), OnShitDoneToAppsListener {
         showPopupMenu(view).setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.ca_menu_rename -> {
-                    RenameAppDialog.getInstance(app, viewModel)
-                            .show(childFragmentManager, "SettingsListAdapter")
+                    RenameAppDialog.getInstance(app, viewModel).show(childFragmentManager, "SettingsListAdapter")
                 }
                 R.id.ca_menu_remove -> {
                     viewModel.remove(app)
+                }
+                R.id.ca_menu_reset -> {
+                    viewModel.reset(app)
                 }
             }
             true
