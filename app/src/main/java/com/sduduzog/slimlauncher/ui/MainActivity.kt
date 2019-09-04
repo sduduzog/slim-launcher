@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity(),
     }
 
     private fun dispatchBack() {
-        subscribers.forEach { if (it.onBack()) return@forEach }
+        subscribers.forEach { if (it.onBack()) return }
         completeBackAction()
     }
 
