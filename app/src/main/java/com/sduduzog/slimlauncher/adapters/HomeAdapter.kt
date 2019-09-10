@@ -32,6 +32,7 @@ class HomeAdapter(private val listener: OnLaunchAppListener)
     override fun getItemCount(): Int = apps.size
 
     fun setItems(list: List<HomeApp>) {
+        apps.clear()
         apps.addAll(list)
         notifyDataSetChanged()
     }
