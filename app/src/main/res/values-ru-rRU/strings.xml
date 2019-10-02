@@ -1,0 +1,45 @@
+<resources>
+    <string name="app_name">Slim Launcher</string>
+    <string name="slim_url">http://sduduzog.github.io/slim-launcher/</string>
+    <string name="main_placeholder_clock">00:00</string>
+    <string name="main_placeholder_date">Cб, Апр 20</string>
+
+    <string-array name="themes_array">
+        <item>По умолчанию</item>
+        <item>Полночь</item>
+        <item>Юпитер</item>
+        <item>Бирюза</item>
+        <item>Сладости</item>
+        <item>Пастель</item>
+    </string-array>
+
+    <string-array name="time_format_array">
+        <item>24 Часа</item>
+        <item>12 Часов</item>
+    </string-array>
+
+    <string name="home_fragment_tasks">Задачи</string>
+
+    <string name="prefs_settings">настройки</string>
+    <string name="prefs_settings_key_theme">key_theme</string>
+    <string name="prefs_settings_key_time_format">clock_type</string>
+    <string name="prefs_settings_key_toggle_status_bar">hide_status_bar</string>
+    <string name="choose_time_format_dialog_title">Формат времени</string>
+    <string name="main_fragment_options">Опции</string>
+    <string name="options_fragment_about_slim">О Slim Launcher</string>
+    <string name="options_fragment_device_settings">Настройки</string>
+    <string name="options_fragment_change_theme">Сменить тему</string>
+    <string name="options_fragment_choose_time_format">Формат времени</string>
+    <string name="options_fragment_customise_apps">Приложения</string>
+    <string name="options_fragment_hide_status_bar">Cкрыть статус бар</string>
+    <string name="options_fragment_show_status_bar">Показать статус бар</string>
+    <string name="main_fragment_notes">Заметки</string>
+    <string name="customise_apps_fragment_add">Добавить</string>
+    <string name="menu_rename">Переименовать</string>
+    <string name="menu_remove">Удалить</string>
+    <string name="choose_theme_dialog_title">Выбор темы</string>
+    <string name="add_apps_fragment_search_apps">Поиск</string>
+    <string name="tasks_fragment_enter_a_new_task">Новая задача</string>
+    <string name="customise_apps_fragment_remove_all">Очистить</string>
+
+</resources>

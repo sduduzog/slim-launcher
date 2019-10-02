@@ -49,11 +49,22 @@ class OptionsFragment : BaseFragment() {
             val chooseTimeFormatDialog = ChooseTimeFormatDialog.getInstance()
             chooseTimeFormatDialog.showNow(fragmentManager, "TIME_FORMAT_CHOOSER")
         }
+        val settings = context!!.getSharedPreferences(getString(R.string.prefs_settings), MODE_PRIVATE)
+
+        if(settings.getBoolean(getString(R.string.prefs_settings_key_toggle_status_bar), false)) {
+            options_fragment_toggle_status_bar.setText(R.string.options_fragment_show_status_bar)
+        } else {
+            options_fragment_toggle_status_bar.setText(R.string.options_fragment_hide_status_bar)
+        }
         options_fragment_toggle_status_bar.setOnClickListener {
-            val settings = context!!.getSharedPreferences(getString(R.string.prefs_settings), MODE_PRIVATE)
             val isHidden = settings.getBoolean(getString(R.string.prefs_settings_key_toggle_status_bar), false)
             settings.edit {
                 putBoolean(getString(R.string.prefs_settings_key_toggle_status_bar), !isHidden)
+            }
+            if(isHidden) {
+                options_fragment_toggle_status_bar.text = getString(R.string.options_fragment_hide_status_bar)
+            } else {
+                options_fragment_toggle_status_bar.text = getString(R.string.options_fragment_show_status_bar)
             }
         }
         options_fragment_customise_apps.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_optionsFragment_to_customiseAppsFragment))

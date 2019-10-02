@@ -77,7 +77,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="@string/options_fragment_toggle_status_bar"
+        android:text="@string/options_fragment_hide_status_bar"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textSize="@dimen/_20ssp"
         app:layout_constraintBottom_toTopOf="@+id/options_fragment_customise_apps"

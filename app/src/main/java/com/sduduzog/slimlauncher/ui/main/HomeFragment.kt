@@ -5,6 +5,7 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.AlarmClock
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -138,14 +139,22 @@ class HomeFragment : BaseFragment(), OnLaunchAppListener {
                 ?.getBoolean(getString(R.string.prefs_settings_key_time_format), true)
         val date = Date()
         if (twenty4Hour as Boolean) {
-            val fWatchTime = SimpleDateFormat("h:mm aa", Locale.ROOT)
+            val fWatchTime = SimpleDateFormat("h:mm aa", Locale.getDefault())
             home_fragment_time.text = fWatchTime.format(date)
         } else {
-            val fWatchTime = SimpleDateFormat("H:mm", Locale.ROOT)
+            val fWatchTime = SimpleDateFormat("H:mm", Locale.getDefault())
             home_fragment_time.text = fWatchTime.format(date)
         }
-        val fWatchDate = SimpleDateFormat("EEE, MMM dd", Locale.ROOT)
-        home_fragment_date.text = fWatchDate.format(date)
+
+        Log.e("Log",Locale.getDefault().displayLanguage.toString())
+        if (Locale.getDefault().displayLanguage.toString() == "русский") {
+            val fWatchDate = SimpleDateFormat("d MMMM, EEEE", Locale.getDefault())
+            home_fragment_date.text = fWatchDate.format(date)
+        } else {
+            val fWatchDate = SimpleDateFormat("EEE, MMM dd", Locale.getDefault())
+            home_fragment_date.text = fWatchDate.format(date)
+        }
+
     }
 
     override fun onLaunch(app: HomeApp, view: View) {
