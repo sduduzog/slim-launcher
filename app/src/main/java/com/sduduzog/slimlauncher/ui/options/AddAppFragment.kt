@@ -1,5 +1,7 @@
 package com.sduduzog.slimlauncher.ui.options
 
+import android.content.Intent
+import android.content.pm.ResolveInfo
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -9,20 +11,21 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
+import com.sduduzog.slimlauncher.BuildConfig
 import com.sduduzog.slimlauncher.R
 import com.sduduzog.slimlauncher.adapters.AddAppAdapter
-import com.sduduzog.slimlauncher.data.MainViewModel
 import com.sduduzog.slimlauncher.data.model.App
+import com.sduduzog.slimlauncher.models.AddAppViewModel
 import com.sduduzog.slimlauncher.utils.BaseFragment
-import com.sduduzog.slimlauncher.utils.LoadInstalledApps
 import com.sduduzog.slimlauncher.utils.OnAppClickedListener
 import kotlinx.android.synthetic.main.add_app_fragment.*
+import java.util.*
 
 class AddAppFragment : BaseFragment(), OnAppClickedListener {
 
     override fun getFragmentView(): ViewGroup = add_app_fragment
 
-    private lateinit var viewModel: MainViewModel
+    private lateinit var viewModel: AddAppViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.add_app_fragment, container, false)
@@ -35,18 +38,22 @@ class AddAppFragment : BaseFragment(), OnAppClickedListener {
         add_app_fragment_list.adapter = adapter
 
         activity?.let {
-            viewModel = ViewModelProviders.of(it).get(MainViewModel::class.java)
+            viewModel = ViewModelProviders.of(it).get(AddAppViewModel::class.java)
         } ?: throw Error("How the fuck is this fragment alive while there's no activity?")
-        viewModel.installedApps.observe(this, Observer {
-            val homeApps = viewModel.apps.value.orEmpty()
+        viewModel.apps.observe(this, Observer {
             it?.let { apps ->
-                adapter.setItems(apps.filterNot { app -> homeApps.map { homeApp -> homeApp.packageName }.contains(app.packageName) })
+                adapter.setItems(apps)
                 add_app_fragment_progress_bar.visibility = View.GONE
             } ?: run {
                 add_app_fragment_progress_bar.visibility = View.VISIBLE
             }
         })
         add_app_fragment_edit_text.addTextChangedListener(onTextChangeListener)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.setInstalledApps(getInstalledApps())
     }
 
     override fun onDestroy() {
@@ -64,16 +71,34 @@ class AddAppFragment : BaseFragment(), OnAppClickedListener {
             // Do nothing
         }
 
-        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            s?.let {
-                LoadInstalledApps(viewModel, s.toString()).execute(context!!.packageManager)
-            }
+        override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+            viewModel.filterApps(s.toString())
         }
     }
 
     override fun onAppClicked(app: App) {
-        viewModel.add(app)
+        viewModel.addAppToHomeScreen(app)
         Navigation.findNavController(add_app_fragment).popBackStack()
     }
 
+    private fun getInstalledApps(): List<App> {
+        val pm = activity!!.packageManager
+        val list = mutableListOf<App>()
+        val main = Intent(Intent.ACTION_MAIN, null)
+        main.addCategory(Intent.CATEGORY_LAUNCHER)
+        val activitiesList = pm.queryIntentActivities(main, 0)
+        Collections.sort(activitiesList, ResolveInfo.DisplayNameComparator(pm))
+        activitiesList.indices.forEach {
+            val item = activitiesList[it]
+            val activity = item.activityInfo
+            val app = App(
+                    activitiesList[it].loadLabel(pm).toString(),
+                    activity.applicationInfo.packageName, activity.name
+            )
+            list.add(app)
+        }
+        val filter = mutableListOf<String>()
+        filter.add(BuildConfig.APPLICATION_ID)
+        return list.filterNot { filter.contains(it.packageName) }
+    }
 }

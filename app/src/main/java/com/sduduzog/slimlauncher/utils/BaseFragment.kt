@@ -34,6 +34,7 @@ abstract class BaseFragment : Fragment() {
             context!!.theme.resolveAttribute(R.attr.colorPrimary, value, true)
             activity!!.window.statusBarColor = value.data
         }
+
     }
 
     override fun onStart() {

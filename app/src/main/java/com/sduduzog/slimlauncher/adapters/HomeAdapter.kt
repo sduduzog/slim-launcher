@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.sduduzog.slimlauncher.R
-import com.sduduzog.slimlauncher.data.model.HomeApp
+import com.sduduzog.slimlauncher.models.HomeApp
 import com.sduduzog.slimlauncher.utils.OnLaunchAppListener
 
 
@@ -23,7 +23,7 @@ class HomeAdapter(private val listener: OnLaunchAppListener)
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = apps.elementAt(position)
-        holder.mLabelView.text = item.appName
+        holder.mLabelView.text = item.appNickname ?: item.appName
         holder.mLabelView.setOnClickListener {
             listener.onLaunch(item, it)
         }

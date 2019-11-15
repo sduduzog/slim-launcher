@@ -1,8 +1,9 @@
-package com.sduduzog.slimlauncher.data.model
+package com.sduduzog.slimlauncher.models
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.sduduzog.slimlauncher.data.model.App
 
 @Entity(tableName = "home_apps")
 data class HomeApp(
@@ -14,7 +15,9 @@ data class HomeApp(
         @field:ColumnInfo(name = "activity_name")
         var activityName: String,
         @field:ColumnInfo(name = "sorting_index")
-        var sortingIndex: Int
+        var sortingIndex: Int,
+        @field:ColumnInfo(name = "app_nickname")
+        var appNickname: String? = null
 ) {
     companion object {
         fun from(app: App, sortingIndex: Int = 0): HomeApp {

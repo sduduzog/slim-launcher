@@ -1,7 +1,6 @@
 package com.sduduzog.slimlauncher.ui.main
 
 import android.content.*
-import android.os.Build
 import android.os.Bundle
 import android.provider.AlarmClock
 import android.provider.MediaStore
@@ -13,8 +12,8 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import com.sduduzog.slimlauncher.R
 import com.sduduzog.slimlauncher.adapters.HomeAdapter
-import com.sduduzog.slimlauncher.data.MainViewModel
-import com.sduduzog.slimlauncher.data.model.HomeApp
+import com.sduduzog.slimlauncher.models.MainViewModel
+import com.sduduzog.slimlauncher.models.HomeApp
 import com.sduduzog.slimlauncher.utils.BaseFragment
 import com.sduduzog.slimlauncher.utils.OnLaunchAppListener
 import kotlinx.android.synthetic.main.home_fragment.*
@@ -64,9 +63,7 @@ class HomeFragment : BaseFragment(), OnLaunchAppListener {
         activity?.registerReceiver(receiver, IntentFilter(Intent.ACTION_TIME_TICK))
     }
 
-    override fun getFragmentView(): ViewGroup {
-        return home_fragment
-    }
+    override fun getFragmentView(): ViewGroup = home_fragment
 
     override fun onResume() {
         super.onResume()
@@ -81,20 +78,18 @@ class HomeFragment : BaseFragment(), OnLaunchAppListener {
     private fun setEventListeners() {
 
         home_fragment_time.setOnClickListener { view ->
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                try {
-                    val pm = context?.packageManager!!
-                    val intent = Intent(AlarmClock.ACTION_SHOW_ALARMS)
-                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                    val componentName = intent.resolveActivity(pm)
-                    if (componentName == null) launchActivity(view, intent) else
-                        pm.getLaunchIntentForPackage(componentName.packageName)?.let {
-                            launchActivity(view, it)
-                        }
-                } catch (e: ActivityNotFoundException) {
-                    e.printStackTrace()
-                    // Do nothing, we've failed :(
-                }
+            try {
+                val pm = context?.packageManager!!
+                val intent = Intent(AlarmClock.ACTION_SHOW_ALARMS)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                val componentName = intent.resolveActivity(pm)
+                if (componentName == null) launchActivity(view, intent) else
+                    pm.getLaunchIntentForPackage(componentName.packageName)?.let {
+                        launchActivity(view, it)
+                    }
+            } catch (e: ActivityNotFoundException) {
+                e.printStackTrace()
+                // Do nothing, we've failed :(
             }
         }
 
