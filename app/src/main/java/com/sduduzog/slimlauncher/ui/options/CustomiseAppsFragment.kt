@@ -13,8 +13,8 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.sduduzog.slimlauncher.R
 import com.sduduzog.slimlauncher.adapters.CustomAppsAdapter
-import com.sduduzog.slimlauncher.models.HomeApp
 import com.sduduzog.slimlauncher.models.CustomiseAppsViewModel
+import com.sduduzog.slimlauncher.models.HomeApp
 import com.sduduzog.slimlauncher.ui.dialogs.RemoveAllAppsDialog
 import com.sduduzog.slimlauncher.ui.dialogs.RenameAppDialog
 import com.sduduzog.slimlauncher.utils.BaseFragment
@@ -55,7 +55,10 @@ class CustomiseAppsFragment : BaseFragment(), OnShitDoneToAppsListener {
             } ?: adapter.setItems(listOf())
         })
         customise_apps_fragment_remove_all.setOnClickListener {
-            RemoveAllAppsDialog.getInstance(viewModel.apps.value!!, viewModel).show(fragmentManager, "REMOVE_APPS")
+            fragmentManager?.let { it1 ->
+                RemoveAllAppsDialog.getInstance(viewModel.apps.value
+                        ?: return@let, viewModel).show(it1, "REMOVE_APPS")
+            }
         }
 
         customise_apps_fragment_list.adapter = adapter
