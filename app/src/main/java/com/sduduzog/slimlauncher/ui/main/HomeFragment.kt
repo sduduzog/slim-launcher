@@ -8,27 +8,39 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import com.sduduzog.slimlauncher.R
 import com.sduduzog.slimlauncher.adapters.HomeAdapter
-import com.sduduzog.slimlauncher.models.MainViewModel
 import com.sduduzog.slimlauncher.models.HomeApp
+import com.sduduzog.slimlauncher.models.MainViewModel
 import com.sduduzog.slimlauncher.utils.BaseFragment
 import com.sduduzog.slimlauncher.utils.OnLaunchAppListener
+import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.home_fragment.*
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
 
 
 class HomeFragment : BaseFragment(), OnLaunchAppListener {
 
     private lateinit var receiver: BroadcastReceiver
+
+    @Inject
+    internal lateinit var viewModelFactory: ViewModelProvider.Factory
+
     private lateinit var viewModel: MainViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
         return inflater.inflate(R.layout.home_fragment, container, false)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        AndroidSupportInjection.inject(this)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -38,9 +50,7 @@ class HomeFragment : BaseFragment(), OnLaunchAppListener {
         home_fragment_list.adapter = adapter1
         home_fragment_list_exp.adapter = adapter2
 
-        activity?.let {
-            viewModel = ViewModelProviders.of(it).get(MainViewModel::class.java)
-        } ?: throw Error("Activity null, something here is fucked up")
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(MainViewModel::class.java)
 
         viewModel.apps.observe(this, Observer { list ->
             list?.let { apps ->
@@ -79,7 +89,7 @@ class HomeFragment : BaseFragment(), OnLaunchAppListener {
 
         home_fragment_time.setOnClickListener { view ->
             try {
-                val pm = context?.packageManager!!
+                val pm = context?.packageManager ?: return@setOnClickListener
                 val intent = Intent(AlarmClock.ACTION_SHOW_ALARMS)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
                 val componentName = intent.resolveActivity(pm)
@@ -106,7 +116,7 @@ class HomeFragment : BaseFragment(), OnLaunchAppListener {
 
         home_fragment_call.setOnClickListener { view ->
             try {
-                val pm = context?.packageManager!!
+                val pm = context?.packageManager ?: return@setOnClickListener
                 val intent = Intent(Intent.ACTION_DIAL)
                 val componentName = intent.resolveActivity(pm)
                 if (componentName == null) launchActivity(view, intent) else
@@ -151,7 +161,7 @@ class HomeFragment : BaseFragment(), OnLaunchAppListener {
             intent.addCategory(Intent.CATEGORY_LAUNCHER)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED
             intent.component = name
-            intent.resolveActivity(activity!!.packageManager)?.let {
+            intent.resolveActivity((activity ?: return).packageManager)?.let {
                 launchActivity(view, intent)
             }
         } catch (e: Exception) {

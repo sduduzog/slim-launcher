@@ -1,17 +1,12 @@
 package com.sduduzog.slimlauncher.models
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
+import javax.inject.Inject
 
-class CustomiseAppsViewModel(application: Application) : AndroidViewModel(application) {
+class CustomiseAppsViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
 
-    private val repository = Repository(application)
-    private var _apps: LiveData<List<HomeApp>>
-
-    init {
-        _apps = repository.apps
-    }
+    private var _apps: LiveData<List<HomeApp>> = repository.apps
 
     val apps: LiveData<List<HomeApp>>
         get() = _apps
@@ -24,6 +19,7 @@ class CustomiseAppsViewModel(application: Application) : AndroidViewModel(applic
         homeApp.appNickname = null
         update(homeApp)
     }
+
     fun remove(vararg app: HomeApp) {
         repository.remove(*app)
     }

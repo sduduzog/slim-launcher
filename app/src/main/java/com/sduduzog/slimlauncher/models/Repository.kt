@@ -1,16 +1,13 @@
 package com.sduduzog.slimlauncher.models
 
-import android.app.Application
 import android.os.AsyncTask
 import androidx.lifecycle.LiveData
 import com.sduduzog.slimlauncher.data.BaseDao
-import com.sduduzog.slimlauncher.data.BaseDatabase
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class Repository(application: Application) {
-
-    private val database: BaseDatabase = BaseDatabase.getDatabase(application)!!
-
-    private val baseDao: BaseDao = database.baseDao()
+@Singleton
+class Repository @Inject constructor(private val baseDao: BaseDao) {
 
     private val _apps = baseDao.apps
 

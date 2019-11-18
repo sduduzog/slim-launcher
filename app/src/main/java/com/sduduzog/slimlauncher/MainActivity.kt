@@ -9,9 +9,12 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation.findNavController
 import com.sduduzog.slimlauncher.utils.BaseFragment
 import com.sduduzog.slimlauncher.utils.HomeWatcher
+import dagger.android.AndroidInjection
 
 
-class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceChangeListener, HomeWatcher.OnHomePressedListener {
+class MainActivity : AppCompatActivity(),
+        SharedPreferences.OnSharedPreferenceChangeListener,
+        HomeWatcher.OnHomePressedListener {
 
     private lateinit var settings: SharedPreferences
     private lateinit var navigator: NavController
@@ -36,6 +39,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
         settings = getSharedPreferences(getString(R.string.prefs_settings), MODE_PRIVATE)

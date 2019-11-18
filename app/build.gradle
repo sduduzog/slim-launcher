@@ -62,7 +62,11 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
     implementation 'android.arch.navigation:navigation-fragment:1.0.0'
     implementation 'androidx.room:room-runtime:2.2.1'
-    kapt "androidx.room:room-compiler:2.2.1"
+    implementation 'com.google.dagger:dagger:2.25.2'
+    implementation 'com.google.dagger:dagger-android-support:2.25.2'
+    kapt 'com.google.dagger:dagger-compiler:2.25.2'
+    kapt 'com.google.dagger:dagger-android-processor:2.25.2'
+    kapt 'androidx.room:room-compiler:2.2.1'
 
     //3rd party libs
     implementation 'com.intuit.sdp:sdp-android:1.0.6'

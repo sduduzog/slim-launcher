@@ -8,6 +8,6 @@ data class App(
         val activityName: String
 ){
     companion object{
-        fun from(homeApp: HomeApp) = App(homeApp.appName, homeApp.packageName, homeApp.activityName)
+        fun from(homeApp: HomeApp): App = App(homeApp.appName, homeApp.packageName, homeApp.activityName)
     }
 }

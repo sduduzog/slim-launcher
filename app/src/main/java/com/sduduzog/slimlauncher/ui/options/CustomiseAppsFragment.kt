@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.PopupMenu
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -20,14 +21,24 @@ import com.sduduzog.slimlauncher.ui.dialogs.RenameAppDialog
 import com.sduduzog.slimlauncher.utils.BaseFragment
 import com.sduduzog.slimlauncher.utils.OnItemActionListener
 import com.sduduzog.slimlauncher.utils.OnShitDoneToAppsListener
+import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.customise_apps_fragment.*
+import javax.inject.Inject
 
 
 class CustomiseAppsFragment : BaseFragment(), OnShitDoneToAppsListener {
 
     override fun getFragmentView(): ViewGroup = customise_apps_fragment
 
+    @Inject
+    internal lateinit var viewModelFactory: ViewModelProvider.Factory
+
     private lateinit var viewModel: CustomiseAppsViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        AndroidSupportInjection.inject(this)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.customise_apps_fragment, container, false)
@@ -37,9 +48,8 @@ class CustomiseAppsFragment : BaseFragment(), OnShitDoneToAppsListener {
         super.onActivityCreated(savedInstanceState)
 
         val adapter = CustomAppsAdapter(this)
-        activity?.let {
-            viewModel = ViewModelProviders.of(it).get(CustomiseAppsViewModel::class.java)
-        } ?: throw Error("Activity null, something here is fucked up")
+
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(CustomiseAppsViewModel::class.java)
 
         viewModel.apps.observe(this, Observer {
             it?.let { apps ->
