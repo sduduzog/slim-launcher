@@ -1,4 +1,4 @@
-package com.sduduzog.slimlauncher
+package com.sduduzog.slimlauncher.ui
 
 import android.content.SharedPreferences
 import android.content.res.Resources
@@ -7,6 +7,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.Navigation.findNavController
+import com.sduduzog.slimlauncher.R
 import com.sduduzog.slimlauncher.utils.BaseFragment
 import com.sduduzog.slimlauncher.utils.HomeWatcher
 import dagger.android.AndroidInjection

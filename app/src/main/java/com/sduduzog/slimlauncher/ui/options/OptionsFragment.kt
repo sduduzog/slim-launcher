@@ -47,7 +47,8 @@ class OptionsFragment : BaseFragment() {
             fragmentManager?.let { it1 -> chooseTimeFormatDialog.showNow(it1, "TIME_FORMAT_CHOOSER") }
         }
         options_fragment_toggle_status_bar.setOnClickListener {
-            val settings = context!!.getSharedPreferences(getString(R.string.prefs_settings), MODE_PRIVATE)
+            val settings = (context
+                    ?: return@setOnClickListener).getSharedPreferences(getString(R.string.prefs_settings), MODE_PRIVATE)
             val isHidden = settings.getBoolean(getString(R.string.prefs_settings_key_toggle_status_bar), false)
             settings.edit {
                 putBoolean(getString(R.string.prefs_settings_key_toggle_status_bar), !isHidden)

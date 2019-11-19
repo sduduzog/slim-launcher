@@ -1,4 +1,4 @@
-package com.sduduzog.slimlauncher.utils
+package com.sduduzog.slimlauncher.factory
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

@@ -1,4 +1,4 @@
-package com.sduduzog.slimlauncher.di
+package com.sduduzog.slimlauncher.di.modules
 
 import dagger.Module
 

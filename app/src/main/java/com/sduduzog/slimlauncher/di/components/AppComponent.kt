@@ -1,9 +1,10 @@
-package com.sduduzog.slimlauncher
+package com.sduduzog.slimlauncher.di.components
 
 import android.app.Application
-import com.sduduzog.slimlauncher.di.ActivityBindingModule
-import com.sduduzog.slimlauncher.di.DatabaseModule
-import com.sduduzog.slimlauncher.di.ViewModelModule
+import com.sduduzog.slimlauncher.AppController
+import com.sduduzog.slimlauncher.di.modules.ActivityBindingModule
+import com.sduduzog.slimlauncher.di.modules.DatabaseModule
+import com.sduduzog.slimlauncher.di.modules.ViewModelModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
@@ -17,7 +18,7 @@ import javax.inject.Singleton
     ActivityBindingModule::class
 ])
 @Singleton
-interface AppComponent : AndroidInjector<MainApplication> {
+interface AppComponent : AndroidInjector<AppController> {
 
     @Component.Builder
     interface Builder {
@@ -28,5 +29,5 @@ interface AppComponent : AndroidInjector<MainApplication> {
         fun build(): AppComponent
     }
 
-    override fun inject(mainApplication: MainApplication)
+    override fun inject(appController: AppController)
 }

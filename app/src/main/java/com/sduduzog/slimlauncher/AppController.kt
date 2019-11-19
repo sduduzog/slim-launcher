@@ -1,12 +1,13 @@
 package com.sduduzog.slimlauncher
 
 import android.app.Application
+import com.sduduzog.slimlauncher.di.components.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
 import javax.inject.Inject
 
-class MainApplication : Application(), HasAndroidInjector {
+class AppController : Application(), HasAndroidInjector {
 
     @Inject
     lateinit var androidInjector: DispatchingAndroidInjector<Any>

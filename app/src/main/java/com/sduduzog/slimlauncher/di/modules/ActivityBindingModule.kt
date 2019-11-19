@@ -1,6 +1,6 @@
-package com.sduduzog.slimlauncher.di
+package com.sduduzog.slimlauncher.di.modules
 
-import com.sduduzog.slimlauncher.MainActivity
+import com.sduduzog.slimlauncher.ui.MainActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

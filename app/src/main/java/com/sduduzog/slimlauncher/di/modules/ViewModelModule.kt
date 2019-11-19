@@ -1,12 +1,11 @@
-package com.sduduzog.slimlauncher.di
+package com.sduduzog.slimlauncher.di.modules
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.sduduzog.slimlauncher.factory.ViewModelFactory
 import com.sduduzog.slimlauncher.models.AddAppViewModel
 import com.sduduzog.slimlauncher.models.CustomiseAppsViewModel
 import com.sduduzog.slimlauncher.models.MainViewModel
-import com.sduduzog.slimlauncher.utils.ViewModelFactory
-import com.sduduzog.slimlauncher.utils.ViewModelKey
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
