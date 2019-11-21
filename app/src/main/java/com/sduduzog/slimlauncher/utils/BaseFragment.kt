@@ -1,5 +1,6 @@
 package com.sduduzog.slimlauncher.utils
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.os.Build
 import android.util.TypedValue
@@ -59,7 +60,11 @@ abstract class BaseFragment : Fragment() {
         val width = view.measuredWidth
         val height = view.measuredHeight
         val opts = ActivityOptionsCompat.makeClipRevealAnimation(view, left, top, width, height)
-        startActivity(intent, opts.toBundle())
+        try {
+            startActivity(intent, opts.toBundle())
+        } catch (ex: ActivityNotFoundException) {
+            ex.printStackTrace()
+        }
     }
 
     open fun onBack(): Boolean = false
