@@ -4,10 +4,8 @@ import com.sduduzog.slimlauncher.ui.MainActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
-@Module(includes = [
-    FragmentBindingModule::class
-])
+@Module
 abstract class ActivityBindingModule {
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(modules = [FragmentBindingModule::class])
     abstract fun contributeMainActivity(): MainActivity
 }
