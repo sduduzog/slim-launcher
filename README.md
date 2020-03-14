@@ -1,7 +1,6 @@
 # Slim launcher
 > _All you need is less._
 
-![CircleCI (all branches)](https://img.shields.io/circleci/project/github/sduduzog/slim-launcher.svg?style=plastic)
 ![GitHub](https://img.shields.io/github/license/sduduzog/slim-launcher.svg?style=plastic)
 ![F-Droid](https://img.shields.io/f-droid/v/com.sduduzog.slimlauncher.svg?style=plastic)
 ![GitHub tag (latest SemVer)](https://img.shields.io/github/tag/sduduzog/slim-launcher.svg?style=plastic)
