@@ -7,26 +7,33 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.PopupMenu
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.sduduzog.slimlauncher.R
 import com.sduduzog.slimlauncher.adapters.CustomAppsAdapter
-import com.sduduzog.slimlauncher.models.HomeApp
 import com.sduduzog.slimlauncher.models.CustomiseAppsViewModel
+import com.sduduzog.slimlauncher.models.HomeApp
 import com.sduduzog.slimlauncher.ui.dialogs.RemoveAllAppsDialog
 import com.sduduzog.slimlauncher.ui.dialogs.RenameAppDialog
 import com.sduduzog.slimlauncher.utils.BaseFragment
 import com.sduduzog.slimlauncher.utils.OnItemActionListener
 import com.sduduzog.slimlauncher.utils.OnShitDoneToAppsListener
+import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.customise_apps_fragment.*
+import javax.inject.Inject
 
 
 class CustomiseAppsFragment : BaseFragment(), OnShitDoneToAppsListener {
 
     override fun getFragmentView(): ViewGroup = customise_apps_fragment
-
+    @Inject
+    internal lateinit var viewModelFactory: ViewModelProvider.Factory
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        AndroidSupportInjection.inject(this)
+    }
     private lateinit var viewModel: CustomiseAppsViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -38,10 +45,10 @@ class CustomiseAppsFragment : BaseFragment(), OnShitDoneToAppsListener {
 
         val adapter = CustomAppsAdapter(this)
         activity?.let {
-            viewModel = ViewModelProviders.of(it).get(CustomiseAppsViewModel::class.java)
+            viewModel = ViewModelProvider(it, viewModelFactory).get(CustomiseAppsViewModel::class.java)
         } ?: throw Error("Activity null, something here is fucked up")
 
-        viewModel.apps.observe(this, Observer {
+        viewModel.apps.observe(viewLifecycleOwner, Observer {
             it?.let { apps ->
                 adapter.setItems(apps)
                 when (apps.size) {
@@ -55,7 +62,7 @@ class CustomiseAppsFragment : BaseFragment(), OnShitDoneToAppsListener {
             } ?: adapter.setItems(listOf())
         })
         customise_apps_fragment_remove_all.setOnClickListener {
-            RemoveAllAppsDialog.getInstance(viewModel.apps.value!!, viewModel).show(fragmentManager, "REMOVE_APPS")
+            RemoveAllAppsDialog.getInstance(viewModel.apps.value!!, viewModel).show(childFragmentManager, "REMOVE_APPS")
         }
 
         customise_apps_fragment_list.adapter = adapter

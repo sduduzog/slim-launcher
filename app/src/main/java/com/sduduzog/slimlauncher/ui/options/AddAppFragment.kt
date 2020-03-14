@@ -9,7 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.sduduzog.slimlauncher.BuildConfig
 import com.sduduzog.slimlauncher.R
@@ -18,15 +18,22 @@ import com.sduduzog.slimlauncher.data.model.App
 import com.sduduzog.slimlauncher.models.AddAppViewModel
 import com.sduduzog.slimlauncher.utils.BaseFragment
 import com.sduduzog.slimlauncher.utils.OnAppClickedListener
+import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.add_app_fragment.*
 import java.util.*
+import javax.inject.Inject
 
 class AddAppFragment : BaseFragment(), OnAppClickedListener {
 
     override fun getFragmentView(): ViewGroup = add_app_fragment
 
+    @Inject
+    internal lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var viewModel: AddAppViewModel
-
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        AndroidSupportInjection.inject(this)
+    }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.add_app_fragment, container, false)
     }
@@ -38,9 +45,9 @@ class AddAppFragment : BaseFragment(), OnAppClickedListener {
         add_app_fragment_list.adapter = adapter
 
         activity?.let {
-            viewModel = ViewModelProviders.of(it).get(AddAppViewModel::class.java)
+            viewModel = ViewModelProvider(it, viewModelFactory).get(AddAppViewModel::class.java)
         } ?: throw Error("How the fuck is this fragment alive while there's no activity?")
-        viewModel.apps.observe(this, Observer {
+        viewModel.apps.observe(viewLifecycleOwner, Observer {
             it?.let { apps ->
                 adapter.setItems(apps)
                 add_app_fragment_progress_bar.visibility = View.GONE
