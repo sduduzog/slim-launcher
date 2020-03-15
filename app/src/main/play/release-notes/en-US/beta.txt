@@ -1,0 +1,5 @@
+1. Added a confirm dialog for remove all apps option
+
+2. Reset app name to original after renaming
+
+3. Bug fixes and download size minimized

@@ -1,6 +1,8 @@
 plugins {
     id("com.android.application")
 
+    id("com.github.triplet.play") version "2.5.0"
+
     kotlin("android")
 
     kotlin("android.extensions")
@@ -14,19 +16,31 @@ android {
         applicationId = "com.sduduzog.slimlauncher"
         minSdkVersion(21)
         targetSdkVersion(29)
-        versionCode = 41
-        versionName = "2.4.6"
+        versionCode = 42
+        versionName = "2.4.7"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables{useSupportLibrary = true}
+
+        signingConfigs {
+            register("release") {
+                storeFile = file(project.extra["RELEASE_STORE_FILE"] as String)
+                storePassword = project.extra["RELEASE_STORE_PASSWORD"] as String
+                keyAlias = project.extra["RELEASE_KEY_ALIAS"] as String
+                keyPassword = project.extra["RELEASE_KEY_PASSWORD"] as String
+            }
+        }
     }
 
+
+
     buildTypes {
-        getByName("release") {
+        named("release").configure {
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(getDefaultProguardFile ("proguard-android-optimize.txt"), "proguard-rules.pro")
+            signingConfig = signingConfigs.getByName("release")
         }
-        getByName("debug") {
+        named("debug").configure {
             isMinifyEnabled = false
             proguardFiles (getDefaultProguardFile ("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
@@ -39,7 +53,13 @@ android {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 }
-
+play {
+    serviceAccountCredentials = file(project.extra["RELEASE_GPP_KEY"] as String)
+    track = "beta"
+    userFraction = 0.5
+    releaseStatus = "inProgress"
+    defaultToAppBundles = true
+}
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
