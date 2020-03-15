@@ -53,8 +53,8 @@ class MainActivity : AppCompatActivity(),
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
         AndroidInjection.inject(this)
+        super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
         settings = getSharedPreferences(getString(R.string.prefs_settings), MODE_PRIVATE)
         settings.registerOnSharedPreferenceChangeListener(this)
