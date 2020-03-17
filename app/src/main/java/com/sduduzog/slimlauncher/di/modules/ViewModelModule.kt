@@ -1,7 +1,9 @@
-package com.sduduzog.slimlauncher
+package com.sduduzog.slimlauncher.di.modules
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.sduduzog.slimlauncher.di.ViewModelKey
+import com.sduduzog.slimlauncher.di.factories.ViewModelFactory
 import com.sduduzog.slimlauncher.models.AddAppViewModel
 import com.sduduzog.slimlauncher.models.CustomiseAppsViewModel
 import com.sduduzog.slimlauncher.models.MainViewModel

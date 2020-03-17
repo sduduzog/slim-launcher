@@ -1,4 +1,4 @@
-package com.sduduzog.slimlauncher
+package com.sduduzog.slimlauncher.di.modules
 
 import com.sduduzog.slimlauncher.ui.main.HomeFragment
 import com.sduduzog.slimlauncher.ui.options.AddAppFragment

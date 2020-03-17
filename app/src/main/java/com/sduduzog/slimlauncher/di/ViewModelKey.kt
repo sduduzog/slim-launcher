@@ -1,4 +1,4 @@
-package com.sduduzog.slimlauncher
+package com.sduduzog.slimlauncher.di
 
 import androidx.lifecycle.ViewModel
 import dagger.MapKey

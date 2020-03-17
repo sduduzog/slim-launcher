@@ -1,6 +1,11 @@
-package com.sduduzog.slimlauncher
+package com.sduduzog.slimlauncher.di.components
 
 import android.app.Application
+import com.sduduzog.slimlauncher.App
+import com.sduduzog.slimlauncher.di.modules.ActivityModule
+import com.sduduzog.slimlauncher.di.modules.DbModule
+import com.sduduzog.slimlauncher.di.modules.FragmentModule
+import com.sduduzog.slimlauncher.di.modules.ViewModelModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.support.AndroidSupportInjectionModule

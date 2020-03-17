@@ -13,6 +13,4 @@ This gives you a pretty simple theme with no sudden distractions.
 
 Don't be afraid to try it out! It's best for minimalists, students who want a strict routine or just about anyone who wants a cleaner, less cluttered home screen.
 
-Follow the app on Twitter @SlimLauncher and @sduduzog
-
 View the source on https://github.com/sduduzog/slim-launcher

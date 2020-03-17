@@ -2,6 +2,7 @@ package com.sduduzog.slimlauncher
 
 import android.app.Activity
 import android.app.Application
+import com.sduduzog.slimlauncher.di.components.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
