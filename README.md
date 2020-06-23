@@ -6,7 +6,7 @@
 ![GitHub tag (latest SemVer)](https://img.shields.io/github/tag/sduduzog/slim-launcher.svg?style=plastic)
 ![GitHub stars](https://img.shields.io/github/stars/sduduzog/slim-launcher.svg?style=social)
 
-![Slim Launcher Logo](docs/assets/ic_launcher-web.png)
+![Slim Launcher Logo](docs/assets/slim-logo.jpg)
 
 **Now available on Google Play and F-Droid!**
 
