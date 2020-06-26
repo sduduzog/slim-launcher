@@ -55,16 +55,17 @@ class AddAppFragment : BaseFragment(), OnAppClickedListener {
                 add_app_fragment_progress_bar.visibility = View.VISIBLE
             }
         })
-        add_app_fragment_edit_text.addTextChangedListener(onTextChangeListener)
     }
 
     override fun onResume() {
         super.onResume()
         viewModel.setInstalledApps(getInstalledApps())
+        viewModel.filterApps("")
+        add_app_fragment_edit_text.addTextChangedListener(onTextChangeListener)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onPause() {
+        super.onPause()
         add_app_fragment_edit_text?.removeTextChangedListener(onTextChangeListener)
     }
 
