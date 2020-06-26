@@ -55,10 +55,15 @@ android {
 }
 play {
     serviceAccountCredentials = file(project.extra["RELEASE_GPP_KEY"] as String)
-    track = "beta"
-    userFraction = 0.5
+    track = "production"
+    userFraction = 0.2
     releaseStatus = "inProgress"
     defaultToAppBundles = true
+
+    resolutionStrategy = "auto"
+    outputProcessor { // this: ApkVariantOutput
+        versionNameOverride = "$versionNameOverride.$versionCode"
+    }
 }
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
