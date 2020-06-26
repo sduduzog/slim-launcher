@@ -1,12 +1,8 @@
 plugins {
     id("com.android.application")
-
     id("com.github.triplet.play") version "2.8.0"
-
     kotlin("android")
-
     kotlin("android.extensions")
-
     kotlin("kapt")
 }
 
@@ -16,8 +12,8 @@ android {
         applicationId = "com.sduduzog.slimlauncher"
         minSdkVersion(21)
         targetSdkVersion(29)
-        versionCode = 42
-        versionName = "2.4.7"
+        versionCode = 43
+        versionName = "2.4.8"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables{useSupportLibrary = true}
 
