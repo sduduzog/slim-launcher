@@ -51,8 +51,8 @@ android {
 }
 play {
     serviceAccountCredentials = file(project.extra["RELEASE_GPP_KEY"] as String)
-    track = "production"
-    userFraction = 0.2
+    track = "beta"
+    userFraction = 1.0
     releaseStatus = "inProgress"
     defaultToAppBundles = true
 
