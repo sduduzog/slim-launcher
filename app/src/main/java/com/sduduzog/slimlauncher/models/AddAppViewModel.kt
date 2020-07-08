@@ -10,7 +10,7 @@ import javax.inject.Inject
 class AddAppViewModel @Inject constructor (baseDao: BaseDao) : ViewModel() {
     private val repository = Repository(baseDao)
     private var filterQuery = ""
-    private val regex = Regex("[^A-Za-z0-9]")
+    private val regex = Regex("[!@#\$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?]")
     private val _installedApps = mutableListOf<App>()
     private val _homeApps = mutableListOf<App>()
     private val homeAppsObserver = Observer<List<HomeApp>> {
