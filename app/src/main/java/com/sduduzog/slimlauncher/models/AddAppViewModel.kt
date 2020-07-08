@@ -10,6 +10,7 @@ import javax.inject.Inject
 class AddAppViewModel @Inject constructor (baseDao: BaseDao) : ViewModel() {
     private val repository = Repository(baseDao)
     private var filterQuery = ""
+    private val regex = Regex("[^A-Za-z0-9]")
     private val _installedApps = mutableListOf<App>()
     private val _homeApps = mutableListOf<App>()
     private val homeAppsObserver = Observer<List<HomeApp>> {
@@ -24,13 +25,13 @@ class AddAppViewModel @Inject constructor (baseDao: BaseDao) : ViewModel() {
     }
 
     fun filterApps(query: String = "") {
-        this.filterQuery = query
+        this.filterQuery = regex.replace(query, "")
         this.updateDisplayedApps()
     }
 
     private fun updateDisplayedApps() {
         val filteredApps = _installedApps.filterNot { _homeApps.contains(it) }
-        this.apps.postValue(filteredApps.filter { it.appName.contains(filterQuery) })
+        this.apps.postValue(filteredApps.filter { regex.replace(it.appName, "").contains(filterQuery, ignoreCase = true) })
     }
 
     fun setInstalledApps(apps: List<App>) {
