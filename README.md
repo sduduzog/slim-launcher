@@ -10,34 +10,34 @@
 
 **Now available on Google Play and F-Droid!**
 
-[<img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png"
-     alt="Get it on Google Play"
-     height="80">](https://play.google.com/store/apps/details?id=com.sduduzog.slimlauncher)
 [<img src="https://f-droid.org/badge/get-it-on.png"
      alt="Get it on F-Droid"
      height="80">](https://f-droid.org/packages/com.sduduzog.slimlauncher/)
+[<img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png"
+     alt="Get it on Google Play"
+     height="80">](https://play.google.com/store/apps/details?id=com.sduduzog.slimlauncher)
 
 ## Background
->Slim launcher only allows you to use fewer apps on your phone. Giving you more time to enjoy life as it was intended. Also a perfect app for a minimalist lifestyle.
-
-If you think you can come up with a better description, shoot submit an issue! I'm horrible at this marketing thing
+>A minimalist launcher that only allows you to use fewer apps on your device.
 
 # Contributions
 
 ## Issues
-**1.** See something you don't like, or that can be made better. Create an issue for it. Of course, its not going to be everything that we might agree on, _like adding a yellow popup when phone screen turns on_ but I try to reason with you and make sure we're on the same page in terms of the direction the app is going.
+**1.** Create an issue with suggestions for what to change, or do so yourself.
+Within the scope of what the app is, features will be added in the next release following friendly discussion.
 
-**2.** I honestly don't always have the time or resources to fix issues that come up in released apps. If you see anywhere where you can assist, please do so. I'll try to meet you halfway by labeling issues as they come.
+**2.** Help is needed anywhere you see fit, please do.
 
 ## Code reviews
-**3.** Whenever I get the chance, I work on implementing all these suggestions from app reviews, emails and feature-request issues into the app. But the process is still fairly slow. I do however need help reviewing the code for the beta channel, and possibly implementation of certain features. This is where you're most likely can suggest a feature and see it being implemented for the next release. To see progress, you don't need to wrte a single line of code but you just have to fork the repo and build the code from the `develop` branch and run the thing. Though don't be suprised if something is broken there, please do ask about it, sometimes I miss those. Also please;
-**4.** [Sign up as a tester](https://play.google.com/apps/testing/com.sduduzog.slimlauncher) to help with assessing any implementations that make it to the beta channel. Your opinion here is very, very vauable because your advise affects ~hundreds~ **thousands** of users using this thing.
+**3.** The code for the beta channel, and possibly implementation of features is in need of review.
+Fork the repo and build the code from the `develop` branch to see its progress. If something is broken, write about it in an issue.
+
+**4.** [Sign up as a tester](https://play.google.com/apps/testing/com.sduduzog.slimlauncher) to help access any implementations that make it to the beta channel. Your opinion is very valuable and affects **thousands** of users.
 
 ## [Buy me a coffee](https://buymeacoff.ee/sduduzog)
-**5.** I won't lie, my motivation to continue working on this app comes from the great feedback I receive from the reviews on the Play Store and the emails people send to me. The fact that someone out there noticed the litle effort that I put into it gives me all the drive I need to type away code over and over again.
+**5.** Motivation to work on this app comes from the great feedback I receive from the reviews on the Play Store and the e-mails.
+That someone out there noticed the little effort that I put into it gives me all the drive I need to type away at it time and time again.
 
-Feel you can do more? [Buy me a cup!](https://buymeacoff.ee/sduduzog). I'd really appreciate it!
-
-**6.** How do I acknowledge people who have contributed to the project and my growth as a developer? How do I start adding those heads we always find on big project READMEs? I want to do that for my supporters too.
+**6.** Thank you to everyone that contributed to the project and my growth as a developer.
 
 Thank you for your time
