@@ -2,9 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.sduduzog.slimlauncher">
-
-    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
-
+    
     <application
         android:name=".App"
         android:allowBackup="false"
