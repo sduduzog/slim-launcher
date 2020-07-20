@@ -5,11 +5,10 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.sduduzog.slimlauncher.data.model.App
 
-@Entity(tableName = "home_apps")
+@Entity(tableName = "home_apps", primaryKeys = ["package_name", "user_serial"])
 data class HomeApp(
         @field:ColumnInfo(name = "app_name")
         var appName: String,
-        @PrimaryKey
         @field:ColumnInfo(name = "package_name")
         var packageName: String,
         @field:ColumnInfo(name = "activity_name")
@@ -17,11 +16,14 @@ data class HomeApp(
         @field:ColumnInfo(name = "sorting_index")
         var sortingIndex: Int,
         @field:ColumnInfo(name = "app_nickname")
-        var appNickname: String? = null
+        var appNickname: String? = null,
+
+        @field:ColumnInfo(name = "user_serial")
+        val userSerial : Int
 ) {
     companion object {
         fun from(app: App, sortingIndex: Int = 0): HomeApp {
-            return HomeApp(appName = app.appName, activityName = app.activityName, packageName = app.packageName, sortingIndex = sortingIndex)
+            return HomeApp(appName = app.appName, activityName = app.activityName, packageName = app.packageName, userSerial = app.userSerial, sortingIndex = sortingIndex)
         }
     }
 }

@@ -1,10 +1,14 @@
 package com.sduduzog.slimlauncher.ui.main
 
 import android.content.*
+import android.content.pm.LauncherApps
+import android.os.Build
 import android.os.Bundle
+import android.os.UserManager
 import android.provider.AlarmClock
 import android.provider.CalendarContract
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -149,14 +153,22 @@ class HomeFragment : BaseFragment(), OnLaunchAppListener {
 
     override fun onLaunch(app: HomeApp, view: View) {
         try {
-            val intent = Intent()
             val name = ComponentName(app.packageName, app.activityName)
-            intent.action = Intent.ACTION_MAIN
-            intent.addCategory(Intent.CATEGORY_LAUNCHER)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED
-            intent.component = name
-            intent.resolveActivity(activity!!.packageManager)?.let {
-                launchActivity(view, intent)
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                Log.i("VINCENT", app.userSerial.toString())
+                val manager = context!!.getSystemService(Context.USER_SERVICE) as UserManager
+                val launcher = context!!.getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
+                launcher.startMainActivity(name, manager.getUserForSerialNumber(app.userSerial.toLong()), null, null)
+            } else {
+                val intent = Intent()
+                intent.action = Intent.ACTION_MAIN
+                intent.addCategory(Intent.CATEGORY_LAUNCHER)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED
+                intent.component = name
+                intent.resolveActivity(activity!!.packageManager)?.let {
+                    launchActivity(view, intent)
+                }
             }
         } catch (e: Exception) {
             // Do no shit yet
