@@ -95,7 +95,6 @@ class AddAppFragment : BaseFragment(), OnAppClickedListener {
     }
 
     private fun getInstalledApps(): List<App> {
-        val pm = activity!!.packageManager
         val list = mutableListOf<App>()
 
         val manager = context!!.getSystemService(Context.USER_SERVICE) as UserManager
@@ -103,14 +102,14 @@ class AddAppFragment : BaseFragment(), OnAppClickedListener {
         val user = Process.myUserHandle()
 
         for (profile in manager.userProfiles) {
-            val prefix = if (profile.equals(user)) "" else "[W] "
+            val prefix = if (profile.equals(user)) "" else "\uD83D\uDCBC " //Briefcase emoji
             for (activityInfo in launcher.getActivityList(null, profile)) {
                 val appInfo = activityInfo.applicationInfo
                 val app = App(
                         appName = prefix + activityInfo.label.toString(),
                         packageName = appInfo.packageName,
                         activityName = activityInfo.name,
-                        userSerial = manager.getSerialNumberForUser(profile).toInt())
+                        userSerial = manager.getSerialNumberForUser(profile))
                 list.add(app)
             }
         }

@@ -19,7 +19,7 @@ data class HomeApp(
         var appNickname: String? = null,
 
         @field:ColumnInfo(name = "user_serial")
-        val userSerial : Int
+        val userSerial : Long
 ) {
     companion object {
         fun from(app: App, sortingIndex: Int = 0): HomeApp {
