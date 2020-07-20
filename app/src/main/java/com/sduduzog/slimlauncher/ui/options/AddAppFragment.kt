@@ -98,40 +98,23 @@ class AddAppFragment : BaseFragment(), OnAppClickedListener {
         val pm = activity!!.packageManager
         val list = mutableListOf<App>()
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            val manager = context!!.getSystemService(Context.USER_SERVICE) as UserManager
-            val launcher = context!!.getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
-            val user = Process.myUserHandle()
+        val manager = context!!.getSystemService(Context.USER_SERVICE) as UserManager
+        val launcher = context!!.getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
+        val user = Process.myUserHandle()
 
-            for (profile in manager.userProfiles) {
-                val prefix = if (profile.equals(user)) "" else "[W] "
-                for (activityInfo in launcher.getActivityList(null, profile)) {
-                    val appInfo = activityInfo.applicationInfo
-                    val app = App(
-                            appName = prefix + activityInfo.label.toString(),
-                            packageName = appInfo.packageName,
-                            activityName = activityInfo.name,
-                            userSerial = manager.getSerialNumberForUser(profile).toInt())
-                    list.add(app)
-                }
-            }
-        } else {
-            val main = Intent(Intent.ACTION_MAIN, null)
-            main.addCategory(Intent.CATEGORY_LAUNCHER)
-            val activitiesList = pm.queryIntentActivities(main, 0)
-            Collections.sort(activitiesList, ResolveInfo.DisplayNameComparator(pm))
-            activitiesList.indices.forEach {
-                val item = activitiesList[it]
-                val activity = item.activityInfo
+        for (profile in manager.userProfiles) {
+            val prefix = if (profile.equals(user)) "" else "[W] "
+            for (activityInfo in launcher.getActivityList(null, profile)) {
+                val appInfo = activityInfo.applicationInfo
                 val app = App(
-                        activitiesList[it].loadLabel(pm).toString(),
-                        activity.applicationInfo.packageName,
-                        activity.name,
-                        0
-                )
+                        appName = prefix + activityInfo.label.toString(),
+                        packageName = appInfo.packageName,
+                        activityName = activityInfo.name,
+                        userSerial = manager.getSerialNumberForUser(profile).toInt())
                 list.add(app)
             }
         }
+
         val filter = mutableListOf<String>()
         filter.add(BuildConfig.APPLICATION_ID)
         return list.filterNot { filter.contains(it.packageName) }
