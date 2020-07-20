@@ -1,10 +1,7 @@
 package com.sduduzog.slimlauncher.ui.options
 
 import android.content.Context
-import android.content.Intent
 import android.content.pm.LauncherApps
-import android.content.pm.ResolveInfo
-import android.os.Build
 import android.os.Bundle
 import android.os.Process
 import android.os.UserManager
@@ -25,7 +22,6 @@ import com.sduduzog.slimlauncher.utils.BaseFragment
 import com.sduduzog.slimlauncher.utils.OnAppClickedListener
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.add_app_fragment.*
-import java.util.*
 import javax.inject.Inject
 
 class AddAppFragment : BaseFragment(), OnAppClickedListener {
