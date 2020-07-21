@@ -60,6 +60,10 @@ abstract class BaseFragment : Fragment() {
         startActivity(intent, opts.toBundle())
     }
 
+    protected fun setVisibility(hide : Boolean) : Int{
+        return if(hide) View.INVISIBLE else View.VISIBLE
+    }
+
     open fun onBack(): Boolean = false
 
     open fun onHome() {}

@@ -37,6 +37,10 @@ class OptionsElementsFragment : BaseFragment(){
         options_fragment_toggle_date_state.setText(currentState(R.string.prefs_settings_key_toggle_date))
         options_fragment_toggle_call_state.setText(currentState(R.string.prefs_settings_key_toggle_call))
         options_fragment_toggle_camera_state.setText(currentState(R.string.prefs_settings_key_toggle_camera))
+        options_fragment_time_as_shortcut_state.setText(currentState(R.string.prefs_settings_key_shortcut_time))
+        options_fragment_date_as_shortcut_state.setText(currentState(R.string.prefs_settings_key_shortcut_date))
+
+        toggleConditionalOptions()
 
         // Set listeners on each option
         addListener(options_fragment_toggle_status_bar, options_fragment_toggle_status_bar_state, R.string.prefs_settings_key_toggle_status_bar)
@@ -44,11 +48,19 @@ class OptionsElementsFragment : BaseFragment(){
         addListener(options_fragment_toggle_date, options_fragment_toggle_date_state, R.string.prefs_settings_key_toggle_date)
         addListener(options_fragment_toggle_call, options_fragment_toggle_call_state, R.string.prefs_settings_key_toggle_call)
         addListener(options_fragment_toggle_camera, options_fragment_toggle_camera_state, R.string.prefs_settings_key_toggle_camera)
+        addListener(options_fragment_time_as_shortcut, options_fragment_time_as_shortcut_state, R.string.prefs_settings_key_shortcut_time)
+        addListener(options_fragment_date_as_shortcut, options_fragment_date_as_shortcut_state, R.string.prefs_settings_key_shortcut_date)
+
     }
 
     fun currentState(settingRef : Int) : Int{
         val isHidden = settings.getBoolean(getString(settingRef), false)
-        return if(isHidden) R.string.options_elements_hidden else R.string.options_elements_shown
+
+        if (settingRef == R.string.prefs_settings_key_shortcut_time || settingRef == R.string.prefs_settings_key_shortcut_date){
+            return if(isHidden) R.string.options_elements_on else R.string.options_elements_off
+        } else {
+            return if(isHidden) R.string.options_elements_hidden else R.string.options_elements_shown
+        }
     }
 
     fun addListener(view : TextView, stateView : TextView, settingRef : Int){
@@ -59,6 +71,17 @@ class OptionsElementsFragment : BaseFragment(){
                 putBoolean(pref, !isHidden)
             }
             stateView.setText(currentState(settingRef))
+            toggleConditionalOptions()
         }
+    }
+
+    fun toggleConditionalOptions(){
+            var enabled = !settings.getBoolean(getString(R.string.prefs_settings_key_toggle_time), false)
+            options_fragment_time_as_shortcut.isEnabled = enabled
+            options_fragment_time_as_shortcut_state.isEnabled = enabled
+
+            enabled = !settings.getBoolean(getString(R.string.prefs_settings_key_toggle_date), false)
+            options_fragment_date_as_shortcut.isEnabled = enabled
+            options_fragment_date_as_shortcut_state.isEnabled = enabled
     }
 }

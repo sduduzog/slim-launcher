@@ -55,6 +55,9 @@ class HomeFragment : BaseFragment(), SharedPreferences.OnSharedPreferenceChangeL
         home_fragment_list.adapter = adapter1
         home_fragment_list_exp.adapter = adapter2
 
+        settings = this.context?.getSharedPreferences(getString(R.string.prefs_settings), AppCompatActivity.MODE_PRIVATE)!!
+        settings.registerOnSharedPreferenceChangeListener(this)
+
         activity?.let {
             viewModel = ViewModelProvider(it, viewModelFactory).get(MainViewModel::class.java)
         } ?: throw Error("Activity null, something here is fucked up")
@@ -72,9 +75,6 @@ class HomeFragment : BaseFragment(), SharedPreferences.OnSharedPreferenceChangeL
 
         setEventListeners()
         home_fragment_options.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_homeFragment_to_optionsFragment))
-
-        settings = this.context?.getSharedPreferences(getString(R.string.prefs_settings), AppCompatActivity.MODE_PRIVATE)!!
-        settings.registerOnSharedPreferenceChangeListener(this)
 
         // Set hideable views
         timeView = home_fragment_time
@@ -103,31 +103,36 @@ class HomeFragment : BaseFragment(), SharedPreferences.OnSharedPreferenceChangeL
     }
 
     private fun setEventListeners() {
-
-        home_fragment_time.setOnClickListener { view ->
-            try {
-                val pm = context?.packageManager!!
-                val intent = Intent(AlarmClock.ACTION_SHOW_ALARMS)
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                val componentName = intent.resolveActivity(pm)
-                if (componentName == null) launchActivity(view, intent) else
-                    pm.getLaunchIntentForPackage(componentName.packageName)?.let {
-                        launchActivity(view, it)
-                    }
-            } catch (e: ActivityNotFoundException) {
-                e.printStackTrace()
-                // Do nothing, we've failed :(
+        var isShortcut  = settings.getBoolean(getString(R.string.prefs_settings_key_shortcut_time), false)
+        if (isShortcut) {
+            home_fragment_time.setOnClickListener { view ->
+                try {
+                    val pm = context?.packageManager!!
+                    val intent = Intent(AlarmClock.ACTION_SHOW_ALARMS)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                    val componentName = intent.resolveActivity(pm)
+                    if (componentName == null) launchActivity(view, intent) else
+                        pm.getLaunchIntentForPackage(componentName.packageName)?.let {
+                            launchActivity(view, it)
+                        }
+                } catch (e: ActivityNotFoundException) {
+                    e.printStackTrace()
+                    // Do nothing, we've failed :(
+                }
             }
         }
 
-        home_fragment_date.setOnClickListener {
-            try {
-                val intent = Intent(Intent.ACTION_MAIN)
-                intent.addCategory(Intent.CATEGORY_APP_CALENDAR)
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                launchActivity(it, intent)
-            } catch (e: ActivityNotFoundException) {
-                // Do nothing, we've failed :(
+        isShortcut  = settings.getBoolean(getString(R.string.prefs_settings_key_shortcut_date), false)
+        if (isShortcut) {
+            home_fragment_date.setOnClickListener {
+                try {
+                    val intent = Intent(Intent.ACTION_MAIN)
+                    intent.addCategory(Intent.CATEGORY_APP_CALENDAR)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                    launchActivity(it, intent)
+                } catch (e: ActivityNotFoundException) {
+                    // Do nothing, we've failed :(
+                }
             }
         }
 
@@ -215,9 +220,5 @@ class HomeFragment : BaseFragment(), SharedPreferences.OnSharedPreferenceChangeL
         dateView.visibility = setVisibility(hideDate)
         callView.visibility = setVisibility(hideCall)
         cameraView.visibility = setVisibility(hideCamera)
-    }
-
-    private fun setVisibility(hide : Boolean) : Int{
-        return if(hide) View.INVISIBLE else View.VISIBLE
     }
 }

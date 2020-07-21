@@ -16,7 +16,7 @@
         android:layout_marginTop="@dimen/_8sdp"
         android:text="@string/main_fragment_options_elements"
         android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textSize="@dimen/_32ssp"
+        android:textSize="@dimen/_24ssp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -29,7 +29,7 @@
         android:layout_marginTop="32dp"
         android:text="@string/options_elements_fragment_toggle_status_bar"
         android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textSize="@dimen/_20ssp"
+        android:textSize="@dimen/_16ssp"
         app:layout_constraintBottom_toTopOf="@+id/options_fragment_toggle_time"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
@@ -41,7 +41,7 @@
         android:layout_marginRight="16dp"
         android:gravity="right"
         android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textSize="@dimen/_20ssp"
+        android:textSize="@dimen/_16ssp"
         app:layout_constraintBaseline_toBaselineOf="@id/options_fragment_toggle_status_bar"
         app:layout_constraintEnd_toEndOf="parent"
         />
@@ -55,8 +55,8 @@
         android:layout_marginTop="32dp"
         android:text="@string/options_elements_fragment_toggle_time"
         android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textSize="@dimen/_20ssp"
-        app:layout_constraintBottom_toTopOf="@+id/options_fragment_toggle_date"
+        android:textSize="@dimen/_16ssp"
+        app:layout_constraintBottom_toTopOf="@+id/options_fragment_time_as_shortcut"
         app:layout_constraintStart_toStartOf="@+id/options_fragment_toggle_status_bar"
         app:layout_constraintTop_toBottomOf="@+id/options_fragment_toggle_status_bar" />
 
@@ -68,8 +68,35 @@
         android:layout_marginRight="16dp"
         android:gravity="right"
         android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textSize="@dimen/_20ssp"
+        android:textSize="@dimen/_16ssp"
         app:layout_constraintBaseline_toBaselineOf="@id/options_fragment_toggle_time"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/options_fragment_time_as_shortcut"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/options_fragment_time_as_shortcut"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textSize="@dimen/_16ssp"
+        app:layout_constraintBottom_toTopOf="@+id/options_fragment_toggle_date"
+        app:layout_constraintStart_toStartOf="@+id/options_fragment_toggle_status_bar"
+        app:layout_constraintTop_toBottomOf="@+id/options_fragment_toggle_time" />
+
+    <TextView
+        android:id="@+id/options_fragment_time_as_shortcut_state"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginRight="16dp"
+        android:gravity="right"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textSize="@dimen/_16ssp"
+        app:layout_constraintBaseline_toBaselineOf="@id/options_fragment_time_as_shortcut"
         app:layout_constraintEnd_toEndOf="parent"
         />
 
@@ -82,10 +109,10 @@
         android:layout_marginTop="32dp"
         android:text="@string/options_elements_fragment_toggle_date"
         android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textSize="@dimen/_20ssp"
-        app:layout_constraintBottom_toTopOf="@+id/options_fragment_toggle_call"
+        android:textSize="@dimen/_16ssp"
+        app:layout_constraintBottom_toTopOf="@+id/options_fragment_date_as_shortcut"
         app:layout_constraintStart_toStartOf="@+id/options_fragment_choose_time_format"
-        app:layout_constraintTop_toBottomOf="@+id/options_fragment_toggle_time" />
+        app:layout_constraintTop_toBottomOf="@+id/options_fragment_time_as_shortcut" />
 
     <TextView
         android:id="@+id/options_fragment_toggle_date_state"
@@ -95,8 +122,35 @@
         android:layout_marginRight="16dp"
         android:gravity="right"
         android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textSize="@dimen/_20ssp"
+        android:textSize="@dimen/_16ssp"
         app:layout_constraintBaseline_toBaselineOf="@id/options_fragment_toggle_date"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/options_fragment_date_as_shortcut"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/options_fragment_date_as_shortcut"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textSize="@dimen/_16ssp"
+        app:layout_constraintBottom_toTopOf="@+id/options_fragment_toggle_call"
+        app:layout_constraintStart_toStartOf="@+id/options_fragment_toggle_status_bar"
+        app:layout_constraintTop_toBottomOf="@+id/options_fragment_toggle_date" />
+
+    <TextView
+        android:id="@+id/options_fragment_date_as_shortcut_state"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginRight="16dp"
+        android:gravity="right"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textSize="@dimen/_16ssp"
+        app:layout_constraintBaseline_toBaselineOf="@id/options_fragment_date_as_shortcut"
         app:layout_constraintEnd_toEndOf="parent"
         />
 
@@ -108,10 +162,10 @@
         android:layout_marginLeft="24dp"
         android:text="@string/options_elements_fragment_toggle_call"
         android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textSize="@dimen/_20ssp"
+        android:textSize="@dimen/_16ssp"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="@+id/options_fragment_toggle_status_bar"
-        app:layout_constraintTop_toBottomOf="@+id/options_fragment_toggle_date" />
+        app:layout_constraintTop_toBottomOf="@+id/options_fragment_date_as_shortcut" />
 
     <TextView
         android:id="@+id/options_fragment_toggle_call_state"
@@ -121,7 +175,7 @@
         android:layout_marginRight="16dp"
         android:gravity="right"
         android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textSize="@dimen/_20ssp"
+        android:textSize="@dimen/_16ssp"
         app:layout_constraintBaseline_toBaselineOf="@id/options_fragment_toggle_call"
         app:layout_constraintEnd_toEndOf="parent"
         />
@@ -134,7 +188,7 @@
         android:layout_marginLeft="24dp"
         android:text="@string/options_elements_fragment_toggle_camera"
         android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textSize="@dimen/_20ssp"
+        android:textSize="@dimen/_16ssp"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="@+id/options_fragment_toggle_status_bar"
         app:layout_constraintTop_toBottomOf="@+id/options_fragment_toggle_call" />
@@ -147,7 +201,7 @@
         android:layout_marginRight="16dp"
         android:gravity="right"
         android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textSize="@dimen/_20ssp"
+        android:textSize="@dimen/_16ssp"
         app:layout_constraintBaseline_toBaselineOf="@id/options_fragment_toggle_camera"
         app:layout_constraintEnd_toEndOf="parent"
         />
