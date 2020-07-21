@@ -2,19 +2,22 @@ package com.sduduzog.slimlauncher.models
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
-import androidx.room.PrimaryKey
 import com.sduduzog.slimlauncher.data.model.App
 
 @Entity(tableName = "home_apps", primaryKeys = ["package_name", "user_serial"])
 data class HomeApp(
         @field:ColumnInfo(name = "app_name")
         var appName: String,
+
         @field:ColumnInfo(name = "package_name")
         var packageName: String,
+
         @field:ColumnInfo(name = "activity_name")
         var activityName: String,
+
         @field:ColumnInfo(name = "sorting_index")
         var sortingIndex: Int,
+
         @field:ColumnInfo(name = "app_nickname")
         var appNickname: String? = null,
 

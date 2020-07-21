@@ -2,15 +2,11 @@ package com.sduduzog.slimlauncher.data
 
 import android.content.Context
 import android.os.Process
-import android.os.UserManager
-import android.util.Log
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.sduduzog.slimlauncher.App
 import com.sduduzog.slimlauncher.models.HomeApp
 
 
@@ -94,7 +90,8 @@ abstract class BaseDatabase : RoomDatabase() {
         }
         val MIGRATION_7_8 = object : Migration(7, 8){
             override fun migrate(database: SupportSQLiteDatabase) {
-                database.execSQL("ALTER TABLE `home_apps` ADD COLUMN `user_serial` INTEGER NOT NULL DEFAULT " + Process.myUserHandle().hashCode().toString())
+                val userSerial = Process.myUserHandle().hashCode()
+                database.execSQL("ALTER TABLE `home_apps` ADD COLUMN `user_serial` INTEGER NOT NULL DEFAULT " + userSerial.toString())
 
                 database.execSQL("CREATE TABLE home_apps_copy(" +
                         "package_name TEXT NOT NULL, " +

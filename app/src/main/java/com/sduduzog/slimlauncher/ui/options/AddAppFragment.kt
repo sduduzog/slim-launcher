@@ -98,12 +98,12 @@ class AddAppFragment : BaseFragment(), OnAppClickedListener {
         val user = Process.myUserHandle()
 
         for (profile in manager.userProfiles) {
-            val prefix = if (profile.equals(user)) "" else "\uD83D\uDCBC " //Briefcase emoji
+            val prefix = if (profile.equals(user)) "" else "\uD83C\uDD46 " //Unicode for boxed w
+
             for (activityInfo in launcher.getActivityList(null, profile)) {
-                val appInfo = activityInfo.applicationInfo
                 val app = App(
                         appName = prefix + activityInfo.label.toString(),
-                        packageName = appInfo.packageName,
+                        packageName = activityInfo.applicationInfo.packageName,
                         activityName = activityInfo.name,
                         userSerial = manager.getSerialNumberForUser(profile))
                 list.add(app)

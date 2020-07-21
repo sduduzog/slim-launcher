@@ -153,9 +153,9 @@ class HomeFragment : BaseFragment(), OnLaunchAppListener {
         try {
             val manager = context!!.getSystemService(Context.USER_SERVICE) as UserManager
             val launcher = context!!.getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
-            val name = ComponentName(app.packageName, app.activityName)
+            val componentName = ComponentName(app.packageName, app.activityName)
 
-            launcher.startMainActivity(name, manager.getUserForSerialNumber(app.userSerial), null, null)
+            launcher.startMainActivity(componentName, manager.getUserForSerialNumber(app.userSerial), null, null)
         } catch (e: Exception) {
             // Do no shit yet
         }
