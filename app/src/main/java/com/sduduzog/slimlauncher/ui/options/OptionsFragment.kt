@@ -1,6 +1,5 @@
 package com.sduduzog.slimlauncher.ui.options
 
-import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -8,7 +7,6 @@ import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.edit
 import androidx.navigation.Navigation
 import com.sduduzog.slimlauncher.R
 import com.sduduzog.slimlauncher.ui.dialogs.ChangeThemeDialog
@@ -51,13 +49,7 @@ class OptionsFragment : BaseFragment() {
             val chooseTimeFormatDialog = ChooseTimeFormatDialog.getInstance()
             chooseTimeFormatDialog.showNow(childFragmentManager, "TIME_FORMAT_CHOOSER")
         }
-        options_fragment_toggle_status_bar.setOnClickListener {
-            val settings = context!!.getSharedPreferences(getString(R.string.prefs_settings), MODE_PRIVATE)
-            val isHidden = settings.getBoolean(getString(R.string.prefs_settings_key_toggle_status_bar), false)
-            settings.edit {
-                putBoolean(getString(R.string.prefs_settings_key_toggle_status_bar), !isHidden)
-            }
-        }
+        options_fragment_elements.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_optionsFragment_to_optionsElementsFragment))
         options_fragment_customise_apps.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_optionsFragment_to_customiseAppsFragment))
     }
 }

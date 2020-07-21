@@ -68,16 +68,16 @@
         android:text="@string/options_fragment_choose_time_format"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textSize="@dimen/_20ssp"
-        app:layout_constraintBottom_toTopOf="@+id/options_fragment_toggle_status_bar"
+        app:layout_constraintBottom_toTopOf="@+id/options_fragment_elements"
         app:layout_constraintStart_toStartOf="@+id/options_fragment_change_theme"
         app:layout_constraintTop_toBottomOf="@+id/options_fragment_change_theme" />
 
     <TextView
-        android:id="@+id/options_fragment_toggle_status_bar"
+        android:id="@+id/options_fragment_elements"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="@string/options_fragment_toggle_status_bar"
+        android:text="@string/options_fragment_elements"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textSize="@dimen/_20ssp"
         app:layout_constraintBottom_toTopOf="@+id/options_fragment_customise_apps"
@@ -94,6 +94,6 @@
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textSize="@dimen/_20ssp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/options_fragment_toggle_status_bar"
-        app:layout_constraintTop_toBottomOf="@+id/options_fragment_toggle_status_bar" />
+        app:layout_constraintStart_toStartOf="@+id/options_fragment_about_slim"
+        app:layout_constraintTop_toBottomOf="@+id/options_fragment_elements" />
 </androidx.constraintlayout.widget.ConstraintLayout>

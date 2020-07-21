@@ -7,6 +7,9 @@ import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
@@ -23,12 +26,18 @@ import java.util.*
 import javax.inject.Inject
 
 
-class HomeFragment : BaseFragment(), OnLaunchAppListener {
+class HomeFragment : BaseFragment(), SharedPreferences.OnSharedPreferenceChangeListener, OnLaunchAppListener {
+
+    private lateinit var timeView : TextView
+    private lateinit var dateView : TextView
+    private lateinit var callView : ImageView
+    private lateinit var cameraView : ImageView
 
     @Inject
     internal lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var receiver: BroadcastReceiver
     private lateinit var viewModel: MainViewModel
+    private lateinit var settings : SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,10 +72,20 @@ class HomeFragment : BaseFragment(), OnLaunchAppListener {
 
         setEventListeners()
         home_fragment_options.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_homeFragment_to_optionsFragment))
+
+        settings = this.context?.getSharedPreferences(getString(R.string.prefs_settings), AppCompatActivity.MODE_PRIVATE)!!
+        settings.registerOnSharedPreferenceChangeListener(this)
+
+        // Set hideable views
+        timeView = home_fragment_time
+        dateView = home_fragment_date
+        callView = home_fragment_call
+        cameraView = home_fragment_camera
     }
 
     override fun onStart() {
         super.onStart()
+        setViewVisibility()
         receiver = ClockReceiver()
         activity?.registerReceiver(receiver, IntentFilter(Intent.ACTION_TIME_TICK))
     }
@@ -180,5 +199,25 @@ class HomeFragment : BaseFragment(), OnLaunchAppListener {
         override fun onReceive(ctx: Context?, intent: Intent?) {
             updateClock()
         }
+    }
+
+    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
+        setViewVisibility()
+    }
+
+    private fun setViewVisibility(){
+        val hideTime = settings.getBoolean(getString(R.string.prefs_settings_key_toggle_time), false)
+        val hideDate = settings.getBoolean(getString(R.string.prefs_settings_key_toggle_date), false)
+        val hideCall = settings.getBoolean(getString(R.string.prefs_settings_key_toggle_call), false)
+        val hideCamera = settings.getBoolean(getString(R.string.prefs_settings_key_toggle_camera), false)
+
+        timeView.visibility = setVisibility(hideTime)
+        dateView.visibility = setVisibility(hideDate)
+        callView.visibility = setVisibility(hideCall)
+        cameraView.visibility = setVisibility(hideCamera)
+    }
+
+    private fun setVisibility(hide : Boolean) : Int{
+        return if(hide) View.INVISIBLE else View.VISIBLE
     }
 }

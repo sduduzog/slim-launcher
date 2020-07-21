@@ -14,15 +14,26 @@
             android:id="@+id/action_homeFragment_to_optionsFragment"
             app:destination="@id/optionsFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/optionsFragment"
         android:name="com.sduduzog.slimlauncher.ui.options.OptionsFragment"
         android:label="options_fragment"
         tools:layout="@layout/options_fragment">
         <action
+            android:id="@+id/action_optionsFragment_to_optionsElementsFragment"
+            app:destination="@id/optionsElementsFragment" />
+        <action
             android:id="@+id/action_optionsFragment_to_customiseAppsFragment"
             app:destination="@id/customiseAppsFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/optionsElementsFragment"
+        android:name="com.sduduzog.slimlauncher.ui.options.OptionsElementsFragment"
+        android:label="options_elements_fragment"
+        tools:layout="@layout/options_elements_fragment" />
+
     <fragment
         android:id="@+id/customiseAppsFragment"
         android:name="com.sduduzog.slimlauncher.ui.options.CustomiseAppsFragment"
@@ -32,10 +43,12 @@
             android:id="@+id/action_customiseAppsFragment_to_addAppFragment"
             app:destination="@id/addAppFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/addAppFragment"
         android:name="com.sduduzog.slimlauncher.ui.options.AddAppFragment"
         android:label="add_app_fragment"
         tools:layout="@layout/add_app_fragment" />
+
 
 </navigation>
