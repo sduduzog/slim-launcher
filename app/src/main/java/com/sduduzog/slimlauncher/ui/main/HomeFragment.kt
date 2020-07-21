@@ -221,4 +221,8 @@ class HomeFragment : BaseFragment(), SharedPreferences.OnSharedPreferenceChangeL
         callView.visibility = setVisibility(hideCall)
         cameraView.visibility = setVisibility(hideCamera)
     }
+
+    private fun setVisibility(hide : Boolean) : Int{
+        return if(hide) View.INVISIBLE else View.VISIBLE
+    }
 }
