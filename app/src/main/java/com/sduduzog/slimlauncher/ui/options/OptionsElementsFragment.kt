@@ -53,7 +53,7 @@ class OptionsElementsFragment : BaseFragment(){
 
     }
 
-    fun currentState(settingRef : Int) : Int{
+    private fun currentState(settingRef : Int) : Int{
         val bool = settings.getBoolean(getString(settingRef), true)
 
         return when(isOnOffElement(settingRef)){
@@ -62,11 +62,11 @@ class OptionsElementsFragment : BaseFragment(){
         }
     }
 
-    fun isOnOffElement (settingRef : Int) : Boolean {
+    private fun isOnOffElement (settingRef : Int) : Boolean {
         return settingRef == R.string.prefs_settings_key_shortcut_time || settingRef == R.string.prefs_settings_key_shortcut_date
     }
 
-    fun addListener(view : TextView, stateView : TextView, settingRef : Int){
+    private fun addListener(view : TextView, stateView : TextView, settingRef : Int){
         view.setOnClickListener {
             val pref = getString(settingRef)
             val bool = settings.getBoolean(pref, true)
@@ -78,7 +78,7 @@ class OptionsElementsFragment : BaseFragment(){
         }
     }
 
-    fun toggleConditionalOptions(){
+    private fun toggleConditionalOptions(){
             var enabled = settings.getBoolean(getString(R.string.prefs_settings_key_toggle_time), true)
             options_fragment_time_as_shortcut.isEnabled = enabled
             options_fragment_time_as_shortcut_state.isEnabled = enabled
