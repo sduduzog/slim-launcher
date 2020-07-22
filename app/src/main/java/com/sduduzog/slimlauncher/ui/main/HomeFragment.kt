@@ -103,8 +103,10 @@ class HomeFragment : BaseFragment(), SharedPreferences.OnSharedPreferenceChangeL
     }
 
     private fun setEventListeners() {
-        var isShortcut  = settings.getBoolean(getString(R.string.prefs_settings_key_shortcut_time), false)
-        if (isShortcut) {
+        val timeIsShortcut  = settings.getBoolean(getString(R.string.prefs_settings_key_shortcut_time), true)
+        val dateIsShortcut = settings.getBoolean(getString(R.string.prefs_settings_key_shortcut_date), true)
+
+        if (timeIsShortcut) {
             home_fragment_time.setOnClickListener { view ->
                 try {
                     val pm = context?.packageManager!!
@@ -122,8 +124,7 @@ class HomeFragment : BaseFragment(), SharedPreferences.OnSharedPreferenceChangeL
             }
         }
 
-        isShortcut  = settings.getBoolean(getString(R.string.prefs_settings_key_shortcut_date), false)
-        if (isShortcut) {
+        if (dateIsShortcut) {
             home_fragment_date.setOnClickListener {
                 try {
                     val intent = Intent(Intent.ACTION_MAIN)
@@ -211,18 +212,18 @@ class HomeFragment : BaseFragment(), SharedPreferences.OnSharedPreferenceChangeL
     }
 
     private fun setViewVisibility(){
-        val hideTime = settings.getBoolean(getString(R.string.prefs_settings_key_toggle_time), false)
-        val hideDate = settings.getBoolean(getString(R.string.prefs_settings_key_toggle_date), false)
-        val hideCall = settings.getBoolean(getString(R.string.prefs_settings_key_toggle_call), false)
-        val hideCamera = settings.getBoolean(getString(R.string.prefs_settings_key_toggle_camera), false)
+        val showTime = settings.getBoolean(getString(R.string.prefs_settings_key_toggle_time), true)
+        val showDate = settings.getBoolean(getString(R.string.prefs_settings_key_toggle_date), true)
+        val showCall = settings.getBoolean(getString(R.string.prefs_settings_key_toggle_call), true)
+        val showCamera = settings.getBoolean(getString(R.string.prefs_settings_key_toggle_camera), true)
 
-        timeView.visibility = setVisibility(hideTime)
-        dateView.visibility = setVisibility(hideDate)
-        callView.visibility = setVisibility(hideCall)
-        cameraView.visibility = setVisibility(hideCamera)
+        timeView.visibility = setVisibility(showTime)
+        dateView.visibility = setVisibility(showDate)
+        callView.visibility = setVisibility(showCall)
+        cameraView.visibility = setVisibility(showCamera)
     }
 
-    private fun setVisibility(hide : Boolean) : Int{
-        return if(hide) View.INVISIBLE else View.VISIBLE
+    private fun setVisibility(show : Boolean) : Int{
+        return if(show) View.VISIBLE else View.INVISIBLE
     }
 }
