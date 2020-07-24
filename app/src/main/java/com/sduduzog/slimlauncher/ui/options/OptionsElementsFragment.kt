@@ -16,6 +16,7 @@ import kotlinx.android.synthetic.main.options_elements_fragment.*
 
 class OptionsElementsFragment : BaseFragment(){
     private lateinit var settings:SharedPreferences
+    private val onOffStates = listOf(R.string.prefs_settings_key_shortcut_time, R.string.prefs_settings_key_shortcut_date)
 
     override fun getFragmentView(): ViewGroup = options_elements_fragment
 
@@ -31,60 +32,66 @@ class OptionsElementsFragment : BaseFragment(){
         super.onActivityCreated(savedInstanceState)
         settings = context!!.getSharedPreferences(getString(R.string.prefs_settings), Context.MODE_PRIVATE)
 
-        // Set current state values for each view
-        options_fragment_toggle_status_bar_state.setText(currentState(R.string.prefs_settings_key_toggle_status_bar))
-        options_fragment_toggle_time_state.setText(currentState(R.string.prefs_settings_key_toggle_time))
-        options_fragment_toggle_date_state.setText(currentState(R.string.prefs_settings_key_toggle_date))
-        options_fragment_toggle_call_state.setText(currentState(R.string.prefs_settings_key_toggle_call))
-        options_fragment_toggle_camera_state.setText(currentState(R.string.prefs_settings_key_toggle_camera))
-        options_fragment_time_as_shortcut_state.setText(currentState(R.string.prefs_settings_key_shortcut_time))
-        options_fragment_date_as_shortcut_state.setText(currentState(R.string.prefs_settings_key_shortcut_date))
+        val viewsInfo = listOf(
+                Triple(options_fragment_toggle_status_bar, options_fragment_toggle_status_bar_state, R.string.prefs_settings_key_toggle_status_bar),
+                Triple(options_fragment_toggle_time, options_fragment_toggle_time_state, R.string.prefs_settings_key_toggle_time),
+                Triple(options_fragment_toggle_date, options_fragment_toggle_date_state, R.string.prefs_settings_key_toggle_date),
+                Triple(options_fragment_toggle_call, options_fragment_toggle_call_state, R.string.prefs_settings_key_toggle_call),
+                Triple(options_fragment_toggle_camera, options_fragment_toggle_camera_state, R.string.prefs_settings_key_toggle_camera),
+                Triple(options_fragment_time_as_shortcut, options_fragment_time_as_shortcut_state, R.string.prefs_settings_key_shortcut_time),
+                Triple(options_fragment_date_as_shortcut, options_fragment_date_as_shortcut_state, R.string.prefs_settings_key_shortcut_date)
+        )
+
+        setStates(viewsInfo)
+        addListeners(viewsInfo)
+
+    }
+
+    private fun setStates(viewsInfo : List<Triple<TextView, TextView, Int>>){
+       for (viewInfo in viewsInfo){
+           val stateView = viewInfo.second
+           val state = currentState(viewInfo.third)
+
+           stateView.setText(state)
+       }
 
         toggleConditionalOptions()
-
-        // Set listeners on each option
-        addListener(options_fragment_toggle_status_bar, options_fragment_toggle_status_bar_state, R.string.prefs_settings_key_toggle_status_bar)
-        addListener(options_fragment_toggle_time, options_fragment_toggle_time_state, R.string.prefs_settings_key_toggle_time)
-        addListener(options_fragment_toggle_date, options_fragment_toggle_date_state, R.string.prefs_settings_key_toggle_date)
-        addListener(options_fragment_toggle_call, options_fragment_toggle_call_state, R.string.prefs_settings_key_toggle_call)
-        addListener(options_fragment_toggle_camera, options_fragment_toggle_camera_state, R.string.prefs_settings_key_toggle_camera)
-        addListener(options_fragment_time_as_shortcut, options_fragment_time_as_shortcut_state, R.string.prefs_settings_key_shortcut_time)
-        addListener(options_fragment_date_as_shortcut, options_fragment_date_as_shortcut_state, R.string.prefs_settings_key_shortcut_date)
-
     }
 
     private fun currentState(settingRef : Int) : Int{
         val bool = settings.getBoolean(getString(settingRef), true)
 
-        return when(isOnOffElement(settingRef)){
+        return when(onOffStates.contains(settingRef)){
             true -> if(bool) R.string.options_elements_on else R.string.options_elements_off
             false -> if(bool) R.string.options_elements_shown else R.string.options_elements_hidden
         }
     }
 
-    private fun isOnOffElement (settingRef : Int) : Boolean {
-        return settingRef == R.string.prefs_settings_key_shortcut_time || settingRef == R.string.prefs_settings_key_shortcut_date
-    }
-
-    private fun addListener(view : TextView, stateView : TextView, settingRef : Int){
-        view.setOnClickListener {
-            val pref = getString(settingRef)
-            val bool = settings.getBoolean(pref, true)
-            settings.edit {
-                putBoolean(pref, !bool)
-            }
-            stateView.setText(currentState(settingRef))
-            toggleConditionalOptions()
-        }
-    }
-
     private fun toggleConditionalOptions(){
-            var enabled = settings.getBoolean(getString(R.string.prefs_settings_key_toggle_time), true)
-            options_fragment_time_as_shortcut.isEnabled = enabled
-            options_fragment_time_as_shortcut_state.isEnabled = enabled
+        var enabled = settings.getBoolean(getString(R.string.prefs_settings_key_toggle_time), true)
+        options_fragment_time_as_shortcut.isEnabled = enabled
+        options_fragment_time_as_shortcut_state.isEnabled = enabled
 
-            enabled = settings.getBoolean(getString(R.string.prefs_settings_key_toggle_date), true)
-            options_fragment_date_as_shortcut.isEnabled = enabled
-            options_fragment_date_as_shortcut_state.isEnabled = enabled
+        enabled = settings.getBoolean(getString(R.string.prefs_settings_key_toggle_date), true)
+        options_fragment_date_as_shortcut.isEnabled = enabled
+        options_fragment_date_as_shortcut_state.isEnabled = enabled
+    }
+
+    private fun addListeners(viewsInfo : List<Triple<TextView, TextView, Int>>) {
+        for (viewInfo in viewsInfo){
+            val textView = viewInfo.first
+            val stateView = viewInfo.second
+            val settingRef = viewInfo.third
+
+            textView.setOnClickListener {
+                val pref = getString(settingRef)
+                val bool = settings.getBoolean(pref, true)
+                settings.edit {
+                    putBoolean(pref, !bool)
+                }
+                stateView.setText(currentState(settingRef))
+                toggleConditionalOptions()
+            }
+        }
     }
 }

@@ -27,6 +27,7 @@ import javax.inject.Inject
 
 
 class HomeFragment : BaseFragment(), SharedPreferences.OnSharedPreferenceChangeListener, OnLaunchAppListener {
+    private lateinit var settings : SharedPreferences
 
     private lateinit var timeView : TextView
     private lateinit var dateView : TextView
@@ -37,7 +38,6 @@ class HomeFragment : BaseFragment(), SharedPreferences.OnSharedPreferenceChangeL
     internal lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var receiver: BroadcastReceiver
     private lateinit var viewModel: MainViewModel
-    private lateinit var settings : SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
