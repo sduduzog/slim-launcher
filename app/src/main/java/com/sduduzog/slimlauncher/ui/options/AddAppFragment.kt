@@ -95,17 +95,19 @@ class AddAppFragment : BaseFragment(), OnAppClickedListener {
 
         val manager = context!!.getSystemService(Context.USER_SERVICE) as UserManager
         val launcher = context!!.getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
-        val user = Process.myUserHandle()
+        val myUserHandle = Process.myUserHandle()
 
         for (profile in manager.userProfiles) {
-            val prefix = if (profile.equals(user)) "" else "\uD83C\uDD46 " //Unicode for boxed w
+            val prefix = if (profile.equals(myUserHandle)) "" else "\uD83C\uDD46 " //Unicode for boxed w
+            val profileSerial = manager.getSerialNumberForUser(profile)
 
             for (activityInfo in launcher.getActivityList(null, profile)) {
                 val app = App(
                         appName = prefix + activityInfo.label.toString(),
                         packageName = activityInfo.applicationInfo.packageName,
                         activityName = activityInfo.name,
-                        userSerial = manager.getSerialNumberForUser(profile))
+                        userSerial = profileSerial
+                )
                 list.add(app)
             }
         }
