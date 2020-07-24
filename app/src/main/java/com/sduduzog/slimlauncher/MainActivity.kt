@@ -121,11 +121,11 @@ class MainActivity : AppCompatActivity(),
     }
 
     private fun toggleStatusBar() {
-        val isHidden = settings.getBoolean(getString(R.string.prefs_settings_key_toggle_status_bar), false)
-        if (isHidden) {
-            hideSystemUI()
-        } else {
+        val showBar = settings.getBoolean(getString(R.string.prefs_settings_key_toggle_status_bar), true)
+        if (showBar) {
             showSystemUI()
+        } else {
+            hideSystemUI()
         }
     }
 
