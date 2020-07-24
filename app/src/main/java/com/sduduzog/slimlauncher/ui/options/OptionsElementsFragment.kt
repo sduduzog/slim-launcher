@@ -32,7 +32,7 @@ class OptionsElementsFragment : BaseFragment(){
         super.onActivityCreated(savedInstanceState)
         settings = context!!.getSharedPreferences(getString(R.string.prefs_settings), Context.MODE_PRIVATE)
 
-        val viewsInfo = listOf(
+        val optionCombis = listOf(
                 Triple(options_fragment_toggle_status_bar, options_fragment_toggle_status_bar_state, R.string.prefs_settings_key_toggle_status_bar),
                 Triple(options_fragment_toggle_time, options_fragment_toggle_time_state, R.string.prefs_settings_key_toggle_time),
                 Triple(options_fragment_toggle_date, options_fragment_toggle_date_state, R.string.prefs_settings_key_toggle_date),
@@ -42,15 +42,15 @@ class OptionsElementsFragment : BaseFragment(){
                 Triple(options_fragment_date_as_shortcut, options_fragment_date_as_shortcut_state, R.string.prefs_settings_key_shortcut_date)
         )
 
-        setStates(viewsInfo)
-        addListeners(viewsInfo)
+        setStates(optionCombis)
+        addListeners(optionCombis)
 
     }
 
-    private fun setStates(viewsInfo : List<Triple<TextView, TextView, Int>>){
-       for (viewInfo in viewsInfo){
-           val stateView = viewInfo.second
-           val state = currentState(viewInfo.third)
+    private fun setStates(optionCombis : List<Triple<TextView, TextView, Int>>){
+       for (optonCombi in optionCombis){
+           val stateView = optonCombi.second
+           val state = currentState(optonCombi.third)
 
            stateView.setText(state)
        }
@@ -77,11 +77,11 @@ class OptionsElementsFragment : BaseFragment(){
         options_fragment_date_as_shortcut_state.isEnabled = enabled
     }
 
-    private fun addListeners(viewsInfo : List<Triple<TextView, TextView, Int>>) {
-        for (viewInfo in viewsInfo){
-            val textView = viewInfo.first
-            val stateView = viewInfo.second
-            val settingRef = viewInfo.third
+    private fun addListeners(optionCombis : List<Triple<TextView, TextView, Int>>) {
+        for (optionCombi in optionCombis){
+            val textView = optionCombi.first
+            val stateView = optionCombi.second
+            val settingRef = optionCombi.third
 
             textView.setOnClickListener {
                 val pref = getString(settingRef)
