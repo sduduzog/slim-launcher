@@ -60,6 +60,15 @@ abstract class BaseFragment : Fragment() {
         startActivity(intent, opts.toBundle())
     }
 
+    protected fun defaultPrefValue(settingRef : Int) : Boolean {
+        val disabledByDefault = listOf(
+                R.string.prefs_settings_key_toggle_call,
+                R.string.prefs_settings_key_toggle_camera
+        )
+
+        return !disabledByDefault.contains(settingRef)
+    }
+
     open fun onBack(): Boolean = false
 
     open fun onHome() {}

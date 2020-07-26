@@ -48,18 +48,18 @@ class OptionsElementsFragment : BaseFragment(){
     }
 
     private fun setStates(optionCombis : List<Triple<TextView, TextView, Int>>){
-       for (optonCombi in optionCombis){
-           val stateView = optonCombi.second
-           val state = currentState(optonCombi.third)
+        for (optionCombi in optionCombis){
+            val stateView = optionCombi.second
+            val state = currentState(optionCombi.third)
 
-           stateView.setText(state)
-       }
+            stateView.setText(state)
+        }
 
         toggleConditionalOptions()
     }
 
     private fun currentState(settingRef : Int) : Int{
-        val bool = settings.getBoolean(getString(settingRef), true)
+        val bool = settings.getBoolean(getString(settingRef), defaultPrefValue(settingRef))
 
         return when(onOffStates.contains(settingRef)){
             true -> if(bool) R.string.options_elements_on else R.string.options_elements_off
@@ -85,7 +85,7 @@ class OptionsElementsFragment : BaseFragment(){
 
             textView.setOnClickListener {
                 val pref = getString(settingRef)
-                val bool = settings.getBoolean(pref, true)
+                val bool = settings.getBoolean(pref, defaultPrefValue(settingRef))
                 settings.edit {
                     putBoolean(pref, !bool)
                 }

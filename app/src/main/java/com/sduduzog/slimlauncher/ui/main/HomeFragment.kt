@@ -212,18 +212,14 @@ class HomeFragment : BaseFragment(), SharedPreferences.OnSharedPreferenceChangeL
     }
 
     private fun setViewVisibility(){
-        val showTime = settings.getBoolean(getString(R.string.prefs_settings_key_toggle_time), true)
-        val showDate = settings.getBoolean(getString(R.string.prefs_settings_key_toggle_date), true)
-        val showCall = settings.getBoolean(getString(R.string.prefs_settings_key_toggle_call), true)
-        val showCamera = settings.getBoolean(getString(R.string.prefs_settings_key_toggle_camera), true)
-
-        timeView.visibility = setVisibility(showTime)
-        dateView.visibility = setVisibility(showDate)
-        callView.visibility = setVisibility(showCall)
-        cameraView.visibility = setVisibility(showCamera)
+        setVisibility(timeView, R.string.prefs_settings_key_toggle_time)
+        setVisibility(dateView, R.string.prefs_settings_key_toggle_date)
+        setVisibility(callView, R.string.prefs_settings_key_toggle_call)
+        setVisibility(cameraView, R.string.prefs_settings_key_toggle_camera)
     }
 
-    private fun setVisibility(show : Boolean) : Int{
-        return if(show) View.VISIBLE else View.INVISIBLE
+    private fun setVisibility(view : View, settingRef : Int){
+        val showView = settings.getBoolean(getString(settingRef), defaultPrefValue(settingRef))
+        view.visibility = if (showView) View.VISIBLE else View.INVISIBLE
     }
 }
