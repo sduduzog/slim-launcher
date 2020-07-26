@@ -103,8 +103,8 @@ class HomeFragment : BaseFragment(), SharedPreferences.OnSharedPreferenceChangeL
     }
 
     private fun setEventListeners() {
-        val timeIsShortcut  = settings.getBoolean(getString(R.string.prefs_settings_key_shortcut_time), true)
-        val dateIsShortcut = settings.getBoolean(getString(R.string.prefs_settings_key_shortcut_date), true)
+        val timeIsShortcut  = settings.getBoolean(getString(R.string.prefs_settings_key_shortcut_time), defaultPrefValue(R.string.prefs_settings_key_shortcut_time))
+        val dateIsShortcut = settings.getBoolean(getString(R.string.prefs_settings_key_shortcut_date), defaultPrefValue(R.string.prefs_settings_key_shortcut_date))
 
         if (timeIsShortcut) {
             home_fragment_time.setOnClickListener { view ->

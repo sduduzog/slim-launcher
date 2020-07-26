@@ -63,7 +63,9 @@ abstract class BaseFragment : Fragment() {
     protected fun defaultPrefValue(settingRef : Int) : Boolean {
         val disabledByDefault = listOf(
                 R.string.prefs_settings_key_toggle_call,
-                R.string.prefs_settings_key_toggle_camera
+                R.string.prefs_settings_key_toggle_camera,
+                R.string.prefs_settings_key_shortcut_time,
+                R.string.prefs_settings_key_shortcut_date
         )
 
         return !disabledByDefault.contains(settingRef)
