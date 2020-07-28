@@ -7,8 +7,6 @@ import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -26,13 +24,8 @@ import java.util.*
 import javax.inject.Inject
 
 
-class HomeFragment : BaseFragment(), SharedPreferences.OnSharedPreferenceChangeListener, OnLaunchAppListener {
+class HomeFragment : BaseFragment(), OnLaunchAppListener {
     private lateinit var settings : SharedPreferences
-
-    private lateinit var timeView : TextView
-    private lateinit var dateView : TextView
-    private lateinit var callView : ImageView
-    private lateinit var cameraView : ImageView
 
     @Inject
     internal lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -56,7 +49,6 @@ class HomeFragment : BaseFragment(), SharedPreferences.OnSharedPreferenceChangeL
         home_fragment_list_exp.adapter = adapter2
 
         settings = this.context?.getSharedPreferences(getString(R.string.prefs_settings), AppCompatActivity.MODE_PRIVATE)!!
-        settings.registerOnSharedPreferenceChangeListener(this)
 
         activity?.let {
             viewModel = ViewModelProvider(it, viewModelFactory).get(MainViewModel::class.java)
@@ -75,12 +67,6 @@ class HomeFragment : BaseFragment(), SharedPreferences.OnSharedPreferenceChangeL
 
         setEventListeners()
         home_fragment_options.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_homeFragment_to_optionsFragment))
-
-        // Set hideable views
-        timeView = home_fragment_time
-        dateView = home_fragment_date
-        callView = home_fragment_call
-        cameraView = home_fragment_camera
     }
 
     override fun onStart() {
@@ -207,15 +193,11 @@ class HomeFragment : BaseFragment(), SharedPreferences.OnSharedPreferenceChangeL
         }
     }
 
-    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
-        setViewVisibility()
-    }
-
     private fun setViewVisibility(){
-        setVisibility(timeView, R.string.prefs_settings_key_toggle_time)
-        setVisibility(dateView, R.string.prefs_settings_key_toggle_date)
-        setVisibility(callView, R.string.prefs_settings_key_toggle_call)
-        setVisibility(cameraView, R.string.prefs_settings_key_toggle_camera)
+        setVisibility(home_fragment_time, R.string.prefs_settings_key_toggle_time)
+        setVisibility(home_fragment_date, R.string.prefs_settings_key_toggle_date)
+        setVisibility(home_fragment_call, R.string.prefs_settings_key_toggle_call)
+        setVisibility(home_fragment_camera, R.string.prefs_settings_key_toggle_camera)
     }
 
     private fun setVisibility(view : View, settingRef : Int){
