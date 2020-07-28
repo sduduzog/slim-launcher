@@ -103,8 +103,8 @@ class HomeFragment : BaseFragment(), SharedPreferences.OnSharedPreferenceChangeL
     }
 
     private fun setEventListeners() {
-        val timeIsShortcut  = settings.getBoolean(getString(R.string.prefs_settings_key_shortcut_time), defaultPrefValue(R.string.prefs_settings_key_shortcut_time))
-        val dateIsShortcut = settings.getBoolean(getString(R.string.prefs_settings_key_shortcut_date), defaultPrefValue(R.string.prefs_settings_key_shortcut_date))
+        val timeIsShortcut  = settings.getBoolean(getString(R.string.prefs_settings_key_shortcut_time), false)
+        val dateIsShortcut = settings.getBoolean(getString(R.string.prefs_settings_key_shortcut_date), false)
 
         if (timeIsShortcut) {
             home_fragment_time.setOnClickListener { view ->
@@ -162,10 +162,9 @@ class HomeFragment : BaseFragment(), SharedPreferences.OnSharedPreferenceChangeL
     }
 
     fun updateClock() {
-        val twenty4Hour = context?.getSharedPreferences(getString(R.string.prefs_settings), Context.MODE_PRIVATE)
-                ?.getBoolean(getString(R.string.prefs_settings_key_time_format), true)
+        val twenty4Hour = settings.getBoolean(getString(R.string.prefs_settings_key_time_format), true)
         val date = Date()
-        if (twenty4Hour as Boolean) {
+        if (twenty4Hour) {
             val fWatchTime = SimpleDateFormat("h:mm aa", Locale.ROOT)
             home_fragment_time.text = fWatchTime.format(date)
         } else {
@@ -219,7 +218,7 @@ class HomeFragment : BaseFragment(), SharedPreferences.OnSharedPreferenceChangeL
     }
 
     private fun setVisibility(view : View, settingRef : Int){
-        val showView = settings.getBoolean(getString(settingRef), defaultPrefValue(settingRef))
+        val showView = settings.getBoolean(getString(settingRef), true)
         view.visibility = if (showView) View.VISIBLE else View.INVISIBLE
     }
 }

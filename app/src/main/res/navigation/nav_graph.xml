@@ -18,21 +18,11 @@
     <fragment
         android:id="@+id/optionsFragment"
         android:name="com.sduduzog.slimlauncher.ui.options.OptionsFragment"
-        android:label="options_fragment"
-        tools:layout="@layout/options_fragment">
-        <action
-            android:id="@+id/action_optionsFragment_to_optionsElementsFragment"
-            app:destination="@id/optionsElementsFragment" />
+        android:label="options_fragment">
         <action
             android:id="@+id/action_optionsFragment_to_customiseAppsFragment"
             app:destination="@id/customiseAppsFragment" />
     </fragment>
-
-    <fragment
-        android:id="@+id/optionsElementsFragment"
-        android:name="com.sduduzog.slimlauncher.ui.options.OptionsElementsFragment"
-        android:label="options_elements_fragment"
-        tools:layout="@layout/options_elements_fragment" />
 
     <fragment
         android:id="@+id/customiseAppsFragment"

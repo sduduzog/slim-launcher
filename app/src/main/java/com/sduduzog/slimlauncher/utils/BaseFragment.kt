@@ -60,16 +60,6 @@ abstract class BaseFragment : Fragment() {
         startActivity(intent, opts.toBundle())
     }
 
-    protected fun defaultPrefValue(settingRef : Int) : Boolean {
-        return when(settingRef){
-            R.string.prefs_settings_key_toggle_call,
-            R.string.prefs_settings_key_toggle_camera,
-            R.string.prefs_settings_key_shortcut_time,
-            R.string.prefs_settings_key_shortcut_date -> false
-            else -> true
-        }
-    }
-
     open fun onBack(): Boolean = false
 
     open fun onHome() {}

@@ -1,13 +1,37 @@
-<PreferenceScreen
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <PreferenceCategory
-        android:title="Test">
+        android:title="General">
 
-        <CheckBoxPreference
-            android:key="checkbox_preference"
-            android:title="This is a checkbox"
-            android:defaultValue="true"/>
+        <ListPreference
+            android:key="@string/prefs_settings_key_theme"
+            android:title="@string/options_fragment_change_theme"
+            android:dialogTitle="@string/choose_theme_dialog_title"
+            android:entries="@array/themes_array"
+            android:entryValues="@array/themes_values" />
+
+        <Preference
+            android:title="About slim">
+            <intent android:action="android.intent.action.VIEW"
+                android:data="http://codepath.com/" />
+        </Preference>
+
+        <Preference
+            android:title="Customize apps"
+            android:key="customizeApps">
+        </Preference>
+
+        <Preference
+            android:title="Theme"
+            android:key="theme">
+        </Preference>
+
+    </PreferenceCategory>
+
+
+    <PreferenceCategory
+        android:title="@string/main_fragment_options_elements">
 
         <SwitchPreference
             android:key="@string/prefs_settings_key_toggle_status_bar"
@@ -20,8 +44,18 @@
             android:defaultValue="true" />
 
         <SwitchPreference
+            android:key="@string/prefs_settings_key_shortcut_time"
+            android:title="@string/options_fragment_time_as_shortcut"
+            android:defaultValue="false" />
+
+        <SwitchPreference
             android:key="@string/prefs_settings_key_toggle_date"
             android:title="@string/options_elements_fragment_toggle_date"
+            android:defaultValue="true" />
+
+        <SwitchPreference
+            android:key="@string/prefs_settings_key_shortcut_date"
+            android:title="@string/options_fragment_date_as_shortcut"
             android:defaultValue="true" />
 
         <SwitchPreference
@@ -33,28 +67,5 @@
             android:key="@string/prefs_settings_key_toggle_camera"
             android:title="@string/options_elements_fragment_toggle_camera"
             android:defaultValue="false" />
-
-
-
-
     </PreferenceCategory>
-
-    <PreferenceCategory
-        android:title="Second category">
-
-<!--        <ListPreference-->
-<!--            android:key="list_preference"-->
-<!--            android:title="@string/options_fragment_change_theme"-->
-<!--            android:dialogTitle="@string/choose_theme_dialog_title"-->
-<!--            android:entries="@array/themes_array"-->
-<!--            android:entryValues="@array/entryvalues_list_preference" />-->
-
-        <Preference
-            android:title="About slim">
-            <intent android:action="android.intent.action.VIEW"
-                android:data="http://codepath.com/" />
-        </Preference>
-
-    </PreferenceCategory>
-
 </PreferenceScreen>
