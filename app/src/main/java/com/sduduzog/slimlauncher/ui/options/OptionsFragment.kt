@@ -1,32 +1,40 @@
 package com.sduduzog.slimlauncher.ui.options
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
+import android.provider.Settings
 import androidx.navigation.Navigation
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.sduduzog.slimlauncher.R
-import com.sduduzog.slimlauncher.ui.dialogs.ChooseTimeFormatDialog
 
 class OptionsFragment : PreferenceFragmentCompat() {
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.options_fragment, rootKey)
-        }
+    }
 
     override fun onPreferenceTreeClick(preference: Preference?): Boolean {
-        if (preference?.key.equals("customizeApps")){
-            Log.i("VINCENT", "DIT WERKT")
-            val navigator = Navigation.findNavController(activity!!, R.id.nav_host_fragment)
+        val key = preference?.key
+
+        if (getString(R.string.prefs_settings_key_open_customize_apps).equals(key)){
+            val navigator = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
             navigator.navigate(R.id.action_optionsFragment_to_customiseAppsFragment)
             return true
         }
 
-        if (preference?.key.equals("theme")){
-            val chooseTimeFormatDialog = ChooseTimeFormatDialog.getInstance()
-            chooseTimeFormatDialog.showNow(childFragmentManager, "TIME_FORMAT_CHOOSER")
+        if(getString(R.string.prefs_settings_key_open_device_settings).equals(key)){
+            val intent = Intent(Settings.ACTION_SETTINGS)
+            startActivity(intent)
             return true
         }
 
-        return true
+        if(key.equals("load_options_elements")){
+            val navigator = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
+            navigator.navigate(R.id.action_optionsFragment_to_optionsElementsFragment)
+            return true
+        }
+
+        return super.onPreferenceTreeClick(preference);
     }
+
 }

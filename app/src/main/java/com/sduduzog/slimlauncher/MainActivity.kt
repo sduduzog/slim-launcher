@@ -3,7 +3,6 @@ package com.sduduzog.slimlauncher
 import android.content.SharedPreferences
 import android.content.res.Resources
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -89,7 +88,6 @@ class MainActivity : AppCompatActivity(),
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, s: String?) {
         if (s.equals(getString(R.string.prefs_settings_key_theme), true)) {
-            Log.i("VINCENT", "THEME CHANGED")
             recreate()
         }
         if (s.equals(getString(R.string.prefs_settings_key_toggle_status_bar), true)) {

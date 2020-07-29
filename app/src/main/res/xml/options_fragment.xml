@@ -2,70 +2,46 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <PreferenceCategory
-        android:title="General">
+        android:title="@string/main_fragment_options"
+        android:layout="@layout/preference_title"/>
 
-        <ListPreference
-            android:key="@string/prefs_settings_key_theme"
-            android:title="@string/options_fragment_change_theme"
-            android:dialogTitle="@string/choose_theme_dialog_title"
-            android:entries="@array/themes_array"
-            android:entryValues="@array/themes_values" />
+    <Preference
+        android:title="@string/options_fragment_about_slim"
+        android:layout="@layout/preference_text"
+        app:iconSpaceReserved="false">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="@string/slim_url" />
+    </Preference>
 
-        <Preference
-            android:title="About slim">
-            <intent android:action="android.intent.action.VIEW"
-                android:data="http://codepath.com/" />
-        </Preference>
+    <Preference
+        android:title="@string/options_fragment_device_settings"
+        android:layout="@layout/preference_text"
+        android:key="@string/prefs_settings_key_open_device_settings"
+        app:iconSpaceReserved="false">
+    </Preference>
 
-        <Preference
-            android:title="Customize apps"
-            android:key="customizeApps">
-        </Preference>
+     <ListPreference
+        android:key="@string/prefs_settings_key_theme"
+        android:title="@string/options_fragment_change_theme"
+        android:layout="@layout/preference_text"
+        android:dialogTitle="@string/choose_theme_dialog_title"
+        android:entries="@array/themes_array"
+        android:entryValues="@array/themes_values"
+        android:defaultValue="0"
+        app:iconSpaceReserved="false" />
 
-        <Preference
-            android:title="Theme"
-            android:key="theme">
-        </Preference>
+    <Preference
+        android:title="@string/options_fragment_customise_apps"
+        android:layout="@layout/preference_text"
+        android:key="@string/prefs_settings_key_open_customize_apps"
+        app:iconSpaceReserved="false" >
+    </Preference>
 
-    </PreferenceCategory>
-
-
-    <PreferenceCategory
-        android:title="@string/main_fragment_options_elements">
-
-        <SwitchPreference
-            android:key="@string/prefs_settings_key_toggle_status_bar"
-            android:title="@string/options_elements_fragment_toggle_status_bar"
-            android:defaultValue="true" />
-
-        <SwitchPreference
-            android:key="@string/prefs_settings_key_toggle_time"
-            android:title="@string/options_elements_fragment_toggle_time"
-            android:defaultValue="true" />
-
-        <SwitchPreference
-            android:key="@string/prefs_settings_key_shortcut_time"
-            android:title="@string/options_fragment_time_as_shortcut"
-            android:defaultValue="false" />
-
-        <SwitchPreference
-            android:key="@string/prefs_settings_key_toggle_date"
-            android:title="@string/options_elements_fragment_toggle_date"
-            android:defaultValue="true" />
-
-        <SwitchPreference
-            android:key="@string/prefs_settings_key_shortcut_date"
-            android:title="@string/options_fragment_date_as_shortcut"
-            android:defaultValue="true" />
-
-        <SwitchPreference
-            android:key="@string/prefs_settings_key_toggle_call"
-            android:title="@string/options_elements_fragment_toggle_call"
-            android:defaultValue="false" />
-
-        <SwitchPreference
-            android:key="@string/prefs_settings_key_toggle_camera"
-            android:title="@string/options_elements_fragment_toggle_camera"
-            android:defaultValue="false" />
-    </PreferenceCategory>
+    <Preference
+        android:title="@string/options_fragment_elements"
+        android:key="@string/prefs_settings_key_open_options_elements"
+        android:layout="@layout/preference_text"
+        app:iconSpaceReserved="false"
+        />
 </PreferenceScreen>
