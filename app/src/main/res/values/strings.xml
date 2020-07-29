@@ -43,8 +43,8 @@
     <string name="options_elements_fragment_toggle_date">Date</string>
     <string name="options_elements_fragment_toggle_call">Call</string>
     <string name="options_elements_fragment_toggle_camera">Camera</string>
-    <string name="options_fragment_time_as_shortcut">Clock is clickable</string>
-    <string name="options_fragment_date_as_shortcut">Date is clickable</string>
+    <string name="options_elements_fragment_visible">Visibility</string>
+    <string name="options_elements_fragment_use_as_shortcut">Use as shortcut</string>
     <string name="options_elements_shown">shown</string>
     <string name="options_elements_hidden">hidden</string>
     <string name="options_elements_on">on</string>
