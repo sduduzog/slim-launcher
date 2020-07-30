@@ -157,7 +157,7 @@ class HomeFragment : BaseFragment(), OnLaunchAppListener {
             val componentName = ComponentName(app.packageName, app.activityName)
             val userHandle = manager.getUserForSerialNumber(app.userSerial)
 
-            launcher.startMainActivity(componentName, userHandle, null, null)
+            launcher.startMainActivity(componentName, userHandle, view.clipBounds, null)
         } catch (e: Exception) {
             // Do no shit yet
         }
