@@ -25,7 +25,11 @@ class CustomiseAppsViewModel @Inject constructor(baseDao: BaseDao) : ViewModel()
         homeApp.appNickname = null
         update(homeApp)
     }
-    fun remove(vararg app: HomeApp) {
-        repository.remove(*app)
+    fun remove(app: HomeApp) {
+        repository.remove(app)
+    }
+
+    fun clearTable(){
+        repository.clearTable()
     }
 }
