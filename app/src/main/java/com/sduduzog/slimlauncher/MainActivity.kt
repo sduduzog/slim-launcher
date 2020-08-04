@@ -57,8 +57,13 @@ class MainActivity : AppCompatActivity(),
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
+
         settings = PreferenceManager.getDefaultSharedPreferences(applicationContext)
         settings.registerOnSharedPreferenceChangeListener(this)
+        PreferenceManager.setDefaultValues(applicationContext, R.xml.options_fragment, true)
+        PreferenceManager.setDefaultValues(applicationContext, R.xml.options_elements_fragment, true)
+
+
         navigator = findNavController(this, R.id.nav_host_fragment)
         homeWatcher = HomeWatcher(this)
         homeWatcher.setOnHomePressedListener(this)
