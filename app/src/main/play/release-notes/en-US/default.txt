@@ -1,2 +1,2 @@
-1. Minor bug fixes
-2. Clear search filter with app search in settings
+1. Version fix for F-droid users
+2. Dependency updates

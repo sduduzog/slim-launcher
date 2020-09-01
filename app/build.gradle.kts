@@ -12,7 +12,7 @@ android {
         applicationId = "com.sduduzog.slimlauncher"
         minSdkVersion(21)
         targetSdkVersion(30)
-        versionName = "2.4.9"
+        versionName = "2.4.10"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables{useSupportLibrary = true}
 
@@ -54,11 +54,6 @@ play {
     userFraction = 1.0
     releaseStatus = "inProgress"
     defaultToAppBundles = true
-
-    resolutionStrategy = "auto"
-    outputProcessor { // this: ApkVariantOutput
-        versionNameOverride = "$versionNameOverride.$versionCode"
-    }
 }
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
@@ -69,7 +64,7 @@ dependencies {
     // Support Libraries
     implementation("androidx.appcompat:appcompat:1.2.0")
     implementation("androidx.recyclerview:recyclerview:1.1.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.0.0-rc1")
+    implementation("androidx.constraintlayout:constraintlayout:2.0.1")
 
     // Arch Components
     implementation("androidx.core:core-ktx:1.5.0-alpha02")
@@ -93,13 +88,13 @@ dependencies {
     testImplementation("junit:junit:4.12")
     testImplementation("org.mockito:mockito-core:2.19.0")
     androidTestImplementation("androidx.room:room-testing:2.2.5")
-    androidTestImplementation("androidx.test:runner:1.2.0")
-    androidTestImplementation("androidx.test:rules:1.2.0")
+    androidTestImplementation("androidx.test:runner:1.3.0")
+    androidTestImplementation("androidx.test:rules:1.3.0")
     androidTestImplementation("androidx.annotation:annotation:1.1.0")
-    androidTestImplementation("androidx.test:runner:1.2.0")
-    androidTestImplementation("androidx.test:rules:1.2.0")
+    androidTestImplementation("androidx.test:runner:1.3.0")
+    androidTestImplementation("androidx.test:rules:1.3.0")
     androidTestImplementation("androidx.arch.core:core-testing:2.1.0")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.2.0")
-    androidTestImplementation("androidx.test.espresso:espresso-intents:3.2.0")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
+    androidTestImplementation("androidx.test.espresso:espresso-intents:3.3.0")
 
 }
