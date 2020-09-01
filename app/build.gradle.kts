@@ -11,8 +11,8 @@ android {
         applicationId = "com.sduduzog.slimlauncher"
         minSdkVersion(21)
         targetSdkVersion(30)
-        versionName = "2.4.10"
-        versionCode = 47
+        versionName = "2.4.14"
+        versionCode = 48
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables{useSupportLibrary = true}
         signingConfigs {
