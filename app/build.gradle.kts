@@ -1,6 +1,5 @@
 plugins {
     id("com.android.application")
-    id("com.github.triplet.play") version "2.8.0"
     kotlin("android")
     kotlin("android.extensions")
     kotlin("kapt")
@@ -13,9 +12,9 @@ android {
         minSdkVersion(21)
         targetSdkVersion(30)
         versionName = "2.4.10"
+        versionCode = 47
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables{useSupportLibrary = true}
-
         signingConfigs {
             register("release") {
                 storeFile = file(project.extra["RELEASE_STORE_FILE"] as String)
@@ -48,13 +47,7 @@ android {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 }
-play {
-    serviceAccountCredentials = file(project.extra["RELEASE_GPP_KEY"] as String)
-    track = "beta"
-    userFraction = 1.0
-    releaseStatus = "inProgress"
-    defaultToAppBundles = true
-}
+
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
