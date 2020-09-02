@@ -112,6 +112,8 @@ class AddAppFragment : BaseFragment(), OnAppClickedListener {
             }
         }
 
+        list.sortBy{it.appName}
+
         val filter = mutableListOf<String>()
         filter.add(BuildConfig.APPLICATION_ID)
         return list.filterNot { filter.contains(it.packageName) }
