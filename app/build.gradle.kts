@@ -7,13 +7,12 @@ plugins {
 }
 
 android {
-    compileSdkVersion(29)
+    compileSdkVersion(30)
     defaultConfig {
         applicationId = "com.sduduzog.slimlauncher"
         minSdkVersion(21)
-        targetSdkVersion(29)
-        versionCode = 44
-        versionName = "2.4.8"
+        targetSdkVersion(30)
+        versionName = "2.4.9"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables{useSupportLibrary = true}
 
@@ -68,12 +67,12 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.72")
 
     // Support Libraries
-    implementation("androidx.appcompat:appcompat:1.1.0")
+    implementation("androidx.appcompat:appcompat:1.2.0")
     implementation("androidx.recyclerview:recyclerview:1.1.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.0.0-beta7")
+    implementation("androidx.constraintlayout:constraintlayout:2.0.0-rc1")
 
     // Arch Components
-    implementation("androidx.core:core-ktx:1.5.0-alpha01")
+    implementation("androidx.core:core-ktx:1.5.0-alpha02")
     implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
     implementation("android.arch.navigation:navigation-fragment:1.0.0")
     implementation("androidx.room:room-runtime:2.2.5")
