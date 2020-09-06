@@ -1,5 +1,7 @@
-# Slim launcher
+# Slim launcher v3 - WIP
 > _All you need is less._
+
+See design here https://framer.com/share/Slim-launcher--8qFXA3nTG1Wl5HsG38e5
 
 ![GitHub](https://img.shields.io/github/license/sduduzog/slim-launcher.svg?style=plastic)
 ![F-Droid](https://img.shields.io/f-droid/v/com.sduduzog.slimlauncher.svg?style=plastic)
