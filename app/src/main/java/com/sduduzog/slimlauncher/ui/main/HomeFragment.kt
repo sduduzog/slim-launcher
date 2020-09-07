@@ -3,6 +3,7 @@ package com.sduduzog.slimlauncher.ui.main
 import android.content.*
 import android.os.Bundle
 import android.provider.AlarmClock
+import android.provider.CalendarContract
 import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
@@ -74,16 +75,11 @@ class HomeFragment : BaseFragment(), OnLaunchAppListener {
 
     private fun setEventListeners() {
 
-        home_fragment_time.setOnClickListener { view ->
+        home_fragment_time.setOnClickListener {
             try {
-                val pm = context?.packageManager!!
                 val intent = Intent(AlarmClock.ACTION_SHOW_ALARMS)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                val componentName = intent.resolveActivity(pm)
-                if (componentName == null) launchActivity(view, intent) else
-                    pm.getLaunchIntentForPackage(componentName.packageName)?.let {
-                        launchActivity(view, it)
-                    }
+                launchActivity(it, intent)
             } catch (e: ActivityNotFoundException) {
                 e.printStackTrace()
                 // Do nothing, we've failed :(
@@ -92,8 +88,8 @@ class HomeFragment : BaseFragment(), OnLaunchAppListener {
 
         home_fragment_date.setOnClickListener {
             try {
-                val intent = Intent(Intent.ACTION_MAIN)
-                intent.addCategory(Intent.CATEGORY_APP_CALENDAR)
+                val builder = CalendarContract.CONTENT_URI.buildUpon().appendPath("time")
+                val intent = Intent(Intent.ACTION_VIEW, builder.build())
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
                 launchActivity(it, intent)
             } catch (e: ActivityNotFoundException) {
