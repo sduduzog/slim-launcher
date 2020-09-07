@@ -5,8 +5,8 @@ import android.app.Dialog
 import android.os.Bundle
 import androidx.fragment.app.DialogFragment
 import com.sduduzog.slimlauncher.R
-import com.sduduzog.slimlauncher.models.HomeApp
 import com.sduduzog.slimlauncher.models.CustomiseAppsViewModel
+import com.sduduzog.slimlauncher.models.HomeApp
 
 class RemoveAllAppsDialog : DialogFragment(){
 
@@ -19,7 +19,7 @@ class RemoveAllAppsDialog : DialogFragment(){
         builder.setTitle(R.string.remove_all_apps_dialog_title)
         builder.setMessage(R.string.remove_all_apps_dialog_message)
         builder.setPositiveButton("OK") {_, _ ->
-            model.remove(*apps.toTypedArray())
+            model.clearTable()
         }
         return builder.create()
     }
