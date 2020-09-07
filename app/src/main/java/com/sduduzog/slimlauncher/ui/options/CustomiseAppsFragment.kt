@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.PopupMenu
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -20,21 +20,16 @@ import com.sduduzog.slimlauncher.ui.dialogs.RenameAppDialog
 import com.sduduzog.slimlauncher.utils.BaseFragment
 import com.sduduzog.slimlauncher.utils.OnItemActionListener
 import com.sduduzog.slimlauncher.utils.OnShitDoneToAppsListener
-import dagger.android.support.AndroidSupportInjection
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.customise_apps_fragment.*
-import javax.inject.Inject
 
 
+@AndroidEntryPoint
 class CustomiseAppsFragment : BaseFragment(), OnShitDoneToAppsListener {
 
     override fun getFragmentView(): ViewGroup = customise_apps_fragment
-    @Inject
-    internal lateinit var viewModelFactory: ViewModelProvider.Factory
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        AndroidSupportInjection.inject(this)
-    }
-    private lateinit var viewModel: CustomiseAppsViewModel
+
+    private val viewModel: CustomiseAppsViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.customise_apps_fragment, container, false)
@@ -44,9 +39,6 @@ class CustomiseAppsFragment : BaseFragment(), OnShitDoneToAppsListener {
         super.onActivityCreated(savedInstanceState)
 
         val adapter = CustomAppsAdapter(this)
-        activity?.let {
-            viewModel = ViewModelProvider(it, viewModelFactory).get(CustomiseAppsViewModel::class.java)
-        } ?: throw Error("Activity null, something here is fucked up")
 
         viewModel.apps.observe(viewLifecycleOwner, Observer {
             it?.let { apps ->
@@ -113,7 +105,7 @@ class CustomiseAppsFragment : BaseFragment(), OnShitDoneToAppsListener {
     }
 
     private fun showPopupMenu(view: View): PopupMenu {
-        val popup = PopupMenu(context!!, view)
+        val popup = PopupMenu(requireContext(), view)
         popup.menuInflater.inflate(R.menu.customise_apps_popup_menu, popup.menu)
         popup.show()
         return popup

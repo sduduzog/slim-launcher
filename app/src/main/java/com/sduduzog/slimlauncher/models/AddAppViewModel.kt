@@ -1,13 +1,13 @@
 package com.sduduzog.slimlauncher.models
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import com.sduduzog.slimlauncher.data.BaseDao
 import com.sduduzog.slimlauncher.data.model.App
-import javax.inject.Inject
 
-class AddAppViewModel @Inject constructor (baseDao: BaseDao) : ViewModel() {
+class AddAppViewModel @ViewModelInject constructor (baseDao: BaseDao) : ViewModel() {
     private val repository = Repository(baseDao)
     private var filterQuery = ""
     private val _installedApps = mutableListOf<App>()

@@ -1,5 +1,6 @@
 plugins {
     id("com.android.application")
+    id("dagger.hilt.android.plugin")
     kotlin("android")
     kotlin("android.extensions")
     kotlin("kapt")
@@ -14,7 +15,7 @@ android {
         versionName = "2.4.14"
         versionCode = 48
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables{useSupportLibrary = true}
+        vectorDrawables { useSupportLibrary = true }
         signingConfigs {
             register("release") {
                 storeFile = file(project.extra["RELEASE_STORE_FILE"] as String)
@@ -31,19 +32,19 @@ android {
         named("release").configure {
             isMinifyEnabled = true
             isShrinkResources = true
-            proguardFiles(getDefaultProguardFile ("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
             signingConfig = signingConfigs.getByName("release")
         }
         named("debug").configure {
             isMinifyEnabled = false
-            proguardFiles (getDefaultProguardFile ("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
-    kotlinOptions{
+    kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 }
@@ -61,6 +62,7 @@ dependencies {
 
     // Arch Components
     implementation("androidx.core:core-ktx:1.5.0-alpha02")
+    implementation("androidx.fragment:fragment-ktx:1.2.5")
     implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
     implementation("android.arch.navigation:navigation-fragment:1.0.0")
     implementation("androidx.room:room-runtime:2.2.5")
@@ -71,11 +73,10 @@ dependencies {
     implementation("com.intuit.sdp:sdp-android:1.0.6")
     implementation("com.intuit.ssp:ssp-android:1.0.6")
 
-    implementation("com.google.dagger:dagger-android:2.17")
-    implementation("com.google.dagger:dagger-android-support:2.17")
-    kapt("com.google.dagger:dagger-android-processor:2.17")
-    kapt("com.google.dagger:dagger-compiler:2.17")
-
+    implementation("com.google.dagger:hilt-android:2.28-alpha")
+    implementation("androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha02")
+    kapt("androidx.hilt:hilt-compiler:1.0.0-alpha02")
+    kapt("com.google.dagger:hilt-android-compiler:2.28-alpha")
 
     // Test libs
     testImplementation("junit:junit:4.12")
@@ -89,5 +90,4 @@ dependencies {
     androidTestImplementation("androidx.arch.core:core-testing:2.1.0")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
     androidTestImplementation("androidx.test.espresso:espresso-intents:3.3.0")
-
 }

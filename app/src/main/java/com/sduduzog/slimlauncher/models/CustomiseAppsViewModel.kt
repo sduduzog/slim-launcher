@@ -1,11 +1,11 @@
 package com.sduduzog.slimlauncher.models
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.sduduzog.slimlauncher.data.BaseDao
-import javax.inject.Inject
 
-class CustomiseAppsViewModel @Inject constructor(baseDao: BaseDao) : ViewModel() {
+class CustomiseAppsViewModel @ViewModelInject constructor(baseDao: BaseDao) : ViewModel() {
 
     private val repository = Repository(baseDao)
     private var _apps: LiveData<List<HomeApp>>
