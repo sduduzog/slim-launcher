@@ -28,8 +28,8 @@
     <string name="options_fragment_elements">Toggle Elements</string>
 
     <string name="options_elements_fragment_toggle_status_bar">Status bar</string>
-    <string name="options_elements_fragment_time_category">clock</string>
-    <string name="options_elements_fragment_date_category">date</string>
+    <string name="options_elements_fragment_time_category">Clock</string>
+    <string name="options_elements_fragment_date_category">Date</string>
     <string name="options_elements_fragment_toggle_call">Telephone icon</string>
     <string name="options_elements_fragment_toggle_camera">Camera icon</string>
     <string name="options_elements_fragment_choose_time_format">Choose time format</string>
@@ -49,4 +49,5 @@
     <string name="menu_rename">Rename</string>
     <string name="menu_remove">Remove</string>
     <string name="menu_reset">Reset</string>
+    <string name="options_elements_fragment_general_category">General</string>
 </resources>

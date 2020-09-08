@@ -6,34 +6,43 @@
         android:title="@string/options_fragment_elements"
         android:layout="@layout/preference_title"/>
 
-    <SwitchPreference
-        android:key="@string/prefs_settings_key_toggle_status_bar"
-        android:title="@string/options_elements_fragment_toggle_status_bar"
-        android:defaultValue="true"
-        app:iconSpaceReserved="false" />
 
-    <SwitchPreference
-        android:key="@string/prefs_settings_key_toggle_call"
-        android:title="@string/options_elements_fragment_toggle_call"
-        android:defaultValue="false"
-        app:iconSpaceReserved="false" />
+    <PreferenceCategory
+        android:title="@string/options_elements_fragment_general_category"
+        app:allowDividerAbove="false"
+        app:iconSpaceReserved="false">
 
-    <SwitchPreference
-        android:key="@string/prefs_settings_key_toggle_camera"
-        android:title="@string/options_elements_fragment_toggle_camera"
-        android:defaultValue="false"
-        app:iconSpaceReserved="false" />
+        <SwitchPreference
+            android:key="@string/prefs_settings_key_toggle_status_bar"
+            android:title="@string/options_elements_fragment_toggle_status_bar"
+            android:defaultValue="true"
+            app:allowDividerAbove="true"
+            app:iconSpaceReserved="false"
+            />
+
+        <SwitchPreference
+            android:key="@string/prefs_settings_key_toggle_call"
+            android:title="@string/options_elements_fragment_toggle_call"
+            android:defaultValue="false"
+            app:iconSpaceReserved="false" />
+
+        <SwitchPreference
+            android:key="@string/prefs_settings_key_toggle_camera"
+            android:title="@string/options_elements_fragment_toggle_camera"
+            android:defaultValue="false"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
 
     <PreferenceCategory
         android:title="@string/options_elements_fragment_time_category"
-        android:layout="@layout/preference_category_header"
-        app:iconSpaceReserved="false"
-        app:allowDividerAbove="false" >
+        app:allowDividerAbove="false"
+        app:iconSpaceReserved="false">
 
         <SwitchPreference
             android:key="@string/prefs_settings_key_toggle_time"
             android:title="@string/options_elements_fragment_visibility"
             app:iconSpaceReserved="false"
+            app:allowDividerAbove="true"
             android:defaultValue="true" />
 
         <SwitchPreference
@@ -58,15 +67,15 @@
 
     <PreferenceCategory
         android:title="@string/options_elements_fragment_date_category"
-        android:layout="@layout/preference_category_header"
-        app:iconSpaceReserved="false"
-        app:allowDividerAbove="false">
+        app:allowDividerAbove="false"
+        app:iconSpaceReserved="false">
 
         <SwitchPreference
             android:key="@string/prefs_settings_key_toggle_date"
             android:title="@string/options_elements_fragment_visibility"
             android:defaultValue="true"
-            app:iconSpaceReserved="false" />
+            app:iconSpaceReserved="false"
+            app:allowDividerAbove="true"/>
 
         <SwitchPreference
             android:key="@string/prefs_settings_key_shortcut_date"
