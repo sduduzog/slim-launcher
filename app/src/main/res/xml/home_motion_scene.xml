@@ -26,16 +26,15 @@
 
         <Constraint android:id="@id/home_fragment_list_exp">
             <Layout
-                android:visibility="invisible"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="parent"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@id/home_fragment_list"
+                app:layout_constraintTop_toBottomOf="@id/home_fragment_list"
                 />
         </Constraint>
 
         <Constraint android:id="@id/home_fragment_options">
             <Layout
-                android:visibility="invisible"
-                app:layout_constraintStart_toStartOf="parent"
+                android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="parent"
                 />
         </Constraint>

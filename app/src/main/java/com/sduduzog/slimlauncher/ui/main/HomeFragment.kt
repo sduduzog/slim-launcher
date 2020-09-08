@@ -134,7 +134,7 @@ class HomeFragment : BaseFragment(), OnLaunchAppListener {
     }
 
     fun updateClock() {
-        val active = Integer.parseInt(settings.getString(getString(R.string.prefs_settings_key_time_format), "0"))
+        val active = Integer.parseInt(settings.getString(getString(R.string.prefs_settings_key_time_format), "0")!!)
         val date = Date()
 
         val fWatchTime = when(active) {

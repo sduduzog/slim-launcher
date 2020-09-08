@@ -39,17 +39,19 @@
         <SwitchPreference
             android:key="@string/prefs_settings_key_shortcut_time"
             android:title="@string/options_elements_fragment_shortcut"
+            android:summary="@string/options_elements_fragment_shortcut_time_summary"
             app:iconSpaceReserved="false"
             android:dependency="@string/prefs_settings_key_toggle_time"
             android:defaultValue="false" />
 
         <ListPreference
             android:key="@string/prefs_settings_key_time_format"
-            android:title="@string/choose_time_format_dialog_title"
-            android:dialogTitle="@string/choose_time_format_dialog_title"
+            android:title="@string/options_elements_fragment_choose_time_format"
+            android:dialogTitle="@string/options_elements_fragment_choose_time_format_title"
             android:entries="@array/time_format_array"
             android:entryValues="@array/time_format_values"
             android:defaultValue="0"
+            android:dependency="@string/prefs_settings_key_toggle_time"
             app:iconSpaceReserved="false" />
 
     </PreferenceCategory>
@@ -69,6 +71,7 @@
         <SwitchPreference
             android:key="@string/prefs_settings_key_shortcut_date"
             android:title="@string/options_elements_fragment_shortcut"
+            android:summary="@string/options_elements_fragment_shortcut_date_summary"
             app:iconSpaceReserved="false"
             android:dependency="@string/prefs_settings_key_toggle_date"
             android:disableDependentsState="true"

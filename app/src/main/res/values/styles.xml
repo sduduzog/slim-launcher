@@ -51,11 +51,13 @@
     </style>
 
     <style name="PreferenceCategoryHeader" parent="@android:style/Widget.TextView">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat</item>
         <item name="android:fontFeatureSettings">smcp</item>
         <item name="android:textSize">@dimen/_16sdp</item>
     </style>
 
     <style name="PreferenceText" parent="@android:style/Widget.TextView">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat</item>
         <item name="android:textSize">@dimen/_20ssp</item>
     </style>
 </resources>
