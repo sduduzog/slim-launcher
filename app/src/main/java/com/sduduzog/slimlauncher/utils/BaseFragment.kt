@@ -18,7 +18,7 @@ abstract class BaseFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        val settings = PreferenceManager.getDefaultSharedPreferences(context!!)
+        val settings = PreferenceManager.getDefaultSharedPreferences(requireContext())
         val active = Integer.parseInt(settings.getString(getString(R.string.prefs_settings_key_theme), "0")!!)
 
 
