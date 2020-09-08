@@ -39,15 +39,6 @@
     <string name="options_elements_fragment_shortcut_time_summary">Tapping the time will open the default alarm clock app</string>
     <string name="options_elements_fragment_shortcut_date_summary">Tapping the date will open the default calendar app</string>
 
-
-    <string name="options_elements_shown">shown</string>
-    <string name="options_elements_hidden">hidden</string>
-    <string name="options_elements_on">on</string>
-    <string name="options_elements_off">off</string>
-    <string name="options_time_format_12h">12H</string>
-    <string name="options_time_format_24h">24H</string>
-
-
     <string name="customise_apps_fragment_add">Add</string>
     <string name="add_apps_fragment_search_apps">Search apps</string>
     <string name="customise_apps_fragment_remove_all">Remove all</string>
