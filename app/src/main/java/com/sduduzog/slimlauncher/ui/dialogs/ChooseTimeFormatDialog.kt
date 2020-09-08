@@ -17,14 +17,12 @@ class ChooseTimeFormatDialog : DialogFragment(){
         val builder = AlertDialog.Builder(requireContext())
         settings = requireContext().getSharedPreferences(getString(R.string.prefs_settings), MODE_PRIVATE)
 
-        val is24Hour = settings.getBoolean(getString(R.string.prefs_settings_key_time_format), true)
-        val index = if (is24Hour) 1 else 0
+        val active = settings.getInt(getString(R.string.prefs_settings_key_time_format), 0)
         builder.setTitle(R.string.choose_time_format_dialog_title)
-        builder.setSingleChoiceItems(R.array.time_format_array, index) {dialogInterface, i ->
+        builder.setSingleChoiceItems(R.array.time_format_array, active) {dialogInterface, i ->
             dialogInterface.dismiss()
             settings.edit {
-                val b = i != 0
-                putBoolean(getString(R.string.prefs_settings_key_time_format), b)
+                putInt(getString(R.string.prefs_settings_key_time_format), i)
             }
 
         }

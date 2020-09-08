@@ -19,6 +19,7 @@ import com.sduduzog.slimlauncher.utils.BaseFragment
 import com.sduduzog.slimlauncher.utils.OnLaunchAppListener
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.home_fragment.*
+import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -122,16 +123,18 @@ class HomeFragment : BaseFragment(), OnLaunchAppListener {
     }
 
     fun updateClock() {
-        val twenty4Hour = context?.getSharedPreferences(getString(R.string.prefs_settings), Context.MODE_PRIVATE)
-                ?.getBoolean(getString(R.string.prefs_settings_key_time_format), true)
+        val active = context?.getSharedPreferences(getString(R.string.prefs_settings), Context.MODE_PRIVATE)
+                ?.getInt(getString(R.string.prefs_settings_key_time_format), 0)
         val date = Date()
-        if (twenty4Hour as Boolean) {
-            val fWatchTime = SimpleDateFormat("h:mm aa", Locale.ROOT)
-            home_fragment_time.text = fWatchTime.format(date)
-        } else {
-            val fWatchTime = SimpleDateFormat("H:mm", Locale.ROOT)
-            home_fragment_time.text = fWatchTime.format(date)
+
+        val fWatchTime = when(active) {
+            1 -> SimpleDateFormat("H:mm", Locale.ROOT)
+            2 -> SimpleDateFormat("h:mm aa", Locale.ROOT)
+            else -> DateFormat.getTimeInstance(DateFormat.SHORT)
         }
+        home_fragment_time.text = fWatchTime.format(date)
+
+
         val fWatchDate = SimpleDateFormat("EEE, MMM dd", Locale.ROOT)
         home_fragment_date.text = fWatchDate.format(date)
     }
