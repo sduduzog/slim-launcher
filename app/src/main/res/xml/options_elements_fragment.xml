@@ -9,6 +9,7 @@
 
     <PreferenceCategory
         android:title="@string/options_elements_fragment_general_category"
+        app:layout="@layout/preference_category"
         app:allowDividerAbove="false"
         app:iconSpaceReserved="false">
 
@@ -35,6 +36,7 @@
 
     <PreferenceCategory
         android:title="@string/options_elements_fragment_time_category"
+        app:layout="@layout/preference_category"
         app:allowDividerAbove="false"
         app:iconSpaceReserved="false">
 
@@ -67,6 +69,7 @@
 
     <PreferenceCategory
         android:title="@string/options_elements_fragment_date_category"
+        app:layout="@layout/preference_category"
         app:allowDividerAbove="false"
         app:iconSpaceReserved="false">
 
