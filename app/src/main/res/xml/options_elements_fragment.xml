@@ -6,68 +6,52 @@
         android:title="@string/options_fragment_elements"
         android:layout="@layout/preference_title"/>
 
-    <CheckBoxPreference
+    <SwitchPreference
         android:key="@string/prefs_settings_key_toggle_status_bar"
         android:title="@string/options_elements_fragment_toggle_status_bar"
         android:defaultValue="true"
-        app:iconSpaceReserved="false"
-        android:layout="@layout/preference_checkbox"
-        android:summaryOn="@string/options_elements_shown"
-        android:summaryOff="@string/options_elements_hidden"/>
+        app:iconSpaceReserved="false" />
 
-    <CheckBoxPreference
+    <SwitchPreference
         android:key="@string/prefs_settings_key_toggle_call"
         android:title="@string/options_elements_fragment_toggle_call"
         android:defaultValue="false"
-        app:iconSpaceReserved="false"
-        android:layout="@layout/preference_checkbox"
-        android:summaryOn="@string/options_elements_shown"
-        android:summaryOff="@string/options_elements_hidden"/>
+        app:iconSpaceReserved="false" />
 
-    <CheckBoxPreference
+    <SwitchPreference
         android:key="@string/prefs_settings_key_toggle_camera"
         android:title="@string/options_elements_fragment_toggle_camera"
         android:defaultValue="false"
-        app:iconSpaceReserved="false"
-        android:layout="@layout/preference_checkbox"
-        android:summaryOn="@string/options_elements_shown"
-        android:summaryOff="@string/options_elements_hidden"/>
+        app:iconSpaceReserved="false" />
 
     <PreferenceCategory
         android:title="@string/options_elements_fragment_time_category"
         android:layout="@layout/preference_category_header"
         app:iconSpaceReserved="false"
-        app:allowDividerAbove="false"
-        >
+        app:allowDividerAbove="false" >
 
-        <CheckBoxPreference
+        <SwitchPreference
             android:key="@string/prefs_settings_key_toggle_time"
             android:title="@string/options_elements_fragment_visibility"
             app:iconSpaceReserved="false"
-            android:defaultValue="true"
-            android:layout="@layout/preference_checkbox"
-            android:summaryOn="@string/options_elements_shown"
-            android:summaryOff="@string/options_elements_hidden"/>
+            android:defaultValue="true" />
 
-        <CheckBoxPreference
+        <SwitchPreference
             android:key="@string/prefs_settings_key_shortcut_time"
             android:title="@string/options_elements_fragment_shortcut"
             app:iconSpaceReserved="false"
             android:dependency="@string/prefs_settings_key_toggle_time"
-            android:defaultValue="false"
-            android:layout="@layout/preference_checkbox"
-            android:summaryOn="@string/options_elements_on"
-            android:summaryOff="@string/options_elements_off"/>
+            android:defaultValue="false" />
 
-        <CheckBoxPreference
+        <SwitchPreference
             android:key="@string/prefs_settings_key_time_format"
             android:title="@string/options_elements_fragment_time_format"
             android:defaultValue="true"
             android:dependency="@string/prefs_settings_key_toggle_time"
-            app:iconSpaceReserved="false"
-            android:layout="@layout/preference_checkbox"
-            android:summaryOff="@string/options_time_format_24h"
-            android:summaryOn="@string/options_time_format_12h"/>
+            app:iconSpaceReserved="false"/>
+
+            
+
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -76,24 +60,18 @@
         app:iconSpaceReserved="false"
         app:allowDividerAbove="false">
 
-        <CheckBoxPreference
+        <SwitchPreference
             android:key="@string/prefs_settings_key_toggle_date"
             android:title="@string/options_elements_fragment_visibility"
             android:defaultValue="true"
-            app:iconSpaceReserved="false"
-            android:layout="@layout/preference_checkbox"
-            android:summaryOn="@string/options_elements_shown"
-            android:summaryOff="@string/options_elements_hidden"/>
+            app:iconSpaceReserved="false" />
 
-        <CheckBoxPreference
+        <SwitchPreference
             android:key="@string/prefs_settings_key_shortcut_date"
             android:title="@string/options_elements_fragment_shortcut"
             app:iconSpaceReserved="false"
             android:dependency="@string/prefs_settings_key_toggle_date"
             android:disableDependentsState="true"
-            android:defaultValue="true"
-            android:layout="@layout/preference_checkbox"
-            android:summaryOn="@string/options_elements_on"
-            android:summaryOff="@string/options_elements_off"/>
+            android:defaultValue="true" />
     </PreferenceCategory>
 </PreferenceScreen>

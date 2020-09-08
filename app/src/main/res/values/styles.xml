@@ -51,7 +51,6 @@
     </style>
 
     <style name="PreferenceCategoryHeader" parent="@android:style/Widget.TextView">
-        <item name="android:gravity">center_horizontal</item>
         <item name="android:fontFeatureSettings">smcp</item>
         <item name="android:textSize">@dimen/_16sdp</item>
     </style>

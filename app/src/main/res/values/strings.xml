@@ -28,7 +28,7 @@
     <string name="options_elements_fragment_time_format">Time format</string>
     <string name="options_elements_fragment_visibility">Visibility</string>
     <string name="options_elements_fragment_shortcut">Acts as shortcut</string>
-    
+
     <string name="options_elements_shown">shown</string>
     <string name="options_elements_hidden">hidden</string>
     <string name="options_elements_on">on</string>
