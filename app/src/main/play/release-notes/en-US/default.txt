@@ -1,2 +1,0 @@
-1. Minor bug fixes
-2. Clear search filter with app search in settings

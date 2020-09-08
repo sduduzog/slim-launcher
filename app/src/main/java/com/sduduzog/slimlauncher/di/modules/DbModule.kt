@@ -13,9 +13,12 @@ import com.sduduzog.slimlauncher.data.BaseDatabase.Companion.MIGRATION_6_7
 import com.sduduzog.slimlauncher.data.BaseDatabase.Companion.MIGRATION_7_8
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
 import javax.inject.Singleton
 
 @Module
+@InstallIn(ApplicationComponent::class)
 class DbModule {
     @Provides
     @Singleton
