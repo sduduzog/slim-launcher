@@ -5,32 +5,19 @@ import android.content.res.Resources
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation.findNavController
 import androidx.preference.PreferenceManager
 import com.sduduzog.slimlauncher.utils.BaseFragment
 import com.sduduzog.slimlauncher.utils.HomeWatcher
-import dagger.android.AndroidInjection
-import dagger.android.AndroidInjector
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.support.HasSupportFragmentInjector
-import javax.inject.Inject
+import dagger.hilt.android.AndroidEntryPoint
 
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity(),
         SharedPreferences.OnSharedPreferenceChangeListener,
-        HomeWatcher.OnHomePressedListener , HasSupportFragmentInjector{
+        HomeWatcher.OnHomePressedListener {
 
-    @Inject
-    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
-    override fun supportFragmentInjector(): AndroidInjector<Fragment> {
-        return dispatchingAndroidInjector
-    }
-
-    @Inject
-    internal lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var settings: SharedPreferences
     private lateinit var navigator: NavController
     private lateinit var homeWatcher: HomeWatcher
@@ -54,7 +41,6 @@ class MainActivity : AppCompatActivity(),
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
 

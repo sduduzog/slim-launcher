@@ -13,6 +13,13 @@
         <item>Pastel</item>
     </string-array>
 
+    <string-array name="time_format_array">
+        <item>Follow system settings</item>
+        <item>24 Hour</item>
+        <item>12 Hour</item>
+    </string-array>
+
+    <string name="choose_time_format_dialog_title">Choose Time Format</string>
     <string name="main_fragment_options">Options</string>
     <string name="options_fragment_about_slim">About Slim</string>
     <string name="options_fragment_device_settings">Device Settings</string>

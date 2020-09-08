@@ -43,14 +43,14 @@
             android:dependency="@string/prefs_settings_key_toggle_time"
             android:defaultValue="false" />
 
-        <SwitchPreference
+        <ListPreference
             android:key="@string/prefs_settings_key_time_format"
-            android:title="@string/options_elements_fragment_time_format"
-            android:defaultValue="true"
-            android:dependency="@string/prefs_settings_key_toggle_time"
-            app:iconSpaceReserved="false"/>
-
-            
+            android:title="@string/choose_time_format_dialog_title"
+            android:dialogTitle="@string/choose_time_format_dialog_title"
+            android:entries="@array/time_format_array"
+            android:entryValues="@array/time_format_values"
+            android:defaultValue="0"
+            app:iconSpaceReserved="false" />
 
     </PreferenceCategory>
 

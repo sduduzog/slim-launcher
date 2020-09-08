@@ -25,14 +25,14 @@ abstract class BaseFragment : Fragment() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             when (active) {
                 0, 3, 5 -> {
-                    val flags = activity!!.window.decorView.systemUiVisibility or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+                    val flags = requireActivity().window.decorView.systemUiVisibility or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
                     getFragmentView().systemUiVisibility = flags
                 }
 
             }
             val value = TypedValue()
-            context!!.theme.resolveAttribute(R.attr.colorPrimary, value, true)
-            activity!!.window.statusBarColor = value.data
+            requireContext().theme.resolveAttribute(R.attr.colorPrimary, value, true)
+            requireActivity().window.statusBarColor = value.data
         }
 
     }

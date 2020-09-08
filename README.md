@@ -34,7 +34,7 @@ If you think you can come up with a better description, shoot submit an issue! I
 **4.** [Sign up as a tester](https://play.google.com/apps/testing/com.sduduzog.slimlauncher) to help with assessing any implementations that make it to the beta channel. Your opinion here is very, very vauable because your advise affects ~hundreds~ **thousands** of users using this thing.
 
 ## [Buy me a coffee](https://buymeacoff.ee/sduduzog)
-**5.** I won't lie, my motivation to continue working on this app comes from the great feedback I receive from the reviews on the Play Store and the emails people send to me. The fact that someone out there noticed the litle effort that I put into it gives me all the drive I need to type away code over and over again.
+**5.** I won't lie, my motivation to continue working on this app comes from the great feedback I receive from the reviews on the Play Store and the emails people send to me. The fact that someone out there noticed the little effort that I put into it gives me all the drive I need to type away code over and over again.
 
 Feel you can do more? [Buy me a cup!](https://buymeacoff.ee/sduduzog). I'd really appreciate it!
 

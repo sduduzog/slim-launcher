@@ -9,8 +9,14 @@
         <item>5</item>
     </string-array>
 
+    <string-array name="time_format_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
     <string name="prefs_settings_key_theme" translatable="false">key_theme</string>
-    <string name="prefs_settings_key_time_format" translatable="false">clock_type</string>
+    <string name="prefs_settings_key_time_format" translatable="false">time_format</string>
     <string name="prefs_settings_key_toggle_status_bar" translatable="false">show_status_bar</string>
     <string name="prefs_settings_key_toggle_time" translatable="false">show_time</string>
     <string name="prefs_settings_key_toggle_date" translatable="false">show_date</string>
