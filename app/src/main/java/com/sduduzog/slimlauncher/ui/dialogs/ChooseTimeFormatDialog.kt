@@ -14,8 +14,8 @@ class ChooseTimeFormatDialog : DialogFragment(){
     private lateinit var settings: SharedPreferences
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val builder = AlertDialog.Builder(context!!)
-        settings = context!!.getSharedPreferences(getString(R.string.prefs_settings), MODE_PRIVATE)
+        val builder = AlertDialog.Builder(requireContext())
+        settings = requireContext().getSharedPreferences(getString(R.string.prefs_settings), MODE_PRIVATE)
 
         val is24Hour = settings.getBoolean(getString(R.string.prefs_settings_key_time_format), true)
         val index = if (is24Hour) 1 else 0

@@ -8,8 +8,8 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.sduduzog.slimlauncher.BuildConfig
 import com.sduduzog.slimlauncher.R
@@ -18,22 +18,17 @@ import com.sduduzog.slimlauncher.data.model.App
 import com.sduduzog.slimlauncher.models.AddAppViewModel
 import com.sduduzog.slimlauncher.utils.BaseFragment
 import com.sduduzog.slimlauncher.utils.OnAppClickedListener
-import dagger.android.support.AndroidSupportInjection
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.add_app_fragment.*
 import java.util.*
-import javax.inject.Inject
 
+@AndroidEntryPoint
 class AddAppFragment : BaseFragment(), OnAppClickedListener {
 
     override fun getFragmentView(): ViewGroup = add_app_fragment
 
-    @Inject
-    internal lateinit var viewModelFactory: ViewModelProvider.Factory
-    private lateinit var viewModel: AddAppViewModel
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        AndroidSupportInjection.inject(this)
-    }
+    private  val viewModel: AddAppViewModel by viewModels()
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.add_app_fragment, container, false)
     }
@@ -44,9 +39,6 @@ class AddAppFragment : BaseFragment(), OnAppClickedListener {
 
         add_app_fragment_list.adapter = adapter
 
-        activity?.let {
-            viewModel = ViewModelProvider(it, viewModelFactory).get(AddAppViewModel::class.java)
-        } ?: throw Error("How the fuck is this fragment alive while there's no activity?")
         viewModel.apps.observe(viewLifecycleOwner, Observer {
             it?.let { apps ->
                 adapter.setItems(apps)
@@ -90,7 +82,7 @@ class AddAppFragment : BaseFragment(), OnAppClickedListener {
     }
 
     private fun getInstalledApps(): List<App> {
-        val pm = activity!!.packageManager
+        val pm = requireActivity().packageManager
         val list = mutableListOf<App>()
         val main = Intent(Intent.ACTION_MAIN, null)
         main.addCategory(Intent.CATEGORY_LAUNCHER)

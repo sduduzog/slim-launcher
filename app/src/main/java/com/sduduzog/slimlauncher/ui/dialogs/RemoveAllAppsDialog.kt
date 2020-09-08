@@ -15,7 +15,7 @@ class RemoveAllAppsDialog : DialogFragment(){
 
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val builder = AlertDialog.Builder(context!!)
+        val builder = AlertDialog.Builder(requireContext())
         builder.setTitle(R.string.remove_all_apps_dialog_title)
         builder.setMessage(R.string.remove_all_apps_dialog_message)
         builder.setPositiveButton("OK") {_, _ ->

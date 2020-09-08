@@ -5,7 +5,6 @@ import androidx.lifecycle.LiveData
 import com.sduduzog.slimlauncher.data.BaseDao
 import javax.inject.Singleton
 
-@Singleton
 class Repository(private val baseDao: BaseDao) {
 
     private val _apps = baseDao.apps
