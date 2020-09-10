@@ -4,6 +4,7 @@
     <style name="AppTheme" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <item name="colorAccent">@color/lightAccentColor</item>
         <item name="android:colorForeground">@color/lightAccentColor</item>
+
         <item name="colorPrimary">@color/colorWhite</item>
         <item name="colorPrimaryDark">@color/colorWhiteDark</item>
         <item name="android:colorBackground">@color/colorWhite</item>
@@ -42,5 +43,20 @@
         <item name="colorPrimary">@color/colorTeal</item>
         <item name="colorPrimaryDark">@color/colorTeal</item>
         <item name="android:colorBackground">@color/colorTeal</item>
+    </style>
+
+    <style name="PreferenceCategoryTitle" parent="@android:style/Widget.TextView">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat</item>
+        <item name="android:textSize">@dimen/_36ssp</item>
+    </style>
+
+    <style name="PreferenceCategoryHeader" parent="@android:style/Widget.TextView">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="PreferenceText" parent="@android:style/Widget.TextView">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat</item>
+        <item name="android:textSize">@dimen/_20ssp</item>
     </style>
 </resources>

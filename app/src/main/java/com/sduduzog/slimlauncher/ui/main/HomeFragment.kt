@@ -1,5 +1,6 @@
 package com.sduduzog.slimlauncher.ui.main
 
+
 import android.content.*
 import android.content.pm.LauncherApps
 import android.os.Bundle
@@ -13,6 +14,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
+import androidx.preference.PreferenceManager
 import com.sduduzog.slimlauncher.R
 import com.sduduzog.slimlauncher.adapters.HomeAdapter
 import com.sduduzog.slimlauncher.models.HomeApp
@@ -27,6 +29,7 @@ import java.util.*
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment(), OnLaunchAppListener {
+    private lateinit var settings : SharedPreferences
 
     private lateinit var receiver: BroadcastReceiver
     private val viewModel: MainViewModel by viewModels()
@@ -43,6 +46,7 @@ class HomeFragment : BaseFragment(), OnLaunchAppListener {
         home_fragment_list.adapter = adapter1
         home_fragment_list_exp.adapter = adapter2
 
+        settings = PreferenceManager.getDefaultSharedPreferences(context)
         viewModel.apps.observe(viewLifecycleOwner, Observer { list ->
             list?.let { apps ->
                 adapter1.setItems(apps.filter {
@@ -60,6 +64,7 @@ class HomeFragment : BaseFragment(), OnLaunchAppListener {
 
     override fun onStart() {
         super.onStart()
+        setViewVisibility()
         receiver = ClockReceiver()
         activity?.registerReceiver(receiver, IntentFilter(Intent.ACTION_TIME_TICK))
     }
@@ -77,26 +82,32 @@ class HomeFragment : BaseFragment(), OnLaunchAppListener {
     }
 
     private fun setEventListeners() {
+        val timeIsShortcut  = settings.getBoolean(getString(R.string.prefs_settings_key_shortcut_time), false)
+        val dateIsShortcut = settings.getBoolean(getString(R.string.prefs_settings_key_shortcut_date), false)
 
-        home_fragment_time.setOnClickListener {
-            try {
-                val intent = Intent(AlarmClock.ACTION_SHOW_ALARMS)
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                launchActivity(it, intent)
-            } catch (e: ActivityNotFoundException) {
-                e.printStackTrace()
-                // Do nothing, we've failed :(
+        if (timeIsShortcut) {
+            home_fragment_time.setOnClickListener {
+                try {
+                    val intent = Intent(AlarmClock.ACTION_SHOW_ALARMS)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                    launchActivity(it, intent)
+                } catch (e: ActivityNotFoundException) {
+                    e.printStackTrace()
+                    // Do nothing, we've failed :(
+                }
             }
         }
 
-        home_fragment_date.setOnClickListener {
-            try {
-                val builder = CalendarContract.CONTENT_URI.buildUpon().appendPath("time")
-                val intent = Intent(Intent.ACTION_VIEW, builder.build())
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                launchActivity(it, intent)
-            } catch (e: ActivityNotFoundException) {
-                // Do nothing, we've failed :(
+        if (dateIsShortcut) {
+            home_fragment_date.setOnClickListener {
+                try {
+                    val builder = CalendarContract.CONTENT_URI.buildUpon().appendPath("time")
+                    val intent = Intent(Intent.ACTION_VIEW, builder.build())
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                    launchActivity(it, intent)
+                } catch (e: ActivityNotFoundException) {
+                    // Do nothing, we've failed :(
+                }
             }
         }
 
@@ -125,8 +136,7 @@ class HomeFragment : BaseFragment(), OnLaunchAppListener {
     }
 
     fun updateClock() {
-        val active = context?.getSharedPreferences(getString(R.string.prefs_settings), Context.MODE_PRIVATE)
-                ?.getInt(getString(R.string.prefs_settings_key_time_format), 0)
+        val active = Integer.parseInt(settings.getString(getString(R.string.prefs_settings_key_time_format), "0")!!)
         val date = Date()
 
         val fWatchTime = when(active) {
@@ -143,8 +153,8 @@ class HomeFragment : BaseFragment(), OnLaunchAppListener {
 
     override fun onLaunch(app: HomeApp, view: View) {
         try {
-            val manager = context!!.getSystemService(Context.USER_SERVICE) as UserManager
-            val launcher = context!!.getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
+            val manager = requireContext().getSystemService(Context.USER_SERVICE) as UserManager
+            val launcher = requireContext().getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
 
             val componentName = ComponentName(app.packageName, app.activityName)
             val userHandle = manager.getUserForSerialNumber(app.userSerial)
@@ -168,5 +178,17 @@ class HomeFragment : BaseFragment(), OnLaunchAppListener {
         override fun onReceive(ctx: Context?, intent: Intent?) {
             updateClock()
         }
+    }
+
+    private fun setViewVisibility(){
+        setVisibility(home_fragment_time, R.string.prefs_settings_key_toggle_time)
+        setVisibility(home_fragment_date, R.string.prefs_settings_key_toggle_date)
+        setVisibility(home_fragment_call, R.string.prefs_settings_key_toggle_call)
+        setVisibility(home_fragment_camera, R.string.prefs_settings_key_toggle_camera)
+    }
+
+    private fun setVisibility(view : View, settingRef : Int){
+        val showView = settings.getBoolean(getString(settingRef), true)
+        view.visibility = if (showView) View.VISIBLE else View.INVISIBLE
     }
 }

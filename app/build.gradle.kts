@@ -58,6 +58,7 @@ dependencies {
     // Support Libraries
     implementation("androidx.appcompat:appcompat:1.2.0")
     implementation("androidx.recyclerview:recyclerview:1.1.0")
+    implementation("androidx.preference:preference:1.1.1")
     implementation("androidx.constraintlayout:constraintlayout:2.0.1")
 
     // Arch Components

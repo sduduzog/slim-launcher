@@ -5,9 +5,9 @@ import android.os.Build
 import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
 import androidx.fragment.app.Fragment
+import androidx.preference.PreferenceManager
 import com.sduduzog.slimlauncher.MainActivity
 import com.sduduzog.slimlauncher.R
 
@@ -18,8 +18,8 @@ abstract class BaseFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        val settings = requireContext().getSharedPreferences(getString(R.string.prefs_settings), AppCompatActivity.MODE_PRIVATE)
-        val active = settings.getInt(getString(R.string.prefs_settings_key_theme), 0)
+        val settings = PreferenceManager.getDefaultSharedPreferences(requireContext())
+        val active = Integer.parseInt(settings.getString(getString(R.string.prefs_settings_key_theme), "0")!!)
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
