@@ -29,7 +29,7 @@
                 android:visibility="invisible"
                 app:layout_constraintStart_toStartOf="@id/home_fragment_list"
                 app:layout_constraintEnd_toEndOf="@id/home_fragment_list"
-                app:layout_constraintTop_toBottomOf="@id/home_fragment_list"
+                app:layout_constraintTop_toBottomOf="parent"
                 />
         </Constraint>
 
