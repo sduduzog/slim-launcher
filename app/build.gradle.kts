@@ -12,8 +12,8 @@ android {
         applicationId = "com.sduduzog.slimlauncher"
         minSdkVersion(21)
         targetSdkVersion(30)
-        versionName = "2.4.15"
-        versionCode = 49
+        versionName = "2.4.16"
+        versionCode = 50
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables { useSupportLibrary = true }
         signingConfigs {
@@ -65,7 +65,7 @@ dependencies {
     implementation("androidx.core:core-ktx:1.5.0-alpha02")
     implementation("androidx.fragment:fragment-ktx:1.2.5")
     implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
-    implementation("androidx.navigation:navigation-fragment-ktx:2.2.0")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.3.0")
     implementation("androidx.room:room-runtime:2.2.5")
     implementation("androidx.lifecycle:lifecycle-common-java8:2.2.0")
     kapt("androidx.room:room-compiler:2.2.5")
