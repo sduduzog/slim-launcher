@@ -7,6 +7,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.Navigation.findNavController
+import androidx.preference.PreferenceManager
 import com.sduduzog.slimlauncher.utils.BaseFragment
 import com.sduduzog.slimlauncher.utils.HomeWatcher
 import dagger.hilt.android.AndroidEntryPoint
@@ -42,8 +43,13 @@ class MainActivity : AppCompatActivity(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
-        settings = getSharedPreferences(getString(R.string.prefs_settings), MODE_PRIVATE)
+
+        settings = PreferenceManager.getDefaultSharedPreferences(applicationContext)
         settings.registerOnSharedPreferenceChangeListener(this)
+        PreferenceManager.setDefaultValues(applicationContext, R.xml.options_fragment, true)
+        PreferenceManager.setDefaultValues(applicationContext, R.xml.options_elements_fragment, true)
+
+
         navigator = findNavController(this, R.id.nav_host_fragment)
         homeWatcher = HomeWatcher(this)
         homeWatcher.setOnHomePressedListener(this)
@@ -82,9 +88,10 @@ class MainActivity : AppCompatActivity(),
 
     override fun getTheme(): Resources.Theme {
         val theme = super.getTheme()
-        settings = getSharedPreferences(getString(R.string.prefs_settings), MODE_PRIVATE)
-        val active = settings.getInt(getString(R.string.prefs_settings_key_theme), 0)
-        theme.applyStyle(resolveTheme(active), true)
+        settings = PreferenceManager.getDefaultSharedPreferences(this)
+        val active = settings.getString(getString(R.string.prefs_settings_key_theme), "0")!!
+
+        theme.applyStyle(resolveTheme(Integer.parseInt(active)), true)
         return theme
     }
 
@@ -107,11 +114,11 @@ class MainActivity : AppCompatActivity(),
     }
 
     private fun toggleStatusBar() {
-        val isHidden = settings.getBoolean(getString(R.string.prefs_settings_key_toggle_status_bar), false)
-        if (isHidden) {
-            hideSystemUI()
-        } else {
+        val showBar = settings.getBoolean(getString(R.string.prefs_settings_key_toggle_status_bar), true)
+        if (showBar) {
             showSystemUI()
+        } else {
+            hideSystemUI()
         }
     }
 
