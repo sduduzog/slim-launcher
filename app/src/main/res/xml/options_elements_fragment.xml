@@ -24,13 +24,13 @@
         <SwitchPreference
             android:key="@string/prefs_settings_key_toggle_call"
             android:title="@string/options_elements_fragment_toggle_call"
-            android:defaultValue="false"
+            android:defaultValue="true"
             app:iconSpaceReserved="false" />
 
         <SwitchPreference
             android:key="@string/prefs_settings_key_toggle_camera"
             android:title="@string/options_elements_fragment_toggle_camera"
-            android:defaultValue="false"
+            android:defaultValue="true"
             app:iconSpaceReserved="false" />
     </PreferenceCategory>
 
@@ -53,7 +53,7 @@
             android:summary="@string/options_elements_fragment_shortcut_time_summary"
             app:iconSpaceReserved="false"
             android:dependency="@string/prefs_settings_key_toggle_time"
-            android:defaultValue="false" />
+            android:defaultValue="true" />
 
         <ListPreference
             android:key="@string/prefs_settings_key_time_format"
