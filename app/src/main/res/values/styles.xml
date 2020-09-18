@@ -10,6 +10,14 @@
         <item name="android:fontFamily">@font/ubuntu</item>
     </style>
 
+    <style name="AppTheme2" parent="@style/Theme.AppCompat.Light.NoActionBar">
+        <item name="colorAccent">@color/lightAccentColor</item>
+        <item name="android:colorForeground">@color/lightAccentColor</item>
+        <item name="colorPrimary">@color/colorWhite</item>
+        <item name="colorPrimaryDark">@color/colorWhiteDark</item>
+        <item name="android:colorBackground">@color/colorWhite</item>
+    </style>
+
     <style name="AppDarkTheme" parent="@style/Theme.AppCompat.NoActionBar">
         <item name="colorAccent">@color/darkAccentColor</item>
         <item name="colorPrimary">@color/primaryDarkColor</item>
@@ -43,10 +51,13 @@
         <item name="colorPrimaryDark">@color/colorTeal</item>
         <item name="android:colorBackground">@color/colorTeal</item>
     </style>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

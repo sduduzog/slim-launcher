@@ -1,5 +1,6 @@
 package com.sduduzog.slimlauncher.ui
 
+import android.content.res.Resources
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.Navigation
@@ -20,6 +21,18 @@ class MainActivity2 : AppCompatActivity() {
 
         navigationDispatcher.navigationCommands.startListening {
             it.invoke(Navigation.findNavController(this, R.id.nav_graph2))
+        }
+    }
+
+    override fun getTheme(): Resources.Theme {
+        val theme = super.getTheme()
+        theme.applyStyle(resolveTheme(), true)
+        return theme
+    }
+
+    companion object {
+        fun resolveTheme(): Int {
+            return R.style.AppTheme2
         }
     }
 }

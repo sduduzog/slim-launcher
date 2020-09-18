@@ -4,6 +4,7 @@ plugins {
     kotlin("android")
     kotlin("android.extensions")
     kotlin("kapt")
+    id("kotlin-android")
 }
 
 android {
@@ -67,6 +68,7 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:2.3.0")
     implementation("androidx.room:room-runtime:2.2.5")
     implementation("androidx.lifecycle:lifecycle-common-java8:2.2.0")
+    implementation("androidx.legacy:legacy-support-v4:1.0.0")
     kapt("androidx.room:room-compiler:2.2.5")
 
     //3rd party libs
