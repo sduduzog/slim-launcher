@@ -11,6 +11,7 @@ import com.sduduzog.slimlauncher.data.BaseDatabase.Companion.MIGRATION_4_5
 import com.sduduzog.slimlauncher.data.BaseDatabase.Companion.MIGRATION_5_6
 import com.sduduzog.slimlauncher.data.BaseDatabase.Companion.MIGRATION_6_7
 import com.sduduzog.slimlauncher.data.BaseDatabase.Companion.MIGRATION_7_8
+import com.sduduzog.slimlauncher.data.BaseDatabase.Companion.MIGRATION_8_9
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -32,7 +33,8 @@ class DbModule {
                         MIGRATION_4_5,
                         MIGRATION_5_6,
                         MIGRATION_6_7,
-                        MIGRATION_7_8
+                        MIGRATION_7_8,
+                        MIGRATION_8_9
                 )
                 .build()
     }
