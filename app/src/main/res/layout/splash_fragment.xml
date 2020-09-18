@@ -11,11 +11,39 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_24sdp"
-        android:layout_marginBottom="@dimen/_24sdp"
-        android:text="Loading..."
-        android:textSize="24sp"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="116dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/app_name"
+        android:textAppearance="@style/Theme.AppCompat"
+        android:textSize="@dimen/_24ssp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:alpha="0.5"
+        android:text="@string/app_version"
+        android:textAppearance="@style/Theme.AppCompat"
+        android:textSize="@dimen/_18ssp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView3"
+        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="@+id/textView3" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:padding="@dimen/_8sdp"
+        android:text="@string/next"
+        android:textAppearance="@style/Theme.AppCompat"
+        android:textSize="@dimen/_18ssp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
