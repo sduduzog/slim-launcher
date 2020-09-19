@@ -61,7 +61,7 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.0.1")
 
     // Arch Components
-    implementation("androidx.core:core-ktx:1.5.0-alpha02")
+    implementation("androidx.core:core-ktx:1.5.0-alpha03")
     implementation("androidx.fragment:fragment-ktx:1.2.5")
     implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
     implementation("androidx.navigation:navigation-fragment-ktx:2.3.0")
@@ -72,15 +72,29 @@ dependencies {
     //3rd party libs
     implementation("com.intuit.sdp:sdp-android:1.0.6")
     implementation("com.intuit.ssp:ssp-android:1.0.6")
-
     implementation("com.google.dagger:hilt-android:2.28-alpha")
     implementation("androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha02")
     kapt("androidx.hilt:hilt-compiler:1.0.0-alpha02")
     kapt("com.google.dagger:hilt-android-compiler:2.28-alpha")
 
     // Test libs
-    testImplementation("junit:junit:4.12")
-    testImplementation("org.mockito:mockito-core:2.19.0")
+    testImplementation("junit:junit:4.13")
+
+    testImplementation("androidx.test:core:1.3.0")
+    testImplementation("androidx.test:runner:1.3.0")
+    testImplementation("androidx.test:rules:1.3.0")
+
+    testImplementation("androidx.test.ext:junit:1.1.2")
+    testImplementation("androidx.test.ext:truth:1.3.0")
+    testImplementation("com.google.truth:truth:1.0")
+
+    testImplementation("org.robolectric:robolectric:4.3")
+
+    testImplementation("org.mockito:mockito-core:2.24.5")
+
+    testImplementation("com.google.dagger:hilt-android-testing:2.28-alpha")
+    kaptTest("com.google.dagger:hilt-android-compiler:2.28-alpha")
+
     androidTestImplementation("androidx.room:room-testing:2.2.5")
     androidTestImplementation("androidx.test:runner:1.3.0")
     androidTestImplementation("androidx.test:rules:1.3.0")
