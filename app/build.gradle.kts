@@ -25,6 +25,14 @@ android {
                 keyPassword = project.extra["RELEASE_KEY_PASSWORD"] as String
             }
         }
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                argument("room.incremental", "true")
+            }
+        }
+
+        testInstrumentationRunner = "com.sduduzog.slimlauncher.CustomTestRunner"
     }
 
 
@@ -82,15 +90,19 @@ dependencies {
     kapt("com.google.dagger:hilt-android-compiler:2.28-alpha")
 
     // Test libs
-    testImplementation("junit:junit:4.12")
-    testImplementation("org.mockito:mockito-core:2.19.0")
-    androidTestImplementation("androidx.room:room-testing:2.2.5")
-    androidTestImplementation("androidx.test:runner:1.3.0")
+    testImplementation("org.mockito:mockito-core:2.24.5")
+
+    androidTestImplementation("junit:junit:4.13")
+    androidTestImplementation("androidx.test:core-ktx:1.3.0")
+    androidTestImplementation("androidx.test.ext:junit-ktx:1.1.2")
     androidTestImplementation("androidx.test:rules:1.3.0")
-    androidTestImplementation("androidx.annotation:annotation:1.1.0")
-    androidTestImplementation("androidx.test:runner:1.3.0")
-    androidTestImplementation("androidx.test:rules:1.3.0")
-    androidTestImplementation("androidx.arch.core:core-testing:2.1.0")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
-    androidTestImplementation("androidx.test.espresso:espresso-intents:3.3.0")
+    androidTestImplementation("androidx.fragment:fragment-testing:1.2.5")
+    androidTestImplementation("org.mockito:mockito-android:2.24.5")
+
+
+
+    androidTestImplementation("com.google.dagger:hilt-android-testing:2.28-alpha")
+    kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.28-alpha")
+    kaptAndroidTest("androidx.hilt:hilt-compiler:1.0.0-alpha02")
 }
