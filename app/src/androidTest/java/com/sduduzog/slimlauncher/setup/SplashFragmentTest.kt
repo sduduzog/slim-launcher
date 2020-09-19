@@ -1,18 +1,19 @@
-package com.sduduzog.slimlauncher
+package com.sduduzog.slimlauncher.setup
 
 import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.test.espresso.Espresso
-import androidx.test.espresso.assertion.ViewAssertions
-import androidx.test.espresso.matcher.ViewMatchers
-import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
+import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
+import androidx.test.espresso.matcher.ViewMatchers.withText
+import com.sduduzog.slimlauncher.R
+import com.sduduzog.slimlauncher.launchFragmentInHiltContainer
 import com.sduduzog.slimlauncher.ui.setup.SplashFragment
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
 import org.mockito.Mockito.mock
 
 @HiltAndroidTest
@@ -28,7 +29,8 @@ class SplashFragmentTest {
             Navigation.setViewNavController(this.view!!, navController)
         }
 
-        Espresso.onView(ViewMatchers.withText("Slim Launcher")).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
-        Espresso.onView(ViewMatchers.withText("Next")).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        onView(withText("Slim Launcher")).check(matches(isDisplayed()))
+        onView(withText("Next")).check(matches(isDisplayed()))
+        onView(withText("v3.0 (Beta)")).check(matches(isDisplayed()))
     }
 }
