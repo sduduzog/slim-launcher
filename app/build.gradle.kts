@@ -15,7 +15,6 @@ android {
         targetSdkVersion(30)
         versionName = "2.4.17"
         versionCode = 51
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables { useSupportLibrary = true }
         signingConfigs {
             register("release") {
