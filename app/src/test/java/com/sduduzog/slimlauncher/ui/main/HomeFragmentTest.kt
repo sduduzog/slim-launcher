@@ -79,6 +79,7 @@ class HomeFragmentTest {
         launchFragmentInHiltContainer<HomeFragment>(Bundle(), R.style.AppTheme, fragmentFactory) {
             Navigation.setViewNavController(this.view!!, navController)
         }
+        baseDao.add(HomeApp("appName", "packageName", "activityName", 0, null, 1))
     }
 
     @Test
@@ -89,7 +90,13 @@ class HomeFragmentTest {
 
     @Test
     fun `should display added apps to home screen`() {
-        baseDao.add(HomeApp("appName", "packageName", "activityName", 0, "appNickname", 1))
+
+        onView(withText("appName")).check(matches(isDisplayed()))
+    }
+
+    @Test
+    fun `when nickname changed should display added apps to home screen via nickname`() {
+        baseDao.update(HomeApp("appName", "packageName", "activityName", 0, "appNickname", 1))
 
         onView(withText("appNickname")).check(matches(isDisplayed()))
     }
