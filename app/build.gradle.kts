@@ -47,6 +47,16 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
+
+    testOptions {
+        unitTests.isIncludeAndroidResources = true
+//        unitTests.all(KotlinClosure1<Any, Test>({
+//            (this as Test).also {
+//                systemProperties["robolectric.dependency.repo.url"] = "https://repo1.maven.org/maven2"
+//                systemProperties["robolectric.dependency.repo.id"] = "central"
+//            }
+//        }, this))
+    }
 }
 
 dependencies {
@@ -78,9 +88,9 @@ dependencies {
     kapt("com.google.dagger:hilt-android-compiler:2.28-alpha")
 
     // Test libs
-    testImplementation("junit:junit:4.13")
 
     testImplementation("androidx.test:core:1.3.0")
+
     testImplementation("androidx.test:runner:1.3.0")
     testImplementation("androidx.test:rules:1.3.0")
 
@@ -88,7 +98,11 @@ dependencies {
     testImplementation("androidx.test.ext:truth:1.3.0")
     testImplementation("com.google.truth:truth:1.0")
 
-    testImplementation("org.robolectric:robolectric:4.3")
+
+    testImplementation("androidx.arch.core:core-testing:2.1.0")
+    testImplementation("androidx.fragment:fragment-testing:1.2.5")
+
+    testImplementation("org.robolectric:robolectric:4.4")
 
     testImplementation("org.mockito:mockito-core:2.24.5")
 
