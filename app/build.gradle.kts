@@ -50,12 +50,6 @@ android {
 
     testOptions {
         unitTests.isIncludeAndroidResources = true
-//        unitTests.all(KotlinClosure1<Any, Test>({
-//            (this as Test).also {
-//                systemProperties["robolectric.dependency.repo.url"] = "https://repo1.maven.org/maven2"
-//                systemProperties["robolectric.dependency.repo.id"] = "central"
-//            }
-//        }, this))
     }
 }
 
@@ -105,6 +99,8 @@ dependencies {
     testImplementation("org.robolectric:robolectric:4.4")
 
     testImplementation("org.mockito:mockito-core:2.24.5")
+
+    testImplementation("androidx.test.espresso:espresso-core:3.3.0")
 
     testImplementation("com.google.dagger:hilt-android-testing:2.28-alpha")
     kaptTest("com.google.dagger:hilt-android-compiler:2.28-alpha")
