@@ -8,7 +8,6 @@ import javax.inject.Inject
 
 class MainFragmentFactory @Inject constructor(private val mainViewModel: MainViewModel): FragmentFactory() {
     override fun instantiate(classLoader: ClassLoader, className: String): Fragment {
-
         return when(loadFragmentClass(classLoader, className)) {
             HomeFragment::class.java -> HomeFragment(mainViewModel)
             else -> super.instantiate(classLoader, className)

@@ -1,18 +1,19 @@
 package com.sduduzog.slimlauncher.ui.main
 
+import android.app.Application
 import android.os.Build
 import android.os.Bundle
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.room.Room
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
-import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.sduduzog.slimlauncher.R
 import com.sduduzog.slimlauncher.data.BaseDao
+import com.sduduzog.slimlauncher.data.BaseDatabase
 import com.sduduzog.slimlauncher.di.AppModule
 import com.sduduzog.slimlauncher.di.MainFragmentFactory
 import com.sduduzog.slimlauncher.launchFragmentInHiltContainer
@@ -29,10 +30,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mock
-import org.mockito.Mockito
 import org.mockito.Mockito.mock
-import org.mockito.MockitoAnnotations
 import org.robolectric.annotation.Config
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -49,47 +47,50 @@ class HomeFragmentTest {
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
-    @Mock
-    lateinit var baseDao: BaseDao
-
     @Module
     @InstallIn(ApplicationComponent::class)
     inner class TestModule {
 
         @Provides
         @Singleton
-        internal fun provideBaseDao(): BaseDao {
-            return baseDao
+        internal fun provideBaseDatabase(application: Application): BaseDatabase {
+            return Room.inMemoryDatabaseBuilder(application,
+                    BaseDatabase::class.java )
+                    .allowMainThreadQueries()
+                    .build()
+        }
+        @Provides
+        @Singleton
+        internal fun provideBaseDao(database: BaseDatabase): BaseDao {
+            return database.baseDao()
         }
     }
 
     @Inject
     lateinit var fragmentFactory: MainFragmentFactory
 
+    @Inject
+    lateinit var baseDao: BaseDao
+
     @Before
     fun init() {
-        MockitoAnnotations.initMocks(this)
-        val data = MutableLiveData<List<HomeApp>>(
-                mutableListOf(HomeApp(
-                        "appName",
-                        "packagename",
-                        "activityName",
-                        1,
-                        "appNickname",
-                        2)))
-        Mockito.`when`(baseDao.apps).thenReturn(data)
         hiltRule.inject()
-    }
-
-    @Test
-    fun `should display time and date`() {
-
         val navController = mock(NavController::class.java)
         launchFragmentInHiltContainer<HomeFragment>(Bundle(), R.style.AppTheme, fragmentFactory) {
             Navigation.setViewNavController(this.view!!, navController)
         }
+    }
 
+    @Test
+    fun `should display time and date`() {
         onView(withId(R.id.home_fragment_time)).check(matches(isDisplayed()))
         onView(withId(R.id.home_fragment_date)).check(matches(isDisplayed()))
+    }
+
+    @Test
+    fun `should display added apps to home screen`() {
+        baseDao.add(HomeApp("appName", "packageName", "activityName", 0, "appNickname", 1))
+
+        onView(withText("appNickname")).check(matches(isDisplayed()))
     }
 }
