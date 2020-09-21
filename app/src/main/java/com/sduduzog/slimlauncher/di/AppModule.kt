@@ -1,6 +1,9 @@
 package com.sduduzog.slimlauncher.di
 
 import android.app.Application
+import android.content.Context
+import android.content.SharedPreferences
+import androidx.preference.PreferenceManager
 import androidx.room.Room
 import com.sduduzog.slimlauncher.data.BaseDao
 import com.sduduzog.slimlauncher.data.BaseDatabase
@@ -36,4 +39,10 @@ class AppModule {
     internal fun provideBaseDao(baseDatabase: BaseDatabase): BaseDao {
         return baseDatabase.baseDao()
     }
+
+    @Provides
+    fun sharedPref(app: Application) : SharedPreferences = PreferenceManager.getDefaultSharedPreferences(app)
+
+    @Provides
+    fun appContext(app: Application): Context = app
 }

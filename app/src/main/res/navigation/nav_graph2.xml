@@ -3,11 +3,34 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph2"
-    app:startDestination="@id/splashFragment">
+    app:startDestination="@id/splash_graph">
 
-    <fragment
-        android:id="@+id/splashFragment"
-        android:name="com.sduduzog.slimlauncher.ui.setup.SplashFragment"
-        android:label="splash_fragment"
-        tools:layout="@layout/splash_fragment" />
+    <navigation
+        android:id="@+id/splash_graph"
+        app:startDestination="@id/splashFragment">
+        <action
+            android:id="@+id/splashToSetup"
+            app:destination="@id/setup_graph"
+            app:popUpTo="@id/splash_graph"
+            app:popUpToInclusive="true" />
+        <fragment
+            android:id="@+id/splashFragment"
+            android:name="com.sduduzog.slimlauncher.ui.setup.SplashFragment"
+            android:label="splash_fragment"
+            tools:layout="@layout/splash_fragment">
+
+        </fragment>
+    </navigation>
+
+    <navigation
+        android:id="@+id/setup_graph"
+        app:startDestination="@id/setupFragment">
+
+        <fragment
+            android:id="@+id/setupFragment"
+            android:name="com.sduduzog.slimlauncher.ui.setup.SetupFragment"
+            android:label="setup_fragment"
+            tools:layout="@layout/setup_fragment" />
+    </navigation>
+
 </navigation>

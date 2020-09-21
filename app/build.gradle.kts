@@ -5,6 +5,7 @@ plugins {
     kotlin("android.extensions")
     kotlin("kapt")
     id("kotlin-android")
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
@@ -71,12 +72,15 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.2.0")
     implementation("androidx.recyclerview:recyclerview:1.1.0")
     implementation("androidx.constraintlayout:constraintlayout:2.0.1")
+    implementation("androidx.preference:preference-ktx:1.1.1")
 
     // Arch Components
     implementation("androidx.core:core-ktx:1.5.0-alpha03")
     implementation("androidx.fragment:fragment-ktx:1.2.5")
     implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
     implementation("androidx.navigation:navigation-fragment-ktx:2.3.0")
+//    implementation("androidx.navigation:navigation-ui-ktx:2.3.0")
+//    implementation("androidx.lifecycle:lifecycle-common-java8:2.2.0")
     implementation("androidx.room:room-runtime:2.2.5")
     implementation("androidx.lifecycle:lifecycle-common-java8:2.2.0")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
@@ -86,6 +90,7 @@ dependencies {
     implementation("com.intuit.sdp:sdp-android:1.0.6")
     implementation("com.intuit.ssp:ssp-android:1.0.6")
     implementation("com.github.Zhuinden:event-emitter:1.1.0")
+    implementation("com.github.Zhuinden:livedata-combinetuple-kt:1.0.0")
 
     implementation("com.google.dagger:hilt-android:2.28-alpha")
     implementation("androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha02")
@@ -118,7 +123,6 @@ dependencies {
 
     androidTestImplementation("androidx.room:room-testing:2.2.5")
     androidTestImplementation("androidx.test:runner:1.3.0")
-    testImplementation("org.mockito:mockito-core:2.24.5")
 
     androidTestImplementation("junit:junit:4.13")
     androidTestImplementation("androidx.test:core-ktx:1.3.0")

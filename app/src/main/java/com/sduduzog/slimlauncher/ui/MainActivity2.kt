@@ -19,8 +19,8 @@ class MainActivity2 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity2)
 
-        navigationDispatcher.navigationCommands.startListening {
-            it.invoke(Navigation.findNavController(this, R.id.nav_graph2))
+        navigationDispatcher.navigationCommands.startListening { command ->
+            Navigation.findNavController(this, R.id.nav_host).command(this)
         }
     }
 
