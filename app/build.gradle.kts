@@ -55,6 +55,10 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
+
+    testOptions {
+        unitTests.isIncludeAndroidResources = true
+    }
 }
 
 dependencies {
@@ -89,6 +93,31 @@ dependencies {
     kapt("com.google.dagger:hilt-android-compiler:2.28-alpha")
 
     // Test libs
+
+    testImplementation("androidx.test:core:1.3.0")
+
+    testImplementation("androidx.test:runner:1.3.0")
+    testImplementation("androidx.test:rules:1.3.0")
+
+    testImplementation("androidx.test.ext:junit:1.1.2")
+    testImplementation("androidx.test.ext:truth:1.3.0")
+    testImplementation("com.google.truth:truth:1.0")
+
+
+    testImplementation("androidx.arch.core:core-testing:2.1.0")
+    testImplementation("androidx.fragment:fragment-testing:1.2.5")
+
+    testImplementation("org.robolectric:robolectric:4.4")
+
+    testImplementation("org.mockito:mockito-core:2.24.5")
+
+    testImplementation("androidx.test.espresso:espresso-core:3.3.0")
+
+    testImplementation("com.google.dagger:hilt-android-testing:2.28-alpha")
+    kaptTest("com.google.dagger:hilt-android-compiler:2.28-alpha")
+
+    androidTestImplementation("androidx.room:room-testing:2.2.5")
+    androidTestImplementation("androidx.test:runner:1.3.0")
     testImplementation("org.mockito:mockito-core:2.24.5")
 
     androidTestImplementation("junit:junit:4.13")
