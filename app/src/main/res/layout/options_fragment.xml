@@ -13,6 +13,7 @@
         android:id="@+id/options_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        themeBackgroundColor="@{colorPalette.viewBackgroundColor}"
         tools:context=".ui.options.OptionsFragment">
 
         <TextView
