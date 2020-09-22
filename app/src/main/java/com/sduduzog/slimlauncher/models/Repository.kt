@@ -3,7 +3,6 @@ package com.sduduzog.slimlauncher.models
 import android.os.AsyncTask
 import androidx.lifecycle.LiveData
 import com.sduduzog.slimlauncher.data.BaseDao
-import javax.inject.Singleton
 
 class Repository(private val baseDao: BaseDao) {
 
