@@ -9,8 +9,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.edit
+import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
+import com.sduduzog.slimlauncher.ColorPalette
 import com.sduduzog.slimlauncher.R
+import com.sduduzog.slimlauncher.databinding.OptionsFragmentBinding
 import com.sduduzog.slimlauncher.ui.dialogs.ChangeThemeDialog
 import com.sduduzog.slimlauncher.ui.dialogs.ChooseTimeFormatDialog
 import com.sduduzog.slimlauncher.utils.BaseFragment
@@ -20,7 +23,10 @@ class OptionsFragment : BaseFragment() {
     override fun getFragmentView(): ViewGroup = options_fragment
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.options_fragment, container, false)
+        val binding = OptionsFragmentBinding.inflate(inflater, container, false)
+        binding.lifecycleOwner = this
+        binding.colorPalette = ColorPalette()
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
