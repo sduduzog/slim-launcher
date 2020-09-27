@@ -76,10 +76,10 @@ dependencies {
     //3rd party libs
     implementation("com.intuit.sdp:sdp-android:1.0.6")
     implementation("com.intuit.ssp:ssp-android:1.0.6")
-    implementation("com.google.dagger:hilt-android:2.28-alpha")
+    implementation("com.google.dagger:hilt-android:2.29-alpha")
     implementation("androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha02")
     kapt("androidx.hilt:hilt-compiler:1.0.0-alpha02")
-    kapt("com.google.dagger:hilt-android-compiler:2.28-alpha")
+    kapt("com.google.dagger:hilt-android-compiler:2.29-alpha")
 
     // Test libs
 
@@ -102,8 +102,8 @@ dependencies {
 
     testImplementation("androidx.test.espresso:espresso-core:3.3.0")
 
-    testImplementation("com.google.dagger:hilt-android-testing:2.28-alpha")
-    kaptTest("com.google.dagger:hilt-android-compiler:2.28-alpha")
+    testImplementation("com.google.dagger:hilt-android-testing:2.29-alpha")
+    kaptTest("com.google.dagger:hilt-android-compiler:2.29-alpha")
 
     androidTestImplementation("androidx.room:room-testing:2.2.5")
     androidTestImplementation("androidx.test:runner:1.3.0")
