@@ -1,0 +1,47 @@
+<resources>
+    <string name="app_name" translatable="false">Slim Launcher</string>
+    <string name="slim_url" translatable="false">https://slimlauncher.sduduzog.com</string>
+    <string name="main_placeholder_clock" translatable="false">00:00</string>
+    <string name="main_placeholder_date" translatable="false">Sat, Apr 20</string>
+
+    <string-array name="themes_array">
+        <item>Padrão</item>
+        <item>Meia noite</item>
+        <item>Júpiter</item>
+        <item>Verde-azulado</item>
+        <item>Doce</item>
+        <item>Pastel</item>
+    </string-array>
+
+    <string-array name="time_format_array">
+        <item>Seguir configurações do sistema</item>
+        <item>24 Horas</item>
+        <item>12 Horas</item>
+    </string-array>
+
+    <string name="prefs_settings" translatable="false">settings</string>
+    <string name="prefs_settings_key_theme" translatable="false">key_theme</string>
+    <string name="prefs_settings_key_time_format" translatable="false">time_format</string>
+    <string name="prefs_settings_key_toggle_status_bar" translatable="false">hide_status_bar</string>
+    <string name="choose_time_format_dialog_title">Escolher Formato da Hora</string>
+    <string name="main_fragment_options">Opções</string>
+    <string name="options_fragment_about_slim">Sobre o Slim</string>
+    <string name="options_fragment_device_settings">Configurações do Dispositivo</string>
+    <string name="options_fragment_change_theme">Mudar o Tema</string>
+    <string name="options_fragment_choose_time_format">Escolher Formato da Hora</string>
+    <string name="options_fragment_customise_apps">Customizar Apps</string>
+    <string name="options_fragment_toggle_status_bar">Alternar Barra de Status</string>
+    <string name="options_fragment_hide_status_bar">Esconder Barra de Status</string>
+    <string name="options_fragment_show_status_bar">Mostrar Barra de Status</string>
+    <string name="customise_apps_fragment_add">Adicionar</string>
+    <string name="menu_rename">Renomear</string>
+    <string name="menu_remove">Remover</string>
+    <string name="choose_theme_dialog_title">Escolher Tema</string>
+    <string name="add_apps_fragment_search_apps">Pesquisar apps</string>
+    <string name="customise_apps_fragment_remove_all">Remover todos</string>
+    <string name="menu_reset">Restaurar</string>
+    <string name="remove_all_apps_dialog_title" translatable="false">Remover Todos os Apps</string>
+    <string name="remove_all_apps_dialog_message" translatable="false">"Essa ação não vai desinstalar seus apps."
+    "Isto é somente para confirmar que você está limpando esta lista com esse propósito"</string>
+
+</resources>
