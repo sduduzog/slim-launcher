@@ -62,10 +62,10 @@ dependencies {
     // Support Libraries
     implementation("androidx.appcompat:appcompat:1.2.0")
     implementation("androidx.recyclerview:recyclerview:1.1.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.0.1")
+    implementation("androidx.constraintlayout:constraintlayout:2.0.2")
 
     // Arch Components
-    implementation("androidx.core:core-ktx:1.5.0-alpha03")
+    implementation("androidx.core:core-ktx:1.5.0-alpha04")
     implementation("androidx.fragment:fragment-ktx:1.2.5")
     implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
     implementation("androidx.navigation:navigation-fragment-ktx:2.3.0")
