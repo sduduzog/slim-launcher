@@ -8,7 +8,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import com.sduduzog.slimlauncher.models.HomeApp
 
 
-@Database(entities = [HomeApp::class], version = 8, exportSchema = false)
+@Database(entities = [HomeApp::class], version = 9, exportSchema = false)
 abstract class BaseDatabase : RoomDatabase() {
 
     abstract fun baseDao(): BaseDao
@@ -82,6 +82,27 @@ abstract class BaseDatabase : RoomDatabase() {
                 database.execSQL("DROP TABLE home_apps")
                 database.execSQL("ALTER TABLE home_apps_copy RENAME TO home_apps")
             }
+
+
+        }
+
+        val MIGRATION_8_9 = object : Migration(8, 9){
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL("CREATE TABLE home_apps_copy(" +
+                        "package_name TEXT NOT NULL, " +
+                        "user_serial INTEGER NOT NULL, " +
+                        "app_name TEXT NOT NULL, " +
+                        "app_nickname TEXT, " +
+                        "activity_name TEXT NOT NULL, " +
+                        "sorting_index INTEGER NOT NULL, " +
+                        "PRIMARY KEY(package_name, activity_name, user_serial))"
+                )
+                database.execSQL("INSERT INTO home_apps_copy (package_name, user_serial, app_name, app_nickname, activity_name, sorting_index) " +
+                        "SELECT package_name, user_serial, app_name, app_nickname, activity_name, sorting_index FROM home_apps")
+                database.execSQL("DROP TABLE home_apps")
+                database.execSQL("ALTER TABLE home_apps_copy RENAME TO home_apps")
+            }
+
         }
     }
 }

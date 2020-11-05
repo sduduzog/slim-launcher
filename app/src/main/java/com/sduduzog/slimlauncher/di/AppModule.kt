@@ -4,7 +4,6 @@ import android.app.Application
 import androidx.room.Room
 import com.sduduzog.slimlauncher.data.BaseDao
 import com.sduduzog.slimlauncher.data.BaseDatabase
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -26,7 +25,8 @@ class AppModule {
                         BaseDatabase.MIGRATION_4_5,
                         BaseDatabase.MIGRATION_5_6,
                         BaseDatabase.MIGRATION_6_7,
-                        BaseDatabase.MIGRATION_7_8
+                        BaseDatabase.MIGRATION_7_8,
+                        BaseDatabase.MIGRATION_8_9
                 )
                 .build()
     }
