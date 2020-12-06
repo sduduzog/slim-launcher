@@ -1,11 +1,16 @@
 package com.sduduzog.slimlauncher.models
 
-import android.os.AsyncTask
 import androidx.lifecycle.LiveData
 import com.sduduzog.slimlauncher.data.BaseDao
-import javax.inject.Singleton
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 
-class Repository(private val baseDao: BaseDao) {
+class Repository(private val baseDao: BaseDao): CoroutineScope {
+
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.IO
 
     private val _apps = baseDao.apps
 
@@ -13,50 +18,26 @@ class Repository(private val baseDao: BaseDao) {
         get() = _apps
 
     fun add(app: HomeApp) {
-        AddAppAsyncTask(baseDao).execute(app)
+        CoroutineScope(coroutineContext).launch {
+            baseDao.add(app)
+        }
     }
 
     fun update(vararg list : HomeApp) {
-        UpdateAppAsyncTask(baseDao).execute(*list)
+        CoroutineScope(coroutineContext).launch {
+            baseDao.update(*list)
+        }
     }
 
     fun remove(app: HomeApp) {
-        RemoveAppAsyncTask(baseDao).execute(app)
+        CoroutineScope(coroutineContext).launch {
+            baseDao.remove(app)
+        }
     }
 
     fun clearTable(){
-        ClearTableAsyncTask(baseDao).execute()
-    }
-
-    private class AddAppAsyncTask(private val mAsyncTaskDao: BaseDao) : AsyncTask<HomeApp, Void, Void>() {
-
-        override fun doInBackground(vararg params: HomeApp): Void? {
-            mAsyncTaskDao.add(params[0])
-            return null
-        }
-    }
-
-    private class UpdateAppAsyncTask(private val mAsyncTaskDao: BaseDao) : AsyncTask<HomeApp, Void, Void>() {
-
-        override fun doInBackground(vararg params: HomeApp): Void? {
-            mAsyncTaskDao.update(*params)
-            return null
-        }
-    }
-
-    private class RemoveAppAsyncTask(private val mAsyncTaskDao: BaseDao) : AsyncTask<HomeApp, Void, Void>() {
-
-        override fun doInBackground(vararg params: HomeApp): Void? {
-            mAsyncTaskDao.remove(params[0])
-            return null
-        }
-    }
-
-    private class ClearTableAsyncTask(private val mAsyncTaskDao: BaseDao) : AsyncTask<Void, Void, Void>() {
-
-        override fun doInBackground(vararg params: Void): Void? {
-            mAsyncTaskDao.clearTable()
-            return null
+        CoroutineScope(coroutineContext).launch {
+            baseDao.clearTable()
         }
     }
 }

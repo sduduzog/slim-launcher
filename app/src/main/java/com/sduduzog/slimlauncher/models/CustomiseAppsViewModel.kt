@@ -3,7 +3,9 @@ package com.sduduzog.slimlauncher.models
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.sduduzog.slimlauncher.data.BaseDao
+import kotlinx.coroutines.launch
 
 class CustomiseAppsViewModel @ViewModelInject constructor(baseDao: BaseDao) : ViewModel() {
 
@@ -25,11 +27,12 @@ class CustomiseAppsViewModel @ViewModelInject constructor(baseDao: BaseDao) : Vi
         homeApp.appNickname = null
         update(homeApp)
     }
+
     fun remove(app: HomeApp) {
         repository.remove(app)
     }
 
-    fun clearTable(){
+    fun clearTable() {
         repository.clearTable()
     }
 }
