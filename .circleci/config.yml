@@ -5,6 +5,7 @@ orbs:
 
 jobs:
   build:
+    working_directory: ~/code
     executor: android/android
 
     steps:
