@@ -4,24 +4,47 @@ orbs:
   android: circleci/android@0.2.1
 
 jobs:
+  lint:
+    executor: android/android
+    steps:
+      - checkout
+      - run:
+          command: ./gradlew lintDebug
+
+  test:
+    executor: android/android
+    parallelism: 4
+    steps:
+      - checkout
+      - run:
+          command: ./gradlew testDebugUnitTest
+      - store_artifacts:
+          path: app/build/reports
+          destination: reports
+      - store_test_results:
+          path: app/build/test-results
+
   build:
     executor: android/android
     steps:
       - checkout
       - run:
-          name: Lint
-          command: ./gradlew lintDebug
-      - run:
-          name: Test
-          command: ./gradlew testDebugUnitTest
-      - run:
-          name: Build
           command: ./gradlew assembleRelease
       - store_artifacts:
-          path: app/build/reports
-          destination: reports
-      - store_artifacts:
-          path: app/build/outputs
-          destinaion: outputs
-      - store_test_results:
-          path: app/build/test-results
+          path: app/build/outputs/apk
+          destinaion: apk
+
+workflows:
+  version: 2.1
+  lint-and-test:
+    jobs:
+      - lint
+      - test:
+          requires:
+            - lint
+      - build:
+          filters:
+            tags:
+              only: /^v.*/
+          requires:
+            - test
