@@ -17,12 +17,17 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables { useSupportLibrary = true }
         signingConfigs {
-            register("release") {
-                storeFile = file(project.extra["RELEASE_STORE_FILE"] as String)
-                storePassword = project.extra["RELEASE_STORE_PASSWORD"] as String
-                keyAlias = project.extra["RELEASE_KEY_ALIAS"] as String
-                keyPassword = project.extra["RELEASE_KEY_PASSWORD"] as String
+            if (System.getenv("CIRCLECI").isNullOrEmpty()) {
+                register("release") {
+                    storeFile = file(project.extra["RELEASE_STORE_FILE"] as String)
+                    storePassword = project.extra["RELEASE_STORE_PASSWORD"] as String
+                    keyAlias = project.extra["RELEASE_KEY_ALIAS"] as String
+                    keyPassword = project.extra["RELEASE_KEY_PASSWORD"] as String
+                }
             }
+        }
+        lintOptions {
+            isAbortOnError = false
         }
     }
 
@@ -33,7 +38,8 @@ android {
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-            signingConfig = signingConfigs.getByName("release")
+            if (System.getenv("CIRCLECI").isNullOrEmpty())
+                signingConfig = signingConfigs.getByName("release")
         }
         named("debug").configure {
             isMinifyEnabled = false
@@ -62,13 +68,13 @@ dependencies {
     // Support Libraries
     implementation("androidx.appcompat:appcompat:1.2.0")
     implementation("androidx.recyclerview:recyclerview:1.1.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.0.2")
+    implementation("androidx.constraintlayout:constraintlayout:2.0.4")
 
     // Arch Components
-    implementation("androidx.core:core-ktx:1.5.0-alpha04")
+    implementation("androidx.core:core-ktx:1.5.0-alpha05")
     implementation("androidx.fragment:fragment-ktx:1.2.5")
     implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
-    implementation("androidx.navigation:navigation-fragment-ktx:2.3.0")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.3.2")
     implementation("androidx.room:room-runtime:2.2.5")
     implementation("androidx.lifecycle:lifecycle-common-java8:2.2.0")
     kapt("androidx.room:room-compiler:2.2.5")
