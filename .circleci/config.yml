@@ -16,7 +16,7 @@ jobs:
       - store_test_results:
           path: app/build/test-results
 
-  buildDebug:
+  build:
     executor: android/android
     steps:
       - checkout
@@ -25,35 +25,11 @@ jobs:
       - store_artifacts:
           path: app/build/outputs/apk
           destination: apk
-  buildRelease:
-    executor: android/android
-    steps:
-      - checkout
-      - run:
-          command: ./gradlew bundleRelease
-      - store_artifacts:
-          path: app/build/outputs/bundle
-          destination: bundle
+
 
 workflows:
   version: 2.1
-  test-and-buildDebug:
+  test-and-build:
     jobs:
       - test
-      - buildDebug
-  test-and-buildRelease:
-    jobs:
-      - test:
-          filters:
-            branches:
-              ignore: /.*/
-            tags:
-              only: /v.*/
-      - buildRelease:
-          requires:
-            - test
-          filters:
-            branches:
-              ignore: /.*/
-            tags:
-              only: /v.*/
+      - build
