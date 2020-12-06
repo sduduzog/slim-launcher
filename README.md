@@ -10,6 +10,8 @@
 ![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/sduduzog/slim-launcher?style=plastic)
 ![GitHub stars](https://img.shields.io/github/stars/sduduzog/slim-launcher.svg?style=social)
 
+[![Awesome Humane Tech](https://raw.githubusercontent.com/humanetech-community/awesome-humane-tech/main/humane-tech-badge.svg?sanitize=true)](https://github.com/humanetech-community/awesome-humane-tech)
+
 ![Slim Launcher Logo](docs/assets/slim-logo.jpg)
 
 **Now available on Google Play and F-Droid!**
