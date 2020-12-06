@@ -17,13 +17,14 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables { useSupportLibrary = true }
         signingConfigs {
-            if (System.getenv("CIRCLECI").isNullOrEmpty())
+            if (System.getenv("CIRCLECI").isNullOrEmpty()) {
                 register("release") {
                     storeFile = file(project.extra["RELEASE_STORE_FILE"] as String)
                     storePassword = project.extra["RELEASE_STORE_PASSWORD"] as String
                     keyAlias = project.extra["RELEASE_KEY_ALIAS"] as String
                     keyPassword = project.extra["RELEASE_KEY_PASSWORD"] as String
                 }
+            }
         }
         lintOptions {
             isAbortOnError = false
@@ -37,7 +38,8 @@ android {
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-            signingConfig = signingConfigs.getByName("release")
+            if (System.getenv("CIRCLECI").isNullOrEmpty())
+                signingConfig = signingConfigs.getByName("release")
         }
         named("debug").configure {
             isMinifyEnabled = false
