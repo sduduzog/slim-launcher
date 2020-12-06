@@ -10,9 +10,19 @@ jobs:
     steps:
       - checkout
       - run:
-          command: ./gradlew lintDebug testDebugUnitTest
+          name: Lint
+          command: ./gradlew lintDebug
+      - run:
+          name: Test
+          command: ./gradlew testDebugUnitTest
+      - run:
+          name: Build
+          command: ./gradlew assembleRelease
       - store_artifacts:
           path: app/build/reports
           destination: reports
+      - store_artifacts:
+          path: app/build/outputs
+          destinaion: outputs
       - store_test_results:
           path: app/build/test-results
