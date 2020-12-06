@@ -9,7 +9,6 @@
 ![GitHub pull requests](https://img.shields.io/github/issues-pr/sduduzog/slim-launcher?style=plastic)
 ![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/sduduzog/slim-launcher?style=plastic)
 ![GitHub stars](https://img.shields.io/github/stars/sduduzog/slim-launcher.svg?style=social)
-![GitHub](https://img.shields.io/github/license/sduduzog/slim-launcher?style=plastic)
 
 ![Slim Launcher Logo](docs/assets/slim-logo.jpg)
 
