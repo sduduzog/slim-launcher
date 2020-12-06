@@ -54,7 +54,7 @@ if it doesn't exist already.
 - Motivation to work on this app comes from the great feedback I receive from the reviews on the Play Store and the e-mails, and in some special cases, as coffee :)
 - The fact that someone out there noticed the little effort that I put into this project gives me all the drive I need to type away at it time and time again.
 
-# Other projects
+#  Other projects forked from slim-launcher
 | Project             | Repo                         | Website                      |
 | ------------------- | ---------------------------- | ---------------------------- |
 | Unlauncher          | [[Github][unlauncher-repo]]  | [[Website][unlauncher-site]] |
