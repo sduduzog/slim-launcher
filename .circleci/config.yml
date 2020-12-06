@@ -31,9 +31,9 @@ jobs:
 
 workflows:
   version: 2.1
-  lint-and-test:
+  test-and-build:
     jobs:
-      - test:
+      - test
       - build:
           filters:
             tags:
