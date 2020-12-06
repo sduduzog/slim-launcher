@@ -1,4 +1,3 @@
-import java.net.URI
 
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
@@ -9,7 +8,7 @@ buildscript {
         maven { url = java.net.URI("https://jitpack.io") }
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:4.1.0")
+        classpath("com.android.tools.build:gradle:4.1.1")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.10")
         classpath("com.google.dagger:hilt-android-gradle-plugin:2.28-alpha")
 
