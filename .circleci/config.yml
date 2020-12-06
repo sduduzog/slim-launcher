@@ -15,14 +15,11 @@ jobs:
           destination: reports
       - store_test_results:
           path: app/build/test-results
-      - persist_to_workspace:
-          root: .
-          paths:
-            - .
 
   build:
     executor: android/android
     steps:
+      - checkout
       - run:
           command: ./gradlew assembleRelease
       - store_artifacts:
