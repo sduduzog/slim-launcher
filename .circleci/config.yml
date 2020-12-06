@@ -21,10 +21,13 @@ jobs:
     steps:
       - checkout
       - run:
-          command: ./gradlew assembleRelease
+          command: ./gradlew assembleRelease bundleRelease
       - store_artifacts:
           path: app/build/outputs/apk
-          destinaion: apk
+          destination: apk
+      - store_artifacts:
+          path: app/build/outputs/bundle
+          destination: bundle
 
 workflows:
   version: 2.1
