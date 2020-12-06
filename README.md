@@ -54,6 +54,12 @@ if it doesn't exist already.
 - Motivation to work on this app comes from the great feedback I receive from the reviews on the Play Store and the e-mails, and in some special cases, as coffee :)
 - The fact that someone out there noticed the little effort that I put into this project gives me all the drive I need to type away at it time and time again.
 
-**6.** Thank you to everyone that contributed to the project and my growth as a developer and a maintainer.
+# Other projects
+| Project             | Repo                         | Website                      |
+| ------------------- | ---------------------------- | ---------------------------- |
+| Unlauncher          | [[Github][unlauncher-repo]]  | [[Website][unlauncher-site]] |
 
-Thank you for your time
+[unlauncher-repo]: https://github.com/jkuester/unlauncher
+[unlauncher-site]: https://jkuester.github.io/unlauncher/
+
+Thank you to everyone that contributed to the project and my growth as a developer and a maintainer.
