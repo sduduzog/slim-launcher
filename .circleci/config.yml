@@ -6,7 +6,7 @@ orbs:
 jobs:
   build:
     executor: android/android
-
+    parallelism: 3
     steps:
       - checkout
       - run:
