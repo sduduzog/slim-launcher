@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import com.sduduzog.slimlauncher.data.model.App
 
-@Entity(tableName = "home_apps", primaryKeys = ["package_name", "user_serial"])
+@Entity(tableName = "home_apps", primaryKeys = ["package_name", "activity_name", "user_serial"])
 data class HomeApp(
         @field:ColumnInfo(name = "app_name")
         var appName: String,

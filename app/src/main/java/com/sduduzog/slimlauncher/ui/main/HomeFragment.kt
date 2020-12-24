@@ -11,7 +11,6 @@ import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import androidx.preference.PreferenceManager
@@ -28,11 +27,9 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 @AndroidEntryPoint
-class HomeFragment : BaseFragment(), OnLaunchAppListener {
+class HomeFragment(private val viewModel: MainViewModel) : BaseFragment(), OnLaunchAppListener {
     private lateinit var settings : SharedPreferences
-
     private lateinit var receiver: BroadcastReceiver
-    private val viewModel: MainViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {

@@ -1,44 +1,19 @@
 package com.sduduzog.slimlauncher.data
 
-import android.content.Context
 import android.os.Process
 import androidx.room.Database
-import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.sduduzog.slimlauncher.models.HomeApp
 
 
-@Database(entities = [HomeApp::class], version = 8, exportSchema = false)
+@Database(entities = [HomeApp::class], version = 9, exportSchema = false)
 abstract class BaseDatabase : RoomDatabase() {
 
     abstract fun baseDao(): BaseDao
 
     companion object {
-        @Volatile
-        @JvmStatic
-        private var INSTANCE: BaseDatabase? = null
-
-        fun getDatabase(context: Context): BaseDatabase? {
-            synchronized(BaseDatabase::class.java) {
-                if (INSTANCE == null) {
-                    INSTANCE = Room.databaseBuilder(context.applicationContext,
-                            BaseDatabase::class.java, "app_database")
-                            .addMigrations(
-                                    MIGRATION_1_2,
-                                    MIGRATION_2_3,
-                                    MIGRATION_3_4,
-                                    MIGRATION_4_5,
-                                    MIGRATION_5_6,
-                                    MIGRATION_6_7,
-                                    MIGRATION_7_8
-                            )
-                            .build()
-                }
-                return INSTANCE
-            }
-        }
 
          val MIGRATION_1_2 = object : Migration(1, 2) {
             override fun migrate(database: SupportSQLiteDatabase) {
@@ -107,6 +82,27 @@ abstract class BaseDatabase : RoomDatabase() {
                 database.execSQL("DROP TABLE home_apps")
                 database.execSQL("ALTER TABLE home_apps_copy RENAME TO home_apps")
             }
+
+
+        }
+
+        val MIGRATION_8_9 = object : Migration(8, 9){
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL("CREATE TABLE home_apps_copy(" +
+                        "package_name TEXT NOT NULL, " +
+                        "user_serial INTEGER NOT NULL, " +
+                        "app_name TEXT NOT NULL, " +
+                        "app_nickname TEXT, " +
+                        "activity_name TEXT NOT NULL, " +
+                        "sorting_index INTEGER NOT NULL, " +
+                        "PRIMARY KEY(package_name, activity_name, user_serial))"
+                )
+                database.execSQL("INSERT INTO home_apps_copy (package_name, user_serial, app_name, app_nickname, activity_name, sorting_index) " +
+                        "SELECT package_name, user_serial, app_name, app_nickname, activity_name, sorting_index FROM home_apps")
+                database.execSQL("DROP TABLE home_apps")
+                database.execSQL("ALTER TABLE home_apps_copy RENAME TO home_apps")
+            }
+
         }
     }
 }
