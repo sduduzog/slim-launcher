@@ -6,16 +6,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layoutDescription="@xml/home_motion_scene">
-
     <TextView
         android:id="@+id/home_fragment_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_64sdp"
         android:text="@string/main_placeholder_clock"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textSize="@dimen/_40ssp" />
-
     <TextView
         android:id="@+id/home_fragment_date"
         android:layout_width="wrap_content"
@@ -24,7 +21,6 @@
         android:text="@string/main_placeholder_date"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textSize="@dimen/_12sdp" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/home_fragment_list"
         android:layout_width="0dp"
@@ -32,7 +28,6 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:itemCount="4"
         tools:listitem="@layout/main_fragment_list_item" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/home_fragment_list_exp"
         android:layout_width="0dp"
@@ -40,7 +35,6 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:itemCount="3"
         tools:listitem="@layout/main_fragment_list_item" />
-
     <TextView
         android:id="@+id/home_fragment_options"
         android:layout_width="wrap_content"
@@ -49,7 +43,6 @@
         android:text="@string/main_fragment_options"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textSize="@dimen/_18ssp" />
-
     <ImageView
         android:id="@+id/home_fragment_call"
         android:layout_width="wrap_content"
@@ -57,7 +50,6 @@
         android:padding="@dimen/_8sdp"
         app:srcCompat="@drawable/ic_call"
         tools:ignore="ContentDescription" />
-
     <ImageView
         android:id="@+id/home_fragment_camera"
         android:layout_width="wrap_content"
@@ -65,5 +57,4 @@
         android:padding="@dimen/_8sdp"
         app:srcCompat="@drawable/ic_photo_camera"
         tools:ignore="ContentDescription" />
-
 </androidx.constraintlayout.motion.widget.MotionLayout>
