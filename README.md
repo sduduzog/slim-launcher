@@ -1,5 +1,6 @@
 # Slim launcher
 > _All you need is less._
+> @@
 
 ![CircleCI](https://img.shields.io/circleci/build/github/sduduzog/slim-launcher?style=plastic)
 ![GitHub](https://img.shields.io/github/license/sduduzog/slim-launcher.svg?style=plastic)
