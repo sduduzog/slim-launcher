@@ -12,8 +12,8 @@ android {
         applicationId = "com.sduduzog.slimlauncher"
         minSdkVersion(21)
         targetSdkVersion(30)
-        versionName = "2.4.18"
-        versionCode = 52
+        versionName = "2.4.19"
+        versionCode = 53
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables { useSupportLibrary = true }
         signingConfigs {
@@ -57,21 +57,21 @@ dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
     // Kotlin Libraries
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.72")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.4.31")
 
     // Support Libraries
-    implementation("androidx.appcompat:appcompat:1.2.0")
-    implementation("androidx.recyclerview:recyclerview:1.1.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.0.1")
+    implementation("androidx.appcompat:appcompat:1.3.0")
+    implementation("androidx.recyclerview:recyclerview:1.2.0")
+    implementation("androidx.constraintlayout:constraintlayout:2.0.4")
 
     // Arch Components
-    implementation("androidx.core:core-ktx:1.5.0-alpha03")
-    implementation("androidx.fragment:fragment-ktx:1.2.5")
+    implementation("androidx.core:core-ktx:1.6.0-beta01")
+    implementation("androidx.fragment:fragment-ktx:1.3.4")
     implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
-    implementation("androidx.navigation:navigation-fragment-ktx:2.3.0")
-    implementation("androidx.room:room-runtime:2.2.5")
-    implementation("androidx.lifecycle:lifecycle-common-java8:2.2.0")
-    kapt("androidx.room:room-compiler:2.2.5")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.3.5")
+    implementation("androidx.room:room-runtime:2.3.0")
+    implementation("androidx.lifecycle:lifecycle-common-java8:2.3.1")
+    kapt("androidx.room:room-compiler:2.3.0")
 
     //3rd party libs
     implementation("com.intuit.sdp:sdp-android:1.0.6")
@@ -94,7 +94,7 @@ dependencies {
 
 
     testImplementation("androidx.arch.core:core-testing:2.1.0")
-    testImplementation("androidx.fragment:fragment-testing:1.2.5")
+    testImplementation("androidx.fragment:fragment-testing:1.3.4")
 
     testImplementation("org.robolectric:robolectric:4.4")
 
@@ -105,10 +105,10 @@ dependencies {
     testImplementation("com.google.dagger:hilt-android-testing:2.29-alpha")
     kaptTest("com.google.dagger:hilt-android-compiler:2.29-alpha")
 
-    androidTestImplementation("androidx.room:room-testing:2.2.5")
+    androidTestImplementation("androidx.room:room-testing:2.3.0")
     androidTestImplementation("androidx.test:runner:1.3.0")
     androidTestImplementation("androidx.test:rules:1.3.0")
-    androidTestImplementation("androidx.annotation:annotation:1.1.0")
+    androidTestImplementation("androidx.annotation:annotation:1.2.0")
     androidTestImplementation("androidx.test:runner:1.3.0")
     androidTestImplementation("androidx.test:rules:1.3.0")
     androidTestImplementation("androidx.arch.core:core-testing:2.1.0")
