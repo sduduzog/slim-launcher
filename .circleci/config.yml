@@ -7,36 +7,24 @@ orbs:
   android: circleci/android@1.0.3
 
 jobs:
-  # Below is the definition of your job to build and test your app, you can rename and customize it as you want.
-  build-and-test:  
-    # These next lines define the Android machine image executor: https://circleci.com/docs/2.0/executor-types/
-    executor:
-      name: android/android-machine
-
+  build:
+    executor: android/android
     steps:
-      # Checkout the code as the first step.
       - checkout
-
-      # The next step will run the unit tests
-      - android/run-tests:
-          test-command: ./gradlew lint --continue
-
-      # Then start the emulator and run the Instrumentation tests!
-      - android/start-emulator-and-run-tests:
-          test-command: ./gradlew connectedDebugAndroidTest
-          system-image: system-images;android-25;google_apis;x86
-
-      # And finally run the release build
       - run:
-          name: Assemble release build
-          command: |
-            ./gradlew assembleRelease    
-
-workflows:
-  # Below is the definition of your workflow.
-  # Inside the workflow, you provide the jobs you want to run, e.g this workflow runs the build-and-test job above.
-  # CircleCI will run this workflow on every commit.
-  # For more details on extending your workflow, see the configuration docs: https://circleci.com/docs/2.0/configuration-reference/#workflows
-  sample: 
-    jobs:
-      - build-and-test
+          name: Lint
+          command: ./gradlew lintDebug
+      - run:
+          name: Test
+          command: ./gradlew testDebugUnitTest
+      - run:
+          name: Build
+          command: ./gradlew assembleRelease
+      - store_artifacts:
+          path: app/build/reports
+          destination: reports
+      - store_artifacts:
+          path: app/build/outputs
+          destinaion: outputs
+      - store_test_results:
+          path: app/build/test-results
