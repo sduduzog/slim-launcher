@@ -17,11 +17,13 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables { useSupportLibrary = true }
         signingConfigs {
-            register("release") {
-                storeFile = file(project.extra["RELEASE_STORE_FILE"] as String)
-                storePassword = project.extra["RELEASE_STORE_PASSWORD"] as String
-                keyAlias = project.extra["RELEASE_KEY_ALIAS"] as String
-                keyPassword = project.extra["RELEASE_KEY_PASSWORD"] as String
+            if (System.getenv("CIRCLECI").isNullOrEmpty()) {
+                register("release") {
+                    storeFile = file(project.extra["RELEASE_STORE_FILE"] as String)
+                    storePassword = project.extra["RELEASE_STORE_PASSWORD"] as String
+                    keyAlias = project.extra["RELEASE_KEY_ALIAS"] as String
+                    keyPassword = project.extra["RELEASE_KEY_PASSWORD"] as String
+                }
             }
         }
     }
