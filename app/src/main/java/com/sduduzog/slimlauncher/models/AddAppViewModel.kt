@@ -4,8 +4,11 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.sduduzog.slimlauncher.data.BaseDao
 import com.sduduzog.slimlauncher.data.model.App
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class AddAppViewModel @ViewModelInject constructor (baseDao: BaseDao) : ViewModel() {
     private val repository = Repository(baseDao)
@@ -42,7 +45,9 @@ class AddAppViewModel @ViewModelInject constructor (baseDao: BaseDao) : ViewMode
 
     fun addAppToHomeScreen(app: App) {
         val index = _homeApps.size
-        repository.add(HomeApp.from(app, index))
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.add(HomeApp.from(app, index))
+        }
     }
 
     override fun onCleared() {

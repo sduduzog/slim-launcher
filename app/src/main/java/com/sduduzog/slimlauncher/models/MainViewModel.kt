@@ -10,11 +10,7 @@ class MainViewModel @Inject constructor(baseDao: BaseDao) : ViewModel() {
 
     private val _baseRepository = Repository(baseDao)
 
-    private var _apps: LiveData<List<HomeApp>>
-
-    init {
-        _apps = _baseRepository.apps
-    }
+    private var _apps: LiveData<List<HomeApp>> = _baseRepository.apps
 
     val apps: LiveData<List<HomeApp>>
         get() = _apps
