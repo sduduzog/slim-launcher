@@ -16,14 +16,16 @@ android {
         versionCode = 53
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables { useSupportLibrary = true }
-//        signingConfigs {
-//            register("release") {
-//                storeFile = file(project.extra["RELEASE_STORE_FILE"] as String)
-//                storePassword = project.extra["RELEASE_STORE_PASSWORD"] as String
-//                keyAlias = project.extra["RELEASE_KEY_ALIAS"] as String
-//                keyPassword = project.extra["RELEASE_KEY_PASSWORD"] as String
-//            }
-//        }
+        signingConfigs {
+            if (project.extra.has("RELEASE_STORE_FILE")) {
+                register("release") {
+                    storeFile = file(project.extra["RELEASE_STORE_FILE"] as String)
+                    storePassword = project.extra["RELEASE_STORE_PASSWORD"] as String
+                    keyAlias = project.extra["RELEASE_KEY_ALIAS"] as String
+                    keyPassword = project.extra["RELEASE_KEY_PASSWORD"] as String
+                }
+            }
+        }
     }
 
 
@@ -36,8 +38,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-
-
+            signingConfig = signingConfigs.maybeCreate("release")
         }
         named("debug").configure {
             isMinifyEnabled = false
@@ -55,7 +56,7 @@ android {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
     lintOptions {
-        isAbortOnError = true
+        isAbortOnError = false
     }
     testOptions {
         unitTests.isIncludeAndroidResources = true
