@@ -25,9 +25,6 @@ jobs:
       - store_test_results:
           path: app/build/test-results
 workflows:
-  lint:
-    jobs:
-      - lint
   test:
     jobs:
       - lint
