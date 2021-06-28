@@ -7,7 +7,7 @@ orbs:
   android: circleci/android@1.0.3
 
 jobs:
-  test:
+  lint:
     executor: android/android
     steps:
       - checkout
@@ -23,6 +23,6 @@ jobs:
       - store_test_results:
           path: app/build/test-results
 workflows:
-  test:
+  lint:
     jobs:
       - test
