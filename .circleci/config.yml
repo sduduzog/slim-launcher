@@ -13,7 +13,7 @@ jobs:
       - checkout
       - run:
           name: Lint
-          command: ./gradlew lint
+          command: ./gradlew lintDebug
       - store_artifacts:
           path: app/build/reports
           destination: reports
