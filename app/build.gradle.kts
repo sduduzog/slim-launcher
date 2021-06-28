@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("dagger.hilt.android.plugin")
+    id("com.gtramontina.ghooks.gradle") version "1.1.1"
     kotlin("android")
     kotlin("android.extensions")
     kotlin("kapt")
@@ -27,8 +28,6 @@ android {
             }
         }
     }
-
-
 
     buildTypes {
         named("release").configure {
