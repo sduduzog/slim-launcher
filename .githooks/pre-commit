@@ -1,0 +1,5 @@
+#!/bin/sh
+set -e
+
+git --no-pager diff --cached --name-only --diff-filter=ACM "*.kt" \
+| xargs -I {} sh -c "./gradlew --quiet lintDebug -PinternalKtlintGitFilter={} && git add {}"

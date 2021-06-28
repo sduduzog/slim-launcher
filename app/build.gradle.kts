@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("dagger.hilt.android.plugin")
+//    id("com.gtramontina.ghooks.gradle").version("1.1.0")
     kotlin("android")
     kotlin("android.extensions")
     kotlin("kapt")
@@ -16,14 +17,14 @@ android {
         versionCode = 53
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables { useSupportLibrary = true }
-        signingConfigs {
-            register("release") {
-                storeFile = file(project.extra["RELEASE_STORE_FILE"] as String)
-                storePassword = project.extra["RELEASE_STORE_PASSWORD"] as String
-                keyAlias = project.extra["RELEASE_KEY_ALIAS"] as String
-                keyPassword = project.extra["RELEASE_KEY_PASSWORD"] as String
-            }
-        }
+//        signingConfigs {
+//            register("release") {
+//                storeFile = file(project.extra["RELEASE_STORE_FILE"] as String)
+//                storePassword = project.extra["RELEASE_STORE_PASSWORD"] as String
+//                keyAlias = project.extra["RELEASE_KEY_ALIAS"] as String
+//                keyPassword = project.extra["RELEASE_KEY_PASSWORD"] as String
+//            }
+//        }
     }
 
 
@@ -36,7 +37,8 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            signingConfig = signingConfigs.getByName("release")
+
+            
         }
         named("debug").configure {
             isMinifyEnabled = false
