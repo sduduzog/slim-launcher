@@ -14,9 +14,4 @@ class MainViewModel @Inject constructor(baseDao: BaseDao) : ViewModel() {
 
     val apps: LiveData<List<HomeApp>>
         get() = _apps
-
-    fun add(app: App) {
-        val index = _apps.value!!.size
-        _baseRepository.add(HomeApp.from(app, index))
-    }
 }
