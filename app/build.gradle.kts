@@ -38,7 +38,7 @@ android {
                 "proguard-rules.pro"
             )
 
-            
+
         }
         named("debug").configure {
             isMinifyEnabled = false
@@ -56,7 +56,7 @@ android {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
     lintOptions {
-        isAbortOnError = false
+        isAbortOnError = true
     }
     testOptions {
         unitTests.isIncludeAndroidResources = true
