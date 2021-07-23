@@ -2,7 +2,6 @@ package com.sduduzog.slimlauncher
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 
-
 class DemoTest {
     @Test
     fun demoTestFunction() {

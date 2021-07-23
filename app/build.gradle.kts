@@ -84,10 +84,10 @@ dependencies {
     //3rd party libs
     implementation("com.intuit.sdp:sdp-android:1.0.6")
     implementation("com.intuit.ssp:ssp-android:1.0.6")
-    implementation("com.google.dagger:hilt-android:2.29-alpha")
-    implementation("androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha02")
-    kapt("androidx.hilt:hilt-compiler:1.0.0-alpha02")
-    kapt("com.google.dagger:hilt-android-compiler:2.29-alpha")
+    implementation("com.google.dagger:hilt-android:2.35")
+    implementation("androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03")
+    kapt("androidx.hilt:hilt-compiler:1.0.0")
+    kapt("com.google.dagger:hilt-android-compiler:2.35")
 
 
     // Unit test libs
