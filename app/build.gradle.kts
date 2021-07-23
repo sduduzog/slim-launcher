@@ -68,13 +68,13 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.4.31")
 
     // Support Libraries
-    implementation("androidx.appcompat:appcompat:1.3.0")
+    implementation("androidx.appcompat:appcompat:1.3.1")
     implementation("androidx.recyclerview:recyclerview:1.2.1")
     implementation("androidx.constraintlayout:constraintlayout:2.0.4")
 
     // Arch Components
-    implementation("androidx.core:core-ktx:1.6.0-rc01")
-    implementation("androidx.fragment:fragment-ktx:1.3.4")
+    implementation("androidx.core:core-ktx:1.7.0-alpha01")
+    implementation("androidx.fragment:fragment-ktx:1.3.6")
     implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
     implementation("androidx.navigation:navigation-fragment-ktx:2.3.5")
     implementation("androidx.room:room-runtime:2.3.0")
@@ -88,4 +88,10 @@ dependencies {
     implementation("androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha02")
     kapt("androidx.hilt:hilt-compiler:1.0.0-alpha02")
     kapt("com.google.dagger:hilt-android-compiler:2.29-alpha")
+
+
+    // Unit test libs
+    testImplementation("junit:junit:4.13.2")
+    testImplementation("com.google.truth:truth:1.1.3")
+
 }
