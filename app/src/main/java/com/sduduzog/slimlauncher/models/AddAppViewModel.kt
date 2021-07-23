@@ -1,17 +1,19 @@
 package com.sduduzog.slimlauncher.models
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sduduzog.slimlauncher.data.BaseDao
 import com.sduduzog.slimlauncher.data.model.App
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class AddAppViewModel @ViewModelInject constructor (baseDao: BaseDao) : ViewModel() {
-    private val repository = Repository(baseDao)
+@HiltViewModel
+class AddAppViewModel @Inject constructor(
+    private val repository: Repository
+) : ViewModel() {
     private var filterQuery = ""
     private val regex = Regex("[!@#\$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>/? ]")
     private val _installedApps = mutableListOf<App>()
@@ -34,7 +36,9 @@ class AddAppViewModel @ViewModelInject constructor (baseDao: BaseDao) : ViewMode
 
     private fun updateDisplayedApps() {
         val filteredApps = _installedApps.filterNot { _homeApps.contains(it) }
-        this.apps.postValue(filteredApps.filter { regex.replace(it.appName, "").contains(filterQuery, ignoreCase = true) })
+        this.apps.postValue(filteredApps.filter {
+            regex.replace(it.appName, "").contains(filterQuery, ignoreCase = true)
+        })
     }
 
     fun setInstalledApps(apps: List<App>) {
