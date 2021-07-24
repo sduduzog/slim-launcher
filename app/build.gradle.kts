@@ -14,7 +14,7 @@ android {
         targetSdkVersion(30)
         versionName = "2.4.20"
         versionCode = 54
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+//        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables { useSupportLibrary = true }
         signingConfigs {
             if (project.extra.has("RELEASE_STORE_FILE")) {
@@ -94,4 +94,16 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     testImplementation("com.google.truth:truth:1.1.3")
 
+    testImplementation("org.robolectric:robolectric:4.4")
+
+    testImplementation("androidx.arch.core:core-testing:2.1.0")
+//    testImplementation("androidx.test:core:1.4.0")
+//    testImplementation("org.mockito:mockito-core:2.24.5")
+
+
+    testImplementation("com.google.dagger:hilt-android-testing:2.35")
+    kaptTest("com.google.dagger:hilt-android-compiler:2.35")
+
+    androidTestImplementation("androidx.test:runner:1.4.0")
+    androidTestImplementation ("androidx.test.ext:junit:1.1.3")
 }
