@@ -7,7 +7,7 @@ orbs:
   android: circleci/android@1.0.3
 
 jobs:
-  lint:
+  test:
     executor: android/android
     steps:
       - checkout
@@ -15,6 +15,9 @@ jobs:
       - run:
           name: Lint
           command: ./gradlew lintDebug
+      - run:
+          name: Test
+          command: ./gradlew testDebugUnitTest
       - android/save-gradle-cache
       - store_artifacts:
           path: app/build/reports
@@ -27,4 +30,4 @@ jobs:
 workflows:
   test:
     jobs:
-      - lint
+      - test

@@ -4,11 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.sduduzog.slimlauncher.data.BaseDao
 import com.sduduzog.slimlauncher.data.model.App
+import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
-class MainViewModel @Inject constructor(baseDao: BaseDao) : ViewModel() {
-
-    private val _baseRepository = Repository(baseDao)
+@HiltViewModel
+class MainViewModel @Inject constructor(
+    _baseRepository: Repository
+) : ViewModel() {
 
     private var _apps: LiveData<List<HomeApp>> = _baseRepository.apps
 

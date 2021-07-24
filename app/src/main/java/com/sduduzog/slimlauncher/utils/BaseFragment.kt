@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
 import androidx.fragment.app.Fragment
-import com.sduduzog.slimlauncher.MainActivity
 import com.sduduzog.slimlauncher.R
 
 abstract class BaseFragment : Fragment(), ISubscriber {
