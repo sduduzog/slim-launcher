@@ -10,6 +10,7 @@ import java.util.concurrent.TimeUnit
 class LiveDataTestUtil {
     companion object {
         @Throws(InterruptedException::class)
+        @Suppress("UNCHECKED_CAST")
         fun <T> getValue(liveData: LiveData<T>): T? {
             val data = arrayOfNulls<Any>(1)
             val latch = CountDownLatch(1)
