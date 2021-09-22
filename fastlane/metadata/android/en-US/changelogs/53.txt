@@ -1,0 +1,2 @@
+Minor bug fixes and dependency upgrades
+Updated privacy policy link
