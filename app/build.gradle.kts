@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    compileSdkVersion(30)
+    compileSdkVersion(31)
     defaultConfig {
         applicationId = "com.sduduzog.slimlauncher"
         minSdkVersion(21)
-        targetSdkVersion(30)
+        targetSdkVersion(31)
         versionName = "2.4.20"
         versionCode = 54
 //        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -65,15 +65,15 @@ dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
     // Kotlin Libraries
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.4.31")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.5.21")
 
     // Support Libraries
     implementation("androidx.appcompat:appcompat:1.3.1")
     implementation("androidx.recyclerview:recyclerview:1.2.1")
-    implementation("androidx.constraintlayout:constraintlayout:2.0.4")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.0")
 
     // Arch Components
-    implementation("androidx.core:core-ktx:1.7.0-alpha01")
+    implementation("androidx.core:core-ktx:1.7.0-beta01")
     implementation("androidx.fragment:fragment-ktx:1.3.6")
     implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
     implementation("androidx.navigation:navigation-fragment-ktx:2.3.5")

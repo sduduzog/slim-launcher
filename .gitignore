@@ -68,3 +68,4 @@ fastlane/readme.md
 
 app/release/output\.json
 *.aab
+/play-store-creds.json

@@ -1,0 +1,24 @@
+default_platform(:android)
+
+platform :android do
+  desc "Runs all the tests"
+  lane :test do
+    gradle(task: "test")
+  end
+
+  desc "Submit a new Beta Build to Crashlytics Beta"
+  lane :beta do
+    ensure_git_status_clean(
+      show_uncommitted_changes: true
+    )
+    ensure_git_branch(
+      branch: '^release/.*$'
+    )
+    gradle(task: "clean bundleRelease")
+    supply(
+      track: 'beta',
+      rollout: '1'
+    )
+  end
+
+end
