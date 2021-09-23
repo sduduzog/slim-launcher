@@ -25,10 +25,6 @@ class OptionsFragment : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        options_fragment_about_slim.setOnClickListener {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.slim_url)))
-            launchActivity(it, intent)
-        }
         options_fragment_device_settings.setOnClickListener {
             val intent = Intent(Settings.ACTION_SETTINGS)
             launchActivity(it, intent)
