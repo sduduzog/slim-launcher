@@ -12,8 +12,8 @@ android {
         applicationId = "com.sduduzog.slimlauncher"
         minSdkVersion(21)
         targetSdkVersion(31)
-        versionName = "2.4.20"
-        versionCode = 54
+        versionName = "2.4.21"
+        versionCode = 55
         vectorDrawables { useSupportLibrary = true }
         signingConfigs {
             if (project.extra.has("RELEASE_STORE_FILE")) {
