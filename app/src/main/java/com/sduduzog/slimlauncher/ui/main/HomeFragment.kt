@@ -26,7 +26,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 @AndroidEntryPoint
-class HomeFragment() : BaseFragment(), OnLaunchAppListener {
+class HomeFragment : BaseFragment(), OnLaunchAppListener {
 
     private val viewModel: MainViewModel by viewModels()
 
@@ -44,7 +44,7 @@ class HomeFragment() : BaseFragment(), OnLaunchAppListener {
         home_fragment_list.adapter = adapter1
         home_fragment_list_exp.adapter = adapter2
 
-        viewModel.apps.observe(viewLifecycleOwner, Observer { list ->
+        viewModel.apps.observe(viewLifecycleOwner, { list ->
             list?.let { apps ->
                 adapter1.setItems(apps.filter {
                     it.sortingIndex < 4

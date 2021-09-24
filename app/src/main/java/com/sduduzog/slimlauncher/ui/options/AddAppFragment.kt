@@ -11,7 +11,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import com.sduduzog.slimlauncher.BuildConfig
 import com.sduduzog.slimlauncher.R
@@ -22,7 +21,6 @@ import com.sduduzog.slimlauncher.utils.BaseFragment
 import com.sduduzog.slimlauncher.utils.OnAppClickedListener
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.add_app_fragment.*
-import java.util.*
 
 @AndroidEntryPoint
 class AddAppFragment : BaseFragment(), OnAppClickedListener {
@@ -41,7 +39,7 @@ class AddAppFragment : BaseFragment(), OnAppClickedListener {
 
         add_app_fragment_list.adapter = adapter
 
-        viewModel.apps.observe(viewLifecycleOwner, Observer {
+        viewModel.apps.observe(viewLifecycleOwner, {
             it?.let { apps ->
                 adapter.setItems(apps)
                 add_app_fragment_progress_bar.visibility = View.GONE
@@ -86,8 +84,8 @@ class AddAppFragment : BaseFragment(), OnAppClickedListener {
     private fun getInstalledApps(): List<App> {
         val list = mutableListOf<App>()
 
-        val manager = context!!.getSystemService(Context.USER_SERVICE) as UserManager
-        val launcher = context!!.getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
+        val manager = requireContext().getSystemService(Context.USER_SERVICE) as UserManager
+        val launcher = requireContext().getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
         val myUserHandle = Process.myUserHandle()
 
         for (profile in manager.userProfiles) {

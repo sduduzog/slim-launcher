@@ -2,8 +2,6 @@ package com.sduduzog.slimlauncher.models
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.sduduzog.slimlauncher.data.BaseDao
-import com.sduduzog.slimlauncher.data.model.App
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

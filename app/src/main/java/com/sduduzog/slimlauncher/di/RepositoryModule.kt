@@ -12,7 +12,7 @@ import dagger.hilt.android.scopes.ViewModelScoped
 @InstallIn(ViewModelComponent::class)
 class RepositoryModule {
     @Provides
-    @ViewModelScoped()
+    @ViewModelScoped
     fun providesRepository(baseDao: BaseDao): Repository {
         return Repository(baseDao)
     }

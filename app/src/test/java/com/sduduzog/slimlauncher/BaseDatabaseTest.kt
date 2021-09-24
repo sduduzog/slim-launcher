@@ -66,6 +66,6 @@ class BaseDatabaseTest {
             null, 12345
         )
         baseDao.add(app)
-        assertThat(LiveDataTestUtil.getValue(baseDao.apps)).contains(app);
+        assertThat(LiveDataTestUtil.getValue(baseDao.apps)).contains(app)
     }
 }

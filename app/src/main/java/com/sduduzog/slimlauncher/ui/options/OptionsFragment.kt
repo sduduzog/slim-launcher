@@ -2,7 +2,6 @@ package com.sduduzog.slimlauncher.ui.options
 
 import android.content.Context.MODE_PRIVATE
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
 import android.view.LayoutInflater
