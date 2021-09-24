@@ -14,7 +14,6 @@ android {
         targetSdkVersion(31)
         versionName = "2.4.20"
         versionCode = 54
-//        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables { useSupportLibrary = true }
         signingConfigs {
             if (project.extra.has("RELEASE_STORE_FILE")) {
