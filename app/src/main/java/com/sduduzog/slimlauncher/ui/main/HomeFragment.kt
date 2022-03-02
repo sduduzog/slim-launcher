@@ -10,6 +10,7 @@ import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import com.sduduzog.slimlauncher.R
@@ -25,7 +26,9 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 @AndroidEntryPoint
-class HomeFragment(private val viewModel: MainViewModel) : BaseFragment(), OnLaunchAppListener {
+class HomeFragment : BaseFragment(), OnLaunchAppListener {
+
+    private val viewModel: MainViewModel by viewModels()
 
     private lateinit var receiver: BroadcastReceiver
 
@@ -41,7 +44,7 @@ class HomeFragment(private val viewModel: MainViewModel) : BaseFragment(), OnLau
         home_fragment_list.adapter = adapter1
         home_fragment_list_exp.adapter = adapter2
 
-        viewModel.apps.observe(viewLifecycleOwner, Observer { list ->
+        viewModel.apps.observe(viewLifecycleOwner, { list ->
             list?.let { apps ->
                 adapter1.setItems(apps.filter {
                     it.sortingIndex < 4

@@ -1,0 +1,2 @@
+Removed "about slim" from options as it led to a broken link
+Code cleanup and dependency updates
