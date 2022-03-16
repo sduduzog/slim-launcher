@@ -28,6 +28,7 @@ android {
 
     buildFeatures {
         viewBinding = true
+        compose = true
     }
 
     buildTypes {
@@ -55,6 +56,9 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.1.1"
+    }
     testOptions {
         unitTests.isIncludeAndroidResources = true
     }
@@ -67,7 +71,7 @@ dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
     // Kotlin Libraries
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.5.21")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.6.10")
 
     // Support Libraries
     implementation("androidx.appcompat:appcompat:1.4.1")
@@ -88,6 +92,19 @@ dependencies {
     implementation("com.intuit.ssp:ssp-android:1.0.6")
     implementation("com.google.dagger:hilt-android:2.41")
     kapt("com.google.dagger:hilt-compiler:2.41")
+
+    // Integration with activities
+    implementation("androidx.activity:activity-compose:1.4.0")
+    // Compose Material Design
+    implementation("androidx.compose.material:material:1.1.1")
+    // Animations
+    implementation("androidx.compose.animation:animation:1.1.1")
+    // Tooling support (Previews, etc.)
+    implementation("androidx.compose.ui:ui-tooling:1.1.1")
+    // Integration with ViewModels
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.4.1")
+    // When using a AppCompat theme
+    implementation("com.google.accompanist:accompanist-appcompat-theme:0.16.0")
 
 
     // Unit test libs
