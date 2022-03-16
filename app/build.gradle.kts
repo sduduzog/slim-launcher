@@ -83,10 +83,10 @@ dependencies {
     //3rd party libs
     implementation("com.intuit.sdp:sdp-android:1.0.6")
     implementation("com.intuit.ssp:ssp-android:1.0.6")
-    implementation("com.google.dagger:hilt-android:2.35")
-    implementation("androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03")
+    implementation("com.google.dagger:hilt-android:2.38.1")
+//    implementation("androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03")
     kapt("androidx.hilt:hilt-compiler:1.0.0")
-    kapt("com.google.dagger:hilt-android-compiler:2.35")
+    kapt("com.google.dagger:hilt-android-compiler:2.38.1")
 
 
     // Unit test libs
@@ -101,8 +101,11 @@ dependencies {
 
 
     testImplementation("com.google.dagger:hilt-android-testing:2.35")
-    kaptTest("com.google.dagger:hilt-android-compiler:2.35")
+    kaptTest("com.google.dagger:hilt-android-compiler:2.38.1")
 
     androidTestImplementation("androidx.test:runner:1.4.0")
     androidTestImplementation ("androidx.test.ext:junit:1.1.3")
+}
+kapt {
+    correctErrorTypes = true
 }

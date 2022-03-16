@@ -39,14 +39,14 @@ class AddAppFragment : BaseFragment(), OnAppClickedListener {
 
         add_app_fragment_list.adapter = adapter
 
-        viewModel.apps.observe(viewLifecycleOwner, {
+        viewModel.apps.observe(viewLifecycleOwner) {
             it?.let { apps ->
                 adapter.setItems(apps)
                 add_app_fragment_progress_bar.visibility = View.GONE
             } ?: run {
                 add_app_fragment_progress_bar.visibility = View.VISIBLE
             }
-        })
+        }
     }
 
     override fun onResume() {

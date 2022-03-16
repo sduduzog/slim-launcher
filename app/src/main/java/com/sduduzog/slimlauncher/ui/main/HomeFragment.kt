@@ -44,7 +44,7 @@ class HomeFragment : BaseFragment(), OnLaunchAppListener {
         home_fragment_list.adapter = adapter1
         home_fragment_list_exp.adapter = adapter2
 
-        viewModel.apps.observe(viewLifecycleOwner, { list ->
+        viewModel.apps.observe(viewLifecycleOwner) { list ->
             list?.let { apps ->
                 adapter1.setItems(apps.filter {
                     it.sortingIndex < 4
@@ -53,7 +53,7 @@ class HomeFragment : BaseFragment(), OnLaunchAppListener {
                     it.sortingIndex >= 4
                 })
             }
-        })
+        }
 
         setEventListeners()
         home_fragment_options.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_homeFragment_to_optionsFragment))
