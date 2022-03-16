@@ -19,5 +19,5 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
--keepnames class androidx.navigation.fragment.NavHostFragment
--keep class * extends androidx.fragment.app.Fragment{}
+#-keepnames class androidx.navigation.fragment.NavHostFragment
+#-keep class * extends androidx.fragment.app.Fragment{}

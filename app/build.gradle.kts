@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    compileSdkVersion(31)
+    compileSdk = 31
     defaultConfig {
         applicationId = "com.sduduzog.slimlauncher"
-        minSdkVersion(21)
-        targetSdkVersion(31)
+        minSdk = 21
+        targetSdk = 31
         versionName = "2.4.21"
         versionCode = 55
         vectorDrawables { useSupportLibrary = true }
@@ -55,11 +55,11 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
-    lintOptions {
-        isAbortOnError = false
-    }
     testOptions {
         unitTests.isIncludeAndroidResources = true
+    }
+    lint {
+        abortOnError = false
     }
 }
 
@@ -79,9 +79,9 @@ dependencies {
     implementation("androidx.fragment:fragment-ktx:1.4.1")
     implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
     implementation("androidx.navigation:navigation-fragment-ktx:2.3.5")
-    implementation("androidx.room:room-runtime:2.3.0")
+    implementation("androidx.room:room-runtime:2.4.2")
     implementation("androidx.lifecycle:lifecycle-common-java8:2.3.1")
-    kapt("androidx.room:room-compiler:2.3.0")
+    kapt("androidx.room:room-compiler:2.4.2")
 
     //3rd party libs
     implementation("com.intuit.sdp:sdp-android:1.0.6")
@@ -93,12 +93,8 @@ dependencies {
     // Unit test libs
     testImplementation("junit:junit:4.13.2")
     testImplementation("com.google.truth:truth:1.1.3")
-
     testImplementation("org.robolectric:robolectric:4.4")
-
     testImplementation("androidx.arch.core:core-testing:2.1.0")
-
-
     testImplementation("com.google.dagger:hilt-android-testing:2.41")
     kaptTest("com.google.dagger:hilt-android-compiler:2.41")
 

@@ -6,7 +6,7 @@ platform :android do
     gradle(task: "test")
   end
 
-  desc "Submit a new Beta Build to Crashlytics Beta"
+  desc "Publishes app to Beta channel"
   lane :beta do
     ensure_git_status_clean(
       show_uncommitted_changes: true
