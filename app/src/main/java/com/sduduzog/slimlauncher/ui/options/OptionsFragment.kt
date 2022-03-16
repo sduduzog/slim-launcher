@@ -1,5 +1,6 @@
 package com.sduduzog.slimlauncher.ui.options
 
+import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.os.Bundle
@@ -10,44 +11,62 @@ import android.view.ViewGroup
 import androidx.core.content.edit
 import androidx.navigation.Navigation
 import com.sduduzog.slimlauncher.R
+import com.sduduzog.slimlauncher.databinding.OptionsFragmentBinding
 import com.sduduzog.slimlauncher.ui.dialogs.ChangeThemeDialog
 import com.sduduzog.slimlauncher.ui.dialogs.ChooseTimeFormatDialog
 import com.sduduzog.slimlauncher.utils.BaseFragment
-import kotlinx.android.synthetic.main.options_fragment.*
 
 class OptionsFragment : BaseFragment() {
-    override fun getFragmentView(): ViewGroup = options_fragment
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.options_fragment, container, false)
-    }
+    private var _binding: OptionsFragmentBinding? = null
+    private val binding get() = _binding
+    override fun getFragmentView(): ViewGroup = binding!!.root
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        options_fragment_device_settings.setOnClickListener {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = OptionsFragmentBinding.inflate(inflater, container, false)
+        binding!!.optionsFragmentDeviceSettings.setOnClickListener {
             val intent = Intent(Settings.ACTION_SETTINGS)
             launchActivity(it, intent)
         }
-        options_fragment_device_settings.setOnLongClickListener {
+        binding!!.optionsFragmentDeviceSettings.setOnLongClickListener {
             val intent = Intent(Settings.ACTION_HOME_SETTINGS)
             launchActivity(it, intent)
             true
         }
-        options_fragment_change_theme.setOnClickListener {
+        binding!!.optionsFragmentChangeTheme.setOnClickListener {
             val changeThemeDialog = ChangeThemeDialog.getThemeChooser()
             changeThemeDialog.showNow(childFragmentManager, "THEME_CHOOSER")
         }
-        options_fragment_choose_time_format.setOnClickListener {
+        binding!!.optionsFragmentChooseTimeFormat.setOnClickListener {
             val chooseTimeFormatDialog = ChooseTimeFormatDialog.getInstance()
             chooseTimeFormatDialog.showNow(childFragmentManager, "TIME_FORMAT_CHOOSER")
         }
-        options_fragment_toggle_status_bar.setOnClickListener {
-            val settings = requireContext().getSharedPreferences(getString(R.string.prefs_settings), MODE_PRIVATE)
-            val isHidden = settings.getBoolean(getString(R.string.prefs_settings_key_toggle_status_bar), false)
+        binding!!.optionsFragmentToggleStatusBar.setOnClickListener {
+            val settings = requireContext().getSharedPreferences(
+                getString(R.string.prefs_settings),
+                MODE_PRIVATE
+            )
+            val isHidden =
+                settings.getBoolean(getString(R.string.prefs_settings_key_toggle_status_bar), false)
             settings.edit {
                 putBoolean(getString(R.string.prefs_settings_key_toggle_status_bar), !isHidden)
             }
         }
-        options_fragment_customise_apps.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_optionsFragment_to_customiseAppsFragment))
+        binding!!.optionsFragmentCustomiseApps.setOnClickListener(
+            Navigation.createNavigateOnClickListener(
+                R.id.action_optionsFragment_to_customiseAppsFragment
+            )
+        )
+        return binding?.root
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
 }

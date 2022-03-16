@@ -16,49 +16,53 @@ import com.sduduzog.slimlauncher.BuildConfig
 import com.sduduzog.slimlauncher.R
 import com.sduduzog.slimlauncher.adapters.AddAppAdapter
 import com.sduduzog.slimlauncher.data.model.App
+import com.sduduzog.slimlauncher.databinding.AddAppFragmentBinding
 import com.sduduzog.slimlauncher.models.AddAppViewModel
 import com.sduduzog.slimlauncher.utils.BaseFragment
 import com.sduduzog.slimlauncher.utils.OnAppClickedListener
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.add_app_fragment.*
 
 @AndroidEntryPoint
 class AddAppFragment : BaseFragment(), OnAppClickedListener {
 
-    override fun getFragmentView(): ViewGroup = add_app_fragment
+    private var _binding: AddAppFragmentBinding? = null
+    private val binding get() = _binding
+    override fun getFragmentView(): ViewGroup = binding!!.root
 
     private  val viewModel: AddAppViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.add_app_fragment, container, false)
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+        _binding = AddAppFragmentBinding.inflate(inflater, container, false)
         val adapter = AddAppAdapter(this)
 
-        add_app_fragment_list.adapter = adapter
+        binding!!.addAppFragmentList.adapter = adapter
 
         viewModel.apps.observe(viewLifecycleOwner) {
             it?.let { apps ->
                 adapter.setItems(apps)
-                add_app_fragment_progress_bar.visibility = View.GONE
+                binding!!.addAppFragmentProgressBar.visibility = View.GONE
             } ?: run {
-                add_app_fragment_progress_bar.visibility = View.VISIBLE
+               binding!!.addAppFragmentProgressBar.visibility = View.VISIBLE
             }
         }
+        return binding?.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun onResume() {
         super.onResume()
         viewModel.setInstalledApps(getInstalledApps())
         viewModel.filterApps("")
-        add_app_fragment_edit_text.addTextChangedListener(onTextChangeListener)
+        binding!!.addAppFragmentEditText.addTextChangedListener(onTextChangeListener)
     }
 
     override fun onPause() {
         super.onPause()
-        add_app_fragment_edit_text?.removeTextChangedListener(onTextChangeListener)
+        binding!!.addAppFragmentEditText.removeTextChangedListener(onTextChangeListener)
     }
 
     private val onTextChangeListener: TextWatcher = object : TextWatcher {
@@ -78,7 +82,7 @@ class AddAppFragment : BaseFragment(), OnAppClickedListener {
 
     override fun onAppClicked(app: App) {
         viewModel.addAppToHomeScreen(app)
-        Navigation.findNavController(add_app_fragment).popBackStack()
+        Navigation.findNavController(binding!!.root).popBackStack()
     }
 
     private fun getInstalledApps(): List<App> {

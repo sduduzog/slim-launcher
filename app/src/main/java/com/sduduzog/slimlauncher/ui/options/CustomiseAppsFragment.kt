@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.sduduzog.slimlauncher.R
 import com.sduduzog.slimlauncher.adapters.CustomAppsAdapter
+import com.sduduzog.slimlauncher.databinding.CustomiseAppsFragmentBinding
 import com.sduduzog.slimlauncher.models.CustomiseAppsViewModel
 import com.sduduzog.slimlauncher.models.HomeApp
 import com.sduduzog.slimlauncher.ui.dialogs.RemoveAllAppsDialog
@@ -20,64 +21,84 @@ import com.sduduzog.slimlauncher.utils.BaseFragment
 import com.sduduzog.slimlauncher.utils.OnItemActionListener
 import com.sduduzog.slimlauncher.utils.OnShitDoneToAppsListener
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.customise_apps_fragment.*
 
 
 @AndroidEntryPoint
 class CustomiseAppsFragment : BaseFragment(), OnShitDoneToAppsListener {
 
-    override fun getFragmentView(): ViewGroup = customise_apps_fragment
+    private var _binding: CustomiseAppsFragmentBinding? = null
+    private val binding get() = _binding
+    override fun getFragmentView(): ViewGroup = binding!!.root
 
     private val viewModel: CustomiseAppsViewModel by viewModels()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.customise_apps_fragment, container, false)
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = CustomiseAppsFragmentBinding.inflate(inflater, container, false)
 
         val adapter = CustomAppsAdapter(this)
 
         viewModel.apps.observe(viewLifecycleOwner) {
             it?.let { apps ->
                 adapter.setItems(apps)
-                customise_apps_fragment_add.visibility =
+                binding!!.customiseAppsFragmentAdd.visibility =
                     if (apps.size < 7) View.VISIBLE else View.INVISIBLE
             } ?: adapter.setItems(listOf())
         }
-        customise_apps_fragment_remove_all.setOnClickListener {
-            RemoveAllAppsDialog.getInstance(viewModel.apps.value!!, viewModel).show(childFragmentManager, "REMOVE_APPS")
+        binding!!.customiseAppsFragmentRemoveAll.setOnClickListener {
+            RemoveAllAppsDialog.getInstance(viewModel.apps.value!!, viewModel)
+                .show(childFragmentManager, "REMOVE_APPS")
         }
 
-        customise_apps_fragment_list.adapter = adapter
+        binding!!.customiseAppsFragmentList.adapter = adapter
         val listener: OnItemActionListener = adapter
         val simpleItemTouchCallback = object : ItemTouchHelper.Callback() {
 
-            override fun onChildDraw(c: Canvas, recyclerView: RecyclerView,
-                                     viewHolder: RecyclerView.ViewHolder, dX: Float,
-                                     dY: Float, actionState: Int, isCurrentlyActive: Boolean) {
+            override fun onChildDraw(
+                c: Canvas, recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder, dX: Float,
+                dY: Float, actionState: Int, isCurrentlyActive: Boolean
+            ) {
                 if (isCurrentlyActive) {
                     viewHolder.itemView.alpha = 0.5f
                 } else {
                     viewHolder.itemView.alpha = 1f
                 }
-                super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+                super.onChildDraw(
+                    c,
+                    recyclerView,
+                    viewHolder,
+                    dX,
+                    dY,
+                    actionState,
+                    isCurrentlyActive
+                )
             }
 
-            override fun clearView(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder) {
+            override fun clearView(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder
+            ) {
                 super.clearView(recyclerView, viewHolder)
                 listener.onViewIdle()
             }
 
-            override fun getMovementFlags(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder): Int {
+            override fun getMovementFlags(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder
+            ): Int {
                 val dragFlags = ItemTouchHelper.UP or ItemTouchHelper.DOWN
                 val swipeFlags = 0
                 return makeMovementFlags(dragFlags, swipeFlags)
             }
 
-            override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder,
-                                target: RecyclerView.ViewHolder): Boolean {
+            override fun onMove(
+                recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
                 return listener.onViewMoved(viewHolder.adapterPosition, target.adapterPosition)
             }
 
@@ -90,11 +111,16 @@ class CustomiseAppsFragment : BaseFragment(), OnShitDoneToAppsListener {
 
         val itemTouchHelper = ItemTouchHelper(simpleItemTouchCallback)
 
-        itemTouchHelper.attachToRecyclerView(customise_apps_fragment_list)
+        itemTouchHelper.attachToRecyclerView(binding!!.customiseAppsFragmentList)
 
         adapter.setItemTouchHelper(itemTouchHelper)
 
-        customise_apps_fragment_add.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_customiseAppsFragment_to_addAppFragment))
+        binding!!.customiseAppsFragmentAdd.setOnClickListener(
+            Navigation.createNavigateOnClickListener(
+                R.id.action_customiseAppsFragment_to_addAppFragment
+            )
+        )
+        return binding?.root
     }
 
     private fun showPopupMenu(view: View): PopupMenu {
@@ -112,7 +138,8 @@ class CustomiseAppsFragment : BaseFragment(), OnShitDoneToAppsListener {
         showPopupMenu(view).setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.ca_menu_rename -> {
-                    RenameAppDialog.getInstance(app, viewModel).show(childFragmentManager, "SettingsListAdapter")
+                    RenameAppDialog.getInstance(app, viewModel)
+                        .show(childFragmentManager, "SettingsListAdapter")
                 }
                 R.id.ca_menu_remove -> {
                     viewModel.remove(app)
