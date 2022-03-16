@@ -8,7 +8,7 @@ orbs:
 
 jobs:
   test:
-    executor: android/android
+    executor: android/android-docker
     steps:
       - checkout
       - android/restore-gradle-cache
