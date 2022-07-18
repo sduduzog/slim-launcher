@@ -1,0 +1,47 @@
+<resources>
+    <string name="app_name" translatable="false">Slim Launcher</string>
+    <string name="slim_url" translatable="false">https://slimlauncher.sduduzog.com</string>
+    <string name="main_placeholder_clock" translatable="false">00:00</string>
+    <string name="main_placeholder_date" translatable="false">Sat, Apr 20</string>
+
+    <string-array name="themes_array">
+        <item>ปกติ</item>
+        <item>เที่ยงคืน</item>
+        <item>ดาวพฤหัส</item>
+        <item>สีน้ำทะเล</item>
+        <item>ลูกกวาด</item>
+        <item>พาสเทล</item>
+    </string-array>
+
+    <string-array name="time_format_array">
+        <item>ตามการตั้งค่าของระบบ</item>
+        <item>ระบบ 24 ชั่วโมง</item>
+        <item>ระบบ 12 ชั่วโมง</item>
+    </string-array>
+
+    <string name="prefs_settings" translatable="false">settings</string>
+    <string name="prefs_settings_key_theme" translatable="false">key_theme</string>
+    <string name="prefs_settings_key_time_format" translatable="false">time_format</string>
+    <string name="prefs_settings_key_toggle_status_bar" translatable="false">hide_status_bar</string>
+    <string name="choose_time_format_dialog_title">เลือกรูปแบบเวลา</string>
+    <string name="main_fragment_options">การตั้งค่า</string>
+    <string name="options_fragment_about_slim">เกี่ยวกับ Slim</string>
+    <string name="options_fragment_device_settings">การตั้งค่าอุปกรณ์</string>
+    <string name="options_fragment_change_theme">เปลี่ยนธีม</string>
+    <string name="options_fragment_choose_time_format">เลือกรูปแบบเวลา</string>
+    <string name="options_fragment_customise_apps">เปลี่ยนแอพบนหน้าจอ</string>
+    <string name="options_fragment_toggle_status_bar">เปิด/ปิดแถบสถานะ</string>
+    <string name="options_fragment_hide_status_bar">ซ่อนแถบสถานะ</string>
+    <string name="options_fragment_show_status_bar">แสดงแถบสถานะ</string>
+    <string name="customise_apps_fragment_add">เพิ่ม</string>
+    <string name="menu_rename">เปลี่ยนชื่อ</string>
+    <string name="menu_remove">นำออก</string>
+    <string name="choose_theme_dialog_title">เลือกธีม</string>
+    <string name="add_apps_fragment_search_apps">ค้นหาแอพ</string>
+    <string name="customise_apps_fragment_remove_all">นำแอพออกทั้งหมด</string>
+    <string name="menu_reset">รีเซ็ต</string>
+    <string name="remove_all_apps_dialog_title" translatable="false">Remove All Apps</string>
+    <string name="remove_all_apps_dialog_message" translatable="false">"This action will not uninstall your apps."
+    "It is just to confirm if you're clearing this list on purpose"</string>
+
+</resources>
