@@ -22,8 +22,8 @@ class OptionsFragment : BaseFragment() {
         return inflater.inflate(R.layout.options_fragment, container, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         options_fragment_device_settings.setOnClickListener {
             val intent = Intent(Settings.ACTION_SETTINGS)
             launchActivity(it, intent)

@@ -34,9 +34,8 @@ class CustomiseAppsFragment : BaseFragment(), OnShitDoneToAppsListener {
         return inflater.inflate(R.layout.customise_apps_fragment, container, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         val adapter = CustomAppsAdapter(this)
 
         viewModel.apps.observe(viewLifecycleOwner, {
