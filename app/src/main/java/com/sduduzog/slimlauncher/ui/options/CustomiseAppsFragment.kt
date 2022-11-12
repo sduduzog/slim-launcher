@@ -43,13 +43,13 @@ class CustomiseAppsFragment : BaseFragment(), OnShitDoneToAppsListener {
         val adapter = CustomAppsAdapter(this)
 
         val settings = activity!!.applicationContext.getSharedPreferences(getString(R.string.prefs_settings), AppCompatActivity.MODE_PRIVATE)
-        val limit = settings.getInt(getString(R.string.prefs_settings_key_apps_limit), 7)
+        val limit = settings.getBoolean(getString(R.string.prefs_settings_key_toggle_apps_limit), false)
 
         viewModel.apps.observe(viewLifecycleOwner) {
             it?.let { apps ->
                 adapter.setItems(apps)
                 binding!!.customiseAppsFragmentAdd.visibility =
-                    if (apps.size < limit) View.VISIBLE else View.INVISIBLE
+                    if (!limit || apps.size < 7) View.VISIBLE else View.INVISIBLE
             } ?: adapter.setItems(listOf())
         }
         binding!!.customiseAppsFragmentRemoveAll.setOnClickListener {
