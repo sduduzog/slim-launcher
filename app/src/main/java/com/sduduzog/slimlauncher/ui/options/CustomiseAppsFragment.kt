@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
@@ -41,11 +42,14 @@ class CustomiseAppsFragment : BaseFragment(), OnShitDoneToAppsListener {
 
         val adapter = CustomAppsAdapter(this)
 
+        val settings = activity!!.applicationContext.getSharedPreferences(getString(R.string.prefs_settings), AppCompatActivity.MODE_PRIVATE)
+        val limit = settings.getInt(getString(R.string.prefs_settings_key_apps_limit), 7)
+
         viewModel.apps.observe(viewLifecycleOwner) {
             it?.let { apps ->
                 adapter.setItems(apps)
                 binding!!.customiseAppsFragmentAdd.visibility =
-                    if (apps.size < 7) View.VISIBLE else View.INVISIBLE
+                    if (apps.size < limit) View.VISIBLE else View.INVISIBLE
             } ?: adapter.setItems(listOf())
         }
         binding!!.customiseAppsFragmentRemoveAll.setOnClickListener {
