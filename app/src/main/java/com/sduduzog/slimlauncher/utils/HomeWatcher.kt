@@ -2,8 +2,10 @@ package com.sduduzog.slimlauncher.utils
 
 import android.content.BroadcastReceiver
 import android.content.Context
+import android.content.Context.RECEIVER_EXPORTED
 import android.content.Intent
 import android.content.IntentFilter
+import android.os.Build
 
 class HomeWatcher(private val context: Context) {
 
@@ -18,7 +20,11 @@ class HomeWatcher(private val context: Context) {
 
     fun startWatch() {
         receiver?.let {
-            context.registerReceiver(it, filter)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                context.registerReceiver(it, filter, RECEIVER_EXPORTED)
+            } else {
+                context.registerReceiver(it, filter)
+            }
         }
     }
 

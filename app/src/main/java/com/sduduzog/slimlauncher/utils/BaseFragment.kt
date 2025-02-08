@@ -30,7 +30,7 @@ abstract class BaseFragment : Fragment(), ISubscriber {
 
             }
             val value = TypedValue()
-            requireContext().theme.resolveAttribute(R.attr.colorPrimary, value, true)
+            requireContext().theme.resolveAttribute(androidx.appcompat.R.attr.colorPrimary, value, true)
             requireActivity().window.statusBarColor = value.data
         }
 

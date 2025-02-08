@@ -1,7 +1,10 @@
 package com.sduduzog.slimlauncher.ui.main
 
+import android.annotation.SuppressLint
 import android.content.*
+import android.content.Context.RECEIVER_EXPORTED
 import android.content.pm.LauncherApps
+import android.os.Build
 import android.os.Bundle
 import android.os.UserManager
 import android.provider.AlarmClock
@@ -10,6 +13,7 @@ import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import com.sduduzog.slimlauncher.R
@@ -59,10 +63,23 @@ class HomeFragment : BaseFragment(), OnLaunchAppListener {
         return binding?.root
     }
 
+    @SuppressLint("InlinedApi")
     override fun onStart() {
         super.onStart()
         receiver = ClockReceiver()
-        activity?.registerReceiver(receiver, IntentFilter(Intent.ACTION_TIME_TICK))
+        // context.registerReceiver(broadcastReceiver, intentFilter, RECEIVER_NOT_EXPORTED);
+        val intentFilter = IntentFilter(Intent.ACTION_TIME_TICK)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            activity?.registerReceiver(receiver, intentFilter, RECEIVER_EXPORTED)
+        } else {
+            activity?.registerReceiver(receiver, intentFilter)
+        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+//            registerReceiver(broadcastReceiver, intentFilter, RECEIVER_EXPORTED)
+//        } else {
+//            @Suppress("UnspecifiedRegisterReceiverFlag")
+//            registerReceiver(broadcastReceiver, intentFilter)
+//        }
     }
 
     override fun getFragmentView(): ViewGroup = binding!!.root
