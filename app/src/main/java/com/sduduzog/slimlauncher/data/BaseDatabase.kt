@@ -8,7 +8,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import com.sduduzog.slimlauncher.models.HomeApp
 
 
-@Database(entities = [HomeApp::class], version = 8, exportSchema = false)
+@Database(entities = [HomeApp::class], version = 8, exportSchema = true)
 abstract class BaseDatabase : RoomDatabase() {
 
     abstract fun baseDao(): BaseDao
@@ -83,5 +83,15 @@ abstract class BaseDatabase : RoomDatabase() {
                 database.execSQL("ALTER TABLE home_apps_copy RENAME TO home_apps")
             }
         }
+
+        val ALL_MIGRATIONS = arrayOf(
+                MIGRATION_1_2,
+                MIGRATION_2_3,
+                MIGRATION_3_4,
+                MIGRATION_4_5,
+                MIGRATION_5_6,
+                MIGRATION_6_7,
+                MIGRATION_7_8
+        )
     }
 }
