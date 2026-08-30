@@ -36,10 +36,10 @@ When I'm working on something big (new features maybe), I'll probably have a PR 
 Also I'm working on [v3.0](https://github.com/sduduzog/slim-launcher/pull/98) and I think it'll be cool to collaborate with strangers on it :)
 
 ### Running/Writing tests
-- Unit tests use robolectric to run tests on the VM and it currently works with [Java11](https://adoptopenjdk.net/releases.html) for me and does not work with anything below that.
- The project though doesn't complain about the jdk version you're using as far as project development is concerned.
- The point of reintroducing tests to the project is to make sure that there's less brittle parts around the app as more and more tests are added.
- When submitting a PR, for now you don't really have to write unit tests or anything but if you can, please do, but existing tests should not be removed just to pass the build once hooked up to the CI.
+- Install JDK 17 or newer and Android SDK 36.
+- Set the SDK path in `local.properties` or with `ANDROID_SDK_ROOT`.
+- Build and run unit tests with `./gradlew assembleDebug testDebugUnitTest`.
+- Existing tests should not be removed to make a build pass.
 
 **4.** [Sign up as a tester](https://play.google.com/apps/testing/com.sduduzog.slimlauncher) to help access any implementations that make it to the beta channel. Your opinion is very valuable and affects **thousands** of users.
 

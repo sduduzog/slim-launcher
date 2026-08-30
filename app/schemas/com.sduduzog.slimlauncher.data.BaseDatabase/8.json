@@ -1,0 +1,65 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 8,
+    "identityHash": "4ae502947a1666060a404b7f6ad5ab52",
+    "entities": [
+      {
+        "tableName": "home_apps",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`app_name` TEXT NOT NULL, `package_name` TEXT NOT NULL, `activity_name` TEXT NOT NULL, `sorting_index` INTEGER NOT NULL, `app_nickname` TEXT, `user_serial` INTEGER NOT NULL, PRIMARY KEY(`package_name`, `user_serial`))",
+        "fields": [
+          {
+            "fieldPath": "appName",
+            "columnName": "app_name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "packageName",
+            "columnName": "package_name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "activityName",
+            "columnName": "activity_name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sortingIndex",
+            "columnName": "sorting_index",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "appNickname",
+            "columnName": "app_nickname",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "userSerial",
+            "columnName": "user_serial",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "package_name",
+            "user_serial"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '4ae502947a1666060a404b7f6ad5ab52')"
+    ]
+  }
+}

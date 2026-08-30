@@ -5,6 +5,7 @@ import android.os.Build
 import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.R as AppCompatR
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
 import androidx.fragment.app.Fragment
@@ -30,7 +31,7 @@ abstract class BaseFragment : Fragment(), ISubscriber {
 
             }
             val value = TypedValue()
-            requireContext().theme.resolveAttribute(R.attr.colorPrimary, value, true)
+            requireContext().theme.resolveAttribute(AppCompatR.attr.colorPrimary, value, true)
             requireActivity().window.statusBarColor = value.data
         }
 

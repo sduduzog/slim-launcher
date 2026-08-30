@@ -18,15 +18,7 @@ class AppModule {
     internal fun provideBaseDatabase(application: Application): BaseDatabase {
         return Room.databaseBuilder(application,
                 BaseDatabase::class.java, "app_database")
-                .addMigrations(
-                        BaseDatabase.MIGRATION_1_2,
-                        BaseDatabase.MIGRATION_2_3,
-                        BaseDatabase.MIGRATION_3_4,
-                        BaseDatabase.MIGRATION_4_5,
-                        BaseDatabase.MIGRATION_5_6,
-                        BaseDatabase.MIGRATION_6_7,
-                        BaseDatabase.MIGRATION_7_8
-                )
+                .addMigrations(*BaseDatabase.ALL_MIGRATIONS)
                 .build()
     }
 
