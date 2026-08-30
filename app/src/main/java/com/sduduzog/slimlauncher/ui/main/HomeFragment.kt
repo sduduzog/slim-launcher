@@ -10,6 +10,7 @@ import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import com.sduduzog.slimlauncher.R
@@ -62,7 +63,12 @@ class HomeFragment : BaseFragment(), OnLaunchAppListener {
     override fun onStart() {
         super.onStart()
         receiver = ClockReceiver()
-        activity?.registerReceiver(receiver, IntentFilter(Intent.ACTION_TIME_TICK))
+        ContextCompat.registerReceiver(
+            requireContext(),
+            receiver,
+            IntentFilter(Intent.ACTION_TIME_TICK),
+            ContextCompat.RECEIVER_EXPORTED
+        )
     }
 
     override fun getFragmentView(): ViewGroup = binding!!.root

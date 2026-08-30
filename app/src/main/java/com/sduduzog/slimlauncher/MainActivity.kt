@@ -2,9 +2,14 @@ package com.sduduzog.slimlauncher
 
 import android.content.SharedPreferences
 import android.content.res.Resources
+import android.os.Build
 import android.os.Bundle
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.NavController
 import androidx.navigation.Navigation.findNavController
 import com.sduduzog.slimlauncher.databinding.MainActivityBinding
@@ -25,6 +30,11 @@ class MainActivity : AppCompatActivity(),
     private lateinit var homeWatcher: HomeWatcher
     private lateinit var binding: MainActivityBinding
     private val subscribers: MutableSet<BaseFragment> = mutableSetOf()
+    private val backPressedCallback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            dispatchBack()
+        }
+    }
 
     override fun attachSubscriber(s: ISubscriber) {
         subscribers.add(s as BaseFragment)
@@ -45,13 +55,28 @@ class MainActivity : AppCompatActivity(),
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
+            WindowCompat.setDecorFitsSystemWindows(window, false)
+        }
         binding = MainActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
+            ViewCompat.setOnApplyWindowInsetsListener(binding.root) { view, windowInsets ->
+                val insets = windowInsets.getInsets(
+                    WindowInsetsCompat.Type.systemBars() or
+                        WindowInsetsCompat.Type.displayCutout()
+                )
+                view.setPadding(insets.left, insets.top, insets.right, insets.bottom)
+                windowInsets
+            }
+            ViewCompat.requestApplyInsets(binding.root)
+        }
         settings = getSharedPreferences(getString(R.string.prefs_settings), MODE_PRIVATE)
         settings.registerOnSharedPreferenceChangeListener(this)
         navigator = findNavController(this, R.id.nav_host_fragment)
         homeWatcher = HomeWatcher(this)
         homeWatcher.setOnHomePressedListener(this)
+        onBackPressedDispatcher.addCallback(this, backPressedCallback)
     }
 
     override fun onResume() {
@@ -93,10 +118,6 @@ class MainActivity : AppCompatActivity(),
         return theme
     }
 
-    override fun onBackPressed() {
-        dispatchBack()
-    }
-
     override fun onHomePressed() {
         dispatchHome()
         navigator.popBackStack(R.id.homeFragment, false)
@@ -135,6 +156,8 @@ class MainActivity : AppCompatActivity(),
     }
 
     private fun completeBackAction() {
-        super.onBackPressed()
+        backPressedCallback.isEnabled = false
+        onBackPressedDispatcher.onBackPressed()
+        backPressedCallback.isEnabled = true
     }
 }

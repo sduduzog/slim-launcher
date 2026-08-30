@@ -11,7 +11,7 @@ android {
     defaultConfig {
         applicationId = "com.sduduzog.slimlauncher"
         minSdk = 21
-        targetSdk = 31
+        targetSdk = 36
         versionName = "2.4.21"
         versionCode = 55
         vectorDrawables { useSupportLibrary = true }
@@ -74,7 +74,8 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.1.0")
 
     // Arch Components
-    implementation("androidx.core:core-ktx:1.7.0-beta01")
+    implementation("androidx.activity:activity-ktx:1.9.3")
+    implementation("androidx.core:core-ktx:1.13.1")
     implementation("androidx.fragment:fragment-ktx:1.4.1")
     implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1")
