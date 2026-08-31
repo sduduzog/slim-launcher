@@ -10,7 +10,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
 import androidx.fragment.app.Fragment
 import com.sduduzog.slimlauncher.R
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 abstract class BaseFragment : Fragment(), ISubscriber {
 
     abstract fun getFragmentView(): ViewGroup

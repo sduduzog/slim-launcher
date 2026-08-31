@@ -15,7 +15,9 @@ import com.sduduzog.slimlauncher.databinding.OptionsFragmentBinding
 import com.sduduzog.slimlauncher.ui.dialogs.ChangeThemeDialog
 import com.sduduzog.slimlauncher.ui.dialogs.ChooseTimeFormatDialog
 import com.sduduzog.slimlauncher.utils.BaseFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class OptionsFragment : BaseFragment() {
 
     private var _binding: OptionsFragmentBinding? = null

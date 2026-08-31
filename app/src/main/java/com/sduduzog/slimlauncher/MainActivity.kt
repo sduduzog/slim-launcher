@@ -11,7 +11,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.NavController
-import androidx.navigation.Navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import com.sduduzog.slimlauncher.databinding.MainActivityBinding
 import com.sduduzog.slimlauncher.utils.BaseFragment
 import com.sduduzog.slimlauncher.utils.HomeWatcher
@@ -73,7 +73,8 @@ class MainActivity : AppCompatActivity(),
         }
         settings = getSharedPreferences(getString(R.string.prefs_settings), MODE_PRIVATE)
         settings.registerOnSharedPreferenceChangeListener(this)
-        navigator = findNavController(this, R.id.nav_host_fragment)
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        navigator = navHostFragment.navController
         homeWatcher = HomeWatcher(this)
         homeWatcher.setOnHomePressedListener(this)
         onBackPressedDispatcher.addCallback(this, backPressedCallback)
