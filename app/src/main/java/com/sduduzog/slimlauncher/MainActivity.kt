@@ -4,7 +4,6 @@ import android.content.SharedPreferences
 import android.content.res.Resources
 import android.os.Build
 import android.os.Bundle
-import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -125,12 +124,13 @@ class MainActivity : AppCompatActivity(),
     }
 
     private fun showSystemUI() {
-        window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE)
+        WindowCompat.getInsetsController(window, binding.root)
+            .show(WindowInsetsCompat.Type.statusBars())
     }
 
     private fun hideSystemUI() {
-        window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                or View.SYSTEM_UI_FLAG_FULLSCREEN)
+        WindowCompat.getInsetsController(window, binding.root)
+            .hide(WindowInsetsCompat.Type.statusBars())
     }
 
     private fun toggleStatusBar() {

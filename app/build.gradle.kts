@@ -7,13 +7,13 @@ plugins {
 
 android {
     namespace = "com.sduduzog.slimlauncher"
-    compileSdk = 36
+    compileSdk = 37
     defaultConfig {
         applicationId = "com.sduduzog.slimlauncher"
         minSdk = 23
         targetSdk = 36
-        versionName = "2.4.21"
-        versionCode = 55
+        versionName = "2.4.22"
+        versionCode = 59
         vectorDrawables { useSupportLibrary = true }
         signingConfigs {
             if (project.extra.has("RELEASE_STORE_FILE")) {

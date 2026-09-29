@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.appcompat.R as AppCompatR
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
+import androidx.core.view.WindowCompat
 import androidx.fragment.app.Fragment
 import com.sduduzog.slimlauncher.R
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,20 +24,21 @@ abstract class BaseFragment : Fragment(), ISubscriber {
         val settings = requireContext().getSharedPreferences(getString(R.string.prefs_settings), AppCompatActivity.MODE_PRIVATE)
         val active = settings.getInt(getString(R.string.prefs_settings_key_theme), 0)
 
+        val window = requireActivity().window
+        WindowCompat.getInsetsController(window, window.decorView)
+            .isAppearanceLightStatusBars = active in setOf(0, 3, 5)
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            when (active) {
-                0, 3, 5 -> {
-                    val flags = requireActivity().window.decorView.systemUiVisibility or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-                    getFragmentView().systemUiVisibility = flags
-                }
-
-            }
+        if (Build.VERSION.SDK_INT in Build.VERSION_CODES.M until Build.VERSION_CODES.VANILLA_ICE_CREAM) {
             val value = TypedValue()
             requireContext().theme.resolveAttribute(AppCompatR.attr.colorPrimary, value, true)
-            requireActivity().window.statusBarColor = value.data
+            setLegacyStatusBarColor(value.data)
         }
 
+    }
+
+    @Suppress("DEPRECATION")
+    private fun setLegacyStatusBarColor(color: Int) {
+        requireActivity().window.statusBarColor = color
     }
 
     override fun onStart() {
