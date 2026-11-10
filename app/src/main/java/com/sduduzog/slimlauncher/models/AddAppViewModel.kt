@@ -20,8 +20,8 @@ class AddAppViewModel @Inject constructor(
     private val _homeApps = mutableListOf<App>()
     private val homeAppsObserver = Observer<List<HomeApp>> {
         this._homeApps.clear()
-        it.orEmpty().forEach { item -> this._homeApps.add(App.from(item)) }
-        if (it !== null) updateDisplayedApps()
+        it.forEach { item -> this._homeApps.add(App.from(item)) }
+        updateDisplayedApps()
     }
     val apps = MutableLiveData<List<App>>()
 
